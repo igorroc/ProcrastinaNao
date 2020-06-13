@@ -40,63 +40,64 @@ client.on("raw", async dados =>{
     if(dados.t === "MESSAGE_REACTION_ADD"){
         if(dados.d.emoji.id === "696478679391272961"){
             if(membro.roles.has(python)) return console.log(`Usuário "${membro.nickname}" já possui o cargo Python`)
-            membro.roles.add(python)
+            membro.addRole(python)
             console.log(`Cargo Python adicionado para o usuario ${membro.nickname}`)
 
         }else if(dados.d.emoji.name === "721349573901287445"){
             if(membro.roles.has(javascript)) return console.log(`Usuário "${membro.nickname}" já possui o cargo JavaScript`)
-            membro.roles.add(javascript)
+            membro.addRole(javascript)
             console.log(`Cargo JavaScript adicionado para o usuario ${membro.nickname}`)
 
         }else if(dados.d.emoji.id === "721349577143222272"){
             if(membro.roles.has(java)) return console.log(`Usuário "${membro.nickname}" já possui o cargo Java`)
-            membro.roles.add(java)
+            membro.addRole(java)
             console.log(`Cargo Java adicionado para o usuario ${membro.nickname}`)
 
         }else if(dados.d.emoji.id === "721345484035325984"){
             if(membro.roles.has(css)) return console.log(`Usuário "${membro.nickname}" já possui o cargo CSS`)
-            membro.roles.add(css)
+            membro.addRole(css)
             console.log(`Cargo CSS adicionado para o usuario ${membro.nickname}`)
 
         }else if(dados.d.emoji.id === "721345485314588744"){
             if(membro.roles.has(html)) return console.log(`Usuário "${membro.nickname}" já possui o cargo HTML`)
-            membro.roles.add(html)
+            membro.addRole(html)
 
         }else if(dados.d.emoji.id === "721347830765322313"){
             if(membro.roles.has(c)) return console.log(`Usuário "${membro.nickname}" já possui o cargo C`)
-            membro.roles.add(c)
+            membro.addRole(c)
             console.log(`Cargo C adicionado para o usuario ${membro.nickname}`)
         }
     }
     if(dados.t === "MESSAGE_REACTION_REMOVE"){
         if(dados.d.emoji.id === "696478679391272961"){
             if(membro.roles.has(python)) return console.log(`Usuário "${membro.nickname}" ainda não tinha o cargo Python`)
-            membro.roles.remove(python)
+            membro.removeRole(python)
             console.log(`Usuário "${membro.nickname}" removeu o cargo Python`)
 
         }else if(dados.d.emoji.name === "721349573901287445"){
             if(membro.roles.has(javascript)) return console.log(`Usuário "${membro.nickname}" ainda não tinha o cargo JavaScript`)
-            membro.roles.remove(javascript)
+            membro.removeRole(javascript)
             console.log(`Usuário "${membro.nickname}" removeu o cargo JavaScript`)
 
         }else if(dados.d.emoji.id === "721349577143222272"){
             if(membro.roles.has(java)) return console.log(`Usuário "${membro.nickname}" ainda não tinha o cargo Java`)
-            membro.roles.remove(java)
+            membro.removeRole(java)
+            
             console.log(`Usuário "${membro.nickname}" removeu o cargo Java`)
 
         }else if(dados.d.emoji.id === "721345484035325984"){
             if(membro.roles.has(css)) return console.log(`Usuário "${membro.nickname}" ainda não tinha o cargo CSS`)
-            membro.roles.remove(css)
+            membro.removeRole(css)
             console.log(`Usuário "${membro.nickname}" removeu o cargo CSS`)
 
         }else if(dados.d.emoji.id === "721345485314588744"){
             if(membro.roles.has(html)) return console.log(`Usuário "${membro.nickname}" ainda não tinha o cargo HTML`)
-            membro.roles.remove(html)
+            membro.removeRole(html)
             console.log(`Usuário "${membro.nickname}" removeu o cargo HTML`)
 
         }else if(dados.d.emoji.id === "721347830765322313"){
             if(membro.roles.has(c)) return console.log(`Usuário "${membro.nickname}" ainda não tinha o cargo C`)
-            membro.roles.remove(c)
+            membro.removeRole(c)
             console.log(`Usuário "${membro.nickname}" removeu o cargo C`)
         }
     }
@@ -104,7 +105,7 @@ client.on("raw", async dados =>{
 
 client.on("guildMemberAdd", membro => {
     console.log(`Um novo membro: "${membro.nickname}" entrou no servidor`)
-    membro.roles.add("721103513874202645")
+    membro.addRole("721103513874202645")
 });
 
 client.on("message", async message => {
