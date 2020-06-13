@@ -26,6 +26,7 @@ client.on("raw", async dados =>{
     if(dados.t !== "MESSAGE_REACTION_ADD" && dados.t !== "MESSAGE_REACTION_REMOVE") return
     if(dados.d.message_id != "721347287426793494") return
 
+    console.log(`Evento de reação`)
     let servidor = client.guilds.get("696430420992066112")
     let membro = servidor.members.get(dados.d.user_id)
 
@@ -38,54 +39,89 @@ client.on("raw", async dados =>{
 
     if(dados.t === "MESSAGE_REACTION_ADD"){
         if(dados.d.emoji.id === "696478679391272961"){
-            if(membro.roles.has(python)) return
+            if(membro.roles.has(python)) return console.log(`Usuário "${membro.nickname}" já possui o cargo Python`)
             membro.addRole(python)
+            console.log(`Cargo Python adicionado para o usuario ${membro.nickname}`)
 
         }else if(dados.d.emoji.name === "721349573901287445"){
-            if(membro.roles.has(javascript)) return
+            if(membro.roles.has(javascript)) return console.log(`Usuário "${membro.nickname}" já possui o cargo JavaScript`)
             membro.addRole(javascript)
+            console.log(`Cargo JavaScript adicionado para o usuario ${membro.nickname}`)
 
         }else if(dados.d.emoji.id === "721349577143222272"){
-            if(membro.roles.has(java)) return
+            if(membro.roles.has(java)) return console.log(`Usuário "${membro.nickname}" já possui o cargo Java`)
             membro.addRole(java)
+            console.log(`Cargo Java adicionado para o usuario ${membro.nickname}`)
 
         }else if(dados.d.emoji.id === "721345484035325984"){
-            if(membro.roles.has(css)) return
+            if(membro.roles.has(css)) return console.log(`Usuário "${membro.nickname}" já possui o cargo CSS`)
             membro.addRole(css)
+            console.log(`Cargo CSS adicionado para o usuario ${membro.nickname}`)
 
         }else if(dados.d.emoji.id === "721345485314588744"){
-            if(membro.roles.has(html)) return
+            if(membro.roles.has(html)) return console.log(`Usuário "${membro.nickname}" já possui o cargo HTML`)
             membro.addRole(html)
 
         }else if(dados.d.emoji.id === "721347830765322313"){
-            if(membro.roles.has(c)) return
+            if(membro.roles.has(c)) return console.log(`Usuário "${membro.nickname}" já possui o cargo C`)
             membro.addRole(c)
+            console.log(`Cargo C adicionado para o usuario ${membro.nickname}`)
         }
     }
     if(dados.t === "MESSAGE_REACTION_REMOVE"){
         if(dados.d.emoji.id === "696478679391272961"){
-            if(membro.roles.has(python)) membro.removeRole(python)
+            if(membro.roles.has(python)){
+                membro.removeRole(python)
+                console.log(`Usuário "${membro.nickname}" removeu o cargo Python`)
+            }else{
+                console.log(`Usuário "${membro.nickname}" ainda não tinha o cargo Python`)
+            }
 
         }else if(dados.d.emoji.name === "721349573901287445"){
-            if(membro.roles.has(javascript)) membro.removeRole(javascript)
+            if(membro.roles.has(javascript)){
+                membro.removeRole(javascript)
+                console.log(`Usuário "${membro.nickname}" removeu o cargo JavaScript`)
+            }else{
+                console.log(`Usuário "${membro.nickname}" ainda não tinha o cargo JavaScript`)
+            }
 
         }else if(dados.d.emoji.id === "721349577143222272"){
-            if(membro.roles.has(java)) membro.removeRole(java)
+            if(membro.roles.has(java)){
+                membro.removeRole(java)
+                console.log(`Usuário "${membro.nickname}" removeu o cargo Java`)
+            }else{
+                console.log(`Usuário "${membro.nickname}" ainda não tinha o cargo Java`)
+            }
 
         }else if(dados.d.emoji.id === "721345484035325984"){
-            if(membro.roles.has(css)) membro.removeRole(css)
+            if(membro.roles.has(css)){
+                membro.removeRole(css)
+                console.log(`Usuário "${membro.nickname}" removeu o cargo CSS`)
+            }else{
+                console.log(`Usuário "${membro.nickname}" ainda não tinha o cargo CSS`)
+            }
 
         }else if(dados.d.emoji.id === "721345485314588744"){
-            if(membro.roles.has(html)) membro.removeRole(html)
+            if(membro.roles.has(html)){
+                membro.removeRole(html)
+                console.log(`Usuário "${membro.nickname}" removeu o cargo HTML`)
+            }else{
+                console.log(`Usuário "${membro.nickname}" ainda não tinha o cargo HTML`)
+            }
 
         }else if(dados.d.emoji.id === "721347830765322313"){
-            if(membro.roles.has(c)) membro.removeRole(c)
+            if(membro.roles.has(c)){
+                membro.removeRole(c)
+                console.log(`Usuário "${membro.nickname}" removeu o cargo C`)
+            }else{
+                console.log(`Usuário "${membro.nickname}" ainda não tinha o cargo C`)
+            }
         }
     }
 })
 
 client.on("guildMemberAdd", membro => {
-    console.log(`Um novo membro entrou no servidor: ${membro.nickname}`)
+    console.log(`Um novo membro: "${membro.nickname}" entrou no servidor`)
     membro.addRole("721103513874202645")
 });
 
@@ -104,7 +140,7 @@ client.on("message", async message => {
     if(validaPrefix != dbConfig.get('prefix').value()) return;
 
     if(comando == "help"){
-        console.log("Help")
+        console.log(`Usuário "${message.author.username}" usou o comando Help`)
         message.channel.send(`\`\`\`md\n# Coisas que eu sei fazer:\`\`\`\`\`\`md\n`
         +`${dbConfig.get('prefix').value()}decida <pergunta>\n`
         +`/* Você faz uma pergunta e eu vou responde-la! *\n\n`
@@ -159,6 +195,7 @@ client.on("message", async message => {
     }
     
     else if(comando == "config"){
+        console.log(`Usuário "${message.author.username}" usou o comando Config`)
         if(!message.member.hasPermission("ADMINISTRATOR")){
             message.channel.send(`Você não é digno...`);
         }else{
@@ -173,12 +210,14 @@ client.on("message", async message => {
     }
 
     else if(comando == "ping"){
+        console.log(`Usuário "${message.author.username}" usou o comando Ping`)
         const m = await message.channel.send("Ping?");
         m.edit(`Pong! A latencia é de ${m.createdTimestamp - message.createdTimestamp}ms. A latencia da API é ${Math.round(client.ping)}ms`);
         console.log(`Ping! Pong! Latencia: ${m.createdTimestamp - message.createdTimestamp}ms , API: ${Math.round(client.ping)}ms`)
     }
 
     else if(comando == "soma" || comando == "s"){
+        console.log(`Usuário "${message.author.username}" usou o comando Soma`)
         let i
         let soma = 0
         if(!args[0]){
@@ -192,6 +231,7 @@ client.on("message", async message => {
     }
 
     else if(comando == "msg"){
+        console.log(`Usuário "${message.author.username}" usou o comando MSG`)
         let [canal] = args
         if(!canal)[
             message.channel.send(`\`\`\`md\n# Para enviar uma mensagem em um canal especifico, digite:\n${dbConfig.get('prefix').value()}msg <id_do_canal> <mensagem>\`\`\``)
@@ -206,6 +246,7 @@ client.on("message", async message => {
     }
 
     else if(comando == "edit"){
+        console.log(`Usuário "${message.author.username}" usou o comando Edit`)
         let [channelId, msgId] = args
         if(!args[2]){
             message.channel.send(`\`\`\`md\nFaltam argumentos\`\`\``)
@@ -221,6 +262,7 @@ client.on("message", async message => {
     }
     
     else if(comando == "dltmsg"){
+        console.log(`Usuário "${message.author.username}" usou o comando DLTMSG`)
         console.log("Apagando mensagens")
         if(!message.member.hasPermission("ADMINISTRATOR")){ // se nao tem permissao para apagar
             let onlineMembers = message.guild.members.filter(m => m.presence.status === 'online').size-1;
@@ -281,6 +323,7 @@ client.on("message", async message => {
     }
 
     else if(comando == "prefix"){
+        console.log(`Usuário "${message.author.username}" usou o comando Prefix`)
         if(!message.member.hasPermission("ADMINISTRATOR")){
             return message.reply('Você não é digno de realizar esse comando!');
         }else{
@@ -303,7 +346,7 @@ client.on("message", async message => {
     }
 
     else{
-        console.log("Comando não existente")
+        console.log(`Comando não existente "${comando}" pelo usuário "${message.author.username}"`)
         message.channel.send(`Não sou digno de realizar o comando "${comando}". Desculpe 😔`)
     }
 
