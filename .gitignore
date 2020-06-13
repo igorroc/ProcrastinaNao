@@ -1,0 +1,8 @@
+# Don't track content of these folders
+node_modules/
+.vscode/
+assets/
+
+LEMBRAR_DE_TROCAR_O_TOKEN.txt
+ProcrastinaNao.zip
+package-lock.json
