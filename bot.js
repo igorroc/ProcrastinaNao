@@ -142,75 +142,10 @@ bot.on("message", async message => {
     let messageArray = message.content.split(" ")
     let comando = messageArray[0];
     let args = messageArray.slice(1);
-
-
+    
     if(!message.content.startsWith(prefix)) return; // valida o prefix do comando
     let commandfile = bot.commands.get(comando.slice(prefix.length)) || bot.commands.get(bot.aliases.get(comando.slice(prefix.length)))
     if(commandfile) commandfile.run(bot,message,args)
-
-    
-    if(comando == "cadastro"){
-        console.log(`Cadastro de "${message.author.username}"`)
-        let questao1 = message.channel.send(`Olá ${message.member.user}, nos informe o seu nome (seu apelido aqui no servidor será alterado para o que você digitar)`)
-            .then(() => {
-                message.channel.awaitMessages(m => m.author.id == message.author.id,
-                    {max: 1, time: 120000}).then(collected => {
-                        console.log(`Nome escolhido "${collected.first().content}"`)
-                        message.member.setNickname(collected.first().content)
-                        let questao2 = message.channel.send(`${message.member.user}, qual curso você faz? ||Se você não faz nenhum, digite \`N\`||`).then(() => {
-                            message.channel.awaitMessages(m => m.author.id == message.author.id,
-                                {max: 1, time: 120000}).then(collected => {
-                                    console.log(`Curso escolhido "${collected.first().content}"`)
-                                    message.guild.channels.get('722274694535053317').send(`O usuário ${collected.first().author} é do curso ${collected.first().content}`)
-                                    let questao3 = message.channel.send(`${message.member.user}, em qual faculdade? \`Digite a sigla em maiúsculo\` ||Se você não faz nenhuma, digite \`N\`||`).then(() => {
-                                        message.channel.awaitMessages(m => m.author.id == message.author.id,
-                                            {max: 1, time: 120000}).then(collected => {
-                                                console.log(`Faculdade escolhida "${collected.first().content}"`)
-                                                let questao4 = message.channel.send(`${message.member.user}, você é:\nCalouro(a): 😀\nVeterano(a): 😫\n`).then(msg => {
-                                                    msg.react('😀').then(r => {
-                                                        msg.react('😫')
-                                                    });
-                                                    msg.awaitReactions((reaction, user) => user.id == message.author.id && (reaction.emoji.name == "😀" || reaction.emoji.name == "😫"),
-                                                    { max: 1}).then(collected => {
-                                                            if (collected.first().emoji.name == "😀") {
-                                                                message.member.addRole("696434056778350612")
-                                                            }else{
-                                                                message.member.addRole("696434089972072519")
-                                                            }
-                                                    }).catch(() => {
-                                                        message.reply('Erro ao fazer seu cadastro, tente novamente mais tarde.');
-                                                    });
-                                                })
-                                            }).catch(() => {
-                                                message.reply('Seu cadastro demorou mais de 2 minutos, cancelando operação.');
-                                            });
-                                    })
-                                }).catch(() => {
-                                    message.reply('Seu cadastro demorou mais de 2 minutos, cancelando operação.');
-                                });
-                        })
-                    }).catch(() => {
-                        message.reply('Seu cadastro demorou mais de 2 minutos, cancelando operação.');
-                    });
-            })
-        
-        
-    }
-
-    else if(comando == "config"){
-        console.log(`Usuário "${message.author.username}" usou o comando Config`)
-        if(!message.member.hasPermission("ADMINISTRATOR")){
-            message.channel.send(`Você não é digno...`);
-        }else{
-            if(!args[0]){
-                // mostra a config atual
-            }else{
-                if(args[0] == "twitter"){
-
-                }
-            }
-        }
-    }
 
 })
 
