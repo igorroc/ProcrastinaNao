@@ -166,33 +166,46 @@ client.on("message", async message => {
     
     else if(comando == "cadastro"){
         console.log(`Cadastro de "${message.author.username}"`)
-        let questao1 = message.reply(`\nOlá ${message.author.username}, nos informe o seu nome (seu apelido aqui no servidor será alterado para o que você digitar)`)
+        let questao1 = message.channel.send(`Olá ${message.member.user}, nos informe o seu nome (seu apelido aqui no servidor será alterado para o que você digitar)`)
             .then(() => {
                 message.channel.awaitMessages(m => m.author.id == message.author.id,
-                    {max: 1, time: 30000}).then(collected => {
+                    {max: 1, time: 120000}).then(collected => {
                         console.log(`Nome escolhido "${collected.first().content}"`)
                         message.member.setNickname(collected.first().content)
-                        //await questao1.delete()
                         let questao2 = message.channel.send(`${message.member.user}, qual curso você faz? ||Se você não faz nenhum, digite \`N\`||`).then(() => {
                             message.channel.awaitMessages(m => m.author.id == message.author.id,
-                                {max: 1, time: 30000}).then(collected => {
+                                {max: 1, time: 120000}).then(collected => {
                                     console.log(`Curso escolhido "${collected.first().content}"`)
-                                    message.guild.channels.get('722274694535053317').send(`O usuário ${collected.first().author} é da faculdade ${collected.first().content}`)
+                                    message.guild.channels.get('722274694535053317').send(`O usuário ${collected.first().author} é do curso ${collected.first().content}`)
                                     let questao3 = message.channel.send(`${message.member.user}, em qual faculdade? \`Digite a sigla em maiúsculo\` ||Se você não faz nenhuma, digite \`N\`||`).then(() => {
                                         message.channel.awaitMessages(m => m.author.id == message.author.id,
-                                            {max: 1, time: 30000}).then(collected => {
+                                            {max: 1, time: 120000}).then(collected => {
                                                 console.log(`Faculdade escolhida "${collected.first().content}"`)
-                                                
+                                                let questao4 = message.channel.send(`${message.member.user}, você é:\nCalouro(a): 😀\nVeterano(a): 😫\n`).then(msg => {
+                                                    msg.react('😀').then(r => {
+                                                        msg.react('😫')
+                                                    });
+                                                    msg.awaitReactions((reaction, user) => user.id == message.author.id && (reaction.emoji.name == "😀" || reaction.emoji.name == "😫"),
+                                                    { max: 1}).then(collected => {
+                                                            if (collected.first().emoji.name == "😀") {
+                                                                message.member.addRole("696434056778350612")
+                                                            }else{
+                                                                message.member.addRole("696434089972072519")
+                                                            }
+                                                    }).catch(() => {
+                                                        message.reply('Erro ao fazer seu cadastro, tente novamente mais tarde.');
+                                                    });
+                                                })
                                             }).catch(() => {
-                                                message.reply('Sem respostas dentro de 30 segundos, operação cancelada.');
+                                                message.reply('Seu cadastro demorou mais de 2 minutos, cancelando operação.');
                                             });
                                     })
                                 }).catch(() => {
-                                    message.reply('Sem respostas dentro de 30 segundos, operação cancelada.');
+                                    message.reply('Seu cadastro demorou mais de 2 minutos, cancelando operação.');
                                 });
                         })
                     }).catch(() => {
-                        message.reply('Sem respostas dentro de 30 segundos, operação cancelada.');
+                        message.reply('Seu cadastro demorou mais de 2 minutos, cancelando operação.');
                     });
             })
         
