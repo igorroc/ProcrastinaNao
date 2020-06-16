@@ -106,6 +106,8 @@ client.on("raw", async dados =>{
 client.on("guildMemberAdd", membro => {
     console.log(`Um novo membro: "${membro.nickname}" entrou no servidor`)
     membro.addRole("721103513874202645")
+    if(membro.user.bot) return
+    client.channels.get('721103116686327820').send(`${membro.user} -> Faça seu cadastro aqui!\nDigite \`.cadastro\` para começar`)
 });
 
 client.on("message", async message => {
@@ -125,15 +127,9 @@ client.on("message", async message => {
     if(comando == "help"){
         console.log(`Usuário "${message.author.username}" usou o comando Help`)
         message.channel.send(`\`\`\`md\n# Coisas que eu sei fazer:\`\`\`\`\`\`md\n`
-        +`${dbConfig.get('prefix').value()}decida <pergunta>\n`
-        +`/* Você faz uma pergunta e eu vou responde-la! *\n\n`
-
         +`${dbConfig.get('prefix').value()}soma <valores>\n`
         +`/* Faço a soma de todos os números que você digitar! *\n\n`
-                            
-        +`${dbConfig.get('prefix').value()}vote <tempo> <pergunta>\n`
-        +`/* Cria um pool para votação, que fica aberto pelo tempo determinado. *\n\n`
-
+        
         +`${dbConfig.get('prefix').value()}ping\n`
         +`/* Verifico o meu ping! *\`\`\`\`\`\`md\n`
         +`# Para mais informações sobre os comandos, digite o comando sem argumento nenhum.\n`
@@ -156,16 +152,7 @@ client.on("message", async message => {
                         +`/* Envio a mensagem que você escreveu para o canal que você escolher *\n\n`
                         
                         +`${dbConfig.get('prefix').value()}prefix <novo_prefix>\n`
-                        +`/* Altero o prefixo utilizado por mim *\n\n`
-
-                        +`${dbConfig.get('prefix').value()}edit <id_do_canal> <id_da_mensagem> <mensagem_nova>\n`
-                        +`/* Edito uma mensagem enviada por mim mesmo *\n\n`
-
-                        +`${dbConfig.get('prefix').value()}emoji <id_do_emoji>\n`
-                        +`/* Envio o emoji desejado no canal que você está *\n\n`
-                        
-                        +`${dbConfig.get('prefix').value()}react <id_canal> <id_mensagem> <emoji>\n`
-                        +`/* Reajo com o emoji escolhido na mensagem escolhida! *\`\`\``)
+                        +`/* Altero o prefixo utilizado por mim *\`\`\``)
                         confirmacao1.delete();
                     }else{
                         confirmacao1.delete();
@@ -177,6 +164,20 @@ client.on("message", async message => {
         }
     }
     
+    else if(comando == "cadastro"){
+        let questao1 = message.reply(`\nOlá ${message.author.username}, nos informe o seu nome (seu apelido aqui no servidor será alterado para o que você digitar)`)
+        message.channel.awaitMessages(m => m.author.id == message.author.id,
+            {max: 1, time: 30000}).then(collected => {
+                message.member.setNickname(collected.content)
+                //await questao1.delete()
+                let questao2 = message.channel.send(`${message.member.user}, qual curso você faz? ||Se você não faz nenhum, digite \`N\`||`)
+            }).catch(() => {
+                message.reply('Sem respostas dentro de 30 segundos, operação cancelada.');
+            });
+        
+        
+    }
+
     else if(comando == "config"){
         console.log(`Usuário "${message.author.username}" usou o comando Config`)
         if(!message.member.hasPermission("ADMINISTRATOR")){
@@ -226,22 +227,6 @@ client.on("message", async message => {
             client.channels.get(canal).send(msg)
         }
         message.delete();
-    }
-
-    else if(comando == "edit"){
-        console.log(`Usuário "${message.author.username}" usou o comando Edit`)
-        let [channelId, msgId] = args
-        if(!args[2]){
-            message.channel.send(`\`\`\`md\nFaltam argumentos\`\`\``)
-        }
-        message.guild.channels.get(channelId).fetchMessages({around: msgId, limit: 1})
-        .then(msg => {
-            const fetchedMsg = msg.first();
-            fetchedMsg.edit(args.slice(2).join(" "));
-        }).catch((error) => {
-            console.log(error)
-            message.reply('Ocorreu um erro')
-        });
     }
     
     else if(comando == "dltmsg"){
