@@ -16,7 +16,7 @@ module.exports.run = async (bot, message, args) => {
             .setColor(colours.yellow)
             .setAuthor(`Anti-Procrastinador HELP`, message.guild.iconURL)
             .setThumbnail(bot.user.displayAvatarURL)
-            .setDescription(`O prefixo do bot é: \`${prefix}\`\n\n**Comando:** ${command.config.name}\n**Descrição:** ${command.config.description || "No Description"}\n**Uso:** ${command.config.usage || "No Usage"}\n**Acessivel para:** ${command.config.accessableby || "Membros"}\n**Abreviações:** ${command.config.noalias || command.config.aliases}`)
+            .setDescription(`O prefixo do bot é: \`${prefix}\`\n\n**Comando:** ${command.config.name}\n**Descrição:** ${command.config.description || "No Description"}\n**Uso:** ${command.config.usage || "No Usage"}\n**Acessivel para:** ${command.config.accessableby || "Membros"}\n**Variações:** ${command.config.noalias || command.config.aliases}`)
             message.channel.send(SHembed);
         }}
 

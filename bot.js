@@ -215,23 +215,6 @@ bot.on("message", async message => {
         }
     }
 
-    else if(comando == "ping"){
-            }
-
-    else if(comando == "soma" || comando == "s"){
-        console.log(`Usuário "${message.author.username}" usou o comando Soma`)
-        let i
-        let soma = 0
-        if(!args[0]){
-            message.channel.send(`\`\`\`md\n# Eu calculo!\n${dbConfig.get('prefix').value()}soma <valores>\n\n< Exemplo: >\n${dbConfig.get('prefix').value()}soma 10 2 3 -2 1\`\`\`\`\`\`md\n# Esse comando é basicamente uma calculadora que só soma e subtrai.\`\`\`\`\`\`md\n# Variações:\n${dbConfig.get('prefix').value()}soma\n${dbConfig.get('prefix').value()}s\`\`\``)
-            return;
-        }
-        for(i = 0; i < args.length; i++){
-            soma += parseInt(args[i])
-        }
-        return message.channel.send(`\`\`\`md\n# Soma = ${soma}\n\`\`\``)
-    }
-
     else if(comando == "msg"){
         console.log(`Usuário "${message.author.username}" usou o comando MSG`)
         let [canal] = args
