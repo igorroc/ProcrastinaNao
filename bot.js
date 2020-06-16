@@ -1,33 +1,56 @@
 const Discord = require("discord.js");
-const client = new Discord.Client();
 const config = require("./config.json");
-
 const low = require('lowdb')
+
 const FileSync = require('lowdb/adapters/FileSync')
 const adapter = new FileSync('config.json')
 const dbConfig = low(adapter)
 
+const bot = new Discord.Client();
 
-function emojiStr (id){
-    return client.emojis.get(id).toString();
-}
-function emojiTrue (id){
-    return client.emojis.get(id);
-}
 
-client.once("ready", () => {
-    console.log("\n\n\n\n= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =")
-    console.log(`Bot foi iniciado, com ${client.users.size} usuarios, em ${client.channels.size} canais, e em ${client.guilds.size} servidor(es)`);
-    console.log("= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =\n\n")
-    client.user.setActivity(`| Digite ${dbConfig.get('prefix').value()}help para ajuda | Criado por Igor Rocha |`)
+const fs = require("fs");
+bot.commands = new Discord.Collection();
+bot.aliases = new Discord.Collection();
+
+fs.readdir("./commands/", (err, files) => {
+    if(err) console.log(err)
+
+    let jsfile = files.filter(f => f.split(".").pop() === "js") 
+    if(jsfile.length <= 0) {
+         return console.log("[LOGS] Não foi possivel encontrar comandos!");
+    }
+
+    jsfile.forEach((f, i) => {
+        let pull = require(`./commands/${f}`);
+        bot.commands.set(pull.config.name, pull);  
+        pull.config.aliases.forEach(alias => {
+            bot.aliases.set(alias, pull.config.name)
+        });
+    });
 });
 
-client.on("raw", async dados =>{
+//=-=-=-=-=-=-=-=-=-=-=-=-=
+function emojiStr (id){
+    return bot.emojis.get(id).toString();
+}
+function emojiTrue (id){
+    return bot.emojis.get(id);
+}
+
+bot.once("ready", () => {
+    console.log("\n\n\n\n= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =")
+    console.log(`Bot foi iniciado, com ${bot.users.size} usuarios, em ${bot.channels.size} canais, e em ${bot.guilds.size} servidor(es)`);
+    console.log("= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =\n\n")
+    bot.user.setActivity(`| Digite ${dbConfig.get('prefix').value()}help para ajuda | Criado por Igor Rocha |`)
+});
+
+bot.on("raw", async dados =>{
     if(dados.t !== "MESSAGE_REACTION_ADD" && dados.t !== "MESSAGE_REACTION_REMOVE") return
     if(dados.d.message_id != "721347287426793494") return
 
     console.log(`Evento de reação`)
-    let servidor = client.guilds.get("696430420992066112")
+    let servidor = bot.guilds.get("696430420992066112")
     let membro = servidor.members.get(dados.d.user_id)
 
     let python = servidor.roles.get('721102448483369140'),
@@ -103,26 +126,31 @@ client.on("raw", async dados =>{
     }
 })
 
-client.on("guildMemberAdd", membro => {
+bot.on("guildMemberAdd", membro => {
     console.log(`Um novo membro: "${membro.user.username}" entrou no servidor`)
     membro.addRole("721103513874202645")
     if(membro.user.bot) return
-    client.channels.get('721103116686327820').send(`${membro.user} -> Faça seu cadastro aqui!\nDigite \`.cadastro\` para começar`)
+    bot.channels.get('721103116686327820').send(`${membro.user} -> Faça seu cadastro aqui!\nDigite \`.cadastro\` para começar`)
 });
 
-client.on("message", async message => {
+bot.on("message", async message => {
     const agree = "✅";
     const disagree = "❌";
     
     if(message.author.bot) return;//se o autor foi um bot, faz nada
     if(message.channel.type == "dm") return message.channel.send("Não fala comigo por aqui..."); //se a mensagem foi enviada por dm, n faz nada
     
-    const validaPrefix = message.content.slice(0,config.prefix.length)
-    const args = message.content.slice(config.prefix.length).trim().split(/ +/g); // retira o prefixo da mensagem
-    const comando = args.shift().toLowerCase(); // muda pra todas minusculas
+
+    let prefix = config.prefix;
+    let messageArray = message.content.split(" ")
+    let comando = messageArray[0];
+    let args = messageArray.slice(1);
 
 
-    if(validaPrefix != dbConfig.get('prefix').value()) return;
+    if(!message.content.startsWith(prefix)) return; // valida o prefix do comando
+    let commandfile = bot.commands.get(comando.slice(prefix.length)) || bot.commands.get(bot.aliases.get(comando.slice(prefix.length)))
+    if(commandfile) commandfile.run(bot,message,args)
+
 
     if(comando == "help"){
         console.log(`Usuário "${message.author.username}" usou o comando Help`)
@@ -230,8 +258,8 @@ client.on("message", async message => {
     else if(comando == "ping"){
         console.log(`Usuário "${message.author.username}" usou o comando Ping`)
         const m = await message.channel.send("Ping?");
-        m.edit(`Pong! A latencia é de ${m.createdTimestamp - message.createdTimestamp}ms. A latencia da API é ${Math.round(client.ping)}ms`);
-        console.log(`Ping! Pong! Latencia: ${m.createdTimestamp - message.createdTimestamp}ms , API: ${Math.round(client.ping)}ms`)
+        m.edit(`Pong! A latencia é de ${m.createdTimestamp - message.createdTimestamp}ms. A latencia da API é ${Math.round(bot.ping)}ms`);
+        console.log(`Ping! Pong! Latencia: ${m.createdTimestamp - message.createdTimestamp}ms , API: ${Math.round(bot.ping)}ms`)
     }
 
     else if(comando == "soma" || comando == "s"){
@@ -254,11 +282,11 @@ client.on("message", async message => {
         if(!canal)[
             message.channel.send(`\`\`\`md\n# Para enviar uma mensagem em um canal especifico, digite:\n${dbConfig.get('prefix').value()}msg <id_do_canal> <mensagem>\`\`\``)
         ]
-        else if(!client.channels.get(canal)){
+        else if(!bot.channels.get(canal)){
             message.channel.send(`\`\`\`md\nCanal nao encontrado\`\`\``)
         }else{
             let msg = args.slice(1).join(" ");
-            client.channels.get(canal).send(msg)
+            bot.channels.get(canal).send(msg)
         }
         message.delete();
     }
@@ -315,7 +343,7 @@ client.on("message", async message => {
                 limit: 100,
                 }).then((messages) => {
                     if (user) {
-                        const filterBy = user ? user.id : Client.user.id;
+                        const filterBy = user ? user.id : bot.user.id;
                         messages = messages.filter(m => m.author.id === filterBy).array().slice(0, amount);
                     }
                     message.channel.bulkDelete(messages).catch(error => console.log(error.stack));
@@ -344,15 +372,10 @@ client.on("message", async message => {
                 message.channel.send(`\`\`\`md\n# Prefix do servidor alterado para:\n${novoPrefix}\`\`\``);
             }
         }
-        client.user.setActivity(`| Digite ${dbConfig.get('prefix').value()}help para ajuda | Criado por Igor Rocha |`)
-    }
-
-    else{
-        console.log(`Comando não existente "${comando}" pelo usuário "${message.author.username}"`)
-        message.channel.send(`Não sou digno de realizar o comando "${comando}". Desculpe 😔`)
+        bot.user.setActivity(`| Digite ${dbConfig.get('prefix').value()}help para ajuda | Criado por Igor Rocha |`)
     }
 
 })
 
 
-client.login(config.token);
+bot.login(config.token);
