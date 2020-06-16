@@ -34,7 +34,7 @@ module.exports.config = {
     name: "prefix",
     description: "Altera o prefixo do servidor!",
     usage: ".prefix [novo_prefix] | .prefix reset",
-    accessableby: "Admin",
+    accessableby: "Moderadores",
     noalias: "Sem variações",
     aliases: []
 }

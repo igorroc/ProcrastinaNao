@@ -28,7 +28,7 @@ module.exports.run = async (bot, message, args) => {
         .setThumbnail(bot.user.displayAvatarURL)
         .setTimestamp()
         .setDescription(`Esses são os comandos disponíveis para o Bot Anti-Procrastinador!\nO prefixo do bot é: \`${prefix}\``)
-        .addField(`Comandos:`, "``help`` ``serverinfo`` ``soma``")
+        .addField(`Comandos:`, "``help`` ``serverinfo`` ``soma`` ``ping``")
         if(message.member.hasPermission("ADMINISTRATOR")){
             Sembed.addField("Comandos Especiais:", "``prefix`` ``msg``")
         }
@@ -43,6 +43,6 @@ module.exports.config = {
     name: "help",
     description: "Resumo dos comandos do servidor!",
     usage: ".help",
-    accessableby: "Members",
+    accessableby: "Membros",
     aliases: ["h", "commands", "comando", "comandos"]
 }

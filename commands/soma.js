@@ -19,6 +19,6 @@ module.exports.config = {
     name: "soma",
     description: "Faz um cálculo simples de soma ou subtração!",
     usage: ".soma 3 4 | .soma 5 -2",
-    accessableby: "Members",
+    accessableby: "Membros",
     aliases: ["s"]
 }

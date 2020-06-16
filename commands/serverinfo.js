@@ -23,6 +23,6 @@ module.exports.config = {
     name: "serverinfo",
     description: "Envia as informações do servidor!",
     usage: ".serverinfo",
-    accessableby: "Members",
+    accessableby: "Membros",
     aliases: ["si", "serverdesc"]
 }

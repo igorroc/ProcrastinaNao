@@ -18,6 +18,6 @@ module.exports.config = {
     name: "ping",
     description: "Informa a latência atual da conexão bot-servidor!",
     usage: ".ping",
-    accessableby: "Members",
+    accessableby: "Membros",
     aliases: ["latencia"]
 }
