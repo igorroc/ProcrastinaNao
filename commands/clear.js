@@ -41,6 +41,6 @@ module.exports.config = {
     name: "clear",
     description: "Apaga as ultimas mensagens do servidor!",
     usage: ".clear [quantidade] (usuario)",
-    accessableby: "Moderação",
+    accessableby: "Moderadores",
     aliases: ["c"]
 }
