@@ -104,7 +104,7 @@ client.on("raw", async dados =>{
 })
 
 client.on("guildMemberAdd", membro => {
-    console.log(`Um novo membro: "${membro.nickname}" entrou no servidor`)
+    console.log(`Um novo membro: "${membro.user.username}" entrou no servidor`)
     membro.addRole("721103513874202645")
     if(membro.user.bot) return
     client.channels.get('721103116686327820').send(`${membro.user} -> Faça seu cadastro aqui!\nDigite \`.cadastro\` para começar`)
@@ -165,17 +165,29 @@ client.on("message", async message => {
     }
     
     else if(comando == "cadastro"){
+        console.log(`Cadastro de "${message.author.username}"`)
         let questao1 = message.reply(`\nOlá ${message.author.username}, nos informe o seu nome (seu apelido aqui no servidor será alterado para o que você digitar)`)
-        message.channel.awaitMessages(m => m.author.id == message.author.id,
-            {max: 1, time: 30000}).then(collected => {
-                message.member.setNickname(collected.content)
-                //await questao1.delete()
-                let questao2 = message.channel.send(`${message.member.user}, qual curso você faz? ||Se você não faz nenhum, digite \`N\`||`)
-            }).catch(() => {
-                message.reply('Sem respostas dentro de 30 segundos, operação cancelada.');
-            });
+            .then(() => {
+                message.channel.awaitMessages(m => m.author.id == message.author.id,
+                    {max: 1, time: 30000}).then(collected => {
+                        console.log(`Nome escolhido "${collected.first().content}"`)
+                        message.member.setNickname(collected.first().content)
+                        //await questao1.delete()
+                    }).catch(() => {
+                        message.reply('Sem respostas dentro de 30 segundos, operação cancelada.');
+                    });
+            })
         
-        
+        let questao2 = message.channel.send(`${message.member.user}, qual curso você faz? ||Se você não faz nenhum, digite \`N\`||`).then(() => {
+            message.channel.awaitMessages(m => m.author.id == message.author.id,
+                {max: 1, time: 30000}).then(collected => {
+                    console.log(`Curso escolhido "${collected.first().content}"`)
+                    //message.member.setNickname(collected.first().content)
+                    //await questao1.delete()
+                }).catch(() => {
+                    message.reply('Sem respostas dentro de 30 segundos, operação cancelada.');
+                });
+        })
     }
 
     else if(comando == "config"){
