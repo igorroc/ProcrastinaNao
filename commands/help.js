@@ -22,18 +22,22 @@ module.exports.run = async (bot, message, args) => {
 
     if(!args[0]) {
         message.delete();
-        console.log( Array.from(bot.commands.filter(comandos => comandos.config.accessableby === 'Membros' )) )
-
+        let comandosSimples = Array.from(bot.commands.filter(c => c.config.accessableby === 'Membros' )).join("` `")
+        comandosSimples = comandosSimples.split("[object Object]").toString().replace(/,,/g, '')
+        
+        let comandosAdmin = Array.from(bot.commands.filter(c => c.config.accessableby === 'Moderadores' )).join("` `")
+        comandosAdmin = comandosAdmin.split("[object Object]").toString().replace(/,,/g, '')
+        
         let Sembed = new Discord.RichEmbed()
         .setColor(colours.yellow)
         .setAuthor(`Anti-Procrastinador Help`, message.guild.iconURL)
         .setThumbnail(bot.user.displayAvatarURL)
         .setTimestamp()
         .setDescription(`Esses são os comandos disponíveis para o Bot Anti-Procrastinador!\nO prefixo do bot é: \`${prefix}\``)
-        .addField(`Comandos:`, Array.from(bot.commands).join(" "))
+        .addField(`Comandos:`, "`" + comandosSimples + "`")
         
         if(message.member.hasPermission("ADMINISTRATOR")){
-            Sembed.addField("Comandos Especiais:", "``prefix`` ``msg``")
+            Sembed.addField("Comandos Especiais:", "`" + comandosAdmin + "`")
         }
         Sembed.addField("Para mais informações", `digite \`${prefix}help [comando]\``)
         .setFooter(`Anti-Procrastinador | Comandos: ${bot.commands.size}`, bot.user.displayAvatarURL)

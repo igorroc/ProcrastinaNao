@@ -36,9 +36,9 @@ fs.readdir("./commands/", (err, files) => {
 
 
 bot.once("ready", () => {
-    console.log("\n■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■")
-    console.log(` Bot foi iniciado em ${bot.guilds.size} servidor(es)`);
-    console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n\n")
+    console.log("\n■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■")
+    console.log(`■ Bot foi iniciado em ${bot.guilds.size} servidor(es) ■`);
+    console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n\n")
     bot.user.setActivity(`| Digite ${dbConfig.get('prefix').value()}help para ajuda | Criado por Igor Rocha |`)
 });
 
@@ -211,11 +211,6 @@ bot.on("message", async message => {
             }
         }
     }
-    
-    else if(comando == "dltmsg"){
-        
-    }
-
 
 })
 
