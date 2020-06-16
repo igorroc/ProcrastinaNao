@@ -173,21 +173,30 @@ client.on("message", async message => {
                         console.log(`Nome escolhido "${collected.first().content}"`)
                         message.member.setNickname(collected.first().content)
                         //await questao1.delete()
+                        let questao2 = message.channel.send(`${message.member.user}, qual curso você faz? ||Se você não faz nenhum, digite \`N\`||`).then(() => {
+                            message.channel.awaitMessages(m => m.author.id == message.author.id,
+                                {max: 1, time: 30000}).then(collected => {
+                                    console.log(`Curso escolhido "${collected.first().content}"`)
+                                    message.guild.channels.get('722274694535053317').send(`O usuário ${collected.first().author} é da faculdade ${collected.first().content}`)
+                                    let questao3 = message.channel.send(`${message.member.user}, em qual faculdade? \`Digite a sigla em maiúsculo\` ||Se você não faz nenhuma, digite \`N\`||`).then(() => {
+                                        message.channel.awaitMessages(m => m.author.id == message.author.id,
+                                            {max: 1, time: 30000}).then(collected => {
+                                                console.log(`Faculdade escolhida "${collected.first().content}"`)
+                                                
+                                            }).catch(() => {
+                                                message.reply('Sem respostas dentro de 30 segundos, operação cancelada.');
+                                            });
+                                    })
+                                }).catch(() => {
+                                    message.reply('Sem respostas dentro de 30 segundos, operação cancelada.');
+                                });
+                        })
                     }).catch(() => {
                         message.reply('Sem respostas dentro de 30 segundos, operação cancelada.');
                     });
             })
         
-        let questao2 = message.channel.send(`${message.member.user}, qual curso você faz? ||Se você não faz nenhum, digite \`N\`||`).then(() => {
-            message.channel.awaitMessages(m => m.author.id == message.author.id,
-                {max: 1, time: 30000}).then(collected => {
-                    console.log(`Curso escolhido "${collected.first().content}"`)
-                    //message.member.setNickname(collected.first().content)
-                    //await questao1.delete()
-                }).catch(() => {
-                    message.reply('Sem respostas dentro de 30 segundos, operação cancelada.');
-                });
-        })
+        
     }
 
     else if(comando == "config"){
