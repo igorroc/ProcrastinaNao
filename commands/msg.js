@@ -32,5 +32,6 @@ module.exports.config = {
     description: "Envia a mensagem desejada para o canal especificado!",
     usage: ".msg [id_do_canal] [mensagem]",
     accessableby: "Admin",
+    noalias: "Sem variações",
     aliases: []
 }
