@@ -2,13 +2,16 @@ const Discord = require("discord.js")
 
 
 module.exports.run = async (bot, message, args) => {
-    console.log(`[LOGS] -> Usuário "${message.author.username}" usou o comando MSG`)
+    console.log(`■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando MSG`)
 
     let [canal] = args
+    if(canal.length > 18){
+        canal = canal.slice(2, 20)
+    }
 
     if(!message.member.hasPermission("ADMINISTRATOR")){
         message.reply('Você não é digno de realizar esse comando!')
-        console.log(`-> Acesso negado para "${message.author.username}"`)
+        console.log(`↳ Acesso negado para "${message.author.username}."`)
     }
     
     if(!bot.channels.get(canal)){
@@ -18,6 +21,7 @@ module.exports.run = async (bot, message, args) => {
                 clearInterval(contagem)
             }, 3000)
         })
+        console.log(`↳ Canal "${canal}" não encontrado.`)
     }else{
         let msg = args.slice(1).join(" ");
         bot.channels.get(canal).send(msg)

@@ -4,7 +4,7 @@ const botconfig = require('../config.json')
 const prefix = botconfig.prefix
 
 module.exports.run = async (bot, message, args) => {
-    console.log(`[LOGS] -> Usuário "${message.author.username}" usou o comando Help`)
+    console.log(`■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Help`)
 
     if(args[0] == "help") return message.channel.send(`Use \`${prefix}help\` invés disso.`)
 
@@ -22,13 +22,16 @@ module.exports.run = async (bot, message, args) => {
 
     if(!args[0]) {
         message.delete();
+        console.log( Array.from(bot.commands.filter(comandos => comandos.config.accessableby === 'Membros' )) )
+
         let Sembed = new Discord.RichEmbed()
         .setColor(colours.yellow)
         .setAuthor(`Anti-Procrastinador Help`, message.guild.iconURL)
         .setThumbnail(bot.user.displayAvatarURL)
         .setTimestamp()
         .setDescription(`Esses são os comandos disponíveis para o Bot Anti-Procrastinador!\nO prefixo do bot é: \`${prefix}\``)
-        .addField(`Comandos:`, "``help`` ``serverinfo`` ``soma`` ``ping``")
+        .addField(`Comandos:`, Array.from(bot.commands).join(" "))
+        
         if(message.member.hasPermission("ADMINISTRATOR")){
             Sembed.addField("Comandos Especiais:", "``prefix`` ``msg``")
         }

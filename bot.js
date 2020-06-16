@@ -23,25 +23,22 @@ fs.readdir("./commands/", (err, files) => {
 
     jsfile.forEach((f, i) => {
         let pull = require(`./commands/${f}`);
-        bot.commands.set(pull.config.name, pull);  
+        bot.commands.set(pull.config.name, pull);
+        console.log(`\n■▶ [LOGS] ⇥ Comando "${pull.config.name}" inicializado com sucesso`)
         pull.config.aliases.forEach(alias => {
             bot.aliases.set(alias, pull.config.name)
+            console.log(`↳ Variação '${alias}' adicionada para "${pull.config.name}"`)
         });
     });
 });
 
 //=-=-=-=-=-=-=-=-=-=-=-=-=
-function emojiStr (id){
-    return bot.emojis.get(id).toString();
-}
-function emojiTrue (id){
-    return bot.emojis.get(id);
-}
+
 
 bot.once("ready", () => {
-    console.log("\n\n\n\n= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =")
-    console.log(`Bot foi iniciado, com ${bot.users.size} usuarios, em ${bot.channels.size} canais, e em ${bot.guilds.size} servidor(es)`);
-    console.log("= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =\n\n")
+    console.log("\n■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■")
+    console.log(` Bot foi iniciado em ${bot.guilds.size} servidor(es)`);
+    console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n\n")
     bot.user.setActivity(`| Digite ${dbConfig.get('prefix').value()}help para ajuda | Criado por Igor Rocha |`)
 });
 
@@ -216,64 +213,7 @@ bot.on("message", async message => {
     }
     
     else if(comando == "dltmsg"){
-        console.log(`Usuário "${message.author.username}" usou o comando DLTMSG`)
-        console.log("Apagando mensagens")
-        if(!message.member.hasPermission("ADMINISTRATOR")){ // se nao tem permissao para apagar
-            let onlineMembers = message.guild.members.filter(m => m.presence.status === 'online').size-1;
-
-            if(onlineMembers >= 3){
-                let confirmacao = await message.reply(`você não tem permissão para realizar esse comando, porém se 70% das pessoas online aceitarem, as mensagens serão deletadas!`);
-                await confirmacao.react(disagree);
-                await confirmacao.react(agree);
-
-
-                let resposta = await confirmacao.awaitReactions(reaction => reaction.emoji.name == agree || reaction.emoji.name == disagree, {time: 10000});
-
-                if(!resposta.get(agree)){
-                    message.channel.send(`As mensagens não serão apagadas.`)
-                }else{
-                    if((resposta.get(agree).count-1 > (onlineMembers-1)*0.7)){
-                        console.log(`Apagando mensagens do canal: ${message.channel.name}`)
-                        message.channel.send("Apagando mensagens...")
-                        try{
-                            const encontradas = await message.channel.fetchMessages({ limit: 100 });
-                            const naoFixas = encontradas.filter(fetchedMsg => !fetchedMsg.pinned);
-                        
-                            await message.channel.bulkDelete(naoFixas, true);
-                            console.log(`Foram apagadas ${naoFixas.size} mensagens!`)
-                        }catch(err) {
-                            console.error(err);
-                        }
-                    }else{
-                        message.channel.send(`As mensagens não serão apagadas.`)
-                    }
-                }
-                confirmacao.delete();
-                return;
-            }else{
-                message.reply(`você não tem permissão para usar esse comando com menos de 3 pessoas online.`)
-                return;
-            }
-        }
-        else{
-            let confirmacao = await message.channel.send(`${emojiStr("708135676339552278")}Apagando mensagens...`)
-            const user = message.mentions.users.first();
-            // Parse Amount
-            const amount = !!parseInt(message.content.split(' ')[1]) ? parseInt(message.content.split(' ')[1]) : parseInt(message.content.split(' ')[2])
-            if (!amount) return message.reply('Você deve indicar uma quantidade!');
-            if (!amount && !user) return message.reply('Você deve indicar um usuario e/ou uma quantidade!');
-            // Fetch 100 messages (will be filtered and lowered up to max amount requested)
-            message.channel.fetchMessages({
-                limit: 100,
-                }).then((messages) => {
-                    if (user) {
-                        const filterBy = user ? user.id : bot.user.id;
-                        messages = messages.filter(m => m.author.id === filterBy).array().slice(0, amount);
-                    }
-                    message.channel.bulkDelete(messages).catch(error => console.log(error.stack));
-                });
-            await confirmacao.delete();
-        }
+        
     }
 
 
