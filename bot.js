@@ -214,10 +214,6 @@ bot.on("message", async message => {
             }
         }
     }
-
-    else if(comando == "msg"){
-        
-    }
     
     else if(comando == "dltmsg"){
         console.log(`Usuário "${message.author.username}" usou o comando DLTMSG`)
