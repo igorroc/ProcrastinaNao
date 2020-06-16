@@ -131,8 +131,7 @@ bot.on("guildMemberAdd", membro => {
 });
 
 bot.on("message", async message => {
-    const agree = "✅";
-    const disagree = "❌";
+    
     
     if(message.author.bot) return;//se o autor foi um bot, faz nada
     if(message.channel.type == "dm") return message.channel.send("Não fala comigo por aqui..."); //se a mensagem foi enviada por dm, n faz nada
