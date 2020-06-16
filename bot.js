@@ -280,28 +280,6 @@ bot.on("message", async message => {
         }
     }
 
-    else if(comando == "prefix"){
-        console.log(`Usuário "${message.author.username}" usou o comando Prefix`)
-        if(!message.member.hasPermission("ADMINISTRATOR")){
-            return message.reply('Você não é digno de realizar esse comando!');
-        }else{
-            let [novoPrefix] = args
-            if(!novoPrefix){
-                message.channel.send(`\`\`\`md\n# O prefixo atual desse servidor é:\n${config.prefix}\n\n# Para resetar, digite:\n${config.prefix}prefix reset\n\n# Para alterar, digite:\n${config.prefix}prefix <novo_prefix>\`\`\``)
-            }else if(novoPrefix == "reset"){
-                await dbConfig.set('prefix', '.').write()
-                console.log(`Prefix resetado para .`)
-                message.channel.send(`\`\`\`md\n# Prefix do servidor resetado para:\n.\`\`\``)
-            }else if(args[1]){
-                message.channel.send(`\`\`\`md\n# Não é possivel adicionar um prefixo com um espaço em branco.\`\`\``);
-            }else{
-                await dbConfig.set('prefix', novoPrefix).write()
-                console.log(`Prefix alterado para ${novoPrefix}`)
-                message.channel.send(`\`\`\`md\n# Prefix do servidor alterado para:\n${novoPrefix}\`\`\``);
-            }
-        }
-        bot.user.setActivity(`| Digite ${dbConfig.get('prefix').value()}help para ajuda | Criado por Igor Rocha |`)
-    }
 
 })
 
