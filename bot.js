@@ -153,43 +153,7 @@ bot.on("message", async message => {
 
 
     if(comando == "help"){
-        console.log(`Usuário "${message.author.username}" usou o comando Help`)
-        message.channel.send(`\`\`\`md\n# Coisas que eu sei fazer:\`\`\`\`\`\`md\n`
-        +`${dbConfig.get('prefix').value()}soma <valores>\n`
-        +`/* Faço a soma de todos os números que você digitar! *\n\n`
         
-        +`${dbConfig.get('prefix').value()}ping\n`
-        +`/* Verifico o meu ping! *\`\`\`\`\`\`md\n`
-        +`# Para mais informações sobre os comandos, digite o comando sem argumento nenhum.\n`
-        +`# Exemplo:  ${dbConfig.get('prefix').value()}decida\n\`\`\``)
-        
-        if(message.member.hasPermission("ADMINISTRATOR")){
-            let confirmacao1 = await message.channel.send("```md\n\n\n# Você quer ver os comandos de ADM?```");
-            await confirmacao1.react(disagree).then(r => {
-                    confirmacao1.react(agree)
-            });
-
-            confirmacao1.awaitReactions((reaction, user) => user.id == message.author.id && (reaction.emoji.name == agree || reaction.emoji.name == disagree),
-            { max: 1, time: 5000 }).then(collected => {
-                    if (collected.first().emoji.name == agree) {
-                        message.channel.send(`\`\`\`md\n# Comandos especiais:\`\`\`\`\`\`md\n`
-                        +`${dbConfig.get('prefix').value()}dltmsg\n`
-                        +`/* Deleta as ultimas mensagens daquele canal de texto *\n\n`
-                        
-                        +`${dbConfig.get('prefix').value()}msg <id_canal> <mensagem>\n`
-                        +`/* Envio a mensagem que você escreveu para o canal que você escolher *\n\n`
-                        
-                        +`${dbConfig.get('prefix').value()}prefix <novo_prefix>\n`
-                        +`/* Altero o prefixo utilizado por mim *\`\`\``)
-                        confirmacao1.delete();
-                    }else{
-                        confirmacao1.delete();
-                    }
-            }).catch(() => {
-                confirmacao1.delete();
-            });
-            
-        }
     }
     
     else if(comando == "cadastro"){
