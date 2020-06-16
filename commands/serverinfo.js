@@ -3,6 +3,8 @@ const colours = require("../colours.json");
 
 
 module.exports.run = async (bot, message, args) => {
+    console.log(`[LOGS] -> Usuário "${message.author.username}" usou o comando ServerInfo`)
+
     let sEmbed = new Discord.RichEmbed()
     .setColor(colours.yellow)
     .setTitle("Informações do Servidor")

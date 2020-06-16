@@ -151,12 +151,8 @@ bot.on("message", async message => {
     let commandfile = bot.commands.get(comando.slice(prefix.length)) || bot.commands.get(bot.aliases.get(comando.slice(prefix.length)))
     if(commandfile) commandfile.run(bot,message,args)
 
-
-    if(comando == "help"){
-        
-    }
     
-    else if(comando == "cadastro"){
+    if(comando == "cadastro"){
         console.log(`Cadastro de "${message.author.username}"`)
         let questao1 = message.channel.send(`Olá ${message.member.user}, nos informe o seu nome (seu apelido aqui no servidor será alterado para o que você digitar)`)
             .then(() => {
@@ -220,11 +216,7 @@ bot.on("message", async message => {
     }
 
     else if(comando == "ping"){
-        console.log(`Usuário "${message.author.username}" usou o comando Ping`)
-        const m = await message.channel.send("Ping?");
-        m.edit(`Pong! A latencia é de ${m.createdTimestamp - message.createdTimestamp}ms. A latencia da API é ${Math.round(bot.ping)}ms`);
-        console.log(`Ping! Pong! Latencia: ${m.createdTimestamp - message.createdTimestamp}ms , API: ${Math.round(bot.ping)}ms`)
-    }
+            }
 
     else if(comando == "soma" || comando == "s"){
         console.log(`Usuário "${message.author.username}" usou o comando Soma`)
