@@ -28,12 +28,12 @@ module.exports.run = async (bot, message, args) => {
         .setThumbnail(bot.user.displayAvatarURL)
         .setTimestamp()
         .setDescription(`Esses são os comandos disponíveis para o Bot Anti-Procrastinador!\nO prefixo do bot é: \`${prefix}\``)
-        .addField(`Comandos:`, "``serverinfo`` ``soma``")
+        .addField(`Comandos:`, "``help`` ``serverinfo`` ``soma``")
         if(message.member.hasPermission("ADMINISTRATOR")){
             Sembed.addField("Comandos Especiais:", "``prefix`` ``msg``")
         }
         Sembed.addField("Para mais informações", `digite \`${prefix}help [comando]\``)
-        .setFooter(`Anti-Procrastinador`, bot.user.displayAvatarURL)
+        .setFooter(`Anti-Procrastinador | Comandos: ${bot.commands.size}`, bot.user.displayAvatarURL)
         message.channel.send(Sembed)
     }
 }

@@ -216,18 +216,7 @@ bot.on("message", async message => {
     }
 
     else if(comando == "msg"){
-        console.log(`Usuário "${message.author.username}" usou o comando MSG`)
-        let [canal] = args
-        if(!canal)[
-            message.channel.send(`\`\`\`md\n# Para enviar uma mensagem em um canal especifico, digite:\n${dbConfig.get('prefix').value()}msg <id_do_canal> <mensagem>\`\`\``)
-        ]
-        else if(!bot.channels.get(canal)){
-            message.channel.send(`\`\`\`md\nCanal nao encontrado\`\`\``)
-        }else{
-            let msg = args.slice(1).join(" ");
-            bot.channels.get(canal).send(msg)
-        }
-        message.delete();
+        
     }
     
     else if(comando == "dltmsg"){
