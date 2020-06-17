@@ -24,7 +24,7 @@ module.exports.run = async (bot, message, args) => {
             message.channel.send(`\`\`\`md\n# Prefix do servidor alterado para:\n${novoPrefix}\n\`\`\``);
         }
     }
-    bot.user.setActivity(`| Digite ${config.get('prefix').value()}help para ajuda | Criado por Igor Rocha |`)
+    bot.user.setActivity(`| Digite ${config.get('prefix').value()}help para ajuda | Criado por Igor Rocha |`, {type: 'LISTENING'})
 
     
 }

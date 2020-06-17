@@ -39,7 +39,7 @@ bot.once("ready", () => {
     console.log("\n■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■")
     console.log(`■ Bot foi iniciado em ${bot.guilds.size} servidor(es) ■`);
     console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n\n")
-    bot.user.setActivity(`| Digite ${dbConfig.get('prefix').value()}help para ajuda | Criado por Igor Rocha |`)
+    bot.user.setActivity(`| Digite ${dbConfig.get('prefix').value()}help para ajuda | Criado por Igor Rocha |`, {type: 'LISTENING'})
 });
 
 bot.on("raw", async dados =>{
