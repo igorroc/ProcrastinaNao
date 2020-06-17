@@ -50,7 +50,7 @@ bot.on("raw", async dados =>{
     let servidor = bot.guilds.get("696430420992066112")
     let membro = servidor.members.get(dados.d.user_id)
     console.log(`■▶ [LOGS] ⇥ Evento de reação feito por "${membro.nickname}"`)
-    
+
     let python = servidor.roles.get('721102448483369140'),
         javascript = servidor.roles.get('721179010767388682'),
         java = servidor.roles.get('721176368964173835'),
