@@ -62,32 +62,32 @@ bot.on("raw", async dados =>{
         if(dados.d.emoji.id === "696478679391272961"){
             if(membro.roles.has(python)) return console.log(`↳ Usuário "${membro.nickname}" já possui o cargo Python`)
             membro.addRole(python)
-            console.log(`↳ Cargo Python adicionado para o usuario ${membro.nickname}`)
+            console.log(`↳ Cargo Python adicionado para o usuario "${membro.nickname}"`)
 
         }else if(dados.d.emoji.name === "721349573901287445"){
             if(membro.roles.has(javascript)) return console.log(`↳ Usuário "${membro.nickname}" já possui o cargo JavaScript`)
             membro.addRole(javascript)
-            console.log(`↳ Cargo JavaScript adicionado para o usuario ${membro.nickname}`)
+            console.log(`↳ Cargo JavaScript adicionado para o usuario "${membro.nickname}"`)
 
         }else if(dados.d.emoji.id === "721349577143222272"){
             if(membro.roles.has(java)) return console.log(`↳ Usuário "${membro.nickname}" já possui o cargo Java`)
             membro.addRole(java)
-            console.log(`↳ Cargo Java adicionado para o usuario ${membro.nickname}`)
+            console.log(`↳ Cargo Java adicionado para o usuario "${membro.nickname}"`)
 
         }else if(dados.d.emoji.id === "721345484035325984"){
             if(membro.roles.has(css)) return console.log(`↳ Usuário "${membro.nickname}" já possui o cargo CSS`)
             membro.addRole(css)
-            console.log(`↳ Cargo CSS adicionado para o usuario ${membro.nickname}`)
+            console.log(`↳ Cargo CSS adicionado para o usuario "${membro.nickname}"`)
 
         }else if(dados.d.emoji.id === "721345485314588744"){
             if(membro.roles.has(html)) return console.log(`↳ Usuário "${membro.nickname}" já possui o cargo HTML`)
             membro.addRole(html)
-            console.log(`↳ Cargo HTML adicionado para o usuario ${membro.nickname}`)
+            console.log(`↳ Cargo HTML adicionado para o usuario "${membro.nickname}"`)
 
         }else if(dados.d.emoji.id === "721347830765322313"){
             if(membro.roles.has(c)) return console.log(`↳ Usuário "${membro.nickname}" já possui o cargo C`)
             membro.addRole(c)
-            console.log(`↳ Cargo C adicionado para o usuario ${membro.nickname}`)
+            console.log(`↳ Cargo C adicionado para o usuario "${membro.nickname}"`)
         }
     }
     if(dados.t === "MESSAGE_REACTION_REMOVE"){
