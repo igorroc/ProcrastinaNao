@@ -137,13 +137,13 @@ bot.on("message", async message => {
     if(message.author.bot) return;//se o autor foi um bot, faz nada
     if(message.channel.type == "dm") return message.channel.send("Não fala comigo por aqui..."); //se a mensagem foi enviada por dm, n faz nada
     
+    
 
     let prefix = config.prefix;
     let messageArray = message.content.split(" ")
     let comando = messageArray[0];
     let args = messageArray.slice(1);
     
-
     if(!message.content.startsWith(prefix)) return; // valida o prefix do comando
     let commandfile = bot.commands.get(comando.slice(prefix.length)) || bot.commands.get(bot.aliases.get(comando.slice(prefix.length)))
     if(commandfile) commandfile.run(bot,message,args)
