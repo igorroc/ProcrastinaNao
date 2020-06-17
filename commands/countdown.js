@@ -8,28 +8,20 @@ module.exports.run = async (bot, message, args) => {
     let contador = parseInt(args)
     let loading = "<a:loading:722456385098481735>"
     let check = "<a:check:722456384301563966>"
-
-    let contagemEmbed = new Discord.RichEmbed()
-        .setTitle(`${loading} Contagem regressiva de ${message.member.nickname}`)
-        .setColor(colours.green_light)
-        .setThumbnail(message.author.avatarURL)
-        .addField("**CONTAGEM:**", contador)
-        .setFooter(`Anti-Procrastinador`, bot.user.displayAvatarURL)
     
-    let m = message.channel.send(contagemEmbed)
-
-    const contagem = setInterval(() => {
-        if(contador > 0){
-            contador--
-            m.then(value => {
-                value.embeds[0].fields[0].value = contador
-                console.log( value.embeds[0].fields[0].value )
-            }).catch(console.error)
-        }else{
-            console.log('↳ Contagem finalizada.')
-            clearInterval(contagem)
-        }
-    }, 1000)
+    message.channel.send(`${loading} **Contagem iniciada**\n${contador}`).then(async (msg) => {
+        const contagem = setInterval(async () => {
+            if(contador > 0){
+                msg.edit(`${loading} **Contagem iniciada**\n${contador}`)
+                contador--
+            }else{
+                console.log('↳ Contagem finalizada.')
+                msg.edit(`${check} **Contagem finalizada!**`)
+                clearInterval(contagem)
+            }
+        }, 1000)
+    })
+    
 }
 
 
