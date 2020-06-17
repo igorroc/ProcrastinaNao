@@ -6,6 +6,8 @@ const config = require("../config.json")
 const left = '◀️'
 const right = '▶'
 const x = '❌'
+const loading = '<a:loading:722456385098481735>'
+const check = '✅'
 
 module.exports.run = async (bot, message, args) => {
     console.log(`■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Git`)
@@ -48,19 +50,35 @@ module.exports.run = async (bot, message, args) => {
                 reaction.emoji.name === x
             ).on("collect", reaction => {
                 const chosen = reaction.emoji.name;
-                if(chosen === right){
+                if(chosen === left){
                     let novoEmbed = new Discord.RichEmbed()
                         .setColor(colours.orange)
                         .setTitle(`<:github:722277332206747691> Repositórios de ${json.login}`)
-                        .setURL(json.html_url)
+                        .setURL(json.html_url+'?tab=repositories')
                         .setThumbnail(json.avatar_url)
                         .setDescription('Navegue pelas páginas utilizando as setas abaixo')
-                        .addField('**TESTE:**', json.name, true)
                         .setFooter(`Anti-Procrastinador`, bot.user.displayAvatarURL, true)
-                        
-                    msg.edit(new Discord.RichEmbed(novoEmbed));
+                    let total = json.public_repos
+                    fetch(`https://api.github.com/users/${user}/repos`)
+                        .then(res => res.json())
+                        .then(async json => {
+                            let i = 0
+                            json.forEach(repos => {
+                                i++
+                                novoEmbed.addField('**'+repos.name+'**', repos.description || 'Sem descrição')
+                                    .setFooter(`Anti-Procrastinador | ${i} de ${total}`, bot.user.displayAvatarURL, true)
+                                if(i == total){
+                                    novoEmbed.setDescription(`Navegue pelas páginas utilizando as setas abaixo\n${check} Repositórios carregados`)
+                                }else{
+                                    novoEmbed.setDescription(`Navegue pelas páginas utilizando as setas abaixo\n${loading} Carregando repositórios...`)
+                                }
+                                msg.edit(new Discord.RichEmbed(novoEmbed));
+                            })
+                            
+                        })
+                    
 
-                }else if(chosen === left){
+                }else if(chosen === right){
                     msg.edit(new Discord.RichEmbed(embed));
                     
                 }else if(chosen === x){
