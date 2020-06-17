@@ -102,6 +102,8 @@ module.exports.run = async (bot, message, args) => {
                                                                             message.member.addRole(faculdade)
                                                                         }
 
+                                                                        message.member.removeRole('721103513874202645')
+                                                                        
                                                                         concluido.setTitle(`${agree} Cadastro de ${message.author.username}`)
 
                                                                     }else if (collected.first().emoji.name == disagree) {
@@ -120,6 +122,8 @@ module.exports.run = async (bot, message, args) => {
                                                                         .setFooter(`Anti-Procrastinador`, bot.user.displayAvatarURL)
                                                                         
                                                                     envio = await message.channel.send(concluido)
+                                                                        .then(m => m.pin())
+                                                                        .catch(console.log('Erro'))
 
                                                                 })
                                                         })
