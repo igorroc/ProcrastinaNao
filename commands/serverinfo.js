@@ -14,6 +14,7 @@ module.exports.run = async (bot, message, args) => {
     .addField("**Dono do Servidor:**", `${message.guild.owner}`, true)
     .addField("**Quantidade de Membros:**", `${message.guild.memberCount}`)
     .addField("**Quantidade de Cargos:**", `${message.guild.roles.size}`, true)
+    .addField("**Quantidade de Emojis:**", `${message.guild.emojis.size}`, true)
     .setFooter(`| Anti-Procrastinador |`, bot.user.displayAvatarURL);
     message.channel.send({embed: sEmbed});
 }
