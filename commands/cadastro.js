@@ -13,7 +13,7 @@ module.exports.run = async (bot, message, args) => {
         .setColor(colours.green_light)
         .setTitle(`<a:loading:722456385098481735> Cadastro de ${message.member.nickname}`)
         .setThumbnail(message.author.avatarURL)
-        .setDescription("Responda as perguntas que serão feitas abaixo!")
+        .setDescription("Responda as perguntas que serão feitas abaixo!\nItens marcados com \"❗\" devem ser revistos")
         .setFooter(`Anti-Procrastinador`, bot.user.displayAvatarURL)
 
     let envio = await message.channel.send(cEmbed)
@@ -34,18 +34,24 @@ module.exports.run = async (bot, message, args) => {
                         message.channel.awaitMessages(m => m.author.id == message.author.id,
                             { max: 1, time: 120000 }).then(async collected => {
                                 console.log(`↳ Curso escolhido "${collected.first().content}"`)
-
-                                //message.guild.channels.get('722274694535053317').send(`O usuário ${collected.first().author} é do curso ${collected.first().content}`)
-                                cEmbed.addField("**Curso:**", collected.first().content)
+                                if(!message.guild.roles.find((role) => role.name == collected.first().content)){
+                                    cEmbed.addField("**Curso:** ❗", collected.first().content)
+                                }else{
+                                    cEmbed.addField("**Curso:**", collected.first().content)
+                                }
                                 await envio.delete()
                                 await collected.first().delete()
                                 envio = await message.channel.send(cEmbed)
 
-                                let questao3 = message.channel.send(`${message.member.user}, em qual faculdade? \n\`Digite a sigla em maiúsculo\` \n||Se você não faz nenhuma, digite \`N\`||`).then(() => {
+                                let questao3 = message.channel.send(`${message.member.user}, em qual faculdade? \n\`Digite a sigla\`\n||Se você não faz nenhuma, digite \`N\`||`).then(() => {
                                     message.channel.awaitMessages(m => m.author.id == message.author.id,
                                         { max: 1, time: 120000 }).then(async collected => {
-                                            console.log(`↳ Faculdade escolhida "${collected.first().content}"`)
-                                            cEmbed.addField("**Faculdade:**", collected.first().content)
+                                            console.log(`↳ Faculdade escolhida "${collected.first().content.toUpperCase()}"`)
+                                            if(!message.guild.roles.find((role) => role.name == collected.first().content.toUpperCase())){
+                                                cEmbed.addField("**Faculdade:** ❗", collected.first().content.toUpperCase())
+                                            }else{
+                                                cEmbed.addField("**Faculdade:**", collected.first().content.toUpperCase())
+                                            }
                                             await envio.delete()
                                             await collected.first().delete()
                                             envio = await message.channel.send(cEmbed)
@@ -57,11 +63,11 @@ module.exports.run = async (bot, message, args) => {
                                                 msg.awaitReactions((reaction, user) => user.id == message.author.id && (reaction.emoji.name == "😀" || reaction.emoji.name == "😫"),
                                                     { max: 1 }).then(async collected => {
                                                         if (collected.first().emoji.name == "😀") {
-                                                            cEmbed.addField("**Nível:**", "Calouro")
-                                                            console.log(`↳ Nível escolhido "Calouro"`)
+                                                            cEmbed.addField("**Nível:**", "Calouro(a)")
+                                                            console.log(`↳ Nível escolhido "Calouro(a)"`)
                                                         }else if (collected.first().emoji.name == "😫") {
-                                                            cEmbed.addField("**Nível:**", "Veterano")
-                                                            console.log(`↳ Nível escolhido "Veterano"`)
+                                                            cEmbed.addField("**Nível:**", "Veterano(a)")
+                                                            console.log(`↳ Nível escolhido "Veterano(a)"`)
                                                         }
 
                                                         await envio.delete()
@@ -79,11 +85,22 @@ module.exports.run = async (bot, message, args) => {
                                                                         
                                                                     if (collected.first().emoji.name == agree) {
                                                                         console.log(`↳ Cadastro de "${message.member.nickname}" concluido.`)
-                                                                        message.member.setNickname(cEmbed.fields.find( ({name}) => name === '**Nome:**').value)
-                                                                        if (cEmbed.fields.find( ({name}) => name === '**Nível:**').value == "Veterano") 
+                                                                        
+                                                                        //message.member.setNickname(cEmbed.fields.find( ({name}) => name === '**Nome:**').value) // Alterando o Nick
+                                                                        
+                                                                        if (cEmbed.fields.find( ({name}) => name === '**Nível:**').value == "Veterano(a)") // Cargo de Veterano
                                                                             message.member.addRole("696434089972072519")
-                                                                        else if (cEmbed.fields.find( ({name}) => name === '**Nível:**').value == "Calouro") 
+                                                                        else if (cEmbed.fields.find( ({name}) => name === '**Nível:**').value == "Calouro(a)") // Cargo de Calouro
                                                                             message.member.addRole("696434056778350612")
+
+                                                                        if (cEmbed.fields.find( ({name}) => name === '**Curso:**')){ // Cargo do Curso
+                                                                            let curso = message.guild.roles.find((role) => role.name == cEmbed.fields.find( ({name}) => name === '**Curso:**').value).id
+                                                                            message.member.addRole(curso)
+                                                                        }
+                                                                        if (cEmbed.fields.find( ({name}) => name === '**Faculdade:**')){ // Cargo da Faculdade 
+                                                                            let faculdade = message.guild.roles.find((role) => role.name == cEmbed.fields.find( ({name}) => name === '**Faculdade:**').value).id
+                                                                            message.member.addRole(faculdade)
+                                                                        }
 
                                                                         concluido.setTitle(`${agree} Cadastro de ${message.member.nickname}`)
 
@@ -94,13 +111,12 @@ module.exports.run = async (bot, message, args) => {
                                                                     }
                                                                     await envio.delete()
                                                                     
-                                                                    
                                                                     concluido.setThumbnail(message.author.avatarURL)
                                                                         .setDescription("~~Responda as perguntas que serão feitas abaixo!~~")
-                                                                        .addField("**Nome:**", cEmbed.fields.find( ({name}) => name === '**Nome:**').value)
-                                                                        .addField("**Curso:**", cEmbed.fields.find( ({name}) => name === '**Curso:**').value)
-                                                                        .addField("**Faculdade:**", cEmbed.fields.find( ({name}) => name === '**Faculdade:**').value)
-                                                                        .addField("**Nível:**", cEmbed.fields.find( ({name}) => name === '**Nível:**').value)
+                                                                        .addField(cEmbed.fields[0].name, cEmbed.fields[0].value)
+                                                                        .addField(cEmbed.fields[1].name, cEmbed.fields[1].value)
+                                                                        .addField(cEmbed.fields[2].name, cEmbed.fields[2].value)
+                                                                        .addField(cEmbed.fields[3].name, cEmbed.fields[3].value)
                                                                         .setFooter(`Anti-Procrastinador`, bot.user.displayAvatarURL)
                                                                         
                                                                     envio = await message.channel.send(concluido)
