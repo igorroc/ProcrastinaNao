@@ -64,12 +64,12 @@ bot.on("raw", async dados =>{
             membro.addRole(python)
             console.log(`↳ Cargo Python adicionado para o usuario "${membro.nickname}"`)
 
-        }else if(dados.d.emoji.name === "721349573901287445"){
+        }else if(dados.d.emoji.id === "721349573901287445"){
             if(membro.roles.has(javascript)) return console.log(`↳ Usuário "${membro.nickname}" já possui o cargo JavaScript`)
             membro.addRole(javascript)
             console.log(`↳ Cargo JavaScript adicionado para o usuario "${membro.nickname}"`)
 
-        }else if(dados.d.emoji.id === "721349577143222272"){
+        }else if(dados.d.emoji.id === "722249250586492978"){
             if(membro.roles.has(java)) return console.log(`↳ Usuário "${membro.nickname}" já possui o cargo Java`)
             membro.addRole(java)
             console.log(`↳ Cargo Java adicionado para o usuario "${membro.nickname}"`)
@@ -96,12 +96,12 @@ bot.on("raw", async dados =>{
             membro.removeRole(python)
             console.log(`↳ Usuário "${membro.nickname}" removeu o cargo Python`)
 
-        }else if(dados.d.emoji.name === "721349573901287445"){
+        }else if(dados.d.emoji.id === "721349573901287445"){
             if(membro.roles.has(javascript)) return console.log(`↳ Usuário "${membro.nickname}" ainda não tinha o cargo JavaScript`)
             membro.removeRole(javascript)
             console.log(`↳ Usuário "${membro.nickname}" removeu o cargo JavaScript`)
 
-        }else if(dados.d.emoji.id === "721349577143222272"){
+        }else if(dados.d.emoji.id === "722249250586492978"){
             if(membro.roles.has(java)) return console.log(`↳ Usuário "${membro.nickname}" ainda não tinha o cargo Java`)
             membro.removeRole(java)
             console.log(`↳ Usuário "${membro.nickname}" removeu o cargo Java`)
@@ -142,7 +142,6 @@ bot.on("message", async message => {
     let messageArray = message.content.split(" ")
     let comando = messageArray[0];
     let args = messageArray.slice(1);
-    
     
     if(!message.content.startsWith(prefix)) return; // valida o prefix do comando
     let commandfile = bot.commands.get(comando.slice(prefix.length)) || bot.commands.get(bot.aliases.get(comando.slice(prefix.length)))
