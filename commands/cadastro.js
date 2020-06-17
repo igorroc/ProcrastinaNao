@@ -11,7 +11,7 @@ module.exports.run = async (bot, message, args) => {
 
     let cEmbed = new Discord.RichEmbed()
         .setColor(colours.green_light)
-        .setTitle(`<a:loading:722456385098481735> Cadastro de ${message.member.nickname}`)
+        .setTitle(`<a:loading:722456385098481735> Cadastro de ${message.author.username}`)
         .setThumbnail(message.author.avatarURL)
         .setDescription("Responda as perguntas que serão feitas abaixo!\nItens marcados com \"❗\" devem ser revistos")
         .setFooter(`Anti-Procrastinador`, bot.user.displayAvatarURL)
@@ -34,7 +34,7 @@ module.exports.run = async (bot, message, args) => {
                         message.channel.awaitMessages(m => m.author.id == message.author.id,
                             { max: 1, time: 120000 }).then(async collected => {
                                 console.log(`↳ Curso escolhido "${collected.first().content}"`)
-                                if(!message.guild.roles.find((role) => role.name == collected.first().content)){
+                                if(!message.guild.roles.find((role) => role.name == collected.first().content.toLowerCase())){
                                     cEmbed.addField("**Curso:** ❗", collected.first().content)
                                 }else{
                                     cEmbed.addField("**Curso:**", collected.first().content)
@@ -46,11 +46,11 @@ module.exports.run = async (bot, message, args) => {
                                 let questao3 = message.channel.send(`${message.member.user}, em qual faculdade? \n\`Digite a sigla\`\n||Se você não faz nenhuma, digite \`N\`||`).then(() => {
                                     message.channel.awaitMessages(m => m.author.id == message.author.id,
                                         { max: 1, time: 120000 }).then(async collected => {
-                                            console.log(`↳ Faculdade escolhida "${collected.first().content.toUpperCase()}"`)
+                                            console.log(`↳ Faculdade escolhida "${collected.first().content}"`)
                                             if(!message.guild.roles.find((role) => role.name == collected.first().content.toUpperCase())){
-                                                cEmbed.addField("**Faculdade:** ❗", collected.first().content.toUpperCase())
+                                                cEmbed.addField("**Faculdade:** ❗", collected.first().content)
                                             }else{
-                                                cEmbed.addField("**Faculdade:**", collected.first().content.toUpperCase())
+                                                cEmbed.addField("**Faculdade:**", collected.first().content)
                                             }
                                             await envio.delete()
                                             await collected.first().delete()
@@ -84,9 +84,9 @@ module.exports.run = async (bot, message, args) => {
                                                                         .setColor(colours.green_light)
                                                                         
                                                                     if (collected.first().emoji.name == agree) {
-                                                                        console.log(`↳ Cadastro de "${message.member.nickname}" concluido.`)
+                                                                        console.log(`↳ Cadastro de "${message.author.username}" concluido.`)
                                                                         
-                                                                        //message.member.setNickname(cEmbed.fields.find( ({name}) => name === '**Nome:**').value) // Alterando o Nick
+                                                                        message.member.setNickname(cEmbed.fields.find( ({name}) => name === '**Nome:**').value) // Alterando o Nick
                                                                         
                                                                         if (cEmbed.fields.find( ({name}) => name === '**Nível:**').value == "Veterano(a)") // Cargo de Veterano
                                                                             message.member.addRole("696434089972072519")
@@ -94,20 +94,20 @@ module.exports.run = async (bot, message, args) => {
                                                                             message.member.addRole("696434056778350612")
 
                                                                         if (cEmbed.fields.find( ({name}) => name === '**Curso:**')){ // Cargo do Curso
-                                                                            let curso = message.guild.roles.find((role) => role.name == cEmbed.fields.find( ({name}) => name === '**Curso:**').value).id
+                                                                            let curso = message.guild.roles.find((role) => role.name == cEmbed.fields.find( ({name}) => name === '**Curso:**' ).value.toLowerCase()).id
                                                                             message.member.addRole(curso)
                                                                         }
                                                                         if (cEmbed.fields.find( ({name}) => name === '**Faculdade:**')){ // Cargo da Faculdade 
-                                                                            let faculdade = message.guild.roles.find((role) => role.name == cEmbed.fields.find( ({name}) => name === '**Faculdade:**').value).id
+                                                                            let faculdade = message.guild.roles.find((role) => role.name == cEmbed.fields.find( ({name}) => name === '**Faculdade:**' ).value.toUpperCase()).id
                                                                             message.member.addRole(faculdade)
                                                                         }
 
-                                                                        concluido.setTitle(`${agree} Cadastro de ${message.member.nickname}`)
+                                                                        concluido.setTitle(`${agree} Cadastro de ${message.author.username}`)
 
                                                                     }else if (collected.first().emoji.name == disagree) {
-                                                                        console.log(`↳ Cadastro de "${message.member.nickname}" cancelado.`)
+                                                                        console.log(`↳ Cadastro de "${message.author.username}" cancelado.`)
                                                                         message.channel.send(`Tudo bem, você pode refazer o cadastro digitando novamente \`${prefix}cadastro\`!`)
-                                                                        concluido.setTitle(`${disagree} Cadastro de ${message.member.nickname}`)
+                                                                        concluido.setTitle(`${disagree} Cadastro de ${message.author.username}`)
                                                                     }
                                                                     await envio.delete()
                                                                     

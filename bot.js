@@ -142,7 +142,7 @@ bot.on("message", async message => {
     let messageArray = message.content.split(" ")
     let comando = messageArray[0];
     let args = messageArray.slice(1);
-
+    
     if(!message.content.startsWith(prefix)) return; // valida o prefix do comando
     let commandfile = bot.commands.get(comando.slice(prefix.length)) || bot.commands.get(bot.aliases.get(comando.slice(prefix.length)))
     if(commandfile) commandfile.run(bot,message,args)
