@@ -21,7 +21,6 @@ module.exports.run = async (bot, message, args) => {
         }}
 
     if(!args[0]) {
-        message.delete();
         let comandosSimples = Array.from(bot.commands.filter(c => c.config.accessableby === 'Membros' )).join("` `")
         comandosSimples = comandosSimples.split("[object Object]").toString().replace(/,,/g, '')
         
