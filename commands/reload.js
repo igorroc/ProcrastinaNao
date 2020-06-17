@@ -9,7 +9,7 @@ module.exports.run = async (bot, message, args) => {
         console.log(`↳ Acesso negado para "${message.author.username}."`)
     }
 
-    if(!args){
+    if(!args || args.length < 1){
         message.reply("⚠️ Escreva o comando que deseja dar reload!")
         console.log(`↳ Nenhum comando indicado.`)
         return
