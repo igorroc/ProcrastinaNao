@@ -131,6 +131,11 @@ bot.on("guildMemberAdd", membro => {
     bot.channels.get('721103116686327820').send(`Olá, ${membro.user}! Seja bem-vindo(a)! -> Faça seu cadastro aqui!\nDigite \`${config.prefix}cadastro\` para começar`)
 });
 
+bot.on("guildMemberRemove", membro => {
+    
+    console.log(`O membro "${membro.user.username}" saiu do servidor.`)
+});
+
 bot.on("message", async message => {
     
     
@@ -147,7 +152,7 @@ bot.on("message", async message => {
     if(!message.content.startsWith(prefix)) return; // valida o prefix do comando
     let commandfile = bot.commands.get(comando.slice(prefix.length)) || bot.commands.get(bot.aliases.get(comando.slice(prefix.length)))
     if(commandfile) commandfile.run(bot,message,args)
-    
+
 })
 
 
