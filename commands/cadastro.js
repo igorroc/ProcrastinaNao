@@ -27,9 +27,9 @@ module.exports.run = async (bot, message, args) => {
                     console.log(`↳ Nome escolhido "${collected.first().content}"`)
 
                     cEmbed.addField("**Nome:**", collected.first().content)
-                    await envio.delete()
-                    await collected.first().delete()
-                    envio = await message.channel.send(cEmbed)
+                    await envio.delete().catch(() => console.log('⚠️ Erro ao deletar o embed'))
+                    await collected.first().delete().catch(() => console.log('⚠️ Erro ao deletar a mensagem'))
+                    envio = await message.channel.send(cEmbed).catch(() => console.log('⚠️ Erro ao enviar o embed'))
 
                     let questao2 = message.channel.send(`${message.member.user}, qual curso você faz?\n||Se você não faz nenhum, digite \`N\`||`).then(() => {
                         message.channel.awaitMessages(m => m.author.id == message.author.id,
@@ -41,9 +41,9 @@ module.exports.run = async (bot, message, args) => {
                                 } else {
                                     cEmbed.addField("**Curso:**", curso)
                                 }
-                                await envio.delete()
-                                await collected.first().delete()
-                                envio = await message.channel.send(cEmbed)
+                                await envio.delete().catch(() => console.log('⚠️ Erro ao deletar o embed'))
+                                await collected.first().delete().catch(() => console.log('⚠️ Erro ao deletar a mensagem'))
+                                envio = await message.channel.send(cEmbed).catch(() => console.log('⚠️ Erro ao enviar o embed'))
 
                                 let questao3 = message.channel.send(`${message.member.user}, em qual faculdade? \n\`Digite a sigla\`\n||Se você não faz nenhuma, digite \`N\`||`).then(() => {
                                     message.channel.awaitMessages(m => m.author.id == message.author.id,
@@ -55,9 +55,9 @@ module.exports.run = async (bot, message, args) => {
                                             } else {
                                                 cEmbed.addField("**Faculdade:**", faculdade)
                                             }
-                                            await envio.delete()
-                                            await collected.first().delete()
-                                            envio = await message.channel.send(cEmbed)
+                                            await envio.delete().catch(() => console.log('⚠️ Erro ao deletar o embed'))
+                                            await collected.first().delete().catch(() => console.log('⚠️ Erro ao deletar a mensagem'))
+                                            envio = await message.channel.send(cEmbed).catch(() => console.log('⚠️ Erro ao enviar o embed'))
 
                                             let questao4 = message.channel.send(`${message.member.user}, você é:\n\`Calouro(a):\` 😀\n\`Veterano(a):\` 😫\n> Caso você seja professor(a), fale com algum membro da Moderação ou Suporte!`).then(msg => {
                                                 msg.react('😀').then(async r => {
@@ -73,8 +73,8 @@ module.exports.run = async (bot, message, args) => {
                                                             console.log(`↳ Nível escolhido "Veterano(a)"`)
                                                         }
 
-                                                        await envio.delete()
-                                                        envio = await message.channel.send(cEmbed)
+                                                        await envio.delete().catch(() => console.log('⚠️ Erro ao deletar o embed'))
+                                                        envio = await message.channel.send(cEmbed).catch(() => console.log('⚠️ Erro ao enviar o embed'))
 
                                                         let fim = message.channel.send("Cadastro finalizado, deseja confirmar esses dados?").then(msg => {
                                                             msg.react(disagree).then(async r => {
@@ -89,25 +89,25 @@ module.exports.run = async (bot, message, args) => {
                                                                     if (collected.first().emoji.name == agree) {
                                                                         console.log(`↳ Cadastro de "${message.author.username}" concluido.`)
 
-                                                                        message.member.setNickname(cEmbed.fields.find(({ name }) => name === '**Nome:**').value).catch(console.log(`↳ ⚠️ Não foi possível alterar o nick de "${message.author.username}"`)) // Alterando o Nick
+                                                                        message.member.setNickname(cEmbed.fields.find(({ name }) => name === '**Nome:**').value).catch(() => console.log(`⚠️ Não foi possível alterar o nick de "${message.author.username}"`)) // Alterando o Nick
 
                                                                         if (cEmbed.fields.find(({ name }) => name === '**Nível:**').value == "Veterano(a)") // Cargo de Veterano
-                                                                            message.member.addRole("696434089972072519").catch(console.log(`↳ ⚠️ Não foi possível adicionar o cargo "Veterano(a)" para "${message.author.username}"`))
+                                                                            message.member.addRole("696434089972072519").catch(() => console.log(`⚠️ Não foi possível adicionar o cargo "Veterano(a)" para "${message.author.username}"`))
                                                                         else if (cEmbed.fields.find(({ name }) => name === '**Nível:**').value == "Calouro(a)") // Cargo de Calouro
-                                                                            message.member.addRole("696434056778350612").catch(console.log(`↳ ⚠️ Não foi possível adicionar o cargo "Veterano(a)" para "${message.author.username}"`))
+                                                                            message.member.addRole("696434056778350612").catch(() => console.log(`⚠️ Não foi possível adicionar o cargo "Veterano(a)" para "${message.author.username}"`))
 
                                                                         if (cEmbed.fields.find(({ name }) => name === '**Curso:**')) { // Cargo do Curso
                                                                             let nomeCurso = cargos.find(c => c.type == 'curso' && c.name === curso.toLowerCase() || c.aliases.find(v => v === curso.toLowerCase())).name
                                                                             let roleCurso = message.guild.roles.find((role) => role.name == nomeCurso).id
-                                                                            message.member.addRole(roleCurso).catch(console.log(`↳ ⚠️ Não foi possível adicionar o cargo "${nomeCurso}" para "${message.author.username}"`))
+                                                                            message.member.addRole(roleCurso).catch(() => console.log(`⚠️ Não foi possível adicionar o cargo "${nomeCurso}" para "${message.author.username}"`))
                                                                         }
                                                                         if (cEmbed.fields.find(({ name }) => name === '**Faculdade:**')) { // Cargo da Faculdade 
                                                                             let nomeFaculdade = cargos.find(c => c.type == 'faculdade' && c.name === faculdade.toLowerCase() || c.aliases.find(v => v === faculdade.toLowerCase())).name.toUpperCase()
                                                                             let roleFaculdade = message.guild.roles.find((role) => role.name == nomeFaculdade).id
-                                                                            message.member.addRole(roleFaculdade).catch(console.log(`↳ ⚠️ Não foi possível adicionar o cargo "${nomeFaculdade}" para "${message.author.username}"`))
+                                                                            message.member.addRole(roleFaculdade).catch(() => console.log(`⚠️ Não foi possível adicionar o cargo "${nomeFaculdade}" para "${message.author.username}"`))
                                                                         }
 
-                                                                        message.member.removeRole('721103513874202645').catch(console.log(`↳ ⚠️ Não foi possível remover o cargo "Novato(a)" para "${message.author.username}"`))
+                                                                        message.member.removeRole('721103513874202645').catch(() => console.log(`⚠️ Não foi possível remover o cargo "Novato(a)" para "${message.author.username}"`))
 
                                                                         concluido.setTitle(`${agree} Cadastro de ${message.author.username}`)
 
@@ -116,7 +116,7 @@ module.exports.run = async (bot, message, args) => {
                                                                         message.channel.send(`Tudo bem, você pode refazer o cadastro digitando novamente \`${prefix}cadastro\`!`)
                                                                         concluido.setTitle(`${disagree} Cadastro de ${message.author.username}`)
                                                                     }
-                                                                    await envio.delete()
+                                                                    await envio.delete().catch(console.log('⚠️ Erro ao deletar o embed'))
 
                                                                     concluido.setThumbnail(message.author.avatarURL)
                                                                         .setDescription("~~Responda as perguntas que serão feitas abaixo!~~")
@@ -128,7 +128,7 @@ module.exports.run = async (bot, message, args) => {
 
                                                                     envio = await message.channel.send(concluido)
                                                                         .then(m => m.pin())
-                                                                        .catch(console.log('↳ ⚠️ Erro ao fixar a mensagem'))
+                                                                        .catch(() => console.log('⚠️ Erro ao fixar a mensagem'))
 
                                                                 })
                                                         })
