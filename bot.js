@@ -152,6 +152,10 @@ bot.on("message", async message => {
     if(!message.content.startsWith(prefix)) return; // valida o prefix do comando
     let commandfile = bot.commands.get(comando.slice(prefix.length)) || bot.commands.get(bot.aliases.get(comando.slice(prefix.length)))
     if(commandfile) commandfile.run(bot,message,args)
+    else{
+        message.channel.send('Comando não encontrado')
+        console.log(`↳ Comando "${comando.slice(prefix.length)}" não encontrado`)
+    }
 
 })
 
