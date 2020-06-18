@@ -83,11 +83,11 @@ module.exports.run = async (bot, message, args) => {
                     
                 }else if(chosen === x){
                     collector.stop();
-                    msg.delete().catch(console.log('↳ ⚠️ Error'))
-                    message.delete().catch(console.log('↳ ⚠️ Error'))
+                    msg.delete().catch(console.log('↳ ⚠️ Erro ao deletar a mensagem'))
+                    message.delete().catch(console.log('↳ ⚠️ Erro ao deletar a mensagem'))
                 
                 }
-                msg.reactions.forEach(reaction => reaction.remove(message.author.id))
+                msg.reactions.forEach(reaction => reaction.remove(message.author.id).catch(console.log('↳ ⚠️ Erro ao remover as reações')))
                 
             });
 
