@@ -11,15 +11,25 @@
       "ciencia da computacao",
       "ciencia da computação",
       "ciência da computação",
-      "ciência da computação"
+      "ciência da computação",
+      "computacao",
+      "computação"
     ]
   },
   {
-    "name": "fisica",
+    "name": "física",
     "type": "curso",
     "id": "721176643355410483",
     "aliases": [
-      "física"
+      "fisica"
+    ]
+  },
+  {
+    "name": "comunicação",
+    "type": "curso",
+    "id": "723172050356666469",
+    "aliases": [
+      "comunicacao"
     ]
   },
   {
@@ -29,11 +39,34 @@
     "aliases": []
   },
   {
-    "name": "UFBA",
+    "name": "uesc",
+    "type": "faculdade",
+    "id": "721100839011221566",
+    "aliases": [
+      "universidade estadual de santa cruz",
+      "universidade estadual de santacruz",
+      "u.e.s.c.",
+      "u.e.s.c"
+    ]
+  },
+  {
+    "name": "ufba",
     "type": "faculdade",
     "id": "722216867741040753",
     "aliases": [
-      "universidade federal da bahia"
+      "universidade federal da bahia",
+      "u.f.b.a.",
+      "u.f.b.a"
+    ]
+  },
+  {
+    "name": "estácio de sá",
+    "type": "faculdade",
+    "id": "723172834204975124",
+    "aliases": [
+      "estacio de sa",
+      "estácio",
+      "estacio"
     ]
   }
 ]
