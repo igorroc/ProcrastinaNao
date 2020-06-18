@@ -89,25 +89,25 @@ module.exports.run = async (bot, message, args) => {
                                                                     if (collected.first().emoji.name == agree) {
                                                                         console.log(`↳ Cadastro de "${message.author.username}" concluido.`)
 
-                                                                        message.member.setNickname(cEmbed.fields.find(({ name }) => name === '**Nome:**').value) // Alterando o Nick
+                                                                        message.member.setNickname(cEmbed.fields.find(({ name }) => name === '**Nome:**').value).catch(console.log(`↳ ⚠️ Não foi possível alterar o nick de "${message.author.username}"`)) // Alterando o Nick
 
                                                                         if (cEmbed.fields.find(({ name }) => name === '**Nível:**').value == "Veterano(a)") // Cargo de Veterano
-                                                                            message.member.addRole("696434089972072519")
+                                                                            message.member.addRole("696434089972072519").catch(console.log(`↳ ⚠️ Não foi possível adicionar o cargo "Veterano(a)" para "${message.author.username}"`))
                                                                         else if (cEmbed.fields.find(({ name }) => name === '**Nível:**').value == "Calouro(a)") // Cargo de Calouro
-                                                                            message.member.addRole("696434056778350612")
+                                                                            message.member.addRole("696434056778350612").catch(console.log(`↳ ⚠️ Não foi possível adicionar o cargo "Veterano(a)" para "${message.author.username}"`))
 
                                                                         if (cEmbed.fields.find(({ name }) => name === '**Curso:**')) { // Cargo do Curso
                                                                             let nomeCurso = cargos.find(c => c.type == 'curso' && c.name === curso.toLowerCase() || c.aliases.find(v => v === curso.toLowerCase())).name
                                                                             let roleCurso = message.guild.roles.find((role) => role.name == nomeCurso).id
-                                                                            message.member.addRole(roleCurso)
+                                                                            message.member.addRole(roleCurso).catch(console.log(`↳ ⚠️ Não foi possível adicionar o cargo "${nomeCurso}" para "${message.author.username}"`))
                                                                         }
                                                                         if (cEmbed.fields.find(({ name }) => name === '**Faculdade:**')) { // Cargo da Faculdade 
                                                                             let nomeFaculdade = cargos.find(c => c.type == 'faculdade' && c.name === faculdade.toLowerCase() || c.aliases.find(v => v === faculdade.toLowerCase())).name.toUpperCase()
                                                                             let roleFaculdade = message.guild.roles.find((role) => role.name == nomeFaculdade).id
-                                                                            message.member.addRole(roleFaculdade)
+                                                                            message.member.addRole(roleFaculdade).catch(console.log(`↳ ⚠️ Não foi possível adicionar o cargo "${nomeFaculdade}" para "${message.author.username}"`))
                                                                         }
 
-                                                                        message.member.removeRole('721103513874202645')
+                                                                        message.member.removeRole('721103513874202645').catch(console.log(`↳ ⚠️ Não foi possível remover o cargo "Novato(a)" para "${message.author.username}"`))
 
                                                                         concluido.setTitle(`${agree} Cadastro de ${message.author.username}`)
 
