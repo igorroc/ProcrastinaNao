@@ -20,7 +20,22 @@ module.exports.run = async (bot, message, args) => {
 
     console.log(exemplo)
     console.log("-------")
-    console.log(cargos.find(c => c.name === exemplo || c.aliases.forEach(v => v === exemplo)).name)
+    let achou = cargos.find(c => c.name === exemplo || c.aliases.find(v => v === exemplo))
+    console.log(achou)
+
+    if(achou){
+        let embed = new Discord.RichEmbed()
+        .setTitle('Achei isso:')
+        .addField('**Nome:**', achou.name)
+        .addField('**ID:**', achou.id)
+        .addField('**Tipo:**', achou.type)
+        .addField('**Variações:**', achou.aliases)
+
+        message.channel.send(embed)
+    }else{
+        message.channel.send(`Não achei \`${exemplo}\``)
+    }
+    
 }
 
 
