@@ -23,5 +23,5 @@ module.exports.config = {
     description: "Mostra o link de convite do servidor!",
     usage: ".invite",
     accessableby: "Membros",
-    aliases: ["inv"]
+    aliases: ["convite"]
 }

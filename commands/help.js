@@ -50,5 +50,5 @@ module.exports.config = {
     description: "Resumo dos comandos do servidor!",
     usage: ".help",
     accessableby: "Membros",
-    aliases: ["h", "commands", "comando", "comandos"]
+    aliases: ["h", "commands", "comando", "comandos", "ajuda"]
 }
