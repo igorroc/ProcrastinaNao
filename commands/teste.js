@@ -16,7 +16,7 @@ module.exports.run = async (bot, message, args) => {
         return
     }
 
-    let exemplo = args.join(' ').toString()
+    let exemplo = args.join(' ').toString().toLowerCase()
 
     console.log(exemplo)
     console.log("-------")
