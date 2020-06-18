@@ -21,10 +21,10 @@ module.exports.run = async (bot, message, args) => {
         }}
 
     if(!args[0]) {
-        let comandosSimples = Array.from(bot.commands.filter(c => c.config.accessableby === 'Membros' )).join("` `")
+        let comandosSimples = Array.from(bot.commands.filter(c => c.config.accessableby === 'Membros' )).join(" `|` ")
         comandosSimples = comandosSimples.split("[object Object]").toString().replace(/,,/g, '')
         
-        let comandosAdmin = Array.from(bot.commands.filter(c => c.config.accessableby === 'Moderadores' )).join("` `")
+        let comandosAdmin = Array.from(bot.commands.filter(c => c.config.accessableby === 'Moderadores' )).join(" `|` ")
         comandosAdmin = comandosAdmin.split("[object Object]").toString().replace(/,,/g, '')
         
         let Sembed = new Discord.RichEmbed()
@@ -33,10 +33,10 @@ module.exports.run = async (bot, message, args) => {
         .setThumbnail(bot.user.displayAvatarURL)
         .setTimestamp()
         .setDescription(`Esses são os comandos disponíveis para o Bot Anti-Procrastinador!\nO prefixo do bot é: \`${prefix}\``)
-        .addField(`Comandos:`, "`" + comandosSimples + "`")
+        .addField(`Comandos:`, "` " + comandosSimples + " `")
         
         if(message.member.hasPermission("ADMINISTRATOR")){
-            Sembed.addField("Comandos Especiais:", "`" + comandosAdmin + "`")
+            Sembed.addField("Comandos Especiais:", "` " + comandosAdmin + " `")
         }
         Sembed.addField("Para mais informações", `digite \`${prefix}help [comando]\``)
         .setFooter(`Anti-Procrastinador | Comandos: ${bot.commands.size}`, bot.user.displayAvatarURL)
