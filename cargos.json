@@ -1,0 +1,39 @@
+[
+  {
+    "name": "cic",
+    "type": "curso",
+    "id": "721176588489850961",
+    "aliases": [
+      "ciencias da computacao",
+      "ciencias da computação",
+      "ciências da computacao",
+      "ciência da computação",
+      "ciencia da computacao",
+      "ciencia da computação",
+      "ciência da computação",
+      "ciência da computação"
+    ]
+  },
+  {
+    "name": "fisica",
+    "type": "curso",
+    "id": "721176643355410483",
+    "aliases": [
+      "física"
+    ]
+  },
+  {
+    "name": "geologia",
+    "type": "curso",
+    "id": "722217072674734101",
+    "aliases": []
+  },
+  {
+    "name": "UFBA",
+    "type": "faculdade",
+    "id": "722216867741040753",
+    "aliases": [
+      "universidade federal da bahia"
+    ]
+  }
+]
