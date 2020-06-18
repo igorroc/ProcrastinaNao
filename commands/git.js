@@ -100,5 +100,6 @@ module.exports.config = {
     description: "teste",
     usage: ".teste",
     accessableby: "Membros",
+    noalias: 'Sem variações',
     aliases: [""]
 }
