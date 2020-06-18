@@ -6,7 +6,7 @@ Iniciativa de um projeto de grupo de estudos utilizando o Discord como plataform
 
 O Projeto #ProcrastinaNão surgiu da ideia de alunos do curso de #CiênciaDaComputação da #UESC em busca de não procrastinar no momento em que estamos vivendo.
 
-Temos como intuito acumular conhecimento em todas as áreas de ensino possíveis e compartilhar esse conhecimento com a maior quantidade de mentes possível.
+Temos como intuito acumular conhecimento em todas as áreas de ensino e compartilhar esse conhecimento com a maior quantidade de mentes possível.
 
 Queremos receber você independente de sua área de atuação.
 
@@ -16,4 +16,4 @@ Um dos objetivos do servidor é apenas utilizar bots feitos pelos seus próprios
 
 Se você está procrastinando muito nessa quarentena, junte-se a nós e #ProcrastinaNão !
 
-#tecnologia #educação #discord #iniciativa #ensino #estudos #quarentena 
+https://www.linkedin.com/in/igorroc/
