@@ -17,7 +17,7 @@ Um dos objetivos do servidor é apenas utilizar bots feitos pelos seus próprios
 Se você está procrastinando muito nessa quarentena, junte-se a nós e [#ProcrastinaNão](https://discord.gg/RvtHp7V)!
 
 ----
-##Servidor: 
+## Servidor: 
 ![ProcrastinaNão](https://github.com/IgorRoc/ProcrastinaNao/blob/master/assets/Servidor%20ProcrastinaN%C3%A3o(Limpo).png?raw=true)
 
 ----
