@@ -1,6 +1,7 @@
 const Discord = require("discord.js")
 const colours = require("../colours.json")
 const config = require("../config.json")
+const cargos = require("../cargos.json")
 
 const agree = "✅";
 const disagree = "❌";
@@ -13,13 +14,13 @@ module.exports.run = async (bot, message, args) => {
         .setColor(colours.green_light)
         .setTitle(`<a:loading:722456385098481735> Cadastro de ${message.author.username}`)
         .setThumbnail(message.author.avatarURL)
-        .setDescription("Responda as perguntas que serão feitas abaixo!\nItens marcados com \"❗\" devem ser revistos")
+        .setDescription("Responda as perguntas que serão feitas abaixo!\nItens marcados com \"❗\" serão revistos pelo suporte, não é necessário se preocupar!")
         .setFooter(`Anti-Procrastinador`, bot.user.displayAvatarURL)
 
     let envio = await message.channel.send(cEmbed)
     message.delete()
 
-    let questao1 = message.channel.send(`Olá ${message.member.user}, nos informe o seu nome (seu apelido aqui no servidor será alterado para o que você digitar)`)
+    let questao1 = message.channel.send(`Olá ${message.member.user}, nos informe o seu nome real (seu apelido aqui no servidor será alterado para o que você digitar)`)
         .then(() => {
             message.channel.awaitMessages(m => m.author.id == message.author.id,
                 { max: 1, time: 120000 }).then(async collected => {
@@ -33,11 +34,12 @@ module.exports.run = async (bot, message, args) => {
                     let questao2 = message.channel.send(`${message.member.user}, qual curso você faz?\n||Se você não faz nenhum, digite \`N\`||`).then(() => {
                         message.channel.awaitMessages(m => m.author.id == message.author.id,
                             { max: 1, time: 120000 }).then(async collected => {
-                                console.log(`↳ Curso escolhido "${collected.first().content}"`)
-                                if (!message.guild.roles.find((role) => role.name == collected.first().content.toLowerCase())) {
-                                    cEmbed.addField("**Curso:** ❗", collected.first().content)
+                                let curso = collected.first().content
+                                console.log(`↳ Curso escolhido "${curso}"`)
+                                if (!cargos.find(c => c.type == 'curso' && c.name === curso.toLowerCase() || c.aliases.find(v => v === curso.toLowerCase()))) {
+                                    cEmbed.addField("**Curso:** ❗", curso)
                                 } else {
-                                    cEmbed.addField("**Curso:**", collected.first().content)
+                                    cEmbed.addField("**Curso:**", curso)
                                 }
                                 await envio.delete()
                                 await collected.first().delete()
@@ -46,11 +48,12 @@ module.exports.run = async (bot, message, args) => {
                                 let questao3 = message.channel.send(`${message.member.user}, em qual faculdade? \n\`Digite a sigla\`\n||Se você não faz nenhuma, digite \`N\`||`).then(() => {
                                     message.channel.awaitMessages(m => m.author.id == message.author.id,
                                         { max: 1, time: 120000 }).then(async collected => {
-                                            console.log(`↳ Faculdade escolhida "${collected.first().content}"`)
-                                            if (!message.guild.roles.find((role) => role.name == collected.first().content.toUpperCase())) {
-                                                cEmbed.addField("**Faculdade:** ❗", collected.first().content)
+                                            let faculdade = collected.first().content
+                                            console.log(`↳ Faculdade escolhida "${faculdade}"`)
+                                            if (!cargos.find(c => c.type == 'faculdade' && c.name === faculdade.toLowerCase() || c.aliases.find(v => v === faculdade.toLowerCase()))) {
+                                                cEmbed.addField("**Faculdade:** ❗", faculdade)
                                             } else {
-                                                cEmbed.addField("**Faculdade:**", collected.first().content)
+                                                cEmbed.addField("**Faculdade:**", faculdade)
                                             }
                                             await envio.delete()
                                             await collected.first().delete()
@@ -94,12 +97,14 @@ module.exports.run = async (bot, message, args) => {
                                                                             message.member.addRole("696434056778350612")
 
                                                                         if (cEmbed.fields.find(({ name }) => name === '**Curso:**')) { // Cargo do Curso
-                                                                            let curso = message.guild.roles.find((role) => role.name == cEmbed.fields.find(({ name }) => name === '**Curso:**').value.toLowerCase()).id
-                                                                            message.member.addRole(curso)
+                                                                            let nomeCurso = cargos.find(c => c.type == 'curso' && c.name === curso.toLowerCase() || c.aliases.find(v => v === curso.toLowerCase())).name
+                                                                            let roleCurso = message.guild.roles.find((role) => role.name == nomeCurso).id
+                                                                            message.member.addRole(roleCurso)
                                                                         }
                                                                         if (cEmbed.fields.find(({ name }) => name === '**Faculdade:**')) { // Cargo da Faculdade 
-                                                                            let faculdade = message.guild.roles.find((role) => role.name == cEmbed.fields.find(({ name }) => name === '**Faculdade:**').value.toUpperCase()).id
-                                                                            message.member.addRole(faculdade)
+                                                                            let nomeFaculdade = cargos.find(c => c.type == 'faculdade' && c.name === faculdade.toLowerCase() || c.aliases.find(v => v === faculdade.toLowerCase())).name.toUpperCase()
+                                                                            let roleFaculdade = message.guild.roles.find((role) => role.name == nomeFaculdade).id
+                                                                            message.member.addRole(roleFaculdade)
                                                                         }
 
                                                                         message.member.removeRole('721103513874202645')
@@ -123,11 +128,10 @@ module.exports.run = async (bot, message, args) => {
 
                                                                     envio = await message.channel.send(concluido)
                                                                         .then(m => m.pin())
-                                                                        .catch(console.log('Erro'))
+                                                                        .catch(console.log('↳ ⚠️ Erro ao fixar a mensagem'))
 
                                                                 })
                                                         })
-                                                        fim.delete()
                                                     }).catch(() => {
                                                         message.reply('infelizmente ocorreu um erro ao finalizar seu cadastro, tente novamente mais tarde.');
                                                         console.log(`↳ Ocorreu um erro (5) no cadastro de "${message.member.nickname}", operação cancelada.`)
@@ -136,7 +140,6 @@ module.exports.run = async (bot, message, args) => {
                                                 message.reply('infelizmente ocorreu um erro ao fazer seu cadastro, tente novamente mais tarde.');
                                                 console.log(`↳ Ocorreu um erro (4) no cadastro de "${message.member.nickname}", operação cancelada.`)
                                             });
-                                            questao4.delete()
                                         })
 
                                 }).catch(() => {
