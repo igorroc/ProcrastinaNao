@@ -12,16 +12,17 @@ module.exports.run = async (bot, message, args) => {
     let novoNome = message.channel.name.toString()
 
     console.log(novoNome)
-    novoNome.replace(/-/gi, "\u2009")
-    console.log(novoNome)
+    let limpo = novoNome.replace(/-/gi, '\u3000')
+    console.log(limpo)
+    message.channel.setName(limpo)
     message.delete()
 }
 
 
 module.exports.config = {
     name: "space",
-    description: "Arruma o nome do canal para poder colocar espaços vazios!",
+    description: "Arruma o nome do canal para poder colocar espaços vazios!\nAinda não achei um caractere vazio que o Discord deixe passar...",
     usage: ".space",
     accessableby: "Moderadores",
-    aliases: ["s"]
+    aliases: ["sp"]
 }
