@@ -59,7 +59,7 @@ module.exports.run = async (bot, message, args) => {
                                             await collected.first().delete()
                                             envio = await message.channel.send(cEmbed)
 
-                                            let questao4 = message.channel.send(`${message.member.user}, você é:\n\`Calouro(a):\` 😀\n\`Veterano(a):\` 😫\n`).then(msg => {
+                                            let questao4 = message.channel.send(`${message.member.user}, você é:\n\`Calouro(a):\` 😀\n\`Veterano(a):\` 😫\n> Caso você seja professor(a), fale com algum membro da Moderação ou Suporte!`).then(msg => {
                                                 msg.react('😀').then(async r => {
                                                     msg.react('😫')
                                                 });
