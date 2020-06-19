@@ -36,7 +36,9 @@
     "name": "geologia",
     "type": "curso",
     "id": "722217072674734101",
-    "aliases": ["geol"]
+    "aliases": [
+      "geol"
+    ]
   },
   {
     "name": "uesc",
