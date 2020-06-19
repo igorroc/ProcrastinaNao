@@ -14,7 +14,7 @@ module.exports.run = async (bot, message, args) => {
             command = bot.commands.get(command);
             var SHembed = new Discord.RichEmbed()
             .setColor(colours.yellow)
-            .setAuthor(`Anti-Procrastinador HELP`, message.guild.iconURL)
+            .setAuthor(`Anti-Procrastinador`, message.guild.iconURL)
             .setThumbnail(bot.user.displayAvatarURL)
             .setDescription(`O prefixo do bot é: \`${prefix}\`\n\n**Comando:** ${command.config.name}\n**Descrição:** ${command.config.description || "Sem descrição"}\n**Uso:** ${command.config.usage || "Sem uso"}\n**Acessivel para:** ${command.config.accessableby || "Membros"}\n**Variações:** ${command.config.noalias || command.config.aliases}`)
             message.channel.send(SHembed);
@@ -29,7 +29,7 @@ module.exports.run = async (bot, message, args) => {
         
         let Sembed = new Discord.RichEmbed()
         .setColor(colours.yellow)
-        .setAuthor(`Anti-Procrastinador Help`, message.guild.iconURL)
+        .setAuthor(`Anti-Procrastinador`, message.guild.iconURL)
         .setThumbnail(bot.user.displayAvatarURL)
         .setTimestamp()
         .setDescription(`Esses são os comandos disponíveis para o Bot Anti-Procrastinador!\nO prefixo do bot é: \`${prefix}\``)
