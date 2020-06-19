@@ -12,6 +12,8 @@ const check = '✅'
 module.exports.run = async (bot, message, args) => {
     console.log(`■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Git`)
     
+    const emojiLoading = message.guild.emojis.get("722456385098481735");
+    
     let user = args.toString()
     
     fetch(`https://api.github.com/users/${user}`)
@@ -38,7 +40,9 @@ module.exports.run = async (bot, message, args) => {
             let msg = await message.channel.send(embed)
             await msg.react(left).then(async r => {
                 await msg.react(x).then(async r => {
-                    await msg.react(right)
+                    await msg.react(right).then(async r => {
+                        await msg.react(emojiLoading).then( r => r.remove())
+                    })
                 })
             })
             console.log(`↳ Perfil de '${user}' enviado`)
@@ -50,7 +54,7 @@ module.exports.run = async (bot, message, args) => {
                 reaction.emoji.name === x
             ).on("collect", reaction => {
                 const chosen = reaction.emoji.name;
-                if(chosen === left){
+                if(chosen === right){
                     let novoEmbed = new Discord.RichEmbed()
                         .setColor(colours.orange)
                         .setTitle(`<:github:722277332206747691> Repositórios de ${json.login}`)
@@ -78,7 +82,7 @@ module.exports.run = async (bot, message, args) => {
                         })
                     
 
-                }else if(chosen === right){
+                }else if(chosen === left){
                     msg.edit(new Discord.RichEmbed(embed));
                     
                 }else if(chosen === x){
