@@ -5,8 +5,11 @@ const left = '◀️'
 const right = '▶'
 const x = '❌'
 
+
 module.exports.run = async (bot, message, args) => {
-    console.log(`■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Teste`)
+    console.log(`■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Config`)
+    
+    const loading = message.guild.emojis.get("722456385098481735");
     
     if(!message.member.hasPermission("ADMINISTRATOR")){
         message.reply('Você não é digno de realizar esse comando!')
@@ -17,12 +20,11 @@ module.exports.run = async (bot, message, args) => {
     if(args[0] == "comandos"){
         console.log(bot.commands)
         return
-    }else if(args[1] == "cargos"){
+    }else if(args[0] == "cargos"){
 
-        if(args[2]){
+        if(args[1]){
             
-            let exemplo = args.join(' ').toString().toLowerCase()
-            console.log(exemplo)
+            let exemplo = args.slice(1).join(' ').toString().toLowerCase()
 
             let achou = cargos.find(c => c.name === exemplo || c.aliases.find(v => v === exemplo))
         
@@ -45,20 +47,22 @@ module.exports.run = async (bot, message, args) => {
 
             let embed = new Discord.RichEmbed()
                 .setAuthor(`Anti-Procrastinador Help`, message.guild.iconURL)
-                .addField('**Nome:**', cargos[i].name)
-                .addField('**ID:**', cargos[i].id)
-                .addField('**Tipo:**', cargos[i].type)
-                .addField('**Variações:**', cargos[i].aliases)
-                .setFooter(`Anti-Procrastinador | Comando ${i} de ${cargos.length}`, bot)
+                .addField('**Nome:**', cargos[i].name || "Sem nome")
+                .addField('**ID:**', cargos[i].id || "Sem ID")
+                .addField('**Tipo:**', cargos[i].type || "Sem tipo")
+                .addField('**Variações:**', cargos[i].aliases || "Sem variação")
+                .setFooter(`Anti-Procrastinador | Cargo ${i+1} de ${cargos.length}`, bot.user.displayAvatarURL)
 
-            let mCargos = message.channel.send(embed)
+            let mCargos = await message.channel.send(embed)
             
             await mCargos.react(left).then(async r => {
                 await mCargos.react(x).then(async r => {
-                    await mCargos.react(right)
+                    await mCargos.react(right).then(async r => {
+                        await mCargos.react(loading).then( r => r.remove())
+                    })
                 })
             })
-
+            
             const collector = await mCargos.createReactionCollector((reaction, user1) => 
                 user1.id === message.author.id &&
                 reaction.emoji.name === left ||
@@ -71,33 +75,33 @@ module.exports.run = async (bot, message, args) => {
 
                     embed.fields.splice(0, 4)
                     embed
-                        .addField('**Nome:**', cargos[i].name)
-                        .addField('**ID:**', cargos[i].id)
-                        .addField('**Tipo:**', cargos[i].type)
-                        .addField('**Variações:**', cargos[i].aliases)
-                        .setFooter(`Anti-Procrastinador | Comando ${i} de ${cargos.length}`, bot)
+                        .addField('**Nome:**', cargos[i].name || "Sem nome")
+                        .addField('**ID:**', cargos[i].id || "Sem ID")
+                        .addField('**Tipo:**', cargos[i].type || "Sem tipo")
+                        .addField('**Variações:**', cargos[i].aliases || "Sem variação")
+                        .setFooter(`Anti-Procrastinador | Cargo ${i+1} de ${cargos.length}`, bot.user.displayAvatarURL)
                     
-                    await mCargos.edit(embed)
+                    mCargos.edit(embed)
                     
                 }else if(chosen === right){
-                    if(i < cargos.length) i++
+                    if(i < cargos.length-1) i++
 
                     embed.fields.splice(0, 4)
                     embed
-                        .addField('**Nome:**', cargos[i].name)
-                        .addField('**ID:**', cargos[i].id)
-                        .addField('**Tipo:**', cargos[i].type)
-                        .addField('**Variações:**', cargos[i].aliases)
-                        .setFooter(`Anti-Procrastinador | Comando ${i} de ${cargos.length}`, bot)
+                        .addField('**Nome:**', `${cargos[i].name || "Sem nome"}`)
+                        .addField('**ID:**', `${cargos[i].id || "Sem ID"}`)
+                        .addField('**Tipo:**', `${cargos[i].type || "Sem tipo"}`)
+                        .addField('**Variações:**', `${cargos[i].aliases || "Sem variação"}`)
+                        .setFooter(`Anti-Procrastinador | Cargo ${i+1} de ${cargos.length}`, bot.user.displayAvatarURL)
 
-                    await mCargos.edit(embed) 
+                    mCargos.edit(embed) 
                     
                 }else if(chosen === x){
                     collector.stop();
-                    mCargos.delete().catch(console.log('↳ ⚠️ Erro ao deletar a mensagem'))
-                    message.delete().catch(console.log('↳ ⚠️ Erro ao deletar a mensagem'))
+                    mCargos.delete().catch( () => console.log('↳ ⚠️ Erro ao deletar a mensagem'))
+                    message.delete().catch( () => console.log('↳ ⚠️ Erro ao deletar a mensagem'))
                 }
-                mCargos.reactions.forEach(reaction => reaction.remove(message.author.id).catch(console.log('↳ ⚠️ Erro ao remover as reações')))
+                mCargos.reactions.forEach(reaction => reaction.remove(message.author.id).catch( () => console.log('↳ ⚠️ Erro ao remover as reações')))
                 
             });
         }
