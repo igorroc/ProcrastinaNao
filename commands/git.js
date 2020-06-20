@@ -10,7 +10,7 @@ const loading = '<a:loading:722456385098481735>'
 const check = '✅'
 
 module.exports.run = async (bot, message, args) => {
-    console.log(`■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Git`)
+    console.log(`\n■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Git`)
     
     const emojiLoading = message.guild.emojis.get("722456385098481735");
     

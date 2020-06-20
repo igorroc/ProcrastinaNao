@@ -8,7 +8,7 @@ const loading = "<a:loading:722456385098481735>";
 const prefix = config.prefix
 
 module.exports.run = async (bot, message, args) => {
-    console.log(`■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Cadastro`)
+    console.log(`\n■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Cadastro`)
 
     let cEmbed = new Discord.RichEmbed()
         .setColor("#ff0000")

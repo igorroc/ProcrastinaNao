@@ -3,7 +3,7 @@ const Discord = require("discord.js")
 
 
 module.exports.run = async (bot, message, args) => {
-    console.log(`■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Clear`)
+    console.log(`\n■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Clear`)
 
     function emojiStr (id){
         return bot.emojis.get(id).toString();

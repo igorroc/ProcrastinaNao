@@ -3,7 +3,7 @@ const colours = require("../colours.json")
 
 
 module.exports.run = async (bot, message, args) => {
-    console.log(`■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Countdown`)
+    console.log(`\n■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Countdown`)
     
     let contador = parseInt(args)
     let loading = "<a:loading:722456385098481735>"

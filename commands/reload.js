@@ -2,7 +2,7 @@ const Discord = require("discord.js")
 
 
 module.exports.run = async (bot, message, args) => {
-    console.log(`■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Reload`)
+    console.log(`\n■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Reload`)
     
     if(!message.member.hasPermission("ADMINISTRATOR")){
         message.reply('Você não é digno de realizar esse comando!')
@@ -18,7 +18,7 @@ module.exports.run = async (bot, message, args) => {
     let command = args[0]
 
     if(!bot.commands.has(command)){
-        message.reply(`⚠️ Comando \`${command}\` não encontrado!`)
+        message.channel.send(`⚠️ Comando \` ${command} \` não encontrado!`)
         console.log(`↳ Comando '${command}' não encontrado.`)
         return
     }

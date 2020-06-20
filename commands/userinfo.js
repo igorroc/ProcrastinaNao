@@ -3,7 +3,7 @@ const colours = require("../colours.json");
 
 
 module.exports.run = async (bot, message, args) => {
-    console.log(`■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando UserInfo`)
+    console.log(`\n■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando UserInfo`)
     
     let uEmbed = new Discord.RichEmbed()
     .setColor(colours.red_light)
