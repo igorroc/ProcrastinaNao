@@ -20,7 +20,7 @@ module.exports.run = async (bot, message, args) => {
         .then(res => res.json())
         .then(async json => {
             if(!json.name && !json.company && !json.location && !json.email && !json.hireable && !json.bio){
-                message.channel.send(`Usuário não encontrado`)
+                message.channel.send(`Usuário '${user}' não encontrado`)
                 console.log(`↳ Usuário '${user}' não encontrado`)
                 return
             }
@@ -102,8 +102,8 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.config = {
     name: "git",
-    description: "teste",
-    usage: ".teste",
+    description: "Acessa o perfil do GitHub do usuário desejado. É possível também acessar os repositórios.",
+    usage: ".git (usuário)",
     accessableby: "Membros",
     noalias: 'Sem variações',
     aliases: [""]
