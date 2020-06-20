@@ -74,7 +74,7 @@ module.exports.run = async (bot, message, args) => {
                                 if(i == total){
                                     novoEmbed.setDescription(`Navegue pelas páginas utilizando as setas abaixo\n${check} Repositórios carregados`)
                                 }else{
-                                    novoEmbed.setDescription(`Navegue pelas páginas utilizando as setas abaixo\n${loading} Carregando repositórios...`)
+                                    novoEmbed.setDescription(`Navegue pelas páginas utilizando as setas abaixo\n\n${loading} Carregando repositórios...`)
                                 }
                                 msg.edit(new Discord.RichEmbed(novoEmbed));
                             })
@@ -87,11 +87,12 @@ module.exports.run = async (bot, message, args) => {
                     
                 }else if(chosen === x){
                     collector.stop();
-                    msg.delete().catch(console.log('↳ ⚠️ Erro ao deletar a mensagem'))
-                    message.delete().catch(console.log('↳ ⚠️ Erro ao deletar a mensagem'))
+                    msg.clearReactions().catch( () => console.log('↳ ⚠️ Erro ao deletar a mensagem'))
+                    msg.delete().catch( () => console.log('↳ ⚠️ Erro ao deletar a mensagem'))
+                    message.delete().catch( () => console.log('↳ ⚠️ Erro ao deletar a mensagem'))
                 
                 }
-                msg.reactions.forEach(reaction => reaction.remove(message.author.id).catch(console.log('↳ ⚠️ Erro ao remover as reações')))
+                msg.reactions.forEach(reaction => reaction.remove(message.author.id).catch( () => console.log('↳ ⚠️ Erro ao remover as reações')))
                 
             });
 
