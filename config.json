@@ -1,4 +1,5 @@
 {
   "prefix": ".",
-  "token": "KEY_AQUI"
+  "token": "KEY_AQUI",
+  "online": true
 }
