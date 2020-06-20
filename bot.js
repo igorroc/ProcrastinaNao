@@ -148,21 +148,23 @@ bot.on("message", async message => {
 
     let prefix = config.prefix; 
     let messageArray = message.content.split(" ")
-    let comando = messageArray[0];
+    let comando = messageArray[0].slice(prefix.length);
     let args = messageArray.slice(1);
     
-    if(!config.online && comando != "help" && comando != "on"){
+    
+
+    if(!message.content.startsWith(prefix)) return; // Valida o prefix do comando
+    if(!config.online && (comando != "help" && comando != "config")){ // Valida se o bot está online ou offline, liberando apenas o uso do comando config e help
         let off = "<:off:723707654245187665>"
         message.channel.send(`${off} Eu estou \` offline \`. Provavelmente estão fazendo alterações em mim\n> Seja paciente!`)
+        console.log(`⚫ Comando enviado por "${message.author.username}" enquanto o bot está OFF`)
         return
     }
-
-    if(!message.content.startsWith(prefix)) return; // valida o prefix do comando
-    let commandfile = bot.commands.get(comando.slice(prefix.length)) || bot.commands.get(bot.aliases.get(comando.slice(prefix.length))) // Pega o comando escrito no arquivo de comandos
+    let commandfile = bot.commands.get(comando) || bot.commands.get(bot.aliases.get(comando)) // Pega o comando escrito no arquivo de comandos
     if(commandfile) commandfile.run(bot,message,args) // Verifica se o comando existe
     else{
         message.channel.send('Comando não encontrado')
-        console.log(`↳ Comando "${comando.slice(prefix.length)}" não encontrado`)
+        console.log(`↳ Comando "${comando}" não encontrado`)
     }
 
 })
