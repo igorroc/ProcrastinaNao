@@ -164,8 +164,7 @@ module.exports.run = async (bot, message, args) => {
                                             
                                             await envio.clearReactions()
                                             await envio.edit(cEmbed)
-                                                .then( m => m.pin() )
-                                                .catch(() => console.log('⚠️ Erro ao fixar a mensagem'))
+                                                .catch(() => console.log('⚠️ Erro ao editar a mensagem'))
 
                                         })
 
