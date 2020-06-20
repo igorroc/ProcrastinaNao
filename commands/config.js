@@ -1,9 +1,10 @@
 const Discord = require("discord.js")
 const cargos = require("../cargos.json")
+const config = require("../config.json")
 const low = require('lowdb')
 const FileSync = require('lowdb/adapters/FileSync')
 const adapter = new FileSync('../config.json')
-const config = low(adapter)
+const configDB = low(adapter)
 
 const left = '◀️'
 const right = '▶'
@@ -13,7 +14,7 @@ const off = '<:off:723707654245187665>'
 
 
 module.exports.run = async (bot, message, args) => {
-    console.log(`■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Config`)
+    console.log(`\n■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Config`)
     
     const loading = message.guild.emojis.get("722456385098481735");
     
@@ -112,21 +113,21 @@ module.exports.run = async (bot, message, args) => {
             });
         }
     }else if(args[0] == "on"){
-        if(config.get('on').value()){
+        if(config.online){
             console.log('ja estou on')
             message.channel.send(`${on} Status do bot já é: \` ONLINE \``)
         }else{
-            console.log('mudando para off')
-            await config.set('online', false).write()
-            console.log(`↳ Status alterado para "offline"`)
-            message.channel.send(`${off} Status do bot alterado para: \` OFFLINE \``)
-        }
-    }else if(args[0] == "off"){
-        if(config.get('on').value()){
             console.log('mudando para on')
-            await config.set('online', true).write()
+            await configDB.assign("online", true).write()
             console.log(`↳ Status alterado para "online"`)
             message.channel.send(`${on} Status do bot alterado para: \` ONLINE \``)
+        }
+    }else if(args[0] == "off"){
+        if(config.online){
+            console.log('mudando para off')
+            await configDB.assign("online", false).write()
+            console.log(`↳ Status alterado para "offline"`)
+            message.channel.send(`${off} Status do bot alterado para: \` OFFLINE \``)
         }else{
             console.log('ja estou off')
             message.channel.send(`${off} Status do bot já é: \` OFFLINE \``)
