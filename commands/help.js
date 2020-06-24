@@ -10,8 +10,9 @@ module.exports.run = async (bot, message, args) => {
 
     if(args[0]) {
         let command = args[0];
-        if(bot.commands.has(command)) {
-            command = bot.commands.get(command);
+        if(bot.commands.has(command) || bot.aliases.has(command)) {
+            command = bot.commands.get(command) || bot.commands.get(bot.aliases.get(command))
+            
             var SHembed = new Discord.RichEmbed()
             .setColor(colours.yellow)
             .setAuthor(bot.user.username, message.guild.iconURL)
