@@ -126,11 +126,15 @@ bot.on("raw", async dados =>{
 
 bot.on("guildMemberAdd", membro => {
     console.log(`\n■▶ [LOGS] ⇥ Novo membro no servidor. Dê as boas vindas para "${membro.user.username}"`)
-    if(membro.user.bot) return
-    membro.addRole("721103513874202645") // Cargo novato
-    let m = bot.channels.get('721103116686327820').send(`Olá, ${membro.user}! Seja bem-vindo(a)! -> Faça seu cadastro aqui!\nDigite \`${config.prefix}cadastro\` para começar`)
-    m.delete(10000) // Deleta depois de 10seg
-        .catch( () => console.log('↳ ⚠️ Erro ao deletar a mensagem'))
+    if(membro.user.bot){
+        membro.addRole("696464386071593081") // Cargo de Bots
+    }else{
+        membro.addRole("721103513874202645") // Cargo novato
+        let m = bot.channels.get('721103116686327820').send(`Olá, ${membro.user}! Seja bem-vindo(a)! -> Faça seu cadastro aqui!\nDigite \`${config.prefix}cadastro\` para começar`)
+        m.delete(10000) // Deleta depois de 10seg
+            .catch( () => console.log('↳ ⚠️ Erro ao deletar a mensagem'))
+    }
+    
 });
 
 bot.on("guildMemberRemove", membro => {
