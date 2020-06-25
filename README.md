@@ -28,7 +28,7 @@ O principal bot do servidor, o qual é responsável pelo cadastro de novos membr
 
 * [Arquivo principal](https://github.com/IgorRoc/ProcrastinaNao/blob/master/bot.js)
 
-
+[ProcrastinaNão](https://raw.githubusercontent.com/IgorRoc/ProcrastinaNao/master/assets/Bot/Logo_v3_Nome_Small.png)
 
 ----
 ## 💻 Tecnologias Utilizadas
