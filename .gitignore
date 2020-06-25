@@ -2,3 +2,4 @@
 .vscode/
 
 # Don't track content of these files
+config.json
