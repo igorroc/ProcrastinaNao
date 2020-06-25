@@ -3,7 +3,7 @@
 
      🤖 Tecnologia  ⇆  Educação 🧠 
 
-[![Discord](https://raw.githubusercontent.com/IgorRoc/ProcrastinaNao/fullfiles/assets/Logo_Name.png)](https://discord.gg/RvtHp7V)
+[![Discord](https://raw.githubusercontent.com/IgorRoc/ProcrastinaNao/master/assets/Server/LogoServer_Nome_Small.png)](https://discord.gg/RvtHp7V)
 
 ----
 ## 🧠 O projeto

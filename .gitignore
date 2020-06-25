@@ -1,6 +1,8 @@
 # Don't track content of these folders
 .vscode/
+node_modules/
 
 # Don't track content of these files
 config.json
 ProcrastinaNao.zip
+run.bat
