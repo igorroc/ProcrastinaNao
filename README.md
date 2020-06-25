@@ -3,7 +3,7 @@
 
      🤖 Tecnologia  ⇆  Educação 🧠 
 
-[![Discord](https://raw.githubusercontent.com/IgorRoc/ProcrastinaNao/master/assets/Logo_Name.png)](https://discord.gg/RvtHp7V)
+[![Discord](https://raw.githubusercontent.com/IgorRoc/ProcrastinaNao/fullfiles/assets/Logo_Name.png)](https://discord.gg/RvtHp7V)
 
 ----
 ## O projeto
@@ -20,7 +20,7 @@ Se você está procrastinando muito nessa quarentena, junte-se a nós e [#Procra
 
 ----
 ## Servidor: 
-![ProcrastinaNão](https://github.com/IgorRoc/ProcrastinaNao/blob/master/assets/Servidor%20ProcrastinaN%C3%A3o(Limpo).png?raw=true)
+![ProcrastinaNão](https://github.com/IgorRoc/ProcrastinaNao/blob/fullfiles/assets/Servidor%20ProcrastinaN%C3%A3o(Limpo).png?raw=true)
 
 ----
 ## Bot Anti-Procrastinador
