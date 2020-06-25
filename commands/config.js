@@ -3,7 +3,7 @@ const cargos = require("../cargos.json")
 const config = require("../config.json")
 const low = require('lowdb')
 const FileSync = require('lowdb/adapters/FileSync')
-const adapter = new FileSync('../config.json')
+const adapter = new FileSync('config.json')
 const configDB = low(adapter)
 
 const left = '◀️'
