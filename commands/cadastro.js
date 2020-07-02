@@ -14,7 +14,7 @@ module.exports.run = async (bot, message, args) => {
         .setColor("#ff0000")
         .setTitle(`Cadastro de ${message.author.username}`)
         .setThumbnail(message.author.avatarURL)
-        .setDescription("**Responda as perguntas que serão feitas abaixo!**\n> **Itens marcados com \"❗\" serão revistos pelo suporte, não é necessário se preocupar!**")
+        .setDescription("**Responda as perguntas que serão feitas abaixo!**\n> Itens marcados com \"❗\" serão revistos pelo suporte, não é necessário se preocupar!")
         .setFooter(`Anti-Procrastinador | Passo 0 de 5`, bot.user.displayAvatarURL)
 
     let envio = await message.channel.send(cEmbed)
