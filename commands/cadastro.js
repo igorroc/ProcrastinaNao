@@ -36,7 +36,7 @@ module.exports.run = async (bot, message, args) => {
 
             await envio.edit(cEmbed).catch(() => console.log('⚠️ Erro ao editar o embed'))
          
-            cEmbed.addField(`**Curso:**  ${loading}`, `${message.member.user}, qual curso você faz?\n||Se você não faz nenhum, digite \` N \`||`)
+            cEmbed.addField(`**Curso:**  ${loading}`, `${message.member.user}, qual curso você faz/ensina?\n||Se você não faz nenhum, digite \` N \`||`)
                 .setFooter(`Anti-Procrastinador | Passo 2 de 5`, bot.user.displayAvatarURL)
                 .setColor("#ec6b08")
             
