@@ -130,11 +130,7 @@ bot.on("guildMemberAdd", membro => {
         membro.addRole("696464386071593081") // Cargo de Bots
     }else{
         membro.addRole("721103513874202645") // Cargo novato
-        bot.channels.get('721103116686327820').send(`Olá, ${membro.user}! Seja bem-vindo(a)! -> Faça seu cadastro aqui!\nDigite \`${config.prefix}cadastro\` para começar`)
-        .then(msg => {
-            msg.delete(10000) // Deleta depois de 10seg
-        })
-        .catch( () => console.log('↳ ⚠️ Erro ao deletar a mensagem'))
+        bot.channels.get('721103116686327820').send(`Olá, ${membro.user}! \`\`\`md\n# Seja bem-vindo(a)!\n/* Faça seu cadastro aqui! */\nDigite <${config.prefix}cadastro> para começar ( sem as <> )\`\`\``)
     }
 });
 
