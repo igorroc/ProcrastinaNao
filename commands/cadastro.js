@@ -10,7 +10,10 @@ const prefix = config.prefix
 module.exports.run = async (bot, message, args) => {
     console.log(`\n■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Cadastro`)
 
-    if(message.)
+    if(!message.member.roles.has("721103513874202645")){
+        message.channel.send(`Você já está cadastrado no servidor!\n> Caso queira alterar sua faculdade/curso, fale com um membro do <@&721329022621057074>`)
+        console.log(`⚠️ Usuario "${message.author.username}" já cadastrado`)
+    }
 
     let cEmbed = new Discord.RichEmbed()
         .setColor("#ff0000")
