@@ -10,6 +10,8 @@ const prefix = config.prefix
 module.exports.run = async (bot, message, args) => {
     console.log(`\n■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Cadastro`)
 
+    if(message.)
+
     let cEmbed = new Discord.RichEmbed()
         .setColor("#ff0000")
         .setTitle(`Cadastro de ${message.author.username}`)
@@ -179,6 +181,9 @@ module.exports.run = async (bot, message, args) => {
                 })
 
             
+        }).catch( (m) => {
+            m.delete()
+            message.channel.send(`Seu cadastro passou do tempo limite, para se cadastrar novamente digite \` ${config.prefix}cadastro \``)
         })
         
 }
