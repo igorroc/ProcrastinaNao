@@ -203,7 +203,7 @@ module.exports.config = {
     name: "cadastro",
     description: "Comando especifico para o cadastro no servidor!",
     usage: ".cadastro",
-    accessableby: "Membros",
+    accessableby: "Novato",
     noalias: "Sem variações",
     aliases: []
 }
