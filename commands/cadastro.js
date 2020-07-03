@@ -13,6 +13,7 @@ module.exports.run = async (bot, message, args) => {
     if(!message.member.roles.has("721103513874202645")){
         message.channel.send(`Você já está cadastrado no servidor!\n> Caso queira alterar sua faculdade/curso, fale com um membro do <@&721329022621057074>`)
         console.log(`⚠️ Usuario "${message.author.username}" já cadastrado`)
+        return
     }
 
     let cEmbed = new Discord.RichEmbed()
