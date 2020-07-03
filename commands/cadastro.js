@@ -108,6 +108,7 @@ module.exports.run = async (bot, message, args) => {
                                         cEmbed.addField("**Nível:**", "Veterano(a)")
                                         console.log(`↳ Nível escolhido "Veterano(a)"`)
                                     } else if (collected.first().emoji.name == "📚") {
+                                        cEmbed.addField("**Nível:**", "Professor(a)")
                                         message.guild.channels.get('722274694535053317').send(`⚠️ O usuário \` ${message.author.username} \` disse ser um professor, verifique por favor!`)
                                         console.log(`↳ Nível escolhido "Professor(a)"`)
                                     }
