@@ -153,6 +153,9 @@ bot.on("message", async message => {
     let args = messageArray.slice(1);
     
     
+    if(!message.member.roles.has("721103513874202645")){
+        message.channel.send(`Você já está cadastrado no servidor!\n> Caso queira alteras sua faculdade/curso, fale com um membro do <@&721329022621057074>`)
+    }
 
     if(!message.content.startsWith(prefix)) return; // Valida o prefix do comando
     if(!config.online && (comando != "help" && comando != "config")){ // Valida se o bot está online ou offline, liberando apenas o uso do comando config e help
