@@ -20,6 +20,8 @@ module.exports.run = async (bot, message, args) => {
         message.channel.send(`\`\`\`md\n# Prefix do servidor resetado para:\n.\`\`\``)
     }else if(args[1]){
         message.channel.send(`\`\`\`md\n# Não é possivel adicionar um prefixo com um espaço em branco.\`\`\``);
+    }else if(!novoPrefix){
+        return message.channel.send("Faltam argumentos.")
     }else{
         await config.set('prefix', novoPrefix).write()
         console.log(`↳ Prefix alterado para "${novoPrefix}"`)
