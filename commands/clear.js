@@ -16,14 +16,15 @@ module.exports.run = async (bot, message, args) => {
     }
     else{
         let valor = parseInt(args[0], 10);
-        if(!valor || valor < 1 || valor > 100)
-            return message.channel.send("Mande um valor de 1 até 100 para eu deletar")
+        if(!valor || valor < 1 || valor > 99)
+            return message.channel.send("Mande um valor de 1 até 99 para eu deletar")
         
         const fetched = await message.channel.messages.fetch({limit: valor + 1});
-        message.channel.bulkDelete(fetched)
-        .catch(e => console.log(`Erro ao apagar mensagens: ${e}`))
-        message.channel.send(`${args[0]} mensagens apagadas!`)
-            .then(m => m.delete({ timeout: 5000 }))
+        let apagadas = await message.channel.bulkDelete(fetched)
+        .catch(e => {
+            console.log(`⚠️ Erro ao apagar mensagens: ${e}`)
+            message.channel.send('⚠️ Erro ao apagar as mensagens.')
+        })
     }
 }
 
