@@ -7,7 +7,7 @@ module.exports.run = async (bot, message, args) => {
     
     let link = 'https://discord.gg/RvtHp7V'
     
-    let embed = new Discord.RichEmbed()
+    let embed = new Discord.MessageEmbed()
         .setColor(colours.green_light)
         .setAuthor('ProcrastinaNão', message.guild.iconURL)
         .setDescription(`Convide seus amigos para o servidor!`)
