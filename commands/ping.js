@@ -8,8 +8,8 @@ module.exports.run = async (bot, message, args) => {
     let check = "<a:check:722456384301563966>"
     
     const m = await message.channel.send(`${loading} Ping?`);
-    m.edit(`${check} Pong! A latencia é de ${m.createdTimestamp - message.createdTimestamp}ms. A latencia da API é ${Math.round(bot.ping)}ms`);
-    console.log(`↳ Ping! Pong! Latencia: ${m.createdTimestamp - message.createdTimestamp}ms , API: ${Math.round(bot.ping)}ms`)
+    m.edit(`${check} Pong! A latência é de ${m.createdTimestamp - message.createdTimestamp}ms. A latência da API é ${Math.round(bot.ms)}ms`);
+    console.log(`↳ Ping! Pong! Latência: ${m.createdTimestamp - message.createdTimestamp}ms , API: ${Math.round(bot.ms)}ms`)
 
 }
 

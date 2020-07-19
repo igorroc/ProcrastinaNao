@@ -37,7 +37,7 @@ fs.readdir("./commands/", (err, files) => {
 
 bot.once("ready", () => {
     console.log("\n■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■")
-    console.log(`■ Bot foi iniciado em ${bot.guilds.size} servidor(es) ■`);
+    console.log(`■ Bot foi iniciado em ${bot.guilds.cache.size} servidor(es) ■`);
     console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n\n")
     bot.user.setActivity(`${dbConfig.get('prefix').value()}help para ajuda | Criado por Igor Rocha |`, {type: 'WATCHING'})
 });
