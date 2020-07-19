@@ -16,7 +16,7 @@ const off = '<:off:723707654245187665>'
 module.exports.run = async (bot, message, args) => {
     console.log(`\n■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Config`)
     
-    const loading = message.guild.emojis.get("722456385098481735");
+    const loading = message.guild.emojis.cache.get("722456385098481735");
     
     if(!message.member.hasPermission("ADMINISTRATOR")){
         message.reply('Você não é digno de realizar esse comando!')
@@ -36,7 +36,7 @@ module.exports.run = async (bot, message, args) => {
             let achou = cargos.find(c => c.name === exemplo || c.aliases.find(v => v === exemplo))
         
             if(achou){
-                let embed = new Discord.RichEmbed()
+                let embed = new Discord.MessageEmbed()
                 .setAuthor(`Anti-Procrastinador`, message.guild.iconURL)
                 .setTitle('Achei isso:')
                 .addField('**Nome:**', achou.name)
@@ -52,7 +52,7 @@ module.exports.run = async (bot, message, args) => {
         }else{
             let i = 0
 
-            let embed = new Discord.RichEmbed()
+            let embed = new Discord.MessageEmbed()
                 .setAuthor(`Anti-Procrastinador Help`, message.guild.iconURL)
                 .addField('**Nome:**', cargos[i].name || "Sem nome")
                 .addField('**ID:**', cargos[i].id || "Sem ID")
@@ -75,7 +75,7 @@ module.exports.run = async (bot, message, args) => {
                 reaction.emoji.name === left ||
                 reaction.emoji.name === right ||
                 reaction.emoji.name === x
-            ).on("collect", reaction => {
+            ).on("collect", async reaction => {
                 const chosen = reaction.emoji.name;
                 if(chosen === left){
                     if(i > 0) i--
@@ -108,8 +108,14 @@ module.exports.run = async (bot, message, args) => {
                     mCargos.delete().catch( () => console.log('↳ ⚠️ Erro ao deletar a mensagem'))
                     message.delete().catch( () => console.log('↳ ⚠️ Erro ao deletar a mensagem'))
                 }
-                mCargos.reactions.forEach(reaction => reaction.remove(message.author.id).catch( () => console.log('↳ ⚠️ Erro ao remover as reações')))
-                
+                const userReactions = mCargos.reactions.cache.filter(reaction => reaction.users.cache.has(message.author.id));
+                try{
+                    for (const reaction of userReactions.values()) {
+                        await reaction.users.remove(message.author.id);
+                    }
+                }catch (error) {
+                    console.log('↳ ⚠️ Erro ao remover as reações');
+                }
             });
         }
     }else if(args[0] == "on"){
@@ -118,14 +124,16 @@ module.exports.run = async (bot, message, args) => {
             message.channel.send(`${on} Status do bot já é: \` ONLINE \``)
         }else{
             console.log('mudando para on')
-            await configDB.assign("online", true).write()
+            await configDB.set("online", true).write()
+            await bot.user.setStatus('online')
             console.log(`↳ Status alterado para "online"`)
             message.channel.send(`${on} Status do bot alterado para: \` ONLINE \``)
         }
     }else if(args[0] == "off"){
         if(config.online){
             console.log('mudando para off')
-            await configDB.assign("online", false).write()
+            await configDB.set("online", false).write()
+            await bot.user.setStatus('dnd')
             console.log(`↳ Status alterado para "offline"`)
             message.channel.send(`${off} Status do bot alterado para: \` OFFLINE \``)
         }else{
