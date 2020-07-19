@@ -8,7 +8,6 @@ const dbConfig = low(adapter)
 
 const bot = new Discord.Client();
 
-
 const fs = require("fs");
 bot.commands = new Discord.Collection();
 bot.aliases = new Discord.Collection();
@@ -46,7 +45,6 @@ bot.on("raw", async dados =>{
     if(dados.t !== "MESSAGE_REACTION_ADD" && dados.t !== "MESSAGE_REACTION_REMOVE") return
     if(dados.d.message_id != "721347287426793494") return // Mensagem de cargos
 
-    
     let servidor = bot.guilds.get("696430420992066112") // Servidor ProcrastinaNão
     let membro = servidor.members.get(dados.d.user_id)
     console.log(`\n■▶ [LOGS] ⇥ Evento de reação feito por "${membro.user.username}"`)

@@ -10,13 +10,13 @@ const prefix = config.prefix
 module.exports.run = async (bot, message, args) => {
     console.log(`\n■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Cadastro`)
 
-    if(!message.member.roles.has("721103513874202645")){
+    if(!message.member.roles.cache.has("721103513874202645")){ // Não tem cargo novato
         message.channel.send(`Você já está cadastrado no servidor!\n> Caso queira alterar sua faculdade/curso, fale com um membro do <@&721329022621057074>`)
-        console.log(`⚠️ Usuario "${message.author.username}" já cadastrado`)
+        console.log(`⚠️ Usuário "${message.author.username}" já cadastrado`)
         return
     }
 
-    let cEmbed = new Discord.RichEmbed()
+    let cEmbed = new Discord.MessageEmbed()
         .setColor("#ff0000")
         .setTitle(`Cadastro de ${message.author.username}`)
         .setThumbnail(message.author.avatarURL)
@@ -58,7 +58,7 @@ module.exports.run = async (bot, message, args) => {
 
                     if (!cargos.find(c => c.type == 'curso' && c.name === curso.toLowerCase() || c.aliases.find(v => v === curso.toLowerCase()))) {
                         cEmbed.addField("**Curso:** ❗", curso)
-                        message.guild.channels.get('722274694535053317').send(`⚠️ O curso \` ${curso} \` escolhido por \` ${message.author.username} \` não foi encontrado.`)
+                        message.guild.channels.cache.get('722274694535053317').send(`⚠️ O curso \` ${curso} \` escolhido por \` ${message.author.username} \` não foi encontrado.`)
                     } else {
                         cEmbed.addField("**Curso:**", curso)
                     }
@@ -79,7 +79,7 @@ module.exports.run = async (bot, message, args) => {
 
                             if (!cargos.find(c => c.type == 'faculdade' && c.name === faculdade.toLowerCase() || c.aliases.find(v => v === faculdade.toLowerCase()))) {
                                 cEmbed.addField("**Faculdade:** ❗", faculdade)
-                                message.guild.channels.get('722274694535053317').send(`⚠️ A faculdade \` ${faculdade} \` escolhida por \` ${message.author.username} \` não foi encontrada.`)
+                                message.guild.channels.cache.get('722274694535053317').send(`⚠️ A faculdade \` ${faculdade} \` escolhida por \` ${message.author.username} \` não foi encontrada.`)
                             } else {
                                 cEmbed.addField("**Faculdade:**", faculdade)
                             }
@@ -109,14 +109,15 @@ module.exports.run = async (bot, message, args) => {
                                         console.log(`↳ Nível escolhido "Veterano(a)"`)
                                     } else if (collected.first().emoji.name == "📚") {
                                         cEmbed.addField("**Nível:**", "Professor(a)")
-                                        message.guild.channels.get('722274694535053317').send(`⚠️ O usuário \` ${message.author.username} \` disse ser um professor, verifique por favor!`)
+                                        message.guild.channels.cache.get('722274694535053317').send(`⚠️ O usuário \` ${message.author.username} \` disse ser um professor, verifique por favor!`)
                                         console.log(`↳ Nível escolhido "Professor(a)"`)
                                     }
                                     
-                                    await envio.clearReactions()
+                                    await envio.reactions.removeAll()
+                                        .catch(error => console.error('⚠️ Erro ao limpar as reações: ', error));
 
                                     cEmbed
-                                        .addBlankField()
+                                        .addField('\u200B', '\u200B')
                                         .addField(`**Confirmação:**  ${loading}`, "Cadastro finalizado, deseja confirmar esses dados?")
                                         .setFooter(`Anti-Procrastinador | Passo 5 de 5`, bot.user.displayAvatarURL)
                                         .setColor("#00ff00")
@@ -136,22 +137,22 @@ module.exports.run = async (bot, message, args) => {
                                                 message.member.setNickname(cEmbed.fields.find(({ name }) => name === '**Nome:**').value).catch(() => console.log(`⚠️ Não foi possível alterar o nick de "${message.author.username}"`)) // Alterando o Nick
 
                                                 if (cEmbed.fields.find(({ name }) => name === '**Nível:**').value == "Veterano(a)") // Cargo de Veterano
-                                                    message.member.addRole("696434089972072519").catch(() => console.log(`⚠️ Não foi possível adicionar o cargo "Veterano(a)" para "${message.author.username}"`))
+                                                    message.member.roles.add("696434089972072519").catch(() => console.log(`⚠️ Não foi possível adicionar o cargo "Veterano(a)" para "${message.author.username}"`))
                                                 else if (cEmbed.fields.find(({ name }) => name === '**Nível:**').value == "Calouro(a)") // Cargo de Calouro
-                                                    message.member.addRole("696434056778350612").catch(() => console.log(`⚠️ Não foi possível adicionar o cargo "Veterano(a)" para "${message.author.username}"`))
+                                                    message.member.roles.add("696434056778350612").catch(() => console.log(`⚠️ Não foi possível adicionar o cargo "Veterano(a)" para "${message.author.username}"`))
                                                 
                                                 if (cEmbed.fields.find(({ name }) => name === '**Curso:**')) { // Cargo do Curso
                                                     let nomeCurso = cargos.find(c => c.type == 'curso' && c.name === curso.toLowerCase() || c.aliases.find(v => v === curso.toLowerCase())).name
-                                                    let roleCurso = message.guild.roles.find((role) => role.name == nomeCurso).id
-                                                    message.member.addRole(roleCurso).catch(() => console.log(`⚠️ Não foi possível adicionar o cargo "${nomeCurso}" para "${message.author.username}"`))
+                                                    let roleCurso = message.guild.roles.cache.find((role) => role.name == nomeCurso).id
+                                                    message.member.roles.add(roleCurso).catch(() => console.log(`⚠️ Não foi possível adicionar o cargo "${nomeCurso}" para "${message.author.username}"`))
                                                 }
                                                 if (cEmbed.fields.find(({ name }) => name === '**Faculdade:**')) { // Cargo da Faculdade 
                                                     let nomeFaculdade = cargos.find(c => c.type == 'faculdade' && c.name === faculdade.toLowerCase() || c.aliases.find(v => v === faculdade.toLowerCase())).name.toUpperCase()
-                                                    let roleFaculdade = message.guild.roles.find((role) => role.name == nomeFaculdade).id
-                                                    message.member.addRole(roleFaculdade).catch(() => console.log(`⚠️ Não foi possível adicionar o cargo "${nomeFaculdade}" para "${message.author.username}"`))
+                                                    let roleFaculdade = message.guild.roles.cache.find((role) => role.name == nomeFaculdade).id
+                                                    message.member.roles.add(roleFaculdade).catch(() => console.log(`⚠️ Não foi possível adicionar o cargo "${nomeFaculdade}" para "${message.author.username}"`))
                                                 }
 
-                                                message.member.removeRole('721103513874202645').catch(() => console.log(`⚠️ Não foi possível remover o cargo "Novato(a)" para "${message.author.username}"`))
+                                                message.member.roles.remove('721103513874202645').catch(() => console.log(`⚠️ Não foi possível remover o cargo "Novato(a)" para "${message.author.username}"`))
 
                                                 cEmbed
                                                     .setTitle(`${agree} Cadastro de ${message.author.username}`)
@@ -174,7 +175,8 @@ module.exports.run = async (bot, message, args) => {
                                                 .setDescription("~~Responda as perguntas que serão feitas abaixo!~~")
                                                 .setFooter(`Anti-Procrastinador`, bot.user.displayAvatarURL)
                                             
-                                            await envio.clearReactions()
+                                            await envio.reactions.removeAll()
+                                                .catch(error => console.error('⚠️ Erro ao limpar as reações: ', error));
                                             await envio.edit(cEmbed)
                                                 .catch(() => console.log('⚠️ Erro ao editar a mensagem'))
 

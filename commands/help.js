@@ -13,11 +13,11 @@ module.exports.run = async (bot, message, args) => {
         if(bot.commands.has(command) || bot.aliases.has(command)) {
             command = bot.commands.get(command) || bot.commands.get(bot.aliases.get(command))
             
-            var SHembed = new Discord.RichEmbed()
+            var SHembed = new Discord.MessageEmbed()
             .setColor(colours.yellow)
             .setAuthor(bot.user.username, message.guild.iconURL)
             .setThumbnail(bot.user.displayAvatarURL)
-            .setDescription(`O prefixo do bot é: \`${prefix}\`\n\n**Comando:** ${command.config.name}\n**Descrição:** ${command.config.description || "Sem descrição"}\n**Uso:** ${command.config.usage || "Sem uso"}\n**Acessivel para:** ${command.config.accessableby || "Membros"}\n**Variações:** ${command.config.noalias || command.config.aliases}`)
+            .setDescription(`O prefixo do bot é: \` ${prefix} \`\n\n**Comando:** ${command.config.name}\n**Descrição:** ${command.config.description || "Sem descrição"}\n**Uso:** ${command.config.usage || "Sem uso"}\n**Acessivel para:** ${command.config.accessableby || "Membros"}\n**Variações:** ${command.config.noalias || command.config.aliases}`)
             message.channel.send(SHembed);
         }}
 
@@ -28,7 +28,7 @@ module.exports.run = async (bot, message, args) => {
         let comandosAdmin = Array.from(bot.commands.filter(c => c.config.accessableby === 'Moderadores' )).join(" `|` ")
         comandosAdmin = comandosAdmin.split("[object Object]").toString().replace(/,,/g, '')
         
-        let Sembed = new Discord.RichEmbed()
+        let Sembed = new Discord.MessageEmbed()
         .setColor(colours.yellow)
         .setAuthor(bot.user.username, message.guild.iconURL)
         .setThumbnail(bot.user.displayAvatarURL)
