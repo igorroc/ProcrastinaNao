@@ -12,7 +12,7 @@ const check = '✅'
 module.exports.run = async (bot, message, args) => {
     console.log(`\n■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Git`)
     
-    const emojiLoading = message.guild.emojis.get("722456385098481735");
+    const emojiLoading = message.guild.emojis.cache.get("722456385098481735");
     
     let user = args.toString()
     
@@ -24,7 +24,7 @@ module.exports.run = async (bot, message, args) => {
                 console.log(`↳ Usuário '${user}' não encontrado`)
                 return
             }
-            let embed = new Discord.RichEmbed()
+            let embed = new Discord.MessageEmbed()
                 .setColor(colours.orange)
                 .setTitle(`<:github:722277332206747691> GitHub de ${json.login}`)
                 .setURL(json.html_url)
@@ -52,10 +52,10 @@ module.exports.run = async (bot, message, args) => {
                 reaction.emoji.name === left ||
                 reaction.emoji.name === right ||
                 reaction.emoji.name === x
-            ).on("collect", reaction => {
+            ).on("collect", async reaction => {
                 const chosen = reaction.emoji.name;
                 if(chosen === right){
-                    let novoEmbed = new Discord.RichEmbed()
+                    let novoEmbed = new Discord.MessageEmbed()
                         .setColor(colours.orange)
                         .setTitle(`<:github:722277332206747691> Repositórios de ${json.login}`)
                         .setURL(json.html_url+'?tab=repositories')
@@ -76,24 +76,30 @@ module.exports.run = async (bot, message, args) => {
                                 }else{
                                     novoEmbed.setDescription(`Navegue pelas páginas utilizando as setas abaixo\n\n${loading} Carregando repositórios...`)
                                 }
-                                msg.edit(new Discord.RichEmbed(novoEmbed));
+                                msg.edit(new Discord.MessageEmbed(novoEmbed));
                             })
                             
                         })
                     
 
                 }else if(chosen === left){
-                    msg.edit(new Discord.RichEmbed(embed));
+                    msg.edit(new Discord.MessageEmbed(embed));
                     
                 }else if(chosen === x){
                     collector.stop();
-                    msg.clearReactions().catch( () => console.log('↳ ⚠️ Erro ao deletar a mensagem'))
+                    msg.reactions.removeAll().catch( () => console.log('↳ ⚠️ Erro ao deletar a mensagem'))
                     msg.delete().catch( () => console.log('↳ ⚠️ Erro ao deletar a mensagem'))
                     message.delete().catch( () => console.log('↳ ⚠️ Erro ao deletar a mensagem'))
                 
                 }
-                msg.reactions.forEach(reaction => reaction.remove(message.author.id).catch( () => console.log('↳ ⚠️ Erro ao remover as reações')))
-                
+                const userReactions = msg.reactions.cache.filter(reaction => reaction.users.cache.has(message.author.id));
+                try{
+                    for (const reaction of userReactions.values()) {
+                        await reaction.users.remove(message.author.id);
+                    }
+                }catch (error) {
+                    console.log('↳ ⚠️ Erro ao remover as reações');
+                }
             });
 
         })
