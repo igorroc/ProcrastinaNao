@@ -9,6 +9,10 @@ module.exports.run = async (bot, message, args) => {
     up = up.replace("seconds", "segundos")
     up = up.replace("minutes", "minutos")
     up = up.replace("hours", "horas")
+    up = up.replace("day", "dia")
+    up = up.replace("days", "dias")
+    up = up.replace("week", "semana")
+    up = up.replace("weeks", "semanas")
 
 
     const m = await message.channel.send(`Estou trabalhando há ${up} sem acidentes nesse servidor!`);
