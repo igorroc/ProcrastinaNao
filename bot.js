@@ -133,13 +133,21 @@ bot.on("guildMemberAdd", membro => {
     if(membro.user.bot){
         membro.roles.add("696464386071593081") // Cargo de Bots
     }else{
+        var guild = bot.guilds.cache.get("696430420992066112")
+        var memberCount = guild.members.cache.filter(member => !member.user.bot).size
+
         membro.roles.add("721103513874202645") // Cargo novato
         bot.channels.cache.get('721103116686327820').send(`Olá, ${membro.user}! \`\`\`md\n# Seja bem-vindo(a)!\n/* Faça seu cadastro aqui! */\nDigite <${config.prefix}cadastro> para começar ( sem as <> )\`\`\``)
+        bot.channels.cache.get('721103116686327820').send(`Membro \`${membro.user}\` entrou no servidor\nTotal: \`${memberCount}\``)
     }
 });
 
 bot.on("guildMemberRemove", membro => {
     console.log(`\n■▶ [LOGS] ⇥ O membro "${membro.user.username}" saiu do servidor.`)
+    var guild = bot.guilds.cache.get("696430420992066112")
+    var memberCount = guild.members.cache.filter(member => !member.user.bot).size
+
+    bot.channels.cache.get('721103116686327820').send(`Membro \`${membro.user}\` saiu do servidor\nTotal: \`${memberCount}\``)
 });
 
 bot.on("message", async message => {   
