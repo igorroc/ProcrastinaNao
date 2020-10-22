@@ -38,9 +38,14 @@ fs.readdir("./commands/", (err, files) => {
 
 
 bot.once("ready", () => {
+    var guild = bot.guilds.cache.get("696430420992066112")
+    var memberCount = guild.members.cache.filter(member => !member.user.bot).size
+
     console.log("\n■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■")
-    console.log(`■ Bot foi iniciado em ${bot.guilds.cache.size} servidor(es) ■`);
+    console.log(`■ Bot iniciado, total de ${memberCount} participantes! ■`);
     console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n\n")
+    bot.channels.cache.get('722274694535053317').send(`👋🏻 Bot iniciado, total de \`${memberCount}\` participantes!`)
+
     if(config.online == true){
         bot.user.setStatus('online')
         bot.user.setActivity(`${dbConfig.get('prefix').value()}help para ajuda | Criado por Igor Rocha |`, {type: 'WATCHING'})
