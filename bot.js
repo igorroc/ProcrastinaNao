@@ -23,10 +23,10 @@ fs.readdir("./commands/", (err, files) => {
     jsfile.forEach((f, i) => {
         let pull = require(`./commands/${f}`); // Importa cada arquivo
         bot.commands.set(pull.config.name, pull); // Coloca o nome dele na Collection
-        console.log(`\n■▶ [LOGS] ⇥ Comando \"${pull.config.name}\" inicializado com sucesso`)
+        console.log(`\n■▶ [LOGS] ⇥ Comando '${pull.config.name}' inicializado com sucesso`)
         pull.config.aliases.forEach(alias => {
             bot.aliases.set(alias, pull.config.name) // Coloca a variação dele na Collection
-            console.log(`↳ Variação \"${alias}\" adicionada`)
+            console.log(`↳ Variação '${alias}' adicionada`)
         });
     });
 });
