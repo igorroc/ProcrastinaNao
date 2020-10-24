@@ -12,6 +12,9 @@ const fs = require("fs");
 bot.commands = new Discord.Collection();
 bot.aliases = new Discord.Collection();
 
+
+let loading = "<a:loading:722456385098481735>"
+
 fs.readdir("./commands/", (err, files) => {
     if(err) console.log(err)
 
@@ -41,7 +44,17 @@ bot.once("ready", () => {
     console.log("\■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■")
     console.log(`■ Bot iniciado, total de ${memberCount} participantes! ■`);
     console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n\n")
-    bot.channels.cache.get('722274694535053317').send(`👋🏻 Bot iniciado, total de \`${memberCount}\` participantes!`)
+
+    const log = bot.channels.cache.get('722274694535053317')
+
+    let reload = log.send(`${loading} Reiniciando...`).then(async m1 => {
+        await m1.edit(`✅ Reiniciado!`).catch( () => console.log(`↳ ⚠️ Erro ao editar a mensagem`) )
+    }).catch( () => console.log(`↳ ⚠️ Erro ao editar a mensagem`) )
+    
+    let starting = log.send(`${loading}`).then(async m2 => {
+            await m2.edit(`🔽╰(\\*°▽°\\*)╯🔽\n\\✅ Bot iniciado, total de \`${memberCount}\` participantes`)
+                .catch( () => console.log(`↳ ⚠️ Erro ao editar a mensagem`) )
+        }).catch( () => console.log(`↳ ⚠️ Erro ao editar a mensagem`) )
 
     if(config.online == true){
         bot.user.setStatus('online')
