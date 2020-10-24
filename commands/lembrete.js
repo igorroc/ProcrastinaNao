@@ -38,7 +38,7 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.config = {
     name: "lembrete",
-    description: "Faz um lembrete para você pelo tempo determinado em minutos, com uma mensagem opcional!\nCaso você não quiser ser marcado quando a contagem acaber, digite true logo após o tempo.",
+    description: "Faz um lembrete para você pelo tempo determinado em minutos, com uma mensagem opcional!\nCaso você não queira ser marcado quando a contagem acabar, digite true logo após o tempo.",
     usage: ".lembrete [minutos] [true] (mensagem)",
     accessableby: "Membros",
     aliases: ["lembrar"]
