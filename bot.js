@@ -48,11 +48,14 @@ bot.once("ready", () => {
     const log = bot.channels.cache.get('722274694535053317')
 
     let reload = log.send(`${loading} Reiniciando...`).then(async m1 => {
-        await m1.edit(`✅ Reiniciado!`).catch( () => console.log(`↳ ⚠️ Erro ao editar a mensagem`) )
+        await m1.edit(`✅ Reiniciado!`).then(async m1 => {
+            await m1.delete().catch( () => console.log(`↳ ⚠️ Erro ao deletar a mensagem`) )
+        })
+        .catch( () => console.log(`↳ ⚠️ Erro ao editar a mensagem`) )
     }).catch( () => console.log(`↳ ⚠️ Erro ao editar a mensagem`) )
     
     let starting = log.send(`${loading}`).then(async m2 => {
-            await m2.edit(`🔽╰(\\*°▽°\\*)╯🔽\n\\✅ Bot iniciado, total de \`${memberCount}\` participantes`)
+            await m2.edit(`✅ Bot iniciado, total de \`${memberCount}\` participantes`)
                 .catch( () => console.log(`↳ ⚠️ Erro ao editar a mensagem`) )
         }).catch( () => console.log(`↳ ⚠️ Erro ao editar a mensagem`) )
 
