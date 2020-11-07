@@ -44,7 +44,7 @@ bot.once("ready", () => {
     console.log("\■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■")
     console.log(`■ Bot iniciado, total de ${memberCount} participantes! ■`);
     console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n\n")
-
+    
     const log = bot.channels.cache.get('722274694535053317')
 
     let reload = log.send(`${loading} Reiniciando...`).then(async m1 => {
@@ -70,10 +70,11 @@ bot.once("ready", () => {
 
 bot.on("raw", async dados =>{
     if(dados.t !== "MESSAGE_REACTION_ADD" && dados.t !== "MESSAGE_REACTION_REMOVE") return
-    if(dados.d.message_id != "721347287426793494") return // Mensagem de cargos
+    
 
     let servidor = bot.guilds.cache.get("696430420992066112") // Servidor ProcrastinaNão
     let membro = servidor.members.cache.get(dados.d.user_id)
+
     console.log(`\n■▶ [LOGS] ⇥ Evento de reação feito por "${membro.user.username}"`)
 
     let python = servidor.roles.cache.get('721102448483369140'),
@@ -83,68 +84,110 @@ bot.on("raw", async dados =>{
         html = servidor.roles.cache.get('721346290369167460'),
         c = servidor.roles.cache.get('721115106871738408')
 
+    let tac1 = servidor.roles.cache.get('769201810056675338'),
+        ld2 = servidor.roles.cache.get('769201851798650880'),
+        lp3 = servidor.roles.cache.get('769201726426972170')
+
     if(dados.t === "MESSAGE_REACTION_ADD"){
-        if(dados.d.emoji.id === "696478679391272961"){ // Cargo Python
-            if(membro.roles.cache.some(role => role === python)) return console.log(`↳ Usuário "${membro.user.username}" já possui o cargo Python`)
-            membro.roles.add(python)
-            console.log(`↳ Cargo Python adicionado para o usuário "${membro.user.username}"`)
+        if(dados.d.message_id === "721347287426793494"){ // Mensagem de cargos
+            if(dados.d.emoji.id === "696478679391272961"){ // Cargo Python
+                if(membro.roles.cache.some(role => role === python)) return console.log(`↳ Usuário "${membro.user.username}" já possui o cargo Python`)
+                membro.roles.add(python)
+                console.log(`↳ Cargo Python adicionado para o usuário "${membro.user.username}"`)
 
-        }else if(dados.d.emoji.id === "721349573901287445"){ // Cargo JavaScript
-            if(membro.roles.cache.some(role => role === javascript)) return console.log(`↳ Usuário "${membro.user.username}" já possui o cargo JavaScript`)
-            membro.roles.add(javascript)
-            console.log(`↳ Cargo JavaScript adicionado para o usuário "${membro.user.username}"`)
+            }else if(dados.d.emoji.id === "721349573901287445"){ // Cargo JavaScript
+                if(membro.roles.cache.some(role => role === javascript)) return console.log(`↳ Usuário "${membro.user.username}" já possui o cargo JavaScript`)
+                membro.roles.add(javascript)
+                console.log(`↳ Cargo JavaScript adicionado para o usuário "${membro.user.username}"`)
 
-        }else if(dados.d.emoji.id === "722249250586492978"){ // Cargo Java
-            if(membro.roles.cache.some(role => role === java)) return console.log(`↳ Usuário "${membro.user.username}" já possui o cargo Java`)
-            membro.roles.add(java)
-            console.log(`↳ Cargo Java adicionado para o usuário "${membro.user.username}"`)
+            }else if(dados.d.emoji.id === "722249250586492978"){ // Cargo Java
+                if(membro.roles.cache.some(role => role === java)) return console.log(`↳ Usuário "${membro.user.username}" já possui o cargo Java`)
+                membro.roles.add(java)
+                console.log(`↳ Cargo Java adicionado para o usuário "${membro.user.username}"`)
 
-        }else if(dados.d.emoji.id === "721345484035325984"){ // Cargo CSS
-            if(membro.roles.cache.some(role => role === css)) return console.log(`↳ Usuário "${membro.user.username}" já possui o cargo CSS`)
-            membro.roles.add(css)
-            console.log(`↳ Cargo CSS adicionado para o usuário "${membro.user.username}"`)
+            }else if(dados.d.emoji.id === "721345484035325984"){ // Cargo CSS
+                if(membro.roles.cache.some(role => role === css)) return console.log(`↳ Usuário "${membro.user.username}" já possui o cargo CSS`)
+                membro.roles.add(css)
+                console.log(`↳ Cargo CSS adicionado para o usuário "${membro.user.username}"`)
 
-        }else if(dados.d.emoji.id === "721345485314588744"){ // Cargo HTML
-            if(membro.roles.cache.some(role => role === html)) return console.log(`↳ Usuário "${membro.user.username}" já possui o cargo HTML`)
-            membro.roles.add(html)
-            console.log(`↳ Cargo HTML adicionado para o usuário "${membro.user.username}"`)
+            }else if(dados.d.emoji.id === "721345485314588744"){ // Cargo HTML
+                if(membro.roles.cache.some(role => role === html)) return console.log(`↳ Usuário "${membro.user.username}" já possui o cargo HTML`)
+                membro.roles.add(html)
+                console.log(`↳ Cargo HTML adicionado para o usuário "${membro.user.username}"`)
 
-        }else if(dados.d.emoji.id === "721347830765322313"){ // Cargo C
-            if(membro.roles.cache.some(role => role === c)) return console.log(`↳ Usuário "${membro.user.username}" já possui o cargo C`)
-            membro.roles.add(c)
-            console.log(`↳ Cargo C adicionado para o usuário "${membro.user.username}"`)
+            }else if(dados.d.emoji.id === "721347830765322313"){ // Cargo C
+                if(membro.roles.cache.some(role => role === c)) return console.log(`↳ Usuário "${membro.user.username}" já possui o cargo C`)
+                membro.roles.add(c)
+                console.log(`↳ Cargo C adicionado para o usuário "${membro.user.username}"`)
+            }
+        } else if(dados.d.message_id === "769200945484529715"){ // Mensagem das materias
+            if(dados.d.emoji.name === "1️⃣"){ // Cargo TAC1
+                if(membro.roles.cache.some(role => role === tac1)) return console.log(`↳ Usuário "${membro.user.username}" já possui o cargo TAC1`)
+                membro.roles.add(tac1)
+                console.log(`↳ Cargo TAC1 adicionado para o usuário "${membro.user.username}"`)
+
+            }else if(dados.d.emoji.name === "2️⃣"){ // Cargo LP3
+                if(membro.roles.cache.some(role => role === lp3)) return console.log(`↳ Usuário "${membro.user.username}" já possui o cargo LP3`)
+                membro.roles.add(lp3)
+                console.log(`↳ Cargo LP3 adicionado para o usuário "${membro.user.username}"`)
+
+            }else if(dados.d.emoji.name === "3️⃣"){ // Cargo LD2
+                if(membro.roles.cache.some(role => role === ld2)) return console.log(`↳ Usuário "${membro.user.username}" já possui o cargo LD2`)
+                membro.roles.add(ld2)
+                console.log(`↳ Cargo LD2 adicionado para o usuário "${membro.user.username}"`)
+
+            }
         }
     }
     if(dados.t === "MESSAGE_REACTION_REMOVE"){
-        if(dados.d.emoji.id === "696478679391272961"){ // Cargo Python
-            if(!membro.roles.cache.some(role => role === python)) return console.log(`↳ Usuário "${membro.user.username}" ainda não tinha o cargo Python`)
-            membro.roles.remove(python)
-            console.log(`↳ Usuário "${membro.user.username}" removeu o cargo Python`)
+        if(dados.d.message_id === "721347287426793494"){ // Mensagem de cargos
+            if(dados.d.emoji.id === "696478679391272961"){ // Cargo Python
+                if(!membro.roles.cache.some(role => role === python)) return console.log(`↳ Usuário "${membro.user.username}" ainda não tinha o cargo Python`)
+                membro.roles.remove(python)
+                console.log(`↳ Usuário "${membro.user.username}" removeu o cargo Python`)
 
-        }else if(dados.d.emoji.id === "721349573901287445"){ // Cargo JavaScript
-            if(!membro.roles.cache.some(role => role === javascript)) return console.log(`↳ Usuário "${membro.user.username}" ainda não tinha o cargo JavaScript`)
-            membro.roles.remove(javascript)
-            console.log(`↳ Usuário "${membro.user.username}" removeu o cargo JavaScript`)
+            }else if(dados.d.emoji.id === "721349573901287445"){ // Cargo JavaScript
+                if(!membro.roles.cache.some(role => role === javascript)) return console.log(`↳ Usuário "${membro.user.username}" ainda não tinha o cargo JavaScript`)
+                membro.roles.remove(javascript)
+                console.log(`↳ Usuário "${membro.user.username}" removeu o cargo JavaScript`)
 
-        }else if(dados.d.emoji.id === "722249250586492978"){ // Cargo Java
-            if(!membro.roles.cache.some(role => role === java)) return console.log(`↳ Usuário "${membro.user.username}" ainda não tinha o cargo Java`)
-            membro.roles.remove(java)
-            console.log(`↳ Usuário "${membro.user.username}" removeu o cargo Java`)
+            }else if(dados.d.emoji.id === "722249250586492978"){ // Cargo Java
+                if(!membro.roles.cache.some(role => role === java)) return console.log(`↳ Usuário "${membro.user.username}" ainda não tinha o cargo Java`)
+                membro.roles.remove(java)
+                console.log(`↳ Usuário "${membro.user.username}" removeu o cargo Java`)
 
-        }else if(dados.d.emoji.id === "721345484035325984"){ // Cargo CSS
-            if(!membro.roles.cache.some(role => role === css)) return console.log(`↳ Usuário "${membro.user.username}" ainda não tinha o cargo CSS`)
-            membro.roles.remove(css)
-            console.log(`↳ Usuário "${membro.user.username}" removeu o cargo CSS`)
+            }else if(dados.d.emoji.id === "721345484035325984"){ // Cargo CSS
+                if(!membro.roles.cache.some(role => role === css)) return console.log(`↳ Usuário "${membro.user.username}" ainda não tinha o cargo CSS`)
+                membro.roles.remove(css)
+                console.log(`↳ Usuário "${membro.user.username}" removeu o cargo CSS`)
 
-        }else if(dados.d.emoji.id === "721345485314588744"){ // Cargo HMTL
-            if(!membro.roles.cache.some(role => role === html)) return console.log(`↳ Usuário "${membro.user.username}" ainda não tinha o cargo HTML`)
-            membro.roles.remove(html)
-            console.log(`↳ Usuário "${membro.user.username}" removeu o cargo HTML`)
+            }else if(dados.d.emoji.id === "721345485314588744"){ // Cargo HMTL
+                if(!membro.roles.cache.some(role => role === html)) return console.log(`↳ Usuário "${membro.user.username}" ainda não tinha o cargo HTML`)
+                membro.roles.remove(html)
+                console.log(`↳ Usuário "${membro.user.username}" removeu o cargo HTML`)
 
-        }else if(dados.d.emoji.id === "721347830765322313"){ // Cargo C
-            if(!membro.roles.cache.some(role => role === c)) return console.log(`↳ Usuário "${membro.user.username}" ainda não tinha o cargo C`)
-            membro.roles.remove(c)
-            console.log(`↳ Usuário "${membro.user.username}" removeu o cargo C`)
+            }else if(dados.d.emoji.id === "721347830765322313"){ // Cargo C
+                if(!membro.roles.cache.some(role => role === c)) return console.log(`↳ Usuário "${membro.user.username}" ainda não tinha o cargo C`)
+                membro.roles.remove(c)
+                console.log(`↳ Usuário "${membro.user.username}" removeu o cargo C`)
+            }
+        } else if(dados.d.message_id === "769200945484529715"){ // Mensagem das materias
+            if(dados.d.emoji.name === "1️⃣"){ // Cargo TAC1
+                if(!membro.roles.cache.some(role => role === tac1)) return console.log(`↳ Usuário "${membro.user.username}" ainda não tinha o cargo TAC1`)
+                membro.roles.remove(tac1)
+                console.log(`↳ Cargo TAC1 removido do usuário "${membro.user.username}"`)
+
+            }else if(dados.d.emoji.name === "2️⃣"){ // Cargo LP3
+                if(!membro.roles.cache.some(role => role === lp3)) return console.log(`↳ Usuário "${membro.user.username}" ainda não tinha o cargo LP3`)
+                membro.roles.remove(lp3)
+                console.log(`↳ Cargo LP3 removido do usuário "${membro.user.username}"`)
+
+            }else if(dados.d.emoji.name === "3️⃣"){ // Cargo LD2
+                if(!membro.roles.cache.some(role => role === ld2)) return console.log(`↳ Usuário "${membro.user.username}" ainda não tinha o cargo LD2`)
+                membro.roles.remove(ld2)
+                console.log(`↳ Cargo LD2 removido do usuário "${membro.user.username}"`)
+
+            }
         }
     }
 })

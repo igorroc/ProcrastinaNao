@@ -42,7 +42,7 @@ module.exports.run = async (bot, message, args) => {
 
             await envio.edit(cEmbed).catch(() => console.log('⚠️ Erro ao editar o embed'))
          
-            cEmbed.addField(`**Curso:**  ${loading}`, `${message.member.user}, qual curso você faz/ensina?\n||Se você não faz nenhum, digite \` N \`||`)
+            cEmbed.addField(`**Curso:**  ${loading}`, `${message.member.user}, qual curso você faz/ensina?\n> Se você não faz nenhum, digite \` N \``)
                 .setFooter(`Anti-Procrastinador | Passo 2 de 5`, bot.user.displayAvatarURL)
                 .setColor("#ec6b08")
             
@@ -63,7 +63,7 @@ module.exports.run = async (bot, message, args) => {
                         cEmbed.addField("**Curso:**", curso)
                     }
 
-                    cEmbed.addField(`**Faculdade:**  ${loading}`, `${message.member.user}, em qual faculdade? \n||Se você não faz nenhuma, digite \`N\`||`)
+                    cEmbed.addField(`**Faculdade:**  ${loading}`, `${message.member.user}, em qual faculdade? \n> Se você não faz nenhuma, digite \`N\``)
                         .setFooter(`Anti-Procrastinador | Passo 3 de 5`, bot.user.displayAvatarURL)
                         .setColor("#a17700")
                     
@@ -84,7 +84,7 @@ module.exports.run = async (bot, message, args) => {
                                 cEmbed.addField("**Faculdade:**", faculdade)
                             }
 
-                            cEmbed.addField(`**Nível:**  ${loading}`, `${message.member.user}, você é:\n\` Calouro(a):\` 😀\n\` Veterano(a):\` 😫\n\` Professor(a):\` 📚\n`)
+                            cEmbed.addField(`**Nível:**  ${loading}`, `${message.member.user}, você é:\n\` Calouro(a):\` 😀\n\` Veterano(a):\` 😫\n\` Professor(a):\` 📚\n> Clique no emoji correspondente abaixo da mensagem ↓ `)
                                 .setFooter(`Anti-Procrastinador | Passo 4 de 5`, bot.user.displayAvatarURL)
                                 .setColor("#a9c40f")
                             
@@ -118,7 +118,7 @@ module.exports.run = async (bot, message, args) => {
 
                                     cEmbed
                                         .addField('\u200B', '\u200B')
-                                        .addField(`**Confirmação:**  ${loading}`, "Cadastro finalizado, deseja confirmar esses dados?")
+                                        .addField(`**Confirmação:**  ${loading}`, "Cadastro finalizado, deseja confirmar esses dados?\n> Clique no emoji correspondente abaixo da mensagem ↓ ")
                                         .setFooter(`Anti-Procrastinador | Passo 5 de 5`, bot.user.displayAvatarURL)
                                         .setColor("#00ff00")
 
