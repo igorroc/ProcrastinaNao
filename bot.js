@@ -70,10 +70,11 @@ bot.once("ready", () => {
 
 bot.on("raw", async dados =>{
     if(dados.t !== "MESSAGE_REACTION_ADD" && dados.t !== "MESSAGE_REACTION_REMOVE") return
-    
 
     let servidor = bot.guilds.cache.get("696430420992066112") // Servidor ProcrastinaNão
     let membro = servidor.members.cache.get(dados.d.user_id)
+
+    if (membro.user.bot) return
 
     console.log(`\n■▶ [LOGS] ⇥ Evento de reação feito por "${membro.user.username}"`)
     bot.channels.cache.get('722274694535053317').send(`■▶ [LOGS] ⇥ Evento de reação feito por "${membro.user.username}"`)
@@ -221,7 +222,7 @@ bot.on("guildMemberAdd", membro => {
 
         membro.roles.add("721103513874202645") // Cargo novato
         bot.channels.cache.get('721103116686327820').send(`Olá, ${membro.user}! \`\`\`md\n# Seja bem-vindo(a)!\n/* Faça seu cadastro aqui! */\nDigite <${config.prefix}cadastro> para começar ( sem as <> )\`\`\``)
-        bot.channels.cache.get('722274694535053317').send(`✅ Membro \`${membro.user.username}\` entrou no servidor\nTotal: \`${memberCount}\``)
+        bot.channels.cache.get('722274694535053317').send(`✅ Membro \`${membro.user.username}\` entrou no servidor\nTotal: \`${memberCount}\` membros`)
     }
 });
 
@@ -230,7 +231,7 @@ bot.on("guildMemberRemove", membro => {
     var guild = bot.guilds.cache.get("696430420992066112")
     var memberCount = guild.members.cache.filter(member => !member.user.bot).size
 
-    bot.channels.cache.get('722274694535053317').send(`❌ Membro \`${membro.user.username}\` saiu do servidor\nTotal: \`${memberCount}\``)
+    bot.channels.cache.get('722274694535053317').send(`❌ Membro \`${membro.user.username}\` saiu do servidor\nTotal: \`${memberCount}\` membros`)
 });
 
 bot.on("message", async message => {   
@@ -240,8 +241,8 @@ bot.on("message", async message => {
     
     let prefix = config.prefix; 
     let messageArray = message.content.split(" ")
-    let comando = messageArray[0].slice(prefix.length);
-    let args = messageArray.slice(1);
+    let comando = messageArray[0].slice(prefix.length)
+    let args = messageArray.slice(1)
     
 
     if(!message.content.startsWith(prefix)) return; // Valida o prefix do comando
