@@ -120,7 +120,7 @@ module.exports.run = async (bot, message, args) => {
         
                                     cEmbed.addField(`**Foto de Perfil:**  ${loading}`, `${message.member.user}, envie a sua foto de perfil.\n> Basta arrastar a imagem para o chat, ou nos mandar o link da sua foto.`)
                                         .setFooter(`Anti-Procrastinador | Passo 4 de 5`, bot.user.displayAvatarURL)
-                                        .setColor("#a9c40f")
+                                        .setColor("#00c40f")
                                     
                                     await collected.first().delete().catch(() => console.log('⚠️ Erro ao deletar a mensagem'))
                                     await envio.edit(cEmbed).catch(() => console.log('⚠️ Erro ao editar o embed'))
