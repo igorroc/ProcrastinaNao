@@ -17,21 +17,24 @@ module.exports.run = async (bot, message, args) => {
             console.log(`↳ Usuário "${args}" não encontrado, operação cancelada.`)
             return
         }
-        
-        uEmbed.setAuthor(`Info ${user.username}`, user.displayAvatarURL)
-        .addField("**Nome:**", user.username, true)
-        .addField("**Tag:**", user.discriminator, true)
-        .addField("**ID:**", user.id, true)
-        .addField("**Status:**", user.presence.status, true)
-        .addField("**Desde:**", user.createdAt.toDateString(), true)
+        uEmbed
+            .setTitle(`Informações de ${user.username}`)
+            .setThumbnail(user.displayAvatarURL())
+            .addField("**Nome:**", user.username, true)
+            .addField("**Tag:**", user.discriminator, true)
+            .addField("**ID:**", user.id, true)
+            .addField("**Status:**", user.presence.status, true)
+            .addField("**Desde:**", user.createdAt.toDateString(), true)
         
     }else{
-        uEmbed.setAuthor(`Info ${message.author.username}`, message.author.displayAvatarURL)
-        .addField("**Nome:**", message.author.username, true)
-        .addField("**Tag:**", message.author.discriminator, true)
-        .addField("**ID:**", message.author.id, true)
-        .addField("**Status:**", message.author.presence.status, true)
-        .addField("**Desde:**", message.author.createdAt.toDateString(), true)
+        uEmbed
+            .setTitle(`Informações de ${user.username}`)
+            .setThumbnail(user.displayAvatarURL())
+            .addField("**Nome:**", message.author.username, true)
+            .addField("**Tag:**", message.author.discriminator, true)
+            .addField("**ID:**", message.author.id, true)
+            .addField("**Status:**", message.author.presence.status, true)
+            .addField("**Desde:**", message.author.createdAt.toDateString(), true)
     }
     
     
