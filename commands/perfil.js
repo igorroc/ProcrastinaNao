@@ -2,29 +2,41 @@ const Discord = require("discord.js")
 const config = require("../config.json")
 const perfis = require("../perfis.json")
 
+const fs = require('fs')
+
 const agree = "✅"
 const disagree = "❌"
 const loading = "<a:loading:722456385098481735>"
 
 module.exports.run = async (bot, message, args) => {
+
     console.log(`\n■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Perfil`)
 
     if (args[0]){
         let user = message.mentions.users.first()
-        let perfil = perfis.find(c => c.id == user.id)
+        let perfil = null
+        if (!user){
+            user = args[0]
+            perfil = perfis.find(c => c.id == user)
+            console.log(user)
+        }else{
+            perfil = perfis.find(c => c.id == user.id)
+        }
         if (perfil) {
             let cEmbed = new Discord.MessageEmbed()
             .setColor("#00ff00")
             .setTitle(`Perfil de ${user.username}`)
             .setThumbnail(perfil.foto)
-            .addField(`**Nome:**`, `**${perfil.nome}**`, true)
-            .addField(`**Matrícula:**`, `_${perfil.matricula}_`, true)
-            .addField(`**Email:**`, `**${perfil.email}**`, false)
-            .addField(`**Ano de Egresso:**`, perfil.anoEgresso, true)
+            .addField(`Nome:`, perfil.nome, false)
+            .addField(`Matrícula:`, `_${perfil.matricula}_`, true)
+            .addField(`Ano de Egresso:`, `_${perfil.anoEgresso}_`, true)
+            .addField(`Email:`, `[${perfil.email}](https://${perfil.email})`, false)
             .setFooter(`Anti-Procrastinador`, bot.user.displayAvatarURL)
 
             let envio = await message.channel.send(cEmbed)
             message.delete()
+        }else{
+            message.channel.send(`Perfil de ${user.username} ainda não foi criado.`)
         }
         
 
@@ -50,7 +62,8 @@ module.exports.run = async (bot, message, args) => {
         
     message.channel.awaitMessages(m => m.author.id == message.author.id,
         { max: 1, time: 60000 }).then(async collected => {
-            console.log(`↳ Nome escolhido "${collected.first().content}"`)
+            let nome = collected.first().content
+            console.log(`↳ Nome escolhido "${nome}"`)
             
             cEmbed.fields.splice(0, 1) // Remove a mensagem de pedido de dado
             cEmbed.addField(`**Nome Completo:**`, collected.first().content)
@@ -123,8 +136,26 @@ module.exports.run = async (bot, message, args) => {
                 
                                             cEmbed
                                                 .setTitle(`${agree} Perfil de ${message.author.username}`)
+                                                .setDescription("Cadastro finalizado!")
                                                 .setFooter(`Anti-Procrastinador`, bot.user.displayAvatarURL)
                                             
+                                            await collected.first().delete().catch(() => console.log('⚠️ Erro ao deletar a mensagem'))
+                                            await envio.edit(cEmbed).catch(() => console.log('⚠️ Erro ao editar o embed'))
+                
+                                            // ADIÇÃO NO BANCO DE DADOS
+
+                                            fs.readFile("./perfis.json", 'utf8', function readFileCallback(err, data){
+                                                console.log(data)
+                                                if (err){
+                                                    console.log(err);
+                                                } else {
+                                                    obj = JSON.parse(data); //now it an object
+                                                    console.log(obj)
+                                                    obj.push({id:message.author.id, nome:nome, matricula: matricula, email:email, anoEgresso: ano, foto:foto}); //add some data
+                                                    json = JSON.stringify(obj); //convert it back to json
+                                                    fs.writeFile("./perfis.json", json, 'utf8', function(err){if(err) throw err;}); // write it back 
+                                                }
+                                            });
                                         }).catch( (m) => {
                                             envio.delete()
                                             message.channel.send(`Seu cadastro passou do tempo limite, para criar seu perfil novamente, digite \` ${config.prefix}perfil \``)
