@@ -142,7 +142,7 @@ module.exports.run = async (bot, message, args) => {
                                             await collected.first().delete().catch(() => console.log('⚠️ Erro ao deletar a mensagem'))
                                             await envio.edit(cEmbed).catch(() => console.log('⚠️ Erro ao editar o embed'))
                 
-                                            // ADIÇÃO NO BANCO DE DADOS
+                                            // ADIÇÃO NO BANCO DE DADOS 
 
                                             fs.readFile("./perfis.json", 'utf8', function readFileCallback(err, data){
                                                 console.log(data)
