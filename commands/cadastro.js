@@ -56,11 +56,15 @@ module.exports.run = async (bot, message, args) => {
 
                     cEmbed.fields.splice(1, 1) // Remove a mensagem de pedido de dado
 
-                    if (!cargos.find(c => c.type == 'curso' && c.name === curso.toLowerCase() || c.aliases.find(v => v === curso.toLowerCase()))) {
-                        cEmbed.addField("**Curso:** ❗", curso)
-                        message.guild.channels.cache.get('722274694535053317').send(`⚠️ O curso \` ${curso} \` escolhido por \` ${message.author.username} \` não foi encontrado.`)
+                    if (curso != "n"  && curso != "N"){
+                        if (!cargos.find(c => c.type == 'curso' && c.name === curso.toLowerCase() || c.aliases.find(v => v === curso.toLowerCase()))) {
+                            cEmbed.addField("**Curso:** ❗", curso)
+                            message.guild.channels.cache.get('722274694535053317').send(`⚠️ O curso \` ${curso} \` escolhido por \` ${message.author.username} \` não foi encontrado.`)
+                        } else {
+                            cEmbed.addField("**Curso:**", curso)
+                        }
                     } else {
-                        cEmbed.addField("**Curso:**", curso)
+                        cEmbed.addField("**Curso:**", "Nenhum")
                     }
 
                     cEmbed.addField(`**Faculdade:**  ${loading}`, `${message.member.user}, em qual faculdade? \n> Se você não faz nenhuma, digite \`N\``)
@@ -77,12 +81,17 @@ module.exports.run = async (bot, message, args) => {
 
                             cEmbed.fields.splice(2, 1) // Remove a mensagem de pedido de dado
 
-                            if (!cargos.find(c => c.type == 'faculdade' && c.name === faculdade.toLowerCase() || c.aliases.find(v => v === faculdade.toLowerCase()))) {
-                                cEmbed.addField("**Faculdade:** ❗", faculdade)
-                                message.guild.channels.cache.get('722274694535053317').send(`⚠️ A faculdade \` ${faculdade} \` escolhida por \` ${message.author.username} \` não foi encontrada.`)
+                            if (faculdade != "n"  && faculdade != "N"){
+                                if (!cargos.find(c => c.type == 'faculdade' && c.name === faculdade.toLowerCase() || c.aliases.find(v => v === faculdade.toLowerCase()))) {
+                                    cEmbed.addField("**Faculdade:** ❗", faculdade)
+                                    message.guild.channels.cache.get('722274694535053317').send(`⚠️ A faculdade \` ${faculdade} \` escolhida por \` ${message.author.username} \` não foi encontrada.`)
+                                } else {
+                                    cEmbed.addField("**Faculdade:**", faculdade)
+                                }
                             } else {
-                                cEmbed.addField("**Faculdade:**", faculdade)
+                                cEmbed.addField("**Faculdade:**", "Nenhuma")
                             }
+                            
 
                             cEmbed.addField(`**Nível:**  ${loading}`, `${message.member.user}, você é:\n\` Calouro(a):\` 😀\n\` Veterano(a):\` 😫\n\` Professor(a):\` 📚\n> Clique no emoji correspondente abaixo da mensagem ↓ `)
                                 .setFooter(`Anti-Procrastinador | Passo 4 de 5`, bot.user.displayAvatarURL)
@@ -153,6 +162,7 @@ module.exports.run = async (bot, message, args) => {
                                                 }
 
                                                 message.member.roles.remove('721103513874202645').catch(() => console.log(`⚠️ Não foi possível remover o cargo "Novato(a)" para "${message.author.username}"`))
+                                                message.member.roles.add('781125011523895368').catch(() => console.log(`⚠️ Não foi possível adicionar o cargo "Verificado(a)" para "${message.author.username}"`))
 
                                                 cEmbed
                                                     .setTitle(`${agree} Cadastro de ${message.author.username}`)
