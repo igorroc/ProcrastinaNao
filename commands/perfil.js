@@ -28,7 +28,7 @@ module.exports.run = async (bot, message, args) => {
                 .addField(`Matrícula:`, `_${perfil.matricula}_`, true)
                 .addField(`Ano de Egresso:`, `_${perfil.anoEgresso}_`, true)
                 .addField(`Email:`, `[${perfil.email}](https://${perfil.email})`, false)
-                .setFooter(`Anti-Procrastinador | ${indice}/${total}`, bot.user.displayAvatarURL)
+                .setFooter(`Anti-Procrastinador | ${indice+1}/${total}`, bot.user.displayAvatarURL)
             
             let msg = await message.channel.send(cEmbed)
             await msg.react(left).then(async r => {
@@ -60,7 +60,7 @@ module.exports.run = async (bot, message, args) => {
                         .addField(`Matrícula:`, `_${perfil.matricula}_`, true)
                         .addField(`Ano de Egresso:`, `_${perfil.anoEgresso}_`, true)
                         .addField(`Email:`, `[${perfil.email}](https://${perfil.email})`, false)
-                        .setFooter(`Anti-Procrastinador | ${indice}/${total}`, bot.user.displayAvatarURL)
+                        .setFooter(`Anti-Procrastinador | ${indice+1}/${total}`, bot.user.displayAvatarURL)
                     
                     }catch(e){
                         console.log(e)
@@ -80,7 +80,7 @@ module.exports.run = async (bot, message, args) => {
                         .addField(`Matrícula:`, `_${perfil.matricula}_`, true)
                         .addField(`Ano de Egresso:`, `_${perfil.anoEgresso}_`, true)
                         .addField(`Email:`, `[${perfil.email}](https://${perfil.email})`, false)
-                        .setFooter(`Anti-Procrastinador | ${indice}/${total}`, bot.user.displayAvatarURL)
+                        .setFooter(`Anti-Procrastinador | ${indice+1}/${total}`, bot.user.displayAvatarURL)
                     
                     msg.edit(new Discord.MessageEmbed(cEmbed))
                 }else if(chosen === x){
