@@ -13,7 +13,9 @@ module.exports.run = async (bot, message, args) => {
     console.log(`\n■▶ [LOGS] ⇥ Usuário '${message.author.username}' usou o comando Perfil`)
 
     const emojiLoading = message.guild.emojis.cache.get("722456385098481735")
-    const perfis = require("../perfis.json")
+    
+    delete require.cache[require.resolve("../perfis.json")]
+    let perfis = require("../perfis.json")
 
     if (args[0]){
         if (args[0] == "all"){
@@ -105,19 +107,20 @@ module.exports.run = async (bot, message, args) => {
             let perfil = perfis.find(c => c.id == user.id)
             if (perfil){
                 fs.readFile("./perfis.json", 'utf8', function readFileCallback(err, data){
-                    console.log(data)
                     if (err){
                         console.log(err);
                     } else {
                         obj = JSON.parse(data) //now it an object
-                        jQuery(obj).each(function (index){
-                            if(json[index].id == user.id){
-                                json.splice(index, 1) // This will remove the object that first name equals to Test1
-                                return false // This will stop the execution of jQuery each loop.
+                        obj.find(function(item, i){
+                            if(item.id == user.id){
+                                obj.splice(i, 1) // This will remove the object that first name equals to Test1
+                                return
                             }
-                        });
+                        })
                         json = JSON.stringify(obj) //convert it back to json
                         fs.writeFile("./perfis.json", json, 'utf8', function(err){if(err) throw err;}) // write it back 
+                        console.log(`↳ Perfil de '${user.username}' removido`)
+                        message.guild.channels.cache.get('722274694535053317').send(`\\▶ [LOGS] ⇥ Perfil de \` ${user.username} \` removido.`)
                     }
                 });
             }
@@ -164,6 +167,8 @@ module.exports.run = async (bot, message, args) => {
             let envio = await message.channel.send(cEmbed)
             message.delete()
         } else{
+            console.log(`↳ '${message.author.username}' começou a fazer o perfil.`)
+            message.guild.channels.cache.get('722274694535053317').send(`\\▶ [LOGS] ⇥ \` ${message.author.username} \` começou a fazer o perfil.`)
             let cEmbed = new Discord.MessageEmbed()
                 .setColor("#ff0000")
                 .setTitle(`Perfil de ${message.author.username}`)
@@ -184,7 +189,7 @@ module.exports.run = async (bot, message, args) => {
             message.channel.awaitMessages(m => m.author.id == message.author.id,
             { max: 1, time: 60000 }).then(async collected => {
                 let nome = collected.first().content
-                console.log(`↳ Nome escolhido "${nome}"`)
+                console.log(`↳ Nome escolhido '${nome}'`)
                 
                 cEmbed.fields.splice(0, 1) // Remove a mensagem de pedido de dado
                 cEmbed.addField(`**Nome Completo:**`, collected.first().content)
@@ -201,7 +206,7 @@ module.exports.run = async (bot, message, args) => {
                 message.channel.awaitMessages(m => m.author.id == message.author.id,
                     { max: 1, time: 60000 }).then(async collected => {
                         let matricula = collected.first().content
-                        console.log(`↳ Matrícula "${matricula}"`)
+                        console.log(`↳ Matrícula '${matricula}'`)
 
                         cEmbed.fields.splice(1, 1) // Remove a mensagem de pedido de dado
                         cEmbed.addField(`**Matrícula:**`, collected.first().content)
@@ -217,7 +222,7 @@ module.exports.run = async (bot, message, args) => {
                         message.channel.awaitMessages(m => m.author.id == message.author.id,
                             { max: 1, time: 60000 }).then(async collected => {
                                 let email = collected.first().content
-                                console.log(`↳ Email "${email}"`)
+                                console.log(`↳ Email '${email}'`)
 
                                 cEmbed.fields.splice(2, 1) // Remove a mensagem de pedido de dado
                                 cEmbed.addField("**Email:**", email)
@@ -233,7 +238,7 @@ module.exports.run = async (bot, message, args) => {
                                 message.channel.awaitMessages(m => m.author.id == message.author.id,
                                     { max: 1, time: 60000 }).then(async collected => {
                                         let ano = collected.first().content
-                                        console.log(`↳ Ano de Egresso "${ano}"`)
+                                        console.log(`↳ Ano de Egresso '${ano}'`)
             
                                         cEmbed.fields.splice(3, 1) // Remove a mensagem de pedido de dado
             
@@ -249,7 +254,7 @@ module.exports.run = async (bot, message, args) => {
                                         message.channel.awaitMessages(m => m.author.id == message.author.id,
                                             { max: 1, time: 60000 }).then(async collected => {
                                                 let foto = collected.first().content
-                                                console.log(`↳ Foto "${foto}"`)
+                                                console.log(`↳ Foto '${foto}'`)
                     
                                                 cEmbed.fields.splice(4, 1) // Remove a mensagem de pedido de dado
                     
@@ -274,6 +279,8 @@ module.exports.run = async (bot, message, args) => {
                                                         obj.push({id:message.author.id, nome:nome, matricula: matricula, email:email, anoEgresso: ano, foto:foto}) //add some data
                                                         json = JSON.stringify(obj) //convert it back to json
                                                         fs.writeFile("./perfis.json", json, 'utf8', function(err){if(err) throw err;}) // write it back 
+                                                        console.log(`↳ Perfil de '${message.author.username}' criado com sucesso`)
+                                                        message.guild.channels.cache.get('722274694535053317').send(`↳ Perfil de \` ${message.author.username} \` criado com sucesso.`)
                                                     }
                                                 });
                                             }).catch( (m) => {
