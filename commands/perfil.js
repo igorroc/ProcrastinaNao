@@ -120,6 +120,7 @@ module.exports.run = async (bot, message, args) => {
                         json = JSON.stringify(obj) //convert it back to json
                         fs.writeFile("./perfis.json", json, 'utf8', function(err){if(err) throw err;}) // write it back 
                         console.log(`↳ Perfil de '${user.username}' removido`)
+                        message.channel.send(`Seu perfil foi removido com sucesso!`)
                         message.guild.channels.cache.get('722274694535053317').send(`\\▶ [LOGS] ⇥ Perfil de \` ${user.username} \` removido.`)
                     }
                 });
@@ -185,7 +186,7 @@ module.exports.run = async (bot, message, args) => {
                 .setColor("#e75220")
             
             await envio.edit(cEmbed).catch(() => console.log('⚠️ Erro ao editar o embed'))
-                
+            
             message.channel.awaitMessages(m => m.author.id == message.author.id,
             { max: 1, time: 60000 }).then(async collected => {
                 let nome = collected.first().content
@@ -253,7 +254,13 @@ module.exports.run = async (bot, message, args) => {
             
                                         message.channel.awaitMessages(m => m.author.id == message.author.id,
                                             { max: 1, time: 60000 }).then(async collected => {
-                                                let foto = collected.first().content
+                                                let foto = null
+                                                try {
+                                                    foto = collected.first().attachments.first().proxyURL
+                                                } catch (error) {
+                                                    foto = collected.first().content
+                                                }
+                
                                                 console.log(`↳ Foto '${foto}'`)
                     
                                                 cEmbed.fields.splice(4, 1) // Remove a mensagem de pedido de dado
@@ -271,7 +278,6 @@ module.exports.run = async (bot, message, args) => {
                                                 // ADIÇÃO NO BANCO DE DADOS 
 
                                                 fs.readFile("./perfis.json", 'utf8', function readFileCallback(err, data){
-                                                    console.log(data)
                                                     if (err){
                                                         console.log(err);
                                                     } else {
@@ -283,29 +289,34 @@ module.exports.run = async (bot, message, args) => {
                                                         message.guild.channels.cache.get('722274694535053317').send(`↳ Perfil de \` ${message.author.username} \` criado com sucesso.`)
                                                     }
                                                 });
-                                            }).catch( (m) => {
+                                            }).catch( err => {
                                                 envio.delete()
-                                                message.channel.send(`Ocorreu um erro ao criar seu perfil, tente novamente mais tarde ou fale com alguém do <@&721329022621057074>`)
+                                                console.log(err)
+                                                message.channel.send(`Ocorreu um **erro** ao criar seu perfil, **tente novamente** mais tarde ou fale com alguém do <@&721329022621057074>`)
                                             })
                                         
-                                    }).catch( (m) => {
+                                    }).catch( err => {
                                         envio.delete()
-                                        message.channel.send(`Ocorreu um erro ao criar seu perfil, tente novamente mais tarde ou fale com alguém do <@&721329022621057074>`)
+                                        console.log(err)
+                                        message.channel.send(`Ocorreu um **erro** ao criar seu perfil, **tente novamente** mais tarde ou fale com alguém do <@&721329022621057074>`)
                                     })
                                 
-                            }).catch( (m) => {
+                            }).catch( err => {
                                 envio.delete()
-                                message.channel.send(`Ocorreu um erro ao criar seu perfil, tente novamente mais tarde ou fale com alguém do <@&721329022621057074>`)
+                                console.log(err)
+                                message.channel.send(`Ocorreu um **erro** ao criar seu perfil, **tente novamente** mais tarde ou fale com alguém do <@&721329022621057074>`)
                             })
                         
-                    }).catch( (m) => {
+                    }).catch( err => {
                         envio.delete()
-                        message.channel.send(`Ocorreu um erro ao criar seu perfil, tente novamente mais tarde ou fale com alguém do <@&721329022621057074>`)
+                        console.log(err)
+                        message.channel.send(`Ocorreu um **erro** ao criar seu perfil, **tente novamente** mais tarde ou fale com alguém do <@&721329022621057074>`)
                     })
                 
-            }).catch( (m) => {
+            }).catch( err => {
                 envio.delete()
-                message.channel.send(`Seu cadastro passou do tempo limite, para criar seu perfil novamente, digite \` ${config.prefix}perfil \``)
+                console.log(err)
+                message.channel.send(`Ocorreu um **erro** ao criar seu perfil, **tente novamente** mais tarde ou fale com alguém do <@&721329022621057074>`)
             })
         }
     }
