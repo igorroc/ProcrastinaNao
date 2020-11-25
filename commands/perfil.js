@@ -128,7 +128,8 @@ module.exports.run = async (bot, message, args) => {
         }
     } else{
         let user = message.author
-        if (perfis.find(c => c.id == user.id)){
+        let perfil = perfis.find(c => c.id == user.id)
+        if (perfil){
             let cEmbed = new Discord.MessageEmbed()
             .setColor("#00ff00")
             .setTitle(`Perfil de ${user.username}`)
