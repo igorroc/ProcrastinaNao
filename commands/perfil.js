@@ -21,7 +21,7 @@ module.exports.run = async (bot, message, args) => {
             let perfil = perfis[indice]
             let cEmbed = new Discord.MessageEmbed()
                 .setColor("#00ff00")
-                .setTitle(`Perfil de ${user.username}`)
+                .setTitle(`Perfis do Servidor`)
                 .setThumbnail(perfil.foto)
                 .addField(`Nome:`, perfil.nome, false)
                 .addField(`Matrícula:`, `_${perfil.matricula}_`, true)
@@ -53,7 +53,7 @@ module.exports.run = async (bot, message, args) => {
                     try{
                         cEmbed = new Discord.MessageEmbed()
                         .setColor("#00ff00")
-                        .setTitle(`Perfil de ${user.username}`)
+                        .setTitle(`Perfis do Servidor`)
                         .setThumbnail(perfil.foto)
                         .addField(`Nome:`, perfil.nome, false)
                         .addField(`Matrícula:`, `_${perfil.matricula}_`, true)
@@ -73,7 +73,7 @@ module.exports.run = async (bot, message, args) => {
                     perfil = perfis[indice]
                     cEmbed = new Discord.MessageEmbed()
                         .setColor("#00ff00")
-                        .setTitle(`Perfil de ${user.username}`)
+                        .setTitle(`Perfis do Servidor`)
                         .setThumbnail(perfil.foto)
                         .addField(`Nome:`, perfil.nome, false)
                         .addField(`Matrícula:`, `_${perfil.matricula}_`, true)
@@ -105,7 +105,6 @@ module.exports.run = async (bot, message, args) => {
             if (!user){
                 user = args[0]
                 perfil = perfis.find(c => c.id == user)
-                console.log(user)
             }else{
                 perfil = perfis.find(c => c.id == user.id)
             }
@@ -123,7 +122,7 @@ module.exports.run = async (bot, message, args) => {
                 let envio = await message.channel.send(cEmbed)
                 message.delete()
             }else{
-                message.channel.send(`Perfil de ${user.username} ainda não foi criado.`)
+                message.channel.send(`Perfil de \`${user.username}\` ainda não foi criado.`)
             }
         }
     } else{
