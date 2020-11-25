@@ -54,10 +54,10 @@ bot.once("ready", () => {
         .catch( () => console.log(`↳ ⚠️ Erro ao editar a mensagem`) )
     }).catch( () => console.log(`↳ ⚠️ Erro ao editar a mensagem`) )
     
-    let starting = log.send(`${loading}`).then(async m2 => {
-            await m2.edit(`✅ Bot iniciado, total de \`${memberCount}\` participantes`)
-                .catch( () => console.log(`↳ ⚠️ Erro ao editar a mensagem`) )
-        }).catch( () => console.log(`↳ ⚠️ Erro ao editar a mensagem`) )
+    // let starting = log.send(`${loading}`).then(async m2 => {
+    //         await m2.edit(`✅ Bot iniciado, total de \`${memberCount}\` participantes`)
+    //             .catch( () => console.log(`↳ ⚠️ Erro ao editar a mensagem`) )
+    //     }).catch( () => console.log(`↳ ⚠️ Erro ao editar a mensagem`) )
 
     if(config.online == true){
         bot.user.setStatus('online')
