@@ -38,9 +38,23 @@ module.exports.run = async (bot, message, args) => {
         }else{
             message.channel.send(`Perfil de ${user.username} ainda não foi criado.`)
         }
-        
-
         return
+    } else{
+        let user = message.author.user
+        if (perfis.find(c => c.id == user.id)){
+            let cEmbed = new Discord.MessageEmbed()
+            .setColor("#00ff00")
+            .setTitle(`Perfil de ${user.username}`)
+            .setThumbnail(perfil.foto)
+            .addField(`Nome:`, perfil.nome, false)
+            .addField(`Matrícula:`, `_${perfil.matricula}_`, true)
+            .addField(`Ano de Egresso:`, `_${perfil.anoEgresso}_`, true)
+            .addField(`Email:`, `[${perfil.email}](https://${perfil.email})`, false)
+            .setFooter(`Anti-Procrastinador`, bot.user.displayAvatarURL)
+
+            let envio = await message.channel.send(cEmbed)
+            message.delete()
+        }
     }
 
     let cEmbed = new Discord.MessageEmbed()
