@@ -30,7 +30,7 @@ module.exports.run = async (bot, message, args) => {
                 .addField(`Matrícula:`, `_${perfil.matricula}_`, true)
                 .addField(`Ano de Egresso:`, `_${perfil.anoEgresso}_`, true)
                 .addField(`Email:`, `[${perfil.email}](https://${perfil.email})`, false)
-                .setFooter(`Anti-Procrastinador | ${indice+1}/${total}`, bot.user.displayAvatarURL)
+                .setFooter(`Anti-Procrastinador | ${indice+1}/${total}`, bot.user.displayAvatarURL())
             
             let msg = await message.channel.send(cEmbed)
             await msg.react(left).then(async r => {
@@ -62,7 +62,7 @@ module.exports.run = async (bot, message, args) => {
                         .addField(`Matrícula:`, `_${perfil.matricula}_`, true)
                         .addField(`Ano de Egresso:`, `_${perfil.anoEgresso}_`, true)
                         .addField(`Email:`, `[${perfil.email}](https://${perfil.email})`, false)
-                        .setFooter(`Anti-Procrastinador | ${indice+1}/${total}`, bot.user.displayAvatarURL)
+                        .setFooter(`Anti-Procrastinador | ${indice+1}/${total}`, bot.user.displayAvatarURL())
                     
                     }catch(e){
                         console.log(e)
@@ -82,7 +82,7 @@ module.exports.run = async (bot, message, args) => {
                         .addField(`Matrícula:`, `_${perfil.matricula}_`, true)
                         .addField(`Ano de Egresso:`, `_${perfil.anoEgresso}_`, true)
                         .addField(`Email:`, `[${perfil.email}](https://${perfil.email})`, false)
-                        .setFooter(`Anti-Procrastinador | ${indice+1}/${total}`, bot.user.displayAvatarURL)
+                        .setFooter(`Anti-Procrastinador | ${indice+1}/${total}`, bot.user.displayAvatarURL())
                     
                     msg.edit(new Discord.MessageEmbed(cEmbed))
                 }else if(chosen === x){
@@ -142,7 +142,7 @@ module.exports.run = async (bot, message, args) => {
                 .addField(`Matrícula:`, `_${perfil.matricula}_`, true)
                 .addField(`Ano de Egresso:`, `_${perfil.anoEgresso}_`, true)
                 .addField(`Email:`, `[${perfil.email}](https://${perfil.email})`, false)
-                .setFooter(`Anti-Procrastinador`, bot.user.displayAvatarURL)
+                .setFooter(`Anti-Procrastinador`, bot.user.displayAvatarURL())
 
                 let envio = await message.channel.send(cEmbed)
                 message.delete()
@@ -162,7 +162,7 @@ module.exports.run = async (bot, message, args) => {
             .addField(`Matrícula:`, `_${perfil.matricula}_`, true)
             .addField(`Ano de Egresso:`, `_${perfil.anoEgresso}_`, true)
             .addField(`Email:`, `[${perfil.email}](https://${perfil.email})`, false)
-            .setFooter(`Anti-Procrastinador`, bot.user.displayAvatarURL)
+            .setFooter(`Anti-Procrastinador`, bot.user.displayAvatarURL())
 
             let envio = await message.channel.send(cEmbed)
             message.delete()
@@ -174,14 +174,14 @@ module.exports.run = async (bot, message, args) => {
                 .setTitle(`Perfil de ${message.author.username}`)
                 .setThumbnail(message.author.avatarURL)
                 .setDescription("**Responda as perguntas que serão feitas abaixo!**\n> Você necessita ter um arquivo com a sua foto!\n> Itens marcados com \"❗\" serão revistos pelo suporte, não é necessário se preocupar!")
-                .setFooter(`Anti-Procrastinador | Passo 0 de 5`, bot.user.displayAvatarURL)
+                .setFooter(`Anti-Procrastinador | Passo 0 de 5`, bot.user.displayAvatarURL())
 
             let envio = await message.channel.send(cEmbed)
             message.delete()
 
 
             cEmbed.addField(`**Nome Completo:**  ${loading}`, `Olá ${message.member.user}, nos informe o seu nome completo`)
-                .setFooter(`Anti-Procrastinador | Passo 1 de 5`, bot.user.displayAvatarURL)
+                .setFooter(`Anti-Procrastinador | Passo 1 de 5`, bot.user.displayAvatarURL())
                 .setColor("#e75220")
             
             await envio.edit(cEmbed).catch(() => console.log('⚠️ Erro ao editar o embed'))
@@ -197,7 +197,7 @@ module.exports.run = async (bot, message, args) => {
                 await envio.edit(cEmbed).catch(() => console.log('⚠️ Erro ao editar o embed'))
             
                 cEmbed.addField(`**Matrícula:**  ${loading}`, `${message.member.user}, nos informe seu número de matrícula\n> Exemplo: \`202010123\``)
-                    .setFooter(`Anti-Procrastinador | Passo 2 de 5`, bot.user.displayAvatarURL)
+                    .setFooter(`Anti-Procrastinador | Passo 2 de 5`, bot.user.displayAvatarURL())
                     .setColor("#ec6b08")
                 
                 await collected.first().delete().catch(() => console.log('⚠️ Erro ao deletar a mensagem'))
@@ -213,7 +213,7 @@ module.exports.run = async (bot, message, args) => {
                         await envio.edit(cEmbed).catch(() => console.log('⚠️ Erro ao editar o embed'))
 
                         cEmbed.addField(`**Email:**  ${loading}`, `${message.member.user}, informe seu email para contato.\n> Dê preferência o email institucional.\n> Exemplo: \`abc@uesc.br\``)
-                            .setFooter(`Anti-Procrastinador | Passo 3 de 5`, bot.user.displayAvatarURL)
+                            .setFooter(`Anti-Procrastinador | Passo 3 de 5`, bot.user.displayAvatarURL())
                             .setColor("#a17700")
                         
                         await collected.first().delete().catch(() => console.log('⚠️ Erro ao deletar a mensagem'))
@@ -229,7 +229,7 @@ module.exports.run = async (bot, message, args) => {
                                 await envio.edit(cEmbed).catch(() => console.log('⚠️ Erro ao editar o embed'))
 
                                 cEmbed.addField(`**Ano de Egresso:**  ${loading}`, `${message.member.user}, nos informe a previsão de término do curso.\n> Exemplo: \`2024\``)
-                                    .setFooter(`Anti-Procrastinador | Passo 4 de 5`, bot.user.displayAvatarURL)
+                                    .setFooter(`Anti-Procrastinador | Passo 4 de 5`, bot.user.displayAvatarURL())
                                     .setColor("#a9c40f")
                                 
                                 await collected.first().delete().catch(() => console.log('⚠️ Erro ao deletar a mensagem'))
@@ -245,7 +245,7 @@ module.exports.run = async (bot, message, args) => {
                                         cEmbed.addField("**Ano de Egresso:**", ano)
             
                                         cEmbed.addField(`**Foto de Perfil:**  ${loading}`, `${message.member.user}, envie a sua foto de perfil.\n> Basta arrastar a imagem para o chat, ou nos mandar o link da sua foto.`)
-                                            .setFooter(`Anti-Procrastinador | Passo 4 de 5`, bot.user.displayAvatarURL)
+                                            .setFooter(`Anti-Procrastinador | Passo 4 de 5`, bot.user.displayAvatarURL())
                                             .setColor("#00c40f")
                                         
                                         await collected.first().delete().catch(() => console.log('⚠️ Erro ao deletar a mensagem'))
@@ -263,7 +263,7 @@ module.exports.run = async (bot, message, args) => {
                                                 cEmbed
                                                     .setTitle(`${agree} Perfil de ${message.author.username}`)
                                                     .setDescription("Cadastro finalizado!")
-                                                    .setFooter(`Anti-Procrastinador`, bot.user.displayAvatarURL)
+                                                    .setFooter(`Anti-Procrastinador`, bot.user.displayAvatarURL())
                                                 
                                                 await collected.first().delete().catch(() => console.log('⚠️ Erro ao deletar a mensagem'))
                                                 await envio.edit(cEmbed).catch(() => console.log('⚠️ Erro ao editar o embed'))
@@ -285,22 +285,22 @@ module.exports.run = async (bot, message, args) => {
                                                 });
                                             }).catch( (m) => {
                                                 envio.delete()
-                                                message.channel.send(`Seu cadastro passou do tempo limite, para criar seu perfil novamente, digite \` ${config.prefix}perfil \``)
+                                                message.channel.send(`Ocorreu um erro ao criar seu perfil, tente novamente mais tarde ou fale com alguém do <@&721329022621057074>`)
                                             })
                                         
                                     }).catch( (m) => {
                                         envio.delete()
-                                        message.channel.send(`Seu cadastro passou do tempo limite, para criar seu perfil novamente, digite \` ${config.prefix}perfil \``)
+                                        message.channel.send(`Ocorreu um erro ao criar seu perfil, tente novamente mais tarde ou fale com alguém do <@&721329022621057074>`)
                                     })
                                 
                             }).catch( (m) => {
                                 envio.delete()
-                                message.channel.send(`Seu cadastro passou do tempo limite, para criar seu perfil novamente, digite \` ${config.prefix}perfil \``)
+                                message.channel.send(`Ocorreu um erro ao criar seu perfil, tente novamente mais tarde ou fale com alguém do <@&721329022621057074>`)
                             })
                         
                     }).catch( (m) => {
                         envio.delete()
-                        message.channel.send(`Seu cadastro passou do tempo limite, para criar seu perfil novamente, digite \` ${config.prefix}perfil \``)
+                        message.channel.send(`Ocorreu um erro ao criar seu perfil, tente novamente mais tarde ou fale com alguém do <@&721329022621057074>`)
                     })
                 
             }).catch( (m) => {
