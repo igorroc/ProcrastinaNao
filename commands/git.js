@@ -45,7 +45,7 @@ module.exports.run = async (bot, message, args) => {
                     })
                 })
             })
-            console.log(`↳ Perfil de '${user}' enviado`)
+            console.log(`↳ Perfil Git de '${user}' enviado`)
 
             const collector = await msg.createReactionCollector((reaction, user1) => 
                 user1.id === message.author.id &&
