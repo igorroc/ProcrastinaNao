@@ -8,11 +8,11 @@ const loading = "<a:loading:722456385098481735>";
 const prefix = config.prefix
 
 module.exports.run = async (bot, message, args) => {
-    console.log(`\n■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Cadastro`)
+    console.log(`\n■▶ [LOGS] ⇥ Usuário '${message.author.username}' usou o comando Cadastro`)
 
     if(!message.member.roles.cache.has("721103513874202645")){ // Não tem cargo novato
         message.channel.send(`Você já está cadastrado no servidor!\n> Caso queira alterar sua faculdade/curso, fale com um membro do <@&721329022621057074>`)
-        console.log(`⚠️ Usuário "${message.author.username}" já cadastrado`)
+        console.log(`⚠️ Usuário '${message.author.username}' já cadastrado`)
         return
     }
 
@@ -35,7 +35,7 @@ module.exports.run = async (bot, message, args) => {
         
     message.channel.awaitMessages(m => m.author.id == message.author.id,
         { max: 1, time: 120000 }).then(async collected => {
-            console.log(`↳ Nome escolhido "${collected.first().content}"`)
+            console.log(`↳ Nome escolhido '${collected.first().content}'`)
             
             cEmbed.fields.splice(0, 1) // Remove a mensagem de pedido de dado
             cEmbed.addField(`**Nome:**`, collected.first().content)
@@ -52,7 +52,7 @@ module.exports.run = async (bot, message, args) => {
             message.channel.awaitMessages(m => m.author.id == message.author.id,
                 { max: 1, time: 120000 }).then(async collected => {
                     let curso = collected.first().content
-                    console.log(`↳ Curso escolhido "${curso}"`)
+                    console.log(`↳ Curso escolhido '${curso}'`)
 
                     cEmbed.fields.splice(1, 1) // Remove a mensagem de pedido de dado
 
@@ -77,7 +77,7 @@ module.exports.run = async (bot, message, args) => {
                     message.channel.awaitMessages(m => m.author.id == message.author.id,
                         { max: 1, time: 120000 }).then(async collected => {
                             let faculdade = collected.first().content
-                            console.log(`↳ Faculdade escolhida "${faculdade}"`)
+                            console.log(`↳ Faculdade escolhida '${faculdade}'`)
 
                             cEmbed.fields.splice(2, 1) // Remove a mensagem de pedido de dado
 
@@ -112,14 +112,14 @@ module.exports.run = async (bot, message, args) => {
 
                                     if (collected.first().emoji.name == "😀") {
                                         cEmbed.addField("**Nível:**", "Calouro(a)")
-                                        console.log(`↳ Nível escolhido "Calouro(a)"`)
+                                        console.log(`↳ Nível escolhido 'Calouro(a)'`)
                                     } else if (collected.first().emoji.name == "😫") {
                                         cEmbed.addField("**Nível:**", "Veterano(a)")
-                                        console.log(`↳ Nível escolhido "Veterano(a)"`)
+                                        console.log(`↳ Nível escolhido 'Veterano(a)'`)
                                     } else if (collected.first().emoji.name == "📚") {
                                         cEmbed.addField("**Nível:**", "Professor(a)")
                                         message.guild.channels.cache.get('722274694535053317').send(`⚠️ O usuário \` ${message.author.username} \` disse ser um professor, verifique por favor!`)
-                                        console.log(`↳ Nível escolhido "Professor(a)"`)
+                                        console.log(`↳ Nível escolhido 'Professor(a)'`)
                                     }
                                     
                                     await envio.reactions.removeAll()
@@ -141,35 +141,35 @@ module.exports.run = async (bot, message, args) => {
                                         { max: 1 }).then(async collected => {
 
                                             if (collected.first().emoji.name == agree) {
-                                                console.log(`↳ Cadastro de "${message.author.username}" concluido.`)
+                                                console.log(`↳ Cadastro de '${message.author.username}' concluido.`)
 
                                                 message.member.setNickname(cEmbed.fields.find(({ name }) => name === '**Nome:**').value).catch(() => console.log(`⚠️ Não foi possível alterar o nick de "${message.author.username}"`)) // Alterando o Nick
 
                                                 if (cEmbed.fields.find(({ name }) => name === '**Nível:**').value == "Veterano(a)") // Cargo de Veterano
-                                                    message.member.roles.add("696434089972072519").catch(() => console.log(`⚠️ Não foi possível adicionar o cargo "Veterano(a)" para "${message.author.username}"`))
+                                                    message.member.roles.add("696434089972072519").catch(() => console.log(`⚠️ Não foi possível adicionar o cargo 'Veterano(a)' para '${message.author.username}'`))
                                                 else if (cEmbed.fields.find(({ name }) => name === '**Nível:**').value == "Calouro(a)") // Cargo de Calouro
-                                                    message.member.roles.add("696434056778350612").catch(() => console.log(`⚠️ Não foi possível adicionar o cargo "Veterano(a)" para "${message.author.username}"`))
+                                                    message.member.roles.add("696434056778350612").catch(() => console.log(`⚠️ Não foi possível adicionar o cargo 'Veterano(a)' para '${message.author.username}'`))
                                                 
                                                 if (cEmbed.fields.find(({ name }) => name === '**Curso:**')) { // Cargo do Curso
                                                     let nomeCurso = cargos.find(c => c.type == 'curso' && c.name === curso.toLowerCase() || c.aliases.find(v => v === curso.toLowerCase())).name
                                                     let roleCurso = message.guild.roles.cache.find((role) => role.name == nomeCurso).id
-                                                    message.member.roles.add(roleCurso).catch(() => console.log(`⚠️ Não foi possível adicionar o cargo "${nomeCurso}" para "${message.author.username}"`))
+                                                    message.member.roles.add(roleCurso).catch(() => console.log(`⚠️ Não foi possível adicionar o cargo '${nomeCurso}' para '${message.author.username}'`))
                                                 }
                                                 if (cEmbed.fields.find(({ name }) => name === '**Faculdade:**')) { // Cargo da Faculdade 
                                                     let nomeFaculdade = cargos.find(c => c.type == 'faculdade' && c.name === faculdade.toLowerCase() || c.aliases.find(v => v === faculdade.toLowerCase())).name.toUpperCase()
                                                     let roleFaculdade = message.guild.roles.cache.find((role) => role.name == nomeFaculdade).id
-                                                    message.member.roles.add(roleFaculdade).catch(() => console.log(`⚠️ Não foi possível adicionar o cargo "${nomeFaculdade}" para "${message.author.username}"`))
+                                                    message.member.roles.add(roleFaculdade).catch(() => console.log(`⚠️ Não foi possível adicionar o cargo '${nomeFaculdade}' para '${message.author.username}'`))
                                                 }
 
-                                                message.member.roles.remove('721103513874202645').catch(() => console.log(`⚠️ Não foi possível remover o cargo "Novato(a)" para "${message.author.username}"`))
-                                                message.member.roles.add('781125011523895368').catch(() => console.log(`⚠️ Não foi possível adicionar o cargo "Verificado(a)" para "${message.author.username}"`))
+                                                message.member.roles.remove('721103513874202645').catch(() => console.log(`⚠️ Não foi possível remover o cargo 'Novato(a)' para '${message.author.username}'`))
+                                                message.member.roles.add('781125011523895368').catch(() => console.log(`⚠️ Não foi possível adicionar o cargo 'Verificado(a)' para '${message.author.username}'`))
 
                                                 cEmbed
                                                     .setTitle(`${agree} Cadastro de ${message.author.username}`)
                                                     .setFooter(`Anti-Procrastinador`, bot.user.displayAvatarURL)
 
                                             } else if (collected.first().emoji.name == disagree) {
-                                                console.log(`↳ Cadastro de "${message.author.username}" cancelado.`)
+                                                console.log(`↳ Cadastro de '${message.author.username}' cancelado.`)
                                                 message.channel.send(`Tudo bem, você pode refazer o cadastro digitando novamente \` ${prefix}cadastro \`!`)
                                                     .then(msg => {
                                                         msg.delete(5000)
