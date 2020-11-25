@@ -100,6 +100,27 @@ module.exports.run = async (bot, message, args) => {
                 }
             });
             message.delete()
+        }else if (args[0] == "remover"){
+            let user = message.author
+            let perfil = perfis.find(c => c.id == user.id)
+            if (perfil){
+                fs.readFile("./perfis.json", 'utf8', function readFileCallback(err, data){
+                    console.log(data)
+                    if (err){
+                        console.log(err);
+                    } else {
+                        obj = JSON.parse(data) //now it an object
+                        jQuery(obj).each(function (index){
+                            if(json[index].id == user.id){
+                                json.splice(index, 1) // This will remove the object that first name equals to Test1
+                                return false // This will stop the execution of jQuery each loop.
+                            }
+                        });
+                        json = JSON.stringify(obj) //convert it back to json
+                        fs.writeFile("./perfis.json", json, 'utf8', function(err){if(err) throw err;}) // write it back 
+                    }
+                });
+            }
         }else{
             let user = message.mentions.users.first()
             let perfil = null
@@ -249,11 +270,10 @@ module.exports.run = async (bot, message, args) => {
                                                     if (err){
                                                         console.log(err);
                                                     } else {
-                                                        obj = JSON.parse(data); //now it an object
-                                                        console.log(obj)
-                                                        obj.push({id:message.author.id, nome:nome, matricula: matricula, email:email, anoEgresso: ano, foto:foto}); //add some data
-                                                        json = JSON.stringify(obj); //convert it back to json
-                                                        fs.writeFile("./perfis.json", json, 'utf8', function(err){if(err) throw err;}); // write it back 
+                                                        obj = JSON.parse(data) //now it an object
+                                                        obj.push({id:message.author.id, nome:nome, matricula: matricula, email:email, anoEgresso: ano, foto:foto}) //add some data
+                                                        json = JSON.stringify(obj) //convert it back to json
+                                                        fs.writeFile("./perfis.json", json, 'utf8', function(err){if(err) throw err;}) // write it back 
                                                     }
                                                 });
                                             }).catch( (m) => {
