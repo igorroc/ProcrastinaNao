@@ -29,7 +29,7 @@ module.exports.run = async (bot, message, args) => {
     }else{
         uEmbed
             .setTitle(`Informações de ${message.author.username}`)
-            .setThumbnail(user.displayAvatarURL())
+            .setThumbnail(message.author.displayAvatarURL())
             .addField("**Nome:**", message.author.username, true)
             .addField("**Tag:**", message.author.discriminator, true)
             .addField("**ID:**", message.author.id, true)
