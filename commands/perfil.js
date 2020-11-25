@@ -9,6 +9,7 @@ const right = '▶'
 const x = '❌'
 const agree = "✅"
 const loading = "<a:loading:722456385098481735>"
+const emojiLoading = message.guild.emojis.cache.get("722456385098481735")
 
 module.exports.run = async (bot, message, args) => {
 
