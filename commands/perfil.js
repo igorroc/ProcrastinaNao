@@ -4,41 +4,129 @@ const perfis = require("../perfis.json")
 
 const fs = require('fs')
 
+const left = '◀️'
+const right = '▶'
+const x = '❌'
 const agree = "✅"
-const disagree = "❌"
 const loading = "<a:loading:722456385098481735>"
 
 module.exports.run = async (bot, message, args) => {
 
-    console.log(`\n■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Perfil`)
+    console.log(`\n■▶ [LOGS] ⇥ Usuário '${message.author.username}' usou o comando Perfil`)
 
     if (args[0]){
-        let user = message.mentions.users.first()
-        let perfil = null
-        if (!user){
-            user = args[0]
-            perfil = perfis.find(c => c.id == user)
-            console.log(user)
-        }else{
-            perfil = perfis.find(c => c.id == user.id)
-        }
-        if (perfil) {
+        if (args[0] == "all"){
+            let total = perfis.length
+            let indice = 0
+            let perfil = perfis[indice]
             let cEmbed = new Discord.MessageEmbed()
-            .setColor("#00ff00")
-            .setTitle(`Perfil de ${user.username}`)
-            .setThumbnail(perfil.foto)
-            .addField(`Nome:`, perfil.nome, false)
-            .addField(`Matrícula:`, `_${perfil.matricula}_`, true)
-            .addField(`Ano de Egresso:`, `_${perfil.anoEgresso}_`, true)
-            .addField(`Email:`, `[${perfil.email}](https://${perfil.email})`, false)
-            .setFooter(`Anti-Procrastinador`, bot.user.displayAvatarURL)
+                .setColor("#00ff00")
+                .setTitle(`Perfil de ${user.username}`)
+                .setThumbnail(perfil.foto)
+                .addField(`Nome:`, perfil.nome, false)
+                .addField(`Matrícula:`, `_${perfil.matricula}_`, true)
+                .addField(`Ano de Egresso:`, `_${perfil.anoEgresso}_`, true)
+                .addField(`Email:`, `[${perfil.email}](https://${perfil.email})`, false)
+                .setFooter(`Anti-Procrastinador | ${indice}/${total}`, bot.user.displayAvatarURL)
+            
+            let msg = await message.channel.send(cEmbed)
+            await msg.react(left).then(async r => {
+                await msg.react(x).then(async r => {
+                    await msg.react(right).then(async r => {
+                        await msg.react(emojiLoading).then( r => r.remove())
+                    })
+                })
+            })
 
-            let envio = await message.channel.send(cEmbed)
+            const collector = await msg.createReactionCollector((reaction, user1) => 
+                user1.id === message.author.id &&
+                reaction.emoji.name === left ||
+                reaction.emoji.name === right ||
+                reaction.emoji.name === x
+            ).on("collect", async reaction => {
+                const chosen = reaction.emoji.name;
+                if(chosen === right){
+                    if(indice < total){
+                        indice++
+                    }
+                    perfil = perfis[indice]
+                    try{
+                        cEmbed = new Discord.MessageEmbed()
+                        .setColor("#00ff00")
+                        .setTitle(`Perfil de ${user.username}`)
+                        .setThumbnail(perfil.foto)
+                        .addField(`Nome:`, perfil.nome, false)
+                        .addField(`Matrícula:`, `_${perfil.matricula}_`, true)
+                        .addField(`Ano de Egresso:`, `_${perfil.anoEgresso}_`, true)
+                        .addField(`Email:`, `[${perfil.email}](https://${perfil.email})`, false)
+                        .setFooter(`Anti-Procrastinador | ${indice}/${total}`, bot.user.displayAvatarURL)
+                    
+                    }catch(e){
+                        console.log(e)
+                    }
+                    
+                    msg.edit(new Discord.MessageEmbed(cEmbed))
+                }else if(chosen === left){
+                    if(indice > 0){
+                        indice--
+                    }
+                    perfil = perfis[indice]
+                    cEmbed = new Discord.MessageEmbed()
+                        .setColor("#00ff00")
+                        .setTitle(`Perfil de ${user.username}`)
+                        .setThumbnail(perfil.foto)
+                        .addField(`Nome:`, perfil.nome, false)
+                        .addField(`Matrícula:`, `_${perfil.matricula}_`, true)
+                        .addField(`Ano de Egresso:`, `_${perfil.anoEgresso}_`, true)
+                        .addField(`Email:`, `[${perfil.email}](https://${perfil.email})`, false)
+                        .setFooter(`Anti-Procrastinador | ${indice}/${total}`, bot.user.displayAvatarURL)
+                    
+                    msg.edit(new Discord.MessageEmbed(cEmbed))
+                }else if(chosen === x){
+                    collector.stop();
+                    msg.reactions.removeAll().catch( () => console.log('↳ ⚠️ Erro ao deletar a mensagem'))
+                    msg.delete().catch( () => console.log('↳ ⚠️ Erro ao deletar o embed'))
+                    message.delete().catch( () => console.log('↳ ⚠️ Erro ao deletar a mensagem'))
+                
+                }
+                const userReactions = msg.reactions.cache.filter(reaction => reaction.users.cache.has(message.author.id));
+                try{
+                    for (const reaction of userReactions.values()) {
+                        await reaction.users.remove(message.author.id);
+                    }
+                }catch (error) {
+                    console.log('↳ ⚠️ Erro ao remover as reações');
+                }
+            });
             message.delete()
         }else{
-            message.channel.send(`Perfil de ${user.username} ainda não foi criado.`)
+            let user = message.mentions.users.first()
+            let perfil = null
+            if (!user){
+                user = args[0]
+                perfil = perfis.find(c => c.id == user)
+                console.log(user)
+            }else{
+                perfil = perfis.find(c => c.id == user.id)
+            }
+            if (perfil) {
+                let cEmbed = new Discord.MessageEmbed()
+                .setColor("#00ff00")
+                .setTitle(`Perfil de ${user.username}`)
+                .setThumbnail(perfil.foto)
+                .addField(`Nome:`, perfil.nome, false)
+                .addField(`Matrícula:`, `_${perfil.matricula}_`, true)
+                .addField(`Ano de Egresso:`, `_${perfil.anoEgresso}_`, true)
+                .addField(`Email:`, `[${perfil.email}](https://${perfil.email})`, false)
+                .setFooter(`Anti-Procrastinador`, bot.user.displayAvatarURL)
+
+                let envio = await message.channel.send(cEmbed)
+                message.delete()
+            }else{
+                message.channel.send(`Perfil de ${user.username} ainda não foi criado.`)
+            }
+            return
         }
-        return
     } else{
         let user = message.author.user
         if (perfis.find(c => c.id == user.id)){
