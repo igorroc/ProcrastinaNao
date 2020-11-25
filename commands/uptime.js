@@ -3,7 +3,7 @@ const ms = require("ms");
 
 
 module.exports.run = async (bot, message, args) => {
-    console.log(`\n■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Uptime`)
+    console.log(`\n■▶ [LOGS] ⇥ Usuário '${message.author.username}' usou o comando Uptime`)
     
     let up = ms(bot.uptime, {long: true})
     up = up.replace("seconds", "segundos")

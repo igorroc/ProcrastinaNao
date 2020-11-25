@@ -14,13 +14,13 @@ const off = '<:off:723707654245187665>'
 
 
 module.exports.run = async (bot, message, args) => {
-    console.log(`\n■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Config`)
+    console.log(`\n■▶ [LOGS] ⇥ Usuário '${message.author.username}' usou o comando Config`)
     
     const loading = message.guild.emojis.cache.get("722456385098481735");
     
     if(!message.member.hasPermission("ADMINISTRATOR")){
         message.reply('Você não é digno de realizar esse comando!')
-        console.log(`↳ Acesso negado para "${message.author.username}"`)
+        console.log(`↳ Acesso negado para '${message.author.username}'`)
         return
     }
     

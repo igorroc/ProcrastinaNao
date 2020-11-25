@@ -3,7 +3,7 @@ const colours = require("../colours.json");
 
 
 module.exports.run = async (bot, message, args) => {
-    console.log(`\n■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando UserInfo`)
+    console.log(`\n■▶ [LOGS] ⇥ Usuário '${message.author.username}' usou o comando UserInfo`)
     
     let uEmbed = new Discord.MessageEmbed()
     .setColor(colours.red_light)
@@ -28,7 +28,7 @@ module.exports.run = async (bot, message, args) => {
         
     }else{
         uEmbed
-            .setTitle(`Informações de ${user.username}`)
+            .setTitle(`Informações de ${message.author.username}`)
             .setThumbnail(user.displayAvatarURL())
             .addField("**Nome:**", message.author.username, true)
             .addField("**Tag:**", message.author.discriminator, true)

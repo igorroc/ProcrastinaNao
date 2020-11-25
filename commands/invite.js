@@ -3,7 +3,7 @@ const colours = require("../colours.json")
 
 
 module.exports.run = async (bot, message, args) => {
-    console.log(`\n■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Invite`)
+    console.log(`\n■▶ [LOGS] ⇥ Usuário '${message.author.username}' usou o comando Invite`)
     
     let link = 'https://discord.gg/RvtHp7V'
     

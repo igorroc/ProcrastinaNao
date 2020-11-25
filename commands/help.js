@@ -4,7 +4,7 @@ const botconfig = require('../config.json')
 const prefix = botconfig.prefix
 
 module.exports.run = async (bot, message, args) => {
-    console.log(`\n■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Help`)
+    console.log(`\n■▶ [LOGS] ⇥ Usuário '${message.author.username}' usou o comando Help`)
 
     if(args[0] == "help") return message.channel.send(`Use \`${prefix}help\` invés disso.`)
 

@@ -3,7 +3,7 @@ const colours = require("../colours.json");
 
 
 module.exports.run = async (bot, message, args) => {
-    console.log(`\n■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando ServerInfo`)
+    console.log(`\n■▶ [LOGS] ⇥ Usuário '${message.author.username}' usou o comando ServerInfo`)
 
     let sEmbed = new Discord.MessageEmbed()
     .setColor(colours.yellow)

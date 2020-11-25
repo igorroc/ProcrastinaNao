@@ -4,7 +4,7 @@ const { default: fetch } = require("node-fetch");
 
 
 module.exports.run = async (bot, message, args) => {
-    console.log(`\n■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Clear`)
+    console.log(`\n■▶ [LOGS] ⇥ Usuário '${message.author.username}' usou o comando Clear`)
 
     function emojiStr (id){
         return bot.emojis.cache.get(id).toString();
@@ -12,7 +12,7 @@ module.exports.run = async (bot, message, args) => {
 
     if(!message.member.hasPermission("MENAGE_MESSAGES")){ // se nao tem permissao para apagar
         message.reply('Você não é digno de realizar esse comando!')
-        console.log(`↳ Acesso negado para "${message.author.username}"`)
+        console.log(`↳ Acesso negado para '${message.author.username}'`)
     }
     else{
         let valor = parseInt(args[0], 10);

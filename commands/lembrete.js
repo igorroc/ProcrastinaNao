@@ -2,7 +2,7 @@ const Discord = require("discord.js")
 
 
 module.exports.run = async (bot, message, args) => {
-    console.log(`\n■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Lembrete`)
+    console.log(`\n■▶ [LOGS] ⇥ Usuário '${message.author.username}' usou o comando Lembrete`)
     
     let contador = parseInt(args[0])
     let nMarcar = args[1]
@@ -17,7 +17,7 @@ module.exports.run = async (bot, message, args) => {
         if(contador > 0){
             contador--
         }else{
-            console.log(`↳ Lembrete de ${message.author.username} finalizado.`)
+            console.log(`↳ Lembrete de '${message.author.username}' finalizado.`)
             if(nMarcar == "true"){
                 let lembrete = args.slice(2).join(" ")
                 message.channel.send(`**Lembrete:** \n${lembrete}`)

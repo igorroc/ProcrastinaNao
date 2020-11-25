@@ -2,11 +2,11 @@ const Discord = require("discord.js")
 
 
 module.exports.run = async (bot, message, args) => {
-    console.log(`\n■▶ [LOGS] ⇥ Usuário "${message.author.username}" usou o comando Reload`)
+    console.log(`\n■▶ [LOGS] ⇥ Usuário '${message.author.username}' usou o comando Reload`)
     
     if(!message.member.hasPermission("ADMINISTRATOR")){
         message.reply('Você não é digno de realizar esse comando!')
-        console.log(`↳ Acesso negado para "${message.author.username}."`)
+        console.log(`↳ Acesso negado para '${message.author.username}'`)
     }
 
     if(!args || args.length < 1){
