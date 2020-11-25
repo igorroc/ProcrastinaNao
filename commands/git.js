@@ -12,7 +12,7 @@ const check = '✅'
 module.exports.run = async (bot, message, args) => {
     console.log(`\n■▶ [LOGS] ⇥ Usuário '${message.author.username}' usou o comando Git`)
     
-    const emojiLoading = message.guild.emojis.cache.get("722456385098481735");
+    const emojiLoading = message.guild.emojis.cache.get("722456385098481735")
     
     let user = args.toString()
     
