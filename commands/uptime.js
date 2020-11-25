@@ -15,7 +15,7 @@ module.exports.run = async (bot, message, args) => {
     up = up.replace("weeks", "semanas")
 
 
-    const m = await message.channel.send(`Estou trabalhando há ${up} sem acidentes nesse servidor!`);
+    const m = await message.channel.send(`Estou trabalhando há **${up}** sem acidentes nesse servidor!`);
     console.log(`↳ Uptime: ${up}`)
 
 }
