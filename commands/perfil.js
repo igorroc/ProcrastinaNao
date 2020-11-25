@@ -1,6 +1,5 @@
 const Discord = require("discord.js")
 const config = require("../config.json")
-const perfis = require("../perfis.json")
 
 const fs = require('fs')
 
@@ -14,6 +13,7 @@ module.exports.run = async (bot, message, args) => {
     console.log(`\n■▶ [LOGS] ⇥ Usuário '${message.author.username}' usou o comando Perfil`)
 
     const emojiLoading = message.guild.emojis.cache.get("722456385098481735")
+    const perfis = require("../perfis.json")
 
     if (args[0]){
         if (args[0] == "all"){
@@ -47,7 +47,7 @@ module.exports.run = async (bot, message, args) => {
             ).on("collect", async reaction => {
                 const chosen = reaction.emoji.name;
                 if(chosen === right){
-                    if(indice < total){
+                    if(indice < total-1){
                         indice++
                     }
                     perfil = perfis[indice]
