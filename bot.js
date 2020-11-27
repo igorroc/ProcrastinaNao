@@ -1,10 +1,4 @@
 const Discord = require("discord.js");
-const config = require("./config.json");
-
-const low = require('lowdb')
-const FileSync = require('lowdb/adapters/FileSync')
-const adapter = new FileSync('./config.json')
-const dbConfig = low(adapter)
 
 const bot = new Discord.Client();
 
@@ -12,6 +6,7 @@ const fs = require("fs");
 bot.commands = new Discord.Collection();
 bot.aliases = new Discord.Collection();
 
+const MENSAGEM_REINICIO = false
 
 let loading = "<a:loading:722456385098481735>"
 
@@ -38,6 +33,8 @@ fs.readdir("./commands/", (err, files) => {
 
 
 bot.once("ready", () => {
+    let config = require("./config.json")
+
     var guild = bot.guilds.cache.get("696430420992066112")
     var memberCount = guild.members.cache.filter(member => !member.user.bot).size
 
@@ -47,24 +44,26 @@ bot.once("ready", () => {
     
     const log = bot.channels.cache.get('722274694535053317')
 
-    let reload = log.send(`${loading} Reiniciando...`).then(async m1 => {
-        await m1.edit(`✅ Reiniciado!`).then(async m1 => {
-            await m1.delete().catch( () => console.log(`↳ ⚠️ Erro ao deletar a mensagem`) )
-        })
-        .catch( () => console.log(`↳ ⚠️ Erro ao editar a mensagem`) )
-    }).catch( () => console.log(`↳ ⚠️ Erro ao editar a mensagem`) )
-    
-    let starting = log.send(`${loading}`).then(async m2 => {
+    if(MENSAGEM_REINICIO){
+        let reload = log.send(`${loading} Reiniciando...`).then(async m1 => {
+            await m1.edit(`✅ Reiniciado!`).then(async m1 => {
+                await m1.delete().catch( () => console.log(`↳ ⚠️ Erro ao deletar a mensagem`) )
+            })
+            .catch( () => console.log(`↳ ⚠️ Erro ao editar a mensagem`) )
+        }).catch( () => console.log(`↳ ⚠️ Erro ao editar a mensagem`) )
+        
+        let starting = log.send(`${loading}`).then(async m2 => {
             await m2.edit(`✅ Bot iniciado, total de \`${memberCount}\` participantes`)
                 .catch( () => console.log(`↳ ⚠️ Erro ao editar a mensagem`) )
         }).catch( () => console.log(`↳ ⚠️ Erro ao editar a mensagem`) )
-
-    if(config.online == true){
+    }
+    
+    if(config.status == "on"){
         bot.user.setStatus('online')
-        bot.user.setActivity(`${dbConfig.get('prefix').value()}help para ajuda | Criado por Igor Rocha |`, {type: 'WATCHING'})
+        bot.user.setActivity(`| .help para ajuda | Criado por Igor Rocha |`, {type: 'PLAYING'})
     }else{
         bot.user.setStatus('idle')
-        bot.user.setActivity('| ', {type: "CUSTOM_STATUS", name: "Estão fazendo alterações em mim!"})
+        bot.user.setActivity(`| Estão fazendo alterações em mim! |`, {type: 'PLAYING'})
     }
 });
 
@@ -212,6 +211,8 @@ bot.on("raw", async dados =>{
 })
 
 bot.on("guildMemberAdd", membro => {
+    let config = require("./config.json")
+
     console.log(`\n✅ [LOGS] ⇥ Novo membro no servidor. Dê as boas vindas para '${membro.user.username}'`)
     if(membro.user.bot){
         membro.roles.add("696464386071593081") // Cargo de Bots
@@ -237,6 +238,8 @@ bot.on("message", async message => {
     if(message.author.bot) return;// Se o autor foi um bot, faz nada
     if(message.channel.type == "dm") return message.channel.send("Não fala comigo por aqui..."); // Se a mensagem foi enviada por dm, não continua o código
     
+    delete require.cache[require.resolve("./config.json")]
+    let config = require("./config.json")
     
     let prefix = config.prefix; 
     let messageArray = message.content.split(" ")
@@ -245,20 +248,21 @@ bot.on("message", async message => {
     
 
     if(!message.content.startsWith(prefix)) return; // Valida o prefix do comando
-    if(!config.online && (comando != "help" && comando != "config")){ // Valida se o bot está online ou offline, liberando apenas o uso do comando config e help
+    if(config.status == "off" && (comando != "help" && comando != "config")){ // Valida se o bot está online ou offline, liberando apenas o uso do comando config e help
         let off = "<:off:723707654245187665>"
-        message.channel.send(`${off} Eu estou \` offline \`. Provavelmente estão fazendo alterações em mim\n> Seja paciente!`)
+        message.channel.send(`${off} Eu estou \` offline \`.\nProvavelmente estão **fazendo alterações** em mim!\n> Seja **paciente**!`)
         console.log(`⚫ Comando enviado por '${message.author.username}' enquanto o bot está OFF`)
         return
     }
     let commandfile = bot.commands.get(comando) || bot.commands.get(bot.aliases.get(comando)) // Pega o comando escrito no arquivo de comandos
     if(commandfile) commandfile.run(bot,message,args) // Verifica se o comando existe
     else{
-        message.channel.send('Comando não encontrado')
+        message.channel.send(`Comando \`${comando}\` não encontrado`)
         console.log(`↳ Comando '${comando}' não encontrado`)
     }
 
 })
 
 
+let config = require("./config.json")
 bot.login(config.token);
