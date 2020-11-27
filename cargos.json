@@ -96,5 +96,13 @@
       "estácio",
       "estacio"
     ]
+  },
+  {
+    "name": "letras",
+    "type": "curso",
+    "id": "781941650732875818",
+    "aliases": [
+      "letra"
+    ]
   }
 ]
