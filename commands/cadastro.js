@@ -10,7 +10,7 @@ module.exports.run = async (bot, message, args) => {
     console.log(`\n■▶ [LOGS] ⇥ Usuário '${message.author.username}' usou o comando Cadastro`)
 
     if(!message.member.roles.cache.has("721103513874202645")){ // Não tem cargo novato
-        message.channel.send(`Você já está cadastrado no servidor!\n> Caso queira alterar sua faculdade/curso, fale com um membro do <@&721329022621057074>`)
+        message.channel.send(`Você **já está cadastrado** no servidor!\n> Caso queira **alterar** sua faculdade/curso, fale com um membro do <@&721329022621057074>`)
         console.log(`⚠️ Usuário '${message.author.username}' já cadastrado`)
         return
     }
