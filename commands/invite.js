@@ -12,7 +12,7 @@ module.exports.run = async (bot, message, args) => {
         .setAuthor('ProcrastinaNão', message.guild.iconURL)
         .setDescription(`Convide seus amigos para o servidor!`)
         .addField('**Link:**', link)
-        .setFooter(`Anti-Procrastinador | Membros: ${message.guild.memberCount}`, bot.user.displayAvatarURL)
+        .setFooter(`Anti-Procrastinador | Membros: ${message.guild.memberCount}`, bot.user.displayAvatarURL())
         
     message.channel.send(embed)
 }
