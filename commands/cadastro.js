@@ -1,6 +1,5 @@
 const Discord = require("discord.js")
 const config = require("../config.json")
-const cargos = require("../cargos.json")
 
 const agree = "✅";
 const disagree = "❌";
@@ -15,6 +14,10 @@ module.exports.run = async (bot, message, args) => {
         console.log(`⚠️ Usuário '${message.author.username}' já cadastrado`)
         return
     }
+
+    delete require.cache[require.resolve("../cargos.json")]
+    let cargos = require("../cargos.json")
+
 
     let cEmbed = new Discord.MessageEmbed()
         .setColor("#ff0000")
