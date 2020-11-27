@@ -1,10 +1,6 @@
 const Discord = require("discord.js")
-const cargos = require("../cargos.json")
-const config = require("../config.json")
-const low = require('lowdb')
-const FileSync = require('lowdb/adapters/FileSync')
-const adapter = new FileSync('config.json')
-const configDB = low(adapter)
+
+const fs = require('fs')
 
 const left = '◀️'
 const right = '▶'
@@ -23,13 +19,57 @@ module.exports.run = async (bot, message, args) => {
         console.log(`↳ Acesso negado para '${message.author.username}'`)
         return
     }
+
+    delete require.cache[require.resolve("../cargos.json")]
+    let cargos = require("../cargos.json")
     
-    if(args[0] == "comandos"){
+    delete require.cache[require.resolve("../config.json")]
+    let config = require("../config.json")
+    
+    let opcao1 = args.shift()
+
+    if(opcao1 == "comandos"){
         console.log(bot.commands)
         return
-    }else if(args[0] == "cargos"){
+    }else if(opcao1 == "cargos"){
+        let opcao2 = args.shift()
 
-        if(args[1]){
+        if(opcao2 == "add"){
+            let nome = args.shift().toLowerCase().replace(/_/gi, ' ')
+            let tipo = args.shift().toLowerCase().replace(/_/gi, ' ')
+            let id = args.shift().toLowerCase()
+            let variacoes = args
+            for(let i in variacoes){
+                variacoes[i] = variacoes[i].toLowerCase().replace(/_/gi, ' ')
+            }
+
+            if(nome && tipo && id){
+                let cargo = {"name": nome, "type": tipo, "id": id, "aliases": variacoes}
+            
+                try {
+                    fs.readFile("./cargos.json", 'utf8', function readFileCallback(err, data){
+                        if (err){
+                            console.log(err);
+                        } else {
+                            obj = JSON.parse(data) //now it an object
+                            obj.push(cargo) //add some data
+                            json = JSON.stringify(obj) //convert it back to json
+                            fs.writeFile("./cargos.json", json, 'utf8', function(err){if(err) throw err;}) // write it back 
+                        }
+                    });
+                    message.channel.send(`\\✅ Cargo \`${nome}\` adicionado com sucesso!`)
+                    console.log(`↳ Cargo '${nome}' adicionado com sucesso.`)
+                    message.guild.channels.cache.get('722274694535053317').send(`\\▶ [LOGS] ⇥ Cargo \`${nome}\` adicionado com sucesso.`)
+                } catch (error) {
+                    console.log(error)
+                    message.channel.send(`\\❌ Ocorreu um erro ao adicionar o cargo novo.`)
+                    console.log(`↳ Ocorreu um erro ao adicionar o cargo novo.`)
+                    message.guild.channels.cache.get('722274694535053317').send(`\\▶ [LOGS] ⇥ Ocorreu um erro ao adicionar o cargo \`${nome}\`.`)
+                }
+                
+            }
+
+        }else if(opcao2){
             
             let exemplo = args.slice(1).join(' ').toString().toLowerCase()
 
@@ -118,30 +158,34 @@ module.exports.run = async (bot, message, args) => {
                 }
             });
         }
-    }else if(args[0] == "on"){
-        if(config.online){
-            console.log('ja estou on')
-            message.channel.send(`${on} Status do bot já é: \` ONLINE \``)
+    }else if(opcao1 == "on" || opcao1 == "off"){
+        if(config.status == opcao1){
+            message.channel.send(`O bot ja está \`${opcao1}\``)
         }else{
-            console.log('mudando para on')
-            await configDB.set("online", true).write()
-            await bot.user.setStatus('online')
-            console.log(`↳ Status alterado para "online"`)
-            message.channel.send(`${on} Status do bot alterado para: \` ONLINE \``)
-        }
-    }else if(args[0] == "off"){
-        if(config.online){
-            console.log('mudando para off')
-            await configDB.set("online", false).write()
-            await bot.user.setStatus('dnd')
-            console.log(`↳ Status alterado para "offline"`)
-            message.channel.send(`${off} Status do bot alterado para: \` OFFLINE \``)
-        }else{
-            console.log('ja estou off')
-            message.channel.send(`${off} Status do bot já é: \` OFFLINE \``)
+            fs.readFile("./config.json", 'utf8', function readFileCallback(err, data){
+                if (err){
+                    console.log(err);
+                } else {
+                    obj = JSON.parse(data) //now it an object
+                    obj.status = opcao1
+                    json = JSON.stringify(obj) //convert it back to json
+                    fs.writeFile("./config.json", json, 'utf8', function(err){if(err) throw err;}) // write it back 
+                }
+            });
+            if(opcao1 == "on"){
+                let on = "<:on:723708056763891753>"
+                message.channel.send(`${on} Bot configurado para \`ONLINE\`!`)
+                await bot.user.setActivity(`| .help para ajuda | Criado por Igor Rocha |`, {type: 'PLAYING'})
+                await bot.user.setStatus('online')
+            }else{
+                let off = "<:off:723707654245187665>"
+                message.channel.send(`${off} Bot configurado para \`OFFLINE\`!`)
+                await bot.user.setActivity(`| Estão fazendo alterações em mim! |`, {type: 'PLAYING'})
+                await bot.user.setStatus('idle')
+            }
         }
     }
-    
+
 }
 
 
