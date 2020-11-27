@@ -78,7 +78,6 @@ module.exports.run = async (bot, message, args) => {
         
             if(achou){
                 let embed = new Discord.MessageEmbed()
-                .setAuthor(`Anti-Procrastinador`, message.guild.iconURL())
                 .setColor(colours.cyan)
                 .setTitle('Achei isso:')
                 .addField('**Nome:**', achou.name)
@@ -95,7 +94,8 @@ module.exports.run = async (bot, message, args) => {
             let i = 0
 
             let embed = new Discord.MessageEmbed()
-                .setAuthor(`Anti-Procrastinador Help`, message.guild.iconURL)
+                .setTitle('Cargos:')
+                .setColor(colours.cyan)
                 .addField('**Nome:**', cargos[i].name || "Sem nome")
                 .addField('**ID:**', cargos[i].id || "Sem ID")
                 .addField('**Tipo:**', cargos[i].type || "Sem tipo")
