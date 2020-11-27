@@ -21,7 +21,7 @@ fs.readdir("./commands/", (err, files) => {
     jsfile.forEach((f, i) => {
         let pull = require(`./commands/${f}`); // Importa cada arquivo
         bot.commands.set(pull.config.name, pull); // Coloca o nome dele na Collection
-        console.log(`\n■▶ [LOGS] ⇥ Comando '${pull.config.name}' inicializado com sucesso`)
+        console.log(`\n■▶ [STARTING] ⇥ Comando '${pull.config.name}' inicializado com sucesso`)
         pull.config.aliases.forEach(alias => {
             bot.aliases.set(alias, pull.config.name) // Coloca a variação dele na Collection
             console.log(`↳ Variação '${alias}' adicionada`)
@@ -252,7 +252,6 @@ bot.on("message", async message => {
         let off = "<:off:723707654245187665>"
         message.channel.send(`${off} Eu estou \` offline \`.\nProvavelmente estão **fazendo alterações** em mim!\n> Seja **paciente**!`)
         console.log(`⚫ Comando enviado por '${message.author.username}' enquanto o bot está OFF`)
-        return
     }
     let commandfile = bot.commands.get(comando) || bot.commands.get(bot.aliases.get(comando)) // Pega o comando escrito no arquivo de comandos
     if(commandfile) commandfile.run(bot,message,args) // Verifica se o comando existe
