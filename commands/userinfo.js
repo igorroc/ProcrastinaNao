@@ -28,7 +28,7 @@ module.exports.run = async (bot, message, args) => {
         
     }else{
         uEmbed
-            .setTitle(`Informações de ${message.author.username}`)
+            .setTitle(`Informações de ${message.member.nickname || message.author.username}`)
             .setThumbnail(message.author.displayAvatarURL())
             .addField("**Nome:**", message.author.username, true)
             .addField("**Tag:**", message.author.discriminator, true)
@@ -37,10 +37,6 @@ module.exports.run = async (bot, message, args) => {
             .addField("**Desde:**", message.author.createdAt.toDateString(), true)
     }
     
-    
-    
-    uEmbed.setFooter(`Anti-Procrastinador`, bot.user.displayAvatarURL);
-
     message.channel.send({embed: uEmbed});
 }
 
