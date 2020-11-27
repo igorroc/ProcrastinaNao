@@ -186,8 +186,7 @@ module.exports.run = async (bot, message, args) => {
 
                                             cEmbed
                                                 .setDescription("~~Responda as perguntas que serão feitas abaixo!~~")
-                                                .setFooter(`Anti-Procrastinador`, bot.user.displayAvatarURL)
-                                            
+                                                
                                             await envio.reactions.removeAll()
                                                 .catch(error => console.error('⚠️ Erro ao limpar as reações: ', error));
                                             await envio.edit(cEmbed)
