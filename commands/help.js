@@ -15,9 +15,9 @@ module.exports.run = async (bot, message, args) => {
             
             var SHembed = new Discord.MessageEmbed()
             .setColor(colours.yellow)
-            .setAuthor(bot.user.username, message.guild.iconURL)    
-            .setDescription(`\n**Comando:** ${command.config.name}\n**Descrição:** ${command.config.description || "Sem descrição"}\n**Uso:** ${command.config.usage || "Sem uso"}\n**Acessivel para:** ${command.config.accessableby || "Membros"}\n**Variações:** ${command.config.noalias || command.config.aliases}`)
-            message.channel.send(SHembed);
+            .setTitle(`Comando: ${command.config.name}`)  
+            .setDescription(`\n**Descrição:** ${command.config.description || "Sem descrição"}\n**Uso:** ${command.config.usage || "Sem uso"}\n**Acessivel para:** ${command.config.accessableby || "Membros"}\n**Variações:** ${command.config.noalias || command.config.aliases}`)
+            message.channel.send(SHembed)
         }else{
             message.channel.send(`Comando \`${command}\` não encontrado`)
             console.log(`↳ Comando '${command}' não encontrado`)
@@ -33,15 +33,14 @@ module.exports.run = async (bot, message, args) => {
         
         let Sembed = new Discord.MessageEmbed()
         .setColor(colours.yellow)
-        .setAuthor(bot.user.username, message.guild.iconURL)
+        .setTitle(`${bot.commands.size} comandos`)
         .setDescription(`Esses são os comandos disponíveis para o Bot Anti-Procrastinador!`)
-        .addField(`Comandos:`, "`" + comandosSimples + "`")
+        .addField(`Simples:`, "`" + comandosSimples + "`")
         
         if(message.member.hasPermission("ADMINISTRATOR")){
-            Sembed.addField("Comandos Especiais:", "`" + comandosAdmin + "`")
+            Sembed.addField("Especiais:", "`" + comandosAdmin + "`")
         }
-        Sembed.addField("Para mais informações", `digite \`${prefix}help [comando]\``)
-        .setFooter(`${bot.user.username} | Comandos: ${bot.commands.size}`, bot.user.displayAvatarURL())
+        Sembed.addField("Para mais informações", `Digite \`${prefix}help [comando]\``)
         message.channel.send(Sembed)
     }
 }
