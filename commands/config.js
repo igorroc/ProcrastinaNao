@@ -1,4 +1,5 @@
 const Discord = require("discord.js")
+const colours = require("../colours.json")
 
 const fs = require('fs')
 
@@ -71,13 +72,14 @@ module.exports.run = async (bot, message, args) => {
 
         }else if(opcao2){
             
-            let exemplo = args.slice(1).join(' ').toString().toLowerCase()
-
+            let exemplo = opcao2.toString().toLowerCase()
+            
             let achou = cargos.find(c => c.name === exemplo || c.aliases.find(v => v === exemplo))
         
             if(achou){
                 let embed = new Discord.MessageEmbed()
-                .setAuthor(`Anti-Procrastinador`, message.guild.iconURL)
+                .setAuthor(`Anti-Procrastinador`, message.guild.iconURL())
+                .setColor(colours.cyan)
                 .setTitle('Achei isso:')
                 .addField('**Nome:**', achou.name)
                 .addField('**ID:**', achou.id)
@@ -86,7 +88,7 @@ module.exports.run = async (bot, message, args) => {
         
                 message.channel.send(embed)
             }else{
-                message.channel.send(`Não achei \`${exemplo}\``)
+                message.channel.send(`Não achei o cargo: \`${exemplo}\``)
             }
 
         }else{
@@ -175,11 +177,13 @@ module.exports.run = async (bot, message, args) => {
             if(opcao1 == "on"){
                 let on = "<:on:723708056763891753>"
                 message.channel.send(`${on} Bot configurado para \`ONLINE\`!`)
+                message.guild.channels.cache.get('722274694535053317').send(`\\▶ [LOGS] ⇥ ${on} STATUS: \`ONLINE\``)
                 await bot.user.setActivity(`| .help para ajuda | Criado por Igor Rocha |`, {type: 'PLAYING'})
                 await bot.user.setStatus('online')
             }else{
                 let off = "<:off:723707654245187665>"
                 message.channel.send(`${off} Bot configurado para \`OFFLINE\`!`)
+                message.guild.channels.cache.get('722274694535053317').send(`\\▶ [LOGS] ⇥ ${off} STATUS: \`OFFLINE\``)
                 await bot.user.setActivity(`| Estão fazendo alterações em mim! |`, {type: 'PLAYING'})
                 await bot.user.setStatus('idle')
             }
