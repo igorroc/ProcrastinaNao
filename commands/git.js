@@ -35,7 +35,6 @@ module.exports.run = async (bot, message, args) => {
                 .addField('**Bio:**', json.bio || 'Sem bio')
                 .addField('**Repositórios:**', json.public_repos || 0, true)
                 .addField('**Seguidores:**', json.followers, true)
-                .setFooter(`Anti-Procrastinador`, bot.user.displayAvatarURL(), true)
                 
             let msg = await message.channel.send(embed)
             await msg.react(left).then(async r => {
@@ -61,7 +60,6 @@ module.exports.run = async (bot, message, args) => {
                         .setURL(json.html_url+'?tab=repositories')
                         .setThumbnail(json.avatar_url)
                         .setDescription('Navegue pelas páginas utilizando as setas abaixo')
-                        .setFooter(`Anti-Procrastinador`, bot.user.displayAvatarURL(), true)
                     let total = json.public_repos
                     fetch(`https://api.github.com/users/${user}/repos`)
                         .then(res => res.json())
@@ -70,9 +68,9 @@ module.exports.run = async (bot, message, args) => {
                             json.forEach(repos => {
                                 i++
                                 novoEmbed.addField('**'+repos.name+'**', repos.description || 'Sem descrição')
-                                    .setFooter(`Anti-Procrastinador | ${i} de ${total}`, bot.user.displayAvatarURL(), true)
+                                    .setFooter(`${i} de ${total}`)
                                 if(i == total){
-                                    novoEmbed.setDescription(`Navegue pelas páginas utilizando as setas abaixo\n${check} Repositórios carregados`)
+                                    novoEmbed.setDescription(`Navegue pelas páginas utilizando as setas abaixo\n\\${check} Repositórios carregados`)
                                 }else{
                                     novoEmbed.setDescription(`Navegue pelas páginas utilizando as setas abaixo\n\n${loading} Carregando repositórios...`)
                                 }
