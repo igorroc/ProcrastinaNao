@@ -70,6 +70,76 @@ module.exports.run = async (bot, message, args) => {
                 
             }
 
+        }else if (opcao2 == "remove"){
+            let id = args.shift()
+            fs.readFile("./cargos.json", 'utf8', function readFileCallback(err, data){
+                if (err){
+                    console.log(err);
+                } else {
+                    let achou = false
+                    let cargo = null
+                    obj = JSON.parse(data) //now it an object
+                    obj.find(function(item, i){
+                        if(item.id == id || item.name == id){
+                            obj.splice(i, 1) // This will remove the object that first name equals to Test1
+                            achou = true
+                            cargo = item.name
+                            return
+                        }
+                    })
+                    json = JSON.stringify(obj) //convert it back to json
+                    fs.writeFile("./cargos.json", json, 'utf8', function(err){if(err) throw err;}) // write it back 
+                    if(achou){
+                        console.log(`↳ Cargo '${cargo}' removido`)
+                        message.channel.send(`Cargo \`${cargo}\` removido com sucesso!`)
+                        message.guild.channels.cache.get('722274694535053317').send(`\\▶ [LOGS] ⇥ Cargo \`${cargo}\` removido.`)
+                    }else{
+                        console.log(`↳ Cargo '${id}' não encontrado`)
+                        message.channel.send(`Cargo \`${id}\` não encontrado!`)
+                    }
+                    
+                }
+            });
+        }else if (opcao2 == "edit"){
+            let id = args.shift()
+            let itemParaSerMudado = args.shift()
+            let valor = (itemParaSerMudado=="aliases") ? args : args.toString()
+            fs.readFile("./cargos.json", 'utf8', function readFileCallback(err, data){
+                if (err){
+                    console.log(err);
+                } else {
+                    let achouCargo = false
+                    let achouItem = false
+                    let cargo = null
+                    obj = JSON.parse(data) //now it an object
+                    obj.find(function(item, i){
+                        if(item.id == id || item.name == id){
+                            achouCargo = true
+                            cargo = item.name
+                            if(item[itemParaSerMudado]){
+                                achouItem = true
+                                item[itemParaSerMudado] = valor
+                            }
+                            return
+                        }
+                    })
+                    json = JSON.stringify(obj) //convert it back to json
+                    if(achouItem){
+                        fs.writeFile("./cargos.json", json, 'utf8', function(err){if(err) throw err;}) // write it back 
+                    
+                        console.log(`↳ Cargo '${cargo}', item '${itemParaSerMudado}' alterado para '${valor}'`)
+                        message.channel.send(`Cargo \`${cargo}\` alterado com sucesso!`)
+                        message.guild.channels.cache.get('722274694535053317').send(`\\▶ [LOGS] ⇥ Cargo \`${cargo}\`, item \`${itemParaSerMudado}\` alterado para \`${valor}\``)
+                    }else if(achouCargo){
+                        console.log(`↳ Chave '${itemParaSerMudado}' não encontrada`)
+                        message.channel.send(`Chave \`${itemParaSerMudado}\` não encontrada!`)
+                    }else{
+                        console.log(`↳ Cargo '${id}' não encontrado`)
+                        message.channel.send(`Cargo \`${id}\` não encontrado!`)
+                    }
+                    
+                }
+            });
         }else if(opcao2){
             
             let exemplo = opcao2.toString().toLowerCase()
@@ -160,6 +230,8 @@ module.exports.run = async (bot, message, args) => {
                 }
             });
         }
+    }else if(opcao1 == "emojis"){
+        return message.channel.send("Funcionalidade em manutenção")
     }else if(opcao1 == "on" || opcao1 == "off"){
         if(config.status == opcao1){
             message.channel.send(`O bot ja está \`${opcao1}\``)
@@ -175,19 +247,19 @@ module.exports.run = async (bot, message, args) => {
                 }
             });
             if(opcao1 == "on"){
-                let on = "<:on:723708056763891753>"
                 message.channel.send(`${on} Bot configurado para \`ONLINE\`!`)
                 message.guild.channels.cache.get('722274694535053317').send(`\\▶ [LOGS] ⇥ ${on} STATUS: \`ONLINE\``)
                 await bot.user.setActivity(`| .help para ajuda | Criado por Igor Rocha |`, {type: 'PLAYING'})
                 await bot.user.setStatus('online')
             }else{
-                let off = "<:off:723707654245187665>"
                 message.channel.send(`${off} Bot configurado para \`OFFLINE\`!`)
                 message.guild.channels.cache.get('722274694535053317').send(`\\▶ [LOGS] ⇥ ${off} STATUS: \`OFFLINE\``)
                 await bot.user.setActivity(`| Estão fazendo alterações em mim! |`, {type: 'PLAYING'})
                 await bot.user.setStatus('idle')
             }
         }
+    }else{
+        message.channel.send('Digite `comandos`, `cargos`, `emojis`, `on`, `off`')
     }
 
 }
