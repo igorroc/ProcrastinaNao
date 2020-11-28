@@ -15,7 +15,7 @@ fs.readdir("./commands/", (err, files) => {
 
     let jsfile = files.filter(f => f.split(".").pop() === "js") // Pega todos os nomes dos comandos da pasta "./commands/" e remove o '.js'
     if(jsfile.length <= 0) {
-         return console.log("[LOGS] Não foi possível encontrar comandos!");
+         return console.log("[LOGS] Não foi possível encontrar comandos!")
     }
 
     jsfile.forEach((f, i) => {
