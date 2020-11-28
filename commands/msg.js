@@ -1,4 +1,5 @@
 const Discord = require("discord.js")
+const emojis = require("../emojis.json")
 
 
 module.exports.run = async (bot, message, args) => {
@@ -25,7 +26,11 @@ module.exports.run = async (bot, message, args) => {
         })
         console.log(`↳ Canal '${canal}' não encontrado.`)
     }else{
-        let msg = args.slice(1).join(" ");
+        let msg = args.slice(1).join(" ")
+        for(let k in emojis){
+            let re = new RegExp(`:${k}:`, "g")
+            msg = msg.replace(re, emojis[k])
+        }
         if(!msg){
             return message.channel.send("Envie uma mensagem")
         }
