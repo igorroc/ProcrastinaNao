@@ -25,13 +25,18 @@ module.exports.run = async (bot, message, args) => {
             let cEmbed = new Discord.MessageEmbed()
                 .setColor("#00ff00")
                 .setTitle(`Perfis do Servidor`)
-                .setThumbnail(perfil.foto)
                 .addField(`Nome:`, perfil.nome, false)
                 .addField(`Matrícula:`, `_${perfil.matricula}_`, true)
                 .addField(`Ano de Egresso:`, `_${perfil.anoEgresso}_`, true)
                 .addField(`Email:`, `[${perfil.email}](https://${perfil.email})`, false)
                 .setFooter(`${indice+1}/${total}`, bot.user.displayAvatarURL())
             
+            try {
+                cEmbed.setThumbnail(perfil.foto)
+            } catch (error) {
+                console.log(error)
+            }
+
             let msg = await message.channel.send(cEmbed)
             await msg.react(left).then(async r => {
                 await msg.react(x).then(async r => {
@@ -138,12 +143,15 @@ module.exports.run = async (bot, message, args) => {
                 let cEmbed = new Discord.MessageEmbed()
                 .setColor("#00ff00")
                 .setTitle(`Perfil de ${message.mentions.members.first().nickname}`)
-                .setThumbnail(perfil.foto)
                 .addField(`Nome:`, perfil.nome, false)
                 .addField(`Matrícula:`, `_${perfil.matricula}_`, true)
                 .addField(`Ano de Egresso:`, `_${perfil.anoEgresso}_`, true)
                 .addField(`Email:`, `[${perfil.email}](https://${perfil.email})`, false)
-                
+                try {
+                    cEmbed.setThumbnail(perfil.foto)
+                } catch (error) {
+                    console.log(error)
+                }
                 let envio = await message.channel.send(cEmbed)
                 message.delete()
             }else{
@@ -157,11 +165,15 @@ module.exports.run = async (bot, message, args) => {
             let cEmbed = new Discord.MessageEmbed()
             .setColor("#00ff00")
             .setTitle(`Perfil de ${user.username}`)
-            .setThumbnail(perfil.foto)
             .addField(`Nome:`, perfil.nome, false)
             .addField(`Matrícula:`, `_${perfil.matricula}_`, true)
             .addField(`Ano de Egresso:`, `_${perfil.anoEgresso}_`, true)
             .addField(`Email:`, `[${perfil.email}](https://${perfil.email})`, false)
+            try {
+                cEmbed.setThumbnail(perfil.foto)
+            } catch (error) {
+                console.log(error)
+            }
 
             let envio = await message.channel.send(cEmbed)
             message.delete()
