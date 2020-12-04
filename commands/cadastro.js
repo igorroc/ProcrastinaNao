@@ -154,16 +154,19 @@ module.exports.run = async (bot, message, args) => {
                                                     message.member.roles.add("696434056778350612").catch(() => console.log(`⚠️ Não foi possível adicionar o cargo 'Veterano(a)' para '${message.author.username}'`))
                                                 
                                                 if (cEmbed.fields.find(({ name }) => name === '**Curso:**')) { // Cargo do Curso
-                                                    let nomeCurso = cargos.find(c => c.type == 'curso' && c.name === curso.toLowerCase() || c.aliases.find(v => v === curso.toLowerCase())).name
-                                                    let roleCurso = message.guild.roles.cache.find((role) => role.name == nomeCurso).id
-                                                    message.member.roles.add(roleCurso).catch(() => console.log(`⚠️ Não foi possível adicionar o cargo '${nomeCurso}' para '${message.author.username}'`))
+                                                    if(curso.toLowerCase() != "Nenhum"){
+                                                        let nomeCurso = cargos.find(c => c.type == 'curso' && c.name === curso.toLowerCase() || c.aliases.find(v => v === curso.toLowerCase())).name
+                                                        let roleCurso = message.guild.roles.cache.find((role) => role.name == nomeCurso).id
+                                                        message.member.roles.add(roleCurso).catch(() => console.log(`⚠️ Não foi possível adicionar o cargo '${nomeCurso}' para '${message.author.username}'`))
+                                                    }
                                                 }
                                                 if (cEmbed.fields.find(({ name }) => name === '**Faculdade:**')) { // Cargo da Faculdade 
-                                                    let nomeFaculdade = cargos.find(c => c.type == 'faculdade' && c.name === faculdade.toLowerCase() || c.aliases.find(v => v === faculdade.toLowerCase())).name.toUpperCase()
-                                                    let roleFaculdade = message.guild.roles.cache.find((role) => role.name == nomeFaculdade).id
-                                                    message.member.roles.add(roleFaculdade).catch(() => console.log(`⚠️ Não foi possível adicionar o cargo '${nomeFaculdade}' para '${message.author.username}'`))
+                                                    if(faculdade.toLowerCase() != "Nenhuma"){
+                                                        let nomeFaculdade = cargos.find(c => c.type == 'faculdade' && c.name === faculdade.toLowerCase() || c.aliases.find(v => v === faculdade.toLowerCase())).name.toUpperCase()
+                                                        let roleFaculdade = message.guild.roles.cache.find((role) => role.name == nomeFaculdade).id
+                                                        message.member.roles.add(roleFaculdade).catch(() => console.log(`⚠️ Não foi possível adicionar o cargo '${nomeFaculdade}' para '${message.author.username}'`))
+                                                    }
                                                 }
-
                                                 message.member.roles.remove('721103513874202645').catch(() => console.log(`⚠️ Não foi possível remover o cargo 'Novato(a)' para '${message.author.username}'`))
                                                 message.member.roles.add('781125011523895368').catch(() => console.log(`⚠️ Não foi possível adicionar o cargo 'Verificado(a)' para '${message.author.username}'`))
 
