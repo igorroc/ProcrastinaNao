@@ -234,8 +234,7 @@ bot.on("guildMemberRemove", membro => {
 
 bot.on("message", async message => {   
     if(message.author.bot) return;// Se o autor foi um bot, faz nada
-    if(message.channel.type == "dm") return message.channel.send("Não fala comigo por aqui..."); // Se a mensagem foi enviada por dm, não continua o código
-    
+
     delete require.cache[require.resolve("./config.json")]
     let config = require("./config.json")
     
@@ -244,6 +243,9 @@ bot.on("message", async message => {
     let comando = messageArray[0].slice(prefix.length)
     let args = messageArray.slice(1)
     
+    if(message.channel.type == "dm"){
+        return bot.channels.cache.get('722274694535053317').send(`\\💬 [DM] ⇥ Membro \`${message.author.username}\` enviou a mensagem:\n> ${message.content}`)
+    }
 
     if(!message.content.startsWith(prefix)) return; // Valida o prefix do comando
     if(config.status == "off" && (comando != "help" && comando != "config")){ // Valida se o bot está online ou offline, liberando apenas o uso do comando config e help
