@@ -103,23 +103,18 @@ module.exports.run = async (bot, message, args) => {
                             await collected.first().delete().catch(() => console.log('⚠️ Erro ao deletar a mensagem'))
                             await envio.edit(cEmbed).catch(() => console.log('⚠️ Erro ao editar o embed'))
 
-                            envio.react('😀').then(async r => {
-                                await envio.react('😫').then( async r1 => {
-                                    await envio.react('📚')
-                                })
+                            envio.react('📚').then(async r => {
+                                await envio.react('👨‍🏫')
                             });
                             envio.awaitReactions((reaction, user) => user.id == message.author.id && (reaction.emoji.name == "😀" || reaction.emoji.name == "😫" || reaction.emoji.name == "📚"),
                                 { max: 1 }).then(async collected => {
                                     
                                     cEmbed.fields.splice(3, 1) // Remove a mensagem de pedido de dado
 
-                                    if (collected.first().emoji.name == "😀") {
-                                        cEmbed.addField("**Nível:**", "Calouro(a)")
-                                        console.log(`↳ Nível escolhido 'Calouro(a)'`)
-                                    } else if (collected.first().emoji.name == "😫") {
-                                        cEmbed.addField("**Nível:**", "Veterano(a)")
-                                        console.log(`↳ Nível escolhido 'Veterano(a)'`)
-                                    } else if (collected.first().emoji.name == "📚") {
+                                    if (collected.first().emoji.name == "📚") {
+                                        cEmbed.addField("**Nível:**", "Estudante")
+                                        console.log(`↳ Nível escolhido 'Estudante'`)
+                                    } else if (collected.first().emoji.name == "👨‍🏫") {
                                         cEmbed.addField("**Nível:**", "Professor(a)")
                                         message.guild.channels.cache.get('722274694535053317').send(`⚠️ O usuário \` ${message.author.username} \` disse ser um professor, verifique por favor!`)
                                         console.log(`↳ Nível escolhido 'Professor(a)'`)
@@ -148,7 +143,7 @@ module.exports.run = async (bot, message, args) => {
 
                                                 message.member.setNickname(cEmbed.fields.find(({ name }) => name === '**Nome:**').value).catch(() => console.log(`⚠️ Não foi possível alterar o nick de "${message.author.username}"`)) // Alterando o Nick
 
-                                                if (cEmbed.fields.find(({ name }) => name === '**Nível:**').value == "Veterano(a)"||"Calouro(a)") // Cargo de Veterano
+                                                if (cEmbed.fields.find(({ name }) => name === '**Nível:**').value == "Estudante") // Cargo de Veterano
                                                     message.member.roles.add("821147812456300574").catch(() => console.log(`⚠️ Não foi possível adicionar o cargo 'Estudante' para '${message.author.username}'`))
                                                 
                                                 if (cEmbed.fields.find(({ name }) => name === '**Curso:**')) { // Cargo do Curso
