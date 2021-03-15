@@ -96,7 +96,7 @@ module.exports.run = async (bot, message, args) => {
                             }
                             
 
-                            cEmbed.addField(`**Nível:**  ${loading}`, `${message.member.user}, você é:\n\` Calouro(a):\` 😀\n\` Veterano(a):\` 😫\n\` Professor(a):\` 📚\n> Clique no emoji correspondente abaixo da mensagem ↓ `)
+                            cEmbed.addField(`**Nível:**  ${loading}`, `${message.member.user}, você é:\n\` Estudante:\` 📚\n\` Professor(a):\` 👨‍🏫\n> Clique no emoji correspondente abaixo da mensagem ↓ `)
                                 .setFooter(`Anti-Procrastinador | Passo 4 de 5`, bot.user.displayAvatarURL)
                                 .setColor("#a9c40f")
                             
