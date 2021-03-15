@@ -82,10 +82,6 @@ bot.on("raw", async dados =>{
         html = servidor.roles.cache.get('721346290369167460'),
         c = servidor.roles.cache.get('721115106871738408')
 
-    let tac1 = servidor.roles.cache.get('769201810056675338'),
-        ld2 = servidor.roles.cache.get('769201851798650880'),
-        lp3 = servidor.roles.cache.get('769201726426972170')
-
     if(dados.t === "MESSAGE_REACTION_ADD"){
         if(dados.d.message_id === "721347287426793494"){ // Mensagem de cargos
             if(dados.d.emoji.id === "696478679391272961"){ // Cargo Python
@@ -123,26 +119,6 @@ bot.on("raw", async dados =>{
                 membro.roles.add(c)
                 console.log(`↳ Cargo 'C' adicionado para o usuário '${membro.user.username}'`)
                 bot.channels.cache.get('722274694535053317').send(`\\▶ [LOGS] ⇥ Cargo \`C\` adicionado para o usuário \`${membro.user.username}\``)
-            }
-        } else if(dados.d.message_id === "769200945484529715"){ // Mensagem das materias
-            if(dados.d.emoji.name === "1️⃣"){ // Cargo TAC1
-                if(membro.roles.cache.some(role => role === tac1)) return console.log(`↳ Usuário '${membro.user.username}' já possui o cargo 'TAC1'`)
-                membro.roles.add(tac1)
-                console.log(`↳ Cargo 'TAC1' adicionado para o usuário '${membro.user.username}'`)
-                bot.channels.cache.get('722274694535053317').send(`\\▶ [LOGS] ⇥ Cargo \`TAC1\` adicionado para o usuário \`${membro.user.username}\``)
-
-            }else if(dados.d.emoji.name === "2️⃣"){ // Cargo LP3
-                if(membro.roles.cache.some(role => role === lp3)) return console.log(`↳ Usuário '${membro.user.username}' já possui o cargo 'LP3'`)
-                membro.roles.add(lp3)
-                console.log(`↳ Cargo 'LP3' adicionado para o usuário '${membro.user.username}'`)
-                bot.channels.cache.get('722274694535053317').send(`\\▶ [LOGS] ⇥ Cargo \`LP3\` adicionado para o usuário \`${membro.user.username}\``)
-
-            }else if(dados.d.emoji.name === "3️⃣"){ // Cargo LD2
-                if(membro.roles.cache.some(role => role === ld2)) return console.log(`↳ Usuário '${membro.user.username}' já possui o cargo 'LD2'`)
-                membro.roles.add(ld2)
-                console.log(`↳ Cargo 'LD2' adicionado para o usuário '${membro.user.username}'`)
-                bot.channels.cache.get('722274694535053317').send(`\\▶ [LOGS] ⇥ Cargo \`LD2\` adicionado para o usuário \`${membro.user.username}\``)
-
             }
         }
     }
@@ -183,26 +159,6 @@ bot.on("raw", async dados =>{
                 membro.roles.remove(c)
                 console.log(`↳ Usuário '${membro.user.username}' removeu o cargo 'C'`)
                 bot.channels.cache.get('722274694535053317').send(`\\▶ [LOGS] ⇥ Usuário \`${membro.user.username}\` removeu o cargo \`C\``)
-            }
-        } else if(dados.d.message_id === "769200945484529715"){ // Mensagem das materias
-            if(dados.d.emoji.name === "1️⃣"){ // Cargo TAC1
-                if(!membro.roles.cache.some(role => role === tac1)) return console.log(`↳ Usuário '${membro.user.username}' ainda não tinha o cargo 'TAC1'`)
-                membro.roles.remove(tac1)
-                console.log(`↳ Usuário '${membro.user.username}' removeu o cargo 'TAC1'`)
-                bot.channels.cache.get('722274694535053317').send(`\\▶ [LOGS] ⇥ Usuário \`${membro.user.username}\` removeu o cargo \`TAC1\``)
-
-            }else if(dados.d.emoji.name === "2️⃣"){ // Cargo LP3
-                if(!membro.roles.cache.some(role => role === lp3)) return console.log(`↳ Usuário '${membro.user.username}' ainda não tinha o cargo 'LP3'`)
-                membro.roles.remove(lp3)
-                console.log(`↳ Usuário '${membro.user.username}' removeu o cargo 'LP3'`)
-                bot.channels.cache.get('722274694535053317').send(`\\▶ [LOGS] ⇥ Usuário \`${membro.user.username}\` removeu o cargo \`LP3\``)
-
-            }else if(dados.d.emoji.name === "3️⃣"){ // Cargo LD2
-                if(!membro.roles.cache.some(role => role === ld2)) return console.log(`↳ Usuário '${membro.user.username}' ainda não tinha o cargo 'LD2'`)
-                membro.roles.remove(ld2)
-                console.log(`↳ Usuário '${membro.user.username}' removeu o cargo 'LD2'`)
-                bot.channels.cache.get('722274694535053317').send(`\\▶ [LOGS] ⇥ Usuário \`${membro.user.username}\` removeu o cargo \`LD2\``)
-
             }
         }
     }
