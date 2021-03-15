@@ -148,10 +148,8 @@ module.exports.run = async (bot, message, args) => {
 
                                                 message.member.setNickname(cEmbed.fields.find(({ name }) => name === '**Nome:**').value).catch(() => console.log(`⚠️ Não foi possível alterar o nick de "${message.author.username}"`)) // Alterando o Nick
 
-                                                if (cEmbed.fields.find(({ name }) => name === '**Nível:**').value == "Veterano(a)") // Cargo de Veterano
-                                                    message.member.roles.add("696434089972072519").catch(() => console.log(`⚠️ Não foi possível adicionar o cargo 'Veterano(a)' para '${message.author.username}'`))
-                                                else if (cEmbed.fields.find(({ name }) => name === '**Nível:**').value == "Calouro(a)") // Cargo de Calouro
-                                                    message.member.roles.add("696434056778350612").catch(() => console.log(`⚠️ Não foi possível adicionar o cargo 'Veterano(a)' para '${message.author.username}'`))
+                                                if (cEmbed.fields.find(({ name }) => name === '**Nível:**').value == "Veterano(a)"||"Calouro(a)") // Cargo de Veterano
+                                                    message.member.roles.add("821147812456300574").catch(() => console.log(`⚠️ Não foi possível adicionar o cargo 'Estudante' para '${message.author.username}'`))
                                                 
                                                 if (cEmbed.fields.find(({ name }) => name === '**Curso:**')) { // Cargo do Curso
                                                     if(curso.toLowerCase() != "nenhum"){
