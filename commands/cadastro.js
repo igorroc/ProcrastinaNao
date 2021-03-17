@@ -37,7 +37,7 @@ module.exports.run = async (bot, message, args) => {
     await envio.edit(cEmbed).catch(() => console.log('⚠️ Erro ao editar o embed'))
         
     message.channel.awaitMessages(m => m.author.id == message.author.id,
-        { max: 1, time: 120000 }).then(async collected => {
+        { max: 1, time: 60000 }).then(async collected => {
             console.log(`↳ Nome escolhido '${collected.first().content}'`)
             
             cEmbed.fields.splice(0, 1) // Remove a mensagem de pedido de dado
@@ -96,39 +96,37 @@ module.exports.run = async (bot, message, args) => {
                             }
                             
 
-                            cEmbed.addField(`**Nível:**  ${loading}`, `${message.member.user}, você é:\n\` Estudante:\` 📚\n\` Professor(a):\` 👨‍🏫\n> Clique no emoji correspondente abaixo da mensagem ↓ `)
+                            cEmbed
+                                .addField(`**Nível:**  ${loading}`, `${message.member.user}, você é:\n\`Estudante\` ou \`Professor(a)\``)
                                 .setFooter(`Anti-Procrastinador | Passo 4 de 5`, bot.user.displayAvatarURL)
                                 .setColor("#a9c40f")
                             
                             await collected.first().delete().catch(() => console.log('⚠️ Erro ao deletar a mensagem'))
                             await envio.edit(cEmbed).catch(() => console.log('⚠️ Erro ao editar o embed'))
 
-                            envio.react('📚').then(async r => {
-                                await envio.react('👨‍🏫')
-                            });
-                            envio.awaitReactions((reaction, user) => user.id == message.author.id && (reaction.emoji.name == "😀" || reaction.emoji.name == "😫" || reaction.emoji.name == "📚"),
-                                { max: 1 }).then(async collected => {
-                                    
+                            message.channel.awaitMessages(m => m.author.id == message.author.id,
+                                { max: 1, time: 120000 }).then(async collected => {
+                                    let nivel = collected.first().content.toLowerCase()
+                                    console.log(`↳ Nivel escolhido '${nivel}'`)
+
                                     cEmbed.fields.splice(3, 1) // Remove a mensagem de pedido de dado
 
-                                    if (collected.first().emoji.name == "📚") {
-                                        cEmbed.addField("**Nível:**", "Estudante")
-                                        console.log(`↳ Nível escolhido 'Estudante'`)
-                                    } else if (collected.first().emoji.name == "👨‍🏫") {
+
+                                    if (nivel == "professora" || nivel == "professor"){
                                         cEmbed.addField("**Nível:**", "Professor(a)")
+                                        console.log(`↳ Nível escolhido 'Professor(a)`)
                                         message.guild.channels.cache.get('722274694535053317').send(`⚠️ O usuário \` ${message.author.username} \` disse ser um professor, verifique por favor!`)
-                                        console.log(`↳ Nível escolhido 'Professor(a)'`)
+                                    } else {
+                                        cEmbed.addField("**Nível:**", "Estudante")
                                     }
-                                    
-                                    await envio.reactions.removeAll()
-                                        .catch(error => console.error('⚠️ Erro ao limpar as reações: ', error));
 
                                     cEmbed
                                         .addField('\u200B', '\u200B')
-                                        .addField(`**Confirmação:**  ${loading}`, "Cadastro finalizado, deseja confirmar esses dados?\n> Clique no emoji correspondente abaixo da mensagem ↓ ")
+                                        .addField(`**Confirmação:**  ${loading}`, `Cadastro finalizado, ${message.author.username}, deseja confirmar esses dados?\n> CLIQUE no emoji correspondente ABAIXO da mensagem ↓ `)
                                         .setFooter(`Anti-Procrastinador | Passo 5 de 5`, bot.user.displayAvatarURL)
                                         .setColor("#00ff00")
 
+                                    await collected.first().delete().catch(() => console.log('⚠️ Erro ao deletar a mensagem'))
                                     await envio.edit(cEmbed).catch(() => console.log('⚠️ Erro ao editar o embed'))
 
                                     envio.react(disagree).then(async r => {
@@ -169,10 +167,7 @@ module.exports.run = async (bot, message, args) => {
 
                                             } else if (collected.first().emoji.name == disagree) {
                                                 console.log(`↳ Cadastro de '${message.author.username}' cancelado.`)
-                                                message.channel.send(`Tudo bem, você pode refazer o cadastro digitando novamente \` ${prefix}cadastro \`!`)
-                                                    .then(msg => {
-                                                        msg.delete(5000)
-                                                    })
+                                                message.channel.send(`Tudo bem, ${message.member.user}, você pode refazer o cadastro digitando novamente \` ${prefix}cadastro \`!`)
                                                     .catch( (e) => console.error(e) );
                                                 await envio.delete().catch(() => console.log('⚠️ Erro ao excluir a mensagem'))
                                                 return
@@ -202,9 +197,9 @@ module.exports.run = async (bot, message, args) => {
                 })
 
             
-        }).catch( (m) => {
+        }).catch( (e) => {
             envio.delete()
-            message.channel.send(`${$message.member.user}, Seu cadastro passou do tempo limite, para criar seu perfil novamente, digite \` ${config.prefix}perfil \``)
+            message.channel.send(`${message.member.user}, Seu cadastro passou do tempo limite, para criar seu perfil novamente, digite \` ${config.prefix}cadastro \``)
             console.error(e);
         })
         
