@@ -192,7 +192,7 @@ module.exports.run = async (bot, message, args) => {
 
                                 }).catch((e) => {
                                     envio.delete()
-                                    message.reply('infelizmente ocorreu um erro ao finalizar seu cadastro, tente novamente mais tarde.');
+                                    message.reply(`infelizmente ocorreu um erro ao finalizar seu cadastro, ${message.member.user}, tente novamente mais tarde.`);
                                     console.error(e);
                                 }); // AwaitReactions
                             
@@ -204,7 +204,7 @@ module.exports.run = async (bot, message, args) => {
             
         }).catch( (m) => {
             envio.delete()
-            message.channel.send(`Seu cadastro passou do tempo limite, para criar seu perfil novamente, digite \` ${config.prefix}perfil \``)
+            message.channel.send(`${$message.member.user}, Seu cadastro passou do tempo limite, para criar seu perfil novamente, digite \` ${config.prefix}perfil \``)
             console.error(e);
         })
         
