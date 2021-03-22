@@ -175,7 +175,7 @@ bot.on("guildMemberAdd", membro => {
         var memberCount = guild.members.cache.filter(member => !member.user.bot).size
 
         membro.roles.add("721103513874202645") // Cargo novato
-        bot.channels.cache.get('721103116686327820').send(`Olá, ${membro.user}! \`\`\`md\n# Seja bem-vindo(a)!\n/* Faça seu cadastro aqui! */\nDigite <${config.prefix}cadastro> para começar ( sem as <> )\`\`\``)
+        bot.channels.cache.get('721103116686327820').send(`Olá, ${membro.user}! Seja bem-vindo(a)\nPara ter **acesso completo** ao servidor, digite:\`\`\`fix\n.cadastro\`\`\``)
         bot.channels.cache.get('722274694535053317').send(`\\✅ [NEW] ⇥ Membro \`${membro.user.username}\` entrou no servidor\n> Total: \`${memberCount}\` membros`)
     }
 });
