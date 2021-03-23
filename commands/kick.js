@@ -30,8 +30,8 @@ module.exports.run = async (bot, message, args) => {
 
     member.kick({reason: razao})
             .then(() => {
-                console.log("Usuário expulso")
-                
+                console.log(`↳ Usuário '${user.username}' expulso.`)
+
                 const embed = new Discord.MessageEmbed()
                     .setColor('#E3863F')
                     .setTitle(`Expulsão de ${user.username}`)
@@ -44,6 +44,8 @@ module.exports.run = async (bot, message, args) => {
                 
                 message.channel.send(embed);
         }).catch(console.error())
+        
+    message.delete().catch(console.log('⚠️ Erro ao deletar a mensagem'))
 }
 
 
