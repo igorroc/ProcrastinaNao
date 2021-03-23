@@ -2,7 +2,7 @@ const Discord = require("discord.js")
 
 
 module.exports.run = async (bot, message, args) => {
-    console.log(`\n■▶ [LOGS] ⇥ Usuário '${message.author.username}' usou o comando Expulsar`)
+    console.log(`\n■▶ [LOGS] ⇥ Usuário '${message.author.username}' usou o comando Kick`)
 
     if(!message.member.hasPermission("KICK_MEMBERS")){
         message.reply('Você não é digno de realizar esse comando!')
@@ -39,9 +39,9 @@ module.exports.run = async (bot, message, args) => {
 
 
 module.exports.config = {
-    name: "expulsar",
+    name: "kick",
     description: "Expulsa o usuário marcado!",
-    usage: ".expulsar [@pessoa] [razão]",
+    usage: ".kick [@pessoa] [razão]",
     accessableby: "Moderadores",
-    aliases: ["kick"]
+    aliases: ["expulsar"]
 }
