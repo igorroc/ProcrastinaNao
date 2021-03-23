@@ -35,7 +35,10 @@ module.exports.run = async (bot, message, args) => {
 
         msg.edit(`${check} O comando \`${command}\` foi recarregado com sucesso!`);
         console.log(`↳ Comando '${command}' carregado com sucesso.`)
-    }).catch(console.error())
+    }).catch((e) => {
+        msg.edit(`❌ Ocorreu um erro ao recarregar o comando \`${command}\``)
+        console.error(e)
+    })
     
 }
 
