@@ -34,22 +34,25 @@ module.exports.run = async (bot, message, args) => {
     }
 
 
-    const embed = new Discord.MessageEmbed()
-        .setColor('#FF0013')
-        .setTitle(`Banimento de ${user.username}`)
-        .setDescription(`Usuário: ${user}\nBanido por: ${message.author}`)
-        .addFields(
-            { name: 'Tempo', value: `${tempo} dia(s)`, inline: false},
-            { name: 'Motivo:', value: razao, inline: false },
-        )
-        .setFooter('Hora do banimento:')
-        .setTimestamp()
     
-    message.channel.send(embed);
 
     member.ban({days: tempo, reason: razao})
-            .then(console.log("banido"))
-            .catch(console.error("desbanido"));
+            .then(() => {
+                console.log(`↳ Usuário '${user.username}' banido.`)
+                
+                const embed = new Discord.MessageEmbed()
+                    .setColor('#FF0013')
+                    .setTitle(`Banimento de ${user.username}`)
+                    .setDescription(`Usuário: ${user}\nBanido por: ${message.author}`)
+                    .addFields(
+                        { name: 'Tempo', value: `${tempo} dia(s)`, inline: false},
+                        { name: 'Motivo:', value: razao, inline: false },
+                    )
+                    .setFooter('Hora do banimento:')
+                    .setTimestamp()
+                
+                message.channel.send(embed);
+            }).catch(console.error())
 
     message.delete().catch(console.log('⚠️ Erro ao deletar a mensagem'))
 }
