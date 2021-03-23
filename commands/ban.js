@@ -16,7 +16,12 @@ module.exports.run = async (bot, message, args) => {
         return
     }
 
-    let razao = args.slice(1).join(" ")
+    let tempo = parseInt(args.slice(1,2))
+    let razao = args.slice(2).join(" ")
+    if(!tempo || !Number.isInteger(tempo)){
+        return message.channel.send("Indique um período valido para o banimento do usuário.")
+    }
+
     if(!razao){
         return message.channel.send("Indique uma razão para o banimento do usuário.")
     }
@@ -27,6 +32,7 @@ module.exports.run = async (bot, message, args) => {
         .setTitle(`Banimento de ${user.username}`)
         .setDescription(`Usuário: ${user}\nBanido por: ${message.author}`)
         .addFields(
+            { name: 'Tempo', value: `${tempo} dia(s)`, inline: false},
             { name: 'Motivo:', value: razao, inline: false },
         )
         .setFooter('Hora do banimento:')
@@ -34,14 +40,18 @@ module.exports.run = async (bot, message, args) => {
     
     message.channel.send(embed);
 
-    // user.kick({reason: razao})
+    // user.ban({days: tempo, reason: razao})
+    //         .then(console.log("banido"))
+    //         .catch(console.error("desbanido"));
+
+    message.delete().catch(console.log('⚠️ Erro ao deletar a mensagem'))
 }
 
 
 module.exports.config = {
-    name: "banir",
+    name: "ban",
     description: "Bane o usuário marcado!",
-    usage: ".banir [@pessoa] [razão]",
+    usage: ".ban [@pessoa] [razão]",
     accessableby: "Moderadores",
-    aliases: ["ban"]
+    aliases: ["banir"]
 }
