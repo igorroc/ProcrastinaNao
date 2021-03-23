@@ -7,12 +7,19 @@ module.exports.run = async (bot, message, args) => {
     if(!message.member.hasPermission("BAN_MEMBERS")){
         message.reply('Você não é digno de realizar esse comando!')
         console.log(`↳ Acesso negado para '${message.author.username}'`)
+        return
     }
     
     let user = message.mentions.users.first()
+    let member = message.mentions.members.first()
     if(!user){
         message.channel.send(`Ocorreu um erro ao encontrar o usuário mencionado.`)
         console.log(`↳ Usuário "${args[0]}" não encontrado, operação cancelada.`)
+        return
+    }
+    if(!member.bannable){
+        message.channel.send(`Esse usuário não pode ser banido.`)
+        console.log(`↳ Usuário "${args[0]}" não pode ser banido, operação cancelada.`)
         return
     }
 
@@ -40,9 +47,9 @@ module.exports.run = async (bot, message, args) => {
     
     message.channel.send(embed);
 
-    // user.ban({days: tempo, reason: razao})
-    //         .then(console.log("banido"))
-    //         .catch(console.error("desbanido"));
+    member.ban({days: tempo, reason: razao})
+            .then(console.log("banido"))
+            .catch(console.error("desbanido"));
 
     message.delete().catch(console.log('⚠️ Erro ao deletar a mensagem'))
 }
