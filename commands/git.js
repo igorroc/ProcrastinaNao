@@ -15,6 +15,10 @@ module.exports.run = async (bot, message, args) => {
     const emojiLoading = message.guild.emojis.cache.get("722456385098481735")
     
     let user = args.toString()
+
+    if(!args[0]){
+        return message.channel.send('Indique um usuário')
+    }
     
     fetch(`https://api.github.com/users/${user}`)
         .then(res => res.json())
