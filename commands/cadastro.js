@@ -145,14 +145,14 @@ module.exports.run = async (bot, message, args) => {
                                                     message.member.roles.add("821147812456300574").catch(() => console.log(`⚠️ Não foi possível adicionar o cargo 'Estudante' para '${message.author.username}'`))
                                                 
                                                 if (cEmbed.fields.find(({ name }) => name === '**Curso:**')) { // Cargo do Curso
-                                                    if(curso.toLowerCase() != "nenhum"){
+                                                    if(curso.toLowerCase() != "n"){
                                                         let nomeCurso = cargos.find(c => c.type == 'curso' && c.name === curso.toLowerCase() || c.aliases.find(v => v === curso.toLowerCase())).name
                                                         let roleCurso = message.guild.roles.cache.find((role) => role.name == nomeCurso).id
                                                         message.member.roles.add(roleCurso).catch(() => console.log(`⚠️ Não foi possível adicionar o cargo '${nomeCurso}' para '${message.author.username}'`))
                                                     }
                                                 }
                                                 if (cEmbed.fields.find(({ name }) => name === '**Faculdade:**')) { // Cargo da Faculdade 
-                                                    if(faculdade.toLowerCase() != "nenhuma"){
+                                                    if(faculdade.toLowerCase() != "n"){
                                                         let nomeFaculdade = cargos.find(c => c.type == 'faculdade' && c.name === faculdade.toLowerCase() || c.aliases.find(v => v === faculdade.toLowerCase())).name.toUpperCase()
                                                         let roleFaculdade = message.guild.roles.cache.find((role) => role.name == nomeFaculdade).id
                                                         message.member.roles.add(roleFaculdade).catch(() => console.log(`⚠️ Não foi possível adicionar o cargo '${nomeFaculdade}' para '${message.author.username}'`))
