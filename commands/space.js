@@ -7,6 +7,7 @@ module.exports.run = async (bot, message, args) => {
     if(!message.member.hasPermission("ADMINISTRATOR")){
         message.reply('Você não é digno de realizar esse comando!')
         console.log(`↳ Acesso negado para '${message.author.username}'`)
+        return
     }
 
     let novoNome = message.channel.name.toString()
