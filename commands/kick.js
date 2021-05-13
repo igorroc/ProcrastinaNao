@@ -47,7 +47,7 @@ module.exports.run = async (bot, message, args) => {
                 modlog.send(embed);
         }).catch(console.error())
         
-    message.delete().catch(console.log('⚠️ Erro ao deletar a mensagem'))
+    message.delete().catch(() => console.log('⚠️ Erro ao deletar a mensagem'))
 }
 
 
