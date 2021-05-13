@@ -38,7 +38,10 @@ module.exports.run = async (bot, message, args) => {
         if(!razao){
             return message.channel.send("Indique uma razão para a prisão do usuário.")
         }
-    
+
+        let prisao = bot.guilds.cache.get('696430420992066112').channels.cache.get('842189783454449704')
+                     .send(`${member}, você agora está preso(a)!`)
+
         embed.setColor("#8915bf")
             .setTitle(`${user.username} está preso(a)`)
             .setDescription(`Usuário: ${user}\nPreso por: ${message.author}`)
@@ -47,12 +50,14 @@ module.exports.run = async (bot, message, args) => {
             )
             .setFooter('Hora da prisão:')
             .setTimestamp()
+
         member.roles.add('842189200337666058').catch(() => console.log(`⚠️ Não foi possível adicionar o cargo para '${user.username}'`))    
+        member.voice.kick()
     }
     
     modlog.send(embed)
 
-    message.delete().catch(console.log('⚠️ Erro ao deletar a mensagem'))
+    message.delete().catch(() => console.log('⚠️ Erro ao deletar a mensagem'))
 }
 
 
