@@ -28,6 +28,8 @@ module.exports.run = async (bot, message, args) => {
         return message.channel.send("Indique uma razão para a remoção do usuário.")
     }
 
+    let modlog = bot.guilds.cache.get('696430420992066112').channels.cache.get('823951071235407972')
+
     member.kick({reason: razao})
             .then(() => {
                 console.log(`↳ Usuário '${user.username}' expulso.`)
@@ -42,7 +44,7 @@ module.exports.run = async (bot, message, args) => {
                     .setFooter('Hora da expulsão:')
                     .setTimestamp()
                 
-                message.channel.send(embed);
+                modlog.send(embed);
         }).catch(console.error())
         
     message.delete().catch(console.log('⚠️ Erro ao deletar a mensagem'))
