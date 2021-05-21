@@ -1,10 +1,9 @@
 const Discord = require("discord.js")
-
 const bot = new Discord.Client()
-
-const fs = require("fs")
 bot.commands = new Discord.Collection()
 bot.aliases = new Discord.Collection()
+
+const fs = require("fs")
 
 const MENSAGEM_REINICIO = true
 
@@ -31,7 +30,7 @@ fs.readdir("./commands/", (err, files) => {
 	})
 })
 
-//=-=-=-=-=-=-=-=-=-=-=-=-=
+// * =-=-=-=-=-=-=-=-=-=-=-=-=
 
 bot.once("ready", () => {
 	let config = require("./config.json")
