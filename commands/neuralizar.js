@@ -85,13 +85,17 @@ module.exports.run = async (bot, message, args) => {
 			],
 		})
 		.then((channel) => {
-			channel
-				.send(
+			const embed = new Discord.MessageEmbed()
+				.setColor("#FCE100")
+				.setTitle("\\⚠️ Aviso")
+				.setDescription(
 					"As mensagens desse canal serão excluídas periódicamente :shushing_face:"
 				)
-				.then((message) => {
-					message.pin()
-				})
+				.setTimestamp()
+
+			channel.send(embed).then((message) => {
+				message.pin()
+			})
 		})
 		.catch(console.error)
 }
