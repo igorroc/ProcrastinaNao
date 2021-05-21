@@ -255,15 +255,37 @@ bot.on("guildMemberAdd", membro => {
     console.log(`\n✅ [LOGS] ⇥ Novo membro no servidor. Dê as boas vindas para '${membro.user.username}'`)
     if(membro.user.bot){
         membro.roles.add("696464386071593081") // Cargo de Bots
-    }else{
-        var guild = bot.guilds.cache.get("696430420992066112")
-        var memberCount = guild.members.cache.filter(member => !member.user.bot).size
+	} else {
+		membro.roles.add("721103513874202645") // Cargo novato
+		bot.channels.cache
+			.get("721103116686327820")
+			.send(
+				`Olá, ${membro.user}! Seja bem-vindo(a)\nPara ter **acesso completo** ao servidor, digite:\`\`\`fix\n.cadastro\`\`\``
+			)
+	}
+	var guild = bot.guilds.cache.get("696430420992066112")
+	var memberCount = guild.members.cache.filter(
+		(member) => !member.user.bot
+	).size
+	var botCount = guild.members.cache.filter((member) => member.user.bot).size
 
-        membro.roles.add("721103513874202645") // Cargo novato
-        bot.channels.cache.get('721103116686327820').send(`Olá, ${membro.user}! Seja bem-vindo(a)\nPara ter **acesso completo** ao servidor, digite:\`\`\`fix\n.cadastro\`\`\``)
-        bot.channels.cache.get('722274694535053317').send(`\\✅ [NEW] ⇥ Membro \`${membro.user.username}\` entrou no servidor\n> Total: \`${memberCount}\` membros`)
-    }
-});
+	const embed = new Discord.MessageEmbed()
+		.setColor("#00FF00")
+		.addFields({
+			name: "\\✅ → Novo membro",
+			value:
+				membro ||
+				membro.username ||
+				membro.user ||
+				membro.user.username ||
+				"indefinido",
+			inline: false,
+		})
+		.setTimestamp()
+		.setFooter(`Total de ${memberCount} membros\nTotal de ${botCount} bots`)
+
+	bot.channels.cache.get("722274694535053317").send(embed)
+})
 
 bot.on("guildMemberRemove", membro => {
     console.log(`\n❌ [LOGS] ⇥ O membro '${membro.user.username}' saiu do servidor.`)
