@@ -89,86 +89,164 @@ bot.on("raw", async dados =>{
         html = servidor.roles.cache.get('721346290369167460'),
         c = servidor.roles.cache.get('721115106871738408')
 
-    if(dados.t === "MESSAGE_REACTION_ADD"){
-        if(dados.d.message_id === "721347287426793494"){ // Mensagem de cargos
-            if(dados.d.emoji.id === "696478679391272961"){ // Cargo Python
-                if(membro.roles.cache.some(role => role === python)) return console.log(`↳ Usuário '${membro.user.username}' já possui o cargo 'Python'`)
-                membro.roles.add(python)
-                console.log(`■▶ [LOGS] ⇥  Cargo 'Python' adicionado para o usuário '${membro.user.username}'`)
-                bot.channels.cache.get('722274694535053317').send(`\\▶ [LOGS] ⇥ Cargo \`Python\` adicionado para o usuário \`${membro.user.username}\``)
+	const embed = new Discord.MessageEmbed()
+	let localCorreto = false
 
-            }else if(dados.d.emoji.id === "721349573901287445"){ // Cargo JavaScript
-                if(membro.roles.cache.some(role => role === javascript)) return console.log(`↳ Usuário '${membro.user.username}' já possui o cargo 'JavaScript'`)
-                membro.roles.add(javascript)
-                console.log(`↳ Cargo 'JavaScript' adicionado para o usuário '${membro.user.username}'`)
-                bot.channels.cache.get('722274694535053317').send(`\\▶ [LOGS] ⇥ Cargo \`JavaScript\` adicionado para o usuário \`${membro.user.username}\``)
+	if (dados.t === "MESSAGE_REACTION_ADD") {
+		if (dados.d.message_id === "721347287426793494") {
+			// Mensagem de cargos
+			embed.setTitle("\\💼 Cargo adicionado").setColor("#00FF00")
+			localCorreto = true
 
-            }else if(dados.d.emoji.id === "722249250586492978"){ // Cargo Java
-                if(membro.roles.cache.some(role => role === java)) return console.log(`↳ Usuário '${membro.user.username}' já possui o cargo 'Java'`)
-                membro.roles.add(java)
-                console.log(`↳ Cargo 'Java' adicionado para o usuário '${membro.user.username}'`)
-                bot.channels.cache.get('722274694535053317').send(`\\▶ [LOGS] ⇥ Cargo \`Java\` adicionado para o usuário \`${membro.user.username}\``)
+			if (dados.d.emoji.id === "696478679391272961") {
+				// Cargo Python
+				if (membro.roles.cache.some((role) => role === python))
+					return console.log(
+						`↳ Usuário '${membro.user.username}' já possui o cargo 'Python'`
+					)
+				membro.roles.add(python)
+				console.log(
+					`↳ Cargo 'Python' adicionado para o usuário '${membro.user.username}'`
+				)
+			} else if (dados.d.emoji.id === "721349573901287445") {
+				// Cargo JavaScript
+				if (membro.roles.cache.some((role) => role === javascript))
+					return console.log(
+						`↳ Usuário '${membro.user.username}' já possui o cargo 'JavaScript'`
+					)
+				membro.roles.add(javascript)
+				console.log(
+					`↳ Cargo 'JavaScript' adicionado para o usuário '${membro.user.username}'`
+				)
+			} else if (dados.d.emoji.id === "722249250586492978") {
+				// Cargo Java
+				if (membro.roles.cache.some((role) => role === java))
+					return console.log(
+						`↳ Usuário '${membro.user.username}' já possui o cargo 'Java'`
+					)
+				membro.roles.add(java)
+				console.log(
+					`↳ Cargo 'Java' adicionado para o usuário '${membro.user.username}'`
+				)
+			} else if (dados.d.emoji.id === "721345484035325984") {
+				// Cargo CSS
+				if (membro.roles.cache.some((role) => role === css))
+					return console.log(
+						`↳ Usuário '${membro.user.username}' já possui o cargo 'CSS'`
+					)
+				membro.roles.add(css)
+				console.log(
+					`↳ Cargo 'CSS' adicionado para o usuário '${membro.user.username}'`
+				)
+			} else if (dados.d.emoji.id === "721345485314588744") {
+				// Cargo HTML
+				if (membro.roles.cache.some((role) => role === html))
+					return console.log(
+						`↳ Usuário '${membro.user.username}' já possui o cargo 'HTML'`
+					)
+				membro.roles.add(html)
+				console.log(
+					`↳ Cargo 'HTML' adicionado para o usuário '${membro.user.username}'`
+				)
+			} else if (dados.d.emoji.id === "721347830765322313") {
+				// Cargo C
+				if (membro.roles.cache.some((role) => role === c))
+					return console.log(
+						`↳ Usuário '${membro.user.username}' já possui o cargo 'C'`
+					)
+				membro.roles.add(c)
+				console.log(
+					`↳ Cargo 'C' adicionado para o usuário '${membro.user.username}'`
+				)
+			}
+		}
+	}
+	if (dados.t === "MESSAGE_REACTION_REMOVE") {
+		if (dados.d.message_id === "721347287426793494") {
+			// Mensagem de cargos
+			embed.setTitle("\\💼 Cargo removido").setColor("#FF0000")
+			localCorreto = true
 
-            }else if(dados.d.emoji.id === "721345484035325984"){ // Cargo CSS
-                if(membro.roles.cache.some(role => role === css)) return console.log(`↳ Usuário '${membro.user.username}' já possui o cargo 'CSS'`)
-                membro.roles.add(css)
-                console.log(`↳ Cargo 'CSS' adicionado para o usuário '${membro.user.username}'`)
-                bot.channels.cache.get('722274694535053317').send(`\\▶ [LOGS] ⇥ Cargo \`CSS\` adicionado para o usuário \`${membro.user.username}\``)
+			if (dados.d.emoji.id === "696478679391272961") {
+				// Cargo Python
+				if (!membro.roles.cache.some((role) => role === python))
+					return console.log(
+						`↳ Usuário '${membro.user.username}' ainda não tinha o cargo 'Python'`
+					)
+				membro.roles.remove(python)
+				console.log(
+					`↳ Usuário '${membro.user.username}' removeu o cargo 'Python'`
+				)
+			} else if (dados.d.emoji.id === "721349573901287445") {
+				// Cargo JavaScript
+				if (!membro.roles.cache.some((role) => role === javascript))
+					return console.log(
+						`↳ Usuário '${membro.user.username}' ainda não tinha o cargo 'JavaScript'`
+					)
+				membro.roles.remove(javascript)
+				console.log(
+					`↳ Usuário '${membro.user.username}' removeu o cargo 'JavaScript'`
+				)
+			} else if (dados.d.emoji.id === "722249250586492978") {
+				// Cargo Java
+				if (!membro.roles.cache.some((role) => role === java))
+					return console.log(
+						`↳ Usuário '${membro.user.username}' ainda não tinha o cargo 'Java'`
+					)
+				membro.roles.remove(java)
+				console.log(
+					`↳ Usuário '${membro.user.username}' removeu o cargo 'Java'`
+				)
+			} else if (dados.d.emoji.id === "721345484035325984") {
+				// Cargo CSS
+				if (!membro.roles.cache.some((role) => role === css))
+					return console.log(
+						`↳ Usuário '${membro.user.username}' ainda não tinha o cargo 'CSS'`
+					)
+				membro.roles.remove(css)
+				console.log(
+					`↳ Usuário '${membro.user.username}' removeu o cargo 'CSS'`
+				)
+			} else if (dados.d.emoji.id === "721345485314588744") {
+				// Cargo HMTL
+				if (!membro.roles.cache.some((role) => role === html))
+					return console.log(
+						`↳ Usuário '${membro.user.username}' ainda não tinha o cargo 'HTML'`
+					)
+				membro.roles.remove(html)
+				console.log(
+					`↳ Usuário '${membro.user.username}' removeu o cargo 'HTML'`
+				)
+			} else if (dados.d.emoji.id === "721347830765322313") {
+				// Cargo C
+				if (!membro.roles.cache.some((role) => role === c))
+					return console.log(
+						`↳ Usuário '${membro.user.username}' ainda não tinha o cargo 'C'`
+					)
+				membro.roles.remove(c)
+				console.log(
+					`↳ Usuário '${membro.user.username}' removeu o cargo 'C'`
+				)
+			}
+		}
+	}
 
-            }else if(dados.d.emoji.id === "721345485314588744"){ // Cargo HTML
-                if(membro.roles.cache.some(role => role === html)) return console.log(`↳ Usuário '${membro.user.username}' já possui o cargo 'HTML'`)
-                membro.roles.add(html)
-                console.log(`↳ Cargo 'HTML' adicionado para o usuário '${membro.user.username}'`)
-                bot.channels.cache.get('722274694535053317').send(`\\▶ [LOGS] ⇥ Cargo \`HTML\` adicionado para o usuário \`${membro.user.username}\``)
+	if (localCorreto) {
+		let emoji = servidor.emojis.cache
+			.filter((emoji) => emoji.id == dados.d.emoji.id)
+			.first()
 
-            }else if(dados.d.emoji.id === "721347830765322313"){ // Cargo C
-                if(membro.roles.cache.some(role => role === c)) return console.log(`↳ Usuário '${membro.user.username}' já possui o cargo 'C'`)
-                membro.roles.add(c)
-                console.log(`↳ Cargo 'C' adicionado para o usuário '${membro.user.username}'`)
-                bot.channels.cache.get('722274694535053317').send(`\\▶ [LOGS] ⇥ Cargo \`C\` adicionado para o usuário \`${membro.user.username}\``)
-            }
-        }
-    }
-    if(dados.t === "MESSAGE_REACTION_REMOVE"){
-        if(dados.d.message_id === "721347287426793494"){ // Mensagem de cargos
-            if(dados.d.emoji.id === "696478679391272961"){ // Cargo Python
-                if(!membro.roles.cache.some(role => role === python)) return console.log(`↳ Usuário '${membro.user.username}' ainda não tinha o cargo 'Python'`)
-                membro.roles.remove(python)
-                console.log(`↳ Usuário '${membro.user.username}' removeu o cargo 'Python'`)
-                bot.channels.cache.get('722274694535053317').send(`\\▶ [LOGS] ⇥ Usuário \`${membro.user.username}\` removeu o cargo \`Python\``)
-
-            }else if(dados.d.emoji.id === "721349573901287445"){ // Cargo JavaScript
-                if(!membro.roles.cache.some(role => role === javascript)) return console.log(`↳ Usuário '${membro.user.username}' ainda não tinha o cargo 'JavaScript'`)
-                membro.roles.remove(javascript)
-                console.log(`↳ Usuário '${membro.user.username}' removeu o cargo 'JavaScript'`)
-                bot.channels.cache.get('722274694535053317').send(`\\▶ [LOGS] ⇥ Usuário \`${membro.user.username}\` removeu o cargo \`JavaScript\``)
-
-            }else if(dados.d.emoji.id === "722249250586492978"){ // Cargo Java
-                if(!membro.roles.cache.some(role => role === java)) return console.log(`↳ Usuário '${membro.user.username}' ainda não tinha o cargo 'Java'`)
-                membro.roles.remove(java)
-                console.log(`↳ Usuário '${membro.user.username}' removeu o cargo 'Java'`)
-                bot.channels.cache.get('722274694535053317').send(`\\▶ [LOGS] ⇥ Usuário \`${membro.user.username}\` removeu o cargo \`Java\``)
-
-            }else if(dados.d.emoji.id === "721345484035325984"){ // Cargo CSS
-                if(!membro.roles.cache.some(role => role === css)) return console.log(`↳ Usuário '${membro.user.username}' ainda não tinha o cargo 'CSS'`)
-                membro.roles.remove(css)
-                console.log(`↳ Usuário '${membro.user.username}' removeu o cargo 'CSS'`)
-                bot.channels.cache.get('722274694535053317').send(`\\▶ [LOGS] ⇥ Usuário \`${membro.user.username}\` removeu o cargo \`CSS\``)
-
-            }else if(dados.d.emoji.id === "721345485314588744"){ // Cargo HMTL
-                if(!membro.roles.cache.some(role => role === html)) return console.log(`↳ Usuário '${membro.user.username}' ainda não tinha o cargo 'HTML'`)
-                membro.roles.remove(html)
-                console.log(`↳ Usuário '${membro.user.username}' removeu o cargo 'HTML'`)
-                bot.channels.cache.get('722274694535053317').send(`\\▶ [LOGS] ⇥ Usuário \`${membro.user.username}\` removeu o cargo \`HTML\``)
-
-            }else if(dados.d.emoji.id === "721347830765322313"){ // Cargo C
-                if(!membro.roles.cache.some(role => role === c)) return console.log(`↳ Usuário '${membro.user.username}' ainda não tinha o cargo 'C'`)
-                membro.roles.remove(c)
-                console.log(`↳ Usuário '${membro.user.username}' removeu o cargo 'C'`)
-                bot.channels.cache.get('722274694535053317').send(`\\▶ [LOGS] ⇥ Usuário \`${membro.user.username}\` removeu o cargo \`C\``)
-            }
-        }
-    }
+		embed
+			.addFields({
+				name: "\u200B",
+				value: `${
+					emoji || dados.d.emoji || "`" + dados.d.emoji.id + "`"
+				} → ${membro}`,
+				inline: false,
+			})
+			.setTimestamp()
+		bot.channels.cache.get("722274694535053317").send(embed)
+	}
 })
 
 bot.on("guildMemberAdd", membro => {
