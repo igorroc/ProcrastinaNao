@@ -1,42 +1,45 @@
-const Discord = require("discord.js");
+const Discord = require("discord.js")
 
-const bot = new Discord.Client();
+const bot = new Discord.Client()
 
-const fs = require("fs");
-bot.commands = new Discord.Collection();
-bot.aliases = new Discord.Collection();
+const fs = require("fs")
+bot.commands = new Discord.Collection()
+bot.aliases = new Discord.Collection()
 
 const MENSAGEM_REINICIO = true
 
 let loading = "<a:loading:722456385098481735>"
 
 fs.readdir("./commands/", (err, files) => {
-    if(err) console.log(err)
+	if (err) console.log(err)
 
-    let jsfile = files.filter(f => f.split(".").pop() === "js") // Pega todos os nomes dos comandos da pasta "./commands/" e remove o '.js'
-    if(jsfile.length <= 0) {
-         return console.log("[LOGS] Não foi possível encontrar comandos!")
-    }
+	let jsfile = files.filter((f) => f.split(".").pop() === "js") // Pega todos os nomes dos comandos da pasta "./commands/" e remove o '.js'
+	if (jsfile.length <= 0) {
+		return console.log("[LOGS] Não foi possível encontrar comandos!")
+	}
 
-    jsfile.forEach((f, i) => {
-        let pull = require(`./commands/${f}`); // Importa cada arquivo
-        bot.commands.set(pull.config.name, pull); // Coloca o nome dele na Collection
-        console.log(`\n■▶ [STARTING] ⇥ Comando '${pull.config.name}' inicializado com sucesso`)
-        pull.config.aliases.forEach(alias => {
-            bot.aliases.set(alias, pull.config.name) // Coloca a variação dele na Collection
-            console.log(`↳ Variação '${alias}' adicionada`)
-        });
-    });
-});
+	jsfile.forEach((f, i) => {
+		let pull = require(`./commands/${f}`) // Importa cada arquivo
+		bot.commands.set(pull.config.name, pull) // Coloca o nome dele na Collection
+		console.log(
+			`\n■▶ [STARTING] ⇥ Comando '${pull.config.name}' inicializado com sucesso`
+		)
+		pull.config.aliases.forEach((alias) => {
+			bot.aliases.set(alias, pull.config.name) // Coloca a variação dele na Collection
+			console.log(`↳ Variação '${alias}' adicionada`)
+		})
+	})
+})
 
 //=-=-=-=-=-=-=-=-=-=-=-=-=
 
-
 bot.once("ready", () => {
-    let config = require("./config.json")
+	let config = require("./config.json")
 
-    var guild = bot.guilds.cache.get("696430420992066112")
-    var memberCount = guild.members.cache.filter(member => !member.user.bot).size
+	var guild = bot.guilds.cache.get("696430420992066112")
+	var memberCount = guild.members.cache.filter(
+		(member) => !member.user.bot
+	).size
 
 	let mensagem = `■ Bot iniciado, total de ${memberCount} participantes! ■`
 	let barra = ""
@@ -72,22 +75,26 @@ bot.once("ready", () => {
 			type: "PLAYING",
 		})
 	}
-});
+})
 
-bot.on("raw", async dados =>{
-    if(dados.t !== "MESSAGE_REACTION_ADD" && dados.t !== "MESSAGE_REACTION_REMOVE") return
+bot.on("raw", async (dados) => {
+	if (
+		dados.t !== "MESSAGE_REACTION_ADD" &&
+		dados.t !== "MESSAGE_REACTION_REMOVE"
+	)
+		return
 
-    let servidor = bot.guilds.cache.get("696430420992066112") // Servidor ProcrastinaNão
-    let membro = servidor.members.cache.get(dados.d.user_id)
+	let servidor = bot.guilds.cache.get("696430420992066112") // Servidor ProcrastinaNão
+	let membro = servidor.members.cache.get(dados.d.user_id)
 
-    if (membro.user.bot) return
+	if (membro.user.bot) return
 
-    let python = servidor.roles.cache.get('721102448483369140'),
-        javascript = servidor.roles.cache.get('721179010767388682'),
-        java = servidor.roles.cache.get('721176368964173835'),
-        css = servidor.roles.cache.get('721177136655892632'),
-        html = servidor.roles.cache.get('721346290369167460'),
-        c = servidor.roles.cache.get('721115106871738408')
+	let python = servidor.roles.cache.get("721102448483369140"),
+		javascript = servidor.roles.cache.get("721179010767388682"),
+		java = servidor.roles.cache.get("721176368964173835"),
+		css = servidor.roles.cache.get("721177136655892632"),
+		html = servidor.roles.cache.get("721346290369167460"),
+		c = servidor.roles.cache.get("721115106871738408")
 
 	const embed = new Discord.MessageEmbed()
 	let localCorreto = false
@@ -249,12 +256,12 @@ bot.on("raw", async dados =>{
 	}
 })
 
-bot.on("guildMemberAdd", membro => {
-    let config = require("./config.json")
-
-    console.log(`\n✅ [LOGS] ⇥ Novo membro no servidor. Dê as boas vindas para '${membro.user.username}'`)
-    if(membro.user.bot){
-        membro.roles.add("696464386071593081") // Cargo de Bots
+bot.on("guildMemberAdd", (membro) => {
+	console.log(
+		`\n✅ [LOGS] ⇥ Novo membro no servidor. Dê as boas vindas para '${membro.user.username}'`
+	)
+	if (membro.user.bot) {
+		membro.roles.add("696464386071593081") // Cargo de Bots
 	} else {
 		membro.roles.add("721103513874202645") // Cargo novato
 		bot.channels.cache
@@ -287,9 +294,11 @@ bot.on("guildMemberAdd", membro => {
 	bot.channels.cache.get("722274694535053317").send(embed)
 })
 
-bot.on("guildMemberRemove", membro => {
-    console.log(`\n❌ [LOGS] ⇥ O membro '${membro.user.username}' saiu do servidor.`)
-    var guild = bot.guilds.cache.get("696430420992066112")
+bot.on("guildMemberRemove", (membro) => {
+	console.log(
+		`\n❌ [LOGS] ⇥ O membro '${membro.user.username}' saiu do servidor.`
+	)
+	var guild = bot.guilds.cache.get("696430420992066112")
 	var memberCount = guild.members.cache.filter(
 		(member) => !member.user.bot
 	).size
@@ -313,17 +322,17 @@ bot.on("guildMemberRemove", membro => {
 	bot.channels.cache.get("722274694535053317").send(embed)
 })
 
-bot.on("message", async message => {   
-    if(message.author.bot) return;// Se o autor foi um bot, faz nada
+bot.on("message", async (message) => {
+	if (message.author.bot) return // Se o autor foi um bot, faz nada
 
 	delete require.cache[require.resolve("./config.json")]
 	let config = require("./config.json")
 
-    let prefix = config.prefix; 
-    let messageArray = message.content.split(" ")
-    let comando = messageArray[0].slice(prefix.length)
-    let args = messageArray.slice(1)
-    
+	let prefix = config.prefix
+	let messageArray = message.content.split(" ")
+	let comando = messageArray[0].slice(prefix.length)
+	let args = messageArray.slice(1)
+
 	if (message.channel.type == "dm") {
 		const embed = new Discord.MessageEmbed()
 			.setColor("#0099ff")
@@ -343,21 +352,26 @@ bot.on("message", async message => {
 		return bot.channels.cache.get("722274694535053317").send(embed)
 	}
 
-    if(!message.content.startsWith(prefix)) return; // Valida o prefix do comando
-    if(config.status == "off" && (comando != "help" && comando != "config")){ // Valida se o bot está online ou offline, liberando apenas o uso do comando config e help
-        let off = "<:off:723707654245187665>"
-        message.channel.send(`${off} Eu estou \` offline \`.\nProvavelmente estão **fazendo alterações** em mim!\n> Seja **paciente**!`)
-        console.log(`⚫ Comando enviado por '${message.author.username}' enquanto o bot está OFF`)
-    }
-    let commandfile = bot.commands.get(comando) || bot.commands.get(bot.aliases.get(comando)) // Pega o comando escrito no arquivo de comandos
-    if(commandfile) commandfile.run(bot,message,args) // Verifica se o comando existe
-    else{
-        message.channel.send(`Comando \`${comando}\` não encontrado`)
-        console.log(`\n\\▶ [LOGS] ⇥ Comando '${comando}' não encontrado`)
-    }
-
+	if (!message.content.startsWith(prefix)) return // Valida o prefix do comando
+	if (config.status == "off" && comando != "help" && comando != "config") {
+		// Valida se o bot está online ou offline, liberando apenas o uso do comando config e help
+		let off = "<:off:723707654245187665>"
+		message.channel.send(
+			`${off} Eu estou \` offline \`.\nProvavelmente estão **fazendo alterações** em mim!\n> Seja **paciente**!`
+		)
+		console.log(
+			`⚫ Comando enviado por '${message.author.username}' enquanto o bot está OFF`
+		)
+	}
+	let commandfile =
+		bot.commands.get(comando) || bot.commands.get(bot.aliases.get(comando)) // Pega o comando escrito no arquivo de comandos
+	if (commandfile) commandfile.run(bot, message, args)
+	// Verifica se o comando existe
+	else {
+		message.channel.send(`Comando \`${comando}\` não encontrado`)
+		console.log(`\n\\▶ [LOGS] ⇥ Comando '${comando}' não encontrado`)
+	}
 })
 
-
 let config = require("./config.json")
-bot.login(config.token);
+bot.login(config.token)
