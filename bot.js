@@ -290,17 +290,35 @@ bot.on("guildMemberAdd", membro => {
 bot.on("guildMemberRemove", membro => {
     console.log(`\n❌ [LOGS] ⇥ O membro '${membro.user.username}' saiu do servidor.`)
     var guild = bot.guilds.cache.get("696430420992066112")
-    var memberCount = guild.members.cache.filter(member => !member.user.bot).size
+	var memberCount = guild.members.cache.filter(
+		(member) => !member.user.bot
+	).size
+	var botCount = guild.members.cache.filter((member) => member.user.bot).size
 
-    bot.channels.cache.get('722274694535053317').send(`\\❌ [REMOVE] ⇥ Membro \`${membro.user.username}\` saiu do servidor\n> Total: \`${memberCount}\` membros`)
-});
+	const embed = new Discord.MessageEmbed()
+		.setColor("#FF0000")
+		.addFields({
+			name: "\\❌ → Membro saiu",
+			value:
+				membro ||
+				membro.username ||
+				membro.user ||
+				membro.user.username ||
+				"indefinido",
+			inline: false,
+		})
+		.setTimestamp()
+		.setFooter(`Total de ${memberCount} membros\nTotal de ${botCount} bots`)
+
+	bot.channels.cache.get("722274694535053317").send(embed)
+})
 
 bot.on("message", async message => {   
     if(message.author.bot) return;// Se o autor foi um bot, faz nada
 
-    delete require.cache[require.resolve("./config.json")]
-    let config = require("./config.json")
-    
+	delete require.cache[require.resolve("./config.json")]
+	let config = require("./config.json")
+
     let prefix = config.prefix; 
     let messageArray = message.content.split(" ")
     let comando = messageArray[0].slice(prefix.length)
