@@ -38,11 +38,12 @@ bot.once("ready", () => {
     var guild = bot.guilds.cache.get("696430420992066112")
     var memberCount = guild.members.cache.filter(member => !member.user.bot).size
 
-    console.log("\■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■")
-    console.log(`■ Bot iniciado, total de ${memberCount} participantes! ■`);
-    console.log("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n\n")
-    
-    const log = bot.channels.cache.get('722274694535053317')
+	let mensagem = `■ Bot iniciado, total de ${memberCount} participantes! ■`
+	let barra = ""
+
+	for (let i = 0; i < mensagem.length; i++) {
+		barra = barra + "■"
+	}
 
     if(MENSAGEM_REINICIO){
         let reload = log.send(`${loading} Reiniciando...`).then(async m1 => {
