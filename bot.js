@@ -333,11 +333,17 @@ bot.on("message", async (message) => {
 	let args = messageArray.slice(1)
 
 	if (message.channel.type == "dm") {
+		let anexo = message.attachments.first()?.attachment
+		console.log(anexo)
 		const embed = new Discord.MessageEmbed()
 			.setColor("#0099ff")
 			.setTitle("\\💬 Mensagem recebida")
 			.setDescription(
-				message.content.length < 1024
+				anexo
+					? `[anexo${anexo
+							.toString()
+							.slice(-4)}](${anexo.toString()})`
+					: message.content.length < 1024
 					? message.content
 					: message.content.slice(0, 1015) + " [...]"
 			)
@@ -346,6 +352,13 @@ bot.on("message", async (message) => {
 				value: message.author || message.author.username,
 				inline: false,
 			})
+			.setImage(
+				anexo
+					? anexo.toString().endsWith(".png")
+						? anexo
+						: null
+					: null
+			)
 			.setTimestamp()
 
 		return bot.channels.cache.get("722274694535053317").send(embed)
