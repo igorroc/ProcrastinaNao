@@ -334,7 +334,6 @@ bot.on("message", async (message) => {
 
 	if (message.channel.type == "dm") {
 		let anexo = message.attachments.first()?.attachment
-		console.log(anexo)
 		const embed = new Discord.MessageEmbed()
 			.setColor("#0099ff")
 			.setTitle("\\💬 Mensagem recebida")
