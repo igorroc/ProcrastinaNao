@@ -4,14 +4,20 @@ const Discord = require("discord.js")
 module.exports.run = async (bot, message, args) => {
     console.log(`\n■▶ [LOGS] ⇥ Usuário '${message.author.username}' usou o comando Reload`)
     
+    
     if(!message.member.hasPermission("ADMINISTRATOR")){
-        message.reply('Você não é digno de realizar esse comando!')
+        const naoDigno = new Discord.MessageEmbed()
+            .setColor("#FF0000")
+            .setTitle("Você não é digno de realizar esse comando!")
+
+        message.reply(naoDigno)
+        message.channel.send("https://tenor.com/view/batman-winger-wag-not-allowed-no-nope-gif-5433518")
         console.log(`↳ Acesso negado para '${message.author.username}'`)
         return
     }
 
     if(!args || args.length < 1){
-        message.reply("⚠️ Escreva o comando que deseja dar reload!")
+        message.reply("\\⚠️ Escreva o comando que deseja dar reload!")
         console.log(`↳ Nenhum comando indicado.`)
         return
     }
@@ -19,7 +25,7 @@ module.exports.run = async (bot, message, args) => {
     let command = args[0]
 
     if(!bot.commands.has(command)){
-        message.channel.send(`⚠️ Comando \` ${command} \` não encontrado!`)
+        message.channel.send(`\\⚠️ Comando \` ${command} \` não encontrado!`)
         console.log(`↳ Comando '${command}' não encontrado.`)
         return
     }
