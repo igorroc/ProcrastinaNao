@@ -6,8 +6,11 @@ module.exports.run = async (bot, message, args) => {
     console.log(`\n■▶ [LOGS] ⇥ Usuário '${message.author.username}' usou o comando Uptime`)
     
     let up = ms(bot.uptime, {long: true})
+    up = up.replace("second", "segundo")
     up = up.replace("seconds", "segundos")
+    up = up.replace("minute", "minuto")
     up = up.replace("minutes", "minutos")
+    up = up.replace("hour", "hora")
     up = up.replace("hours", "horas")
     up = up.replace("day", "dia")
     up = up.replace("days", "dias")
