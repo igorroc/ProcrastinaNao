@@ -339,9 +339,9 @@ bot.on("message", async (message) => {
 			.setTitle("\\💬 Mensagem recebida")
 			.setDescription(
 				anexo
-					? `[anexo${anexo
+					? `[anexo](${anexo.toString()})${anexo
 							.toString()
-							.slice(-4)}](${anexo.toString()})`
+							.slice(-4)}`
 					: message.content.length < 1024
 					? message.content
 					: message.content.slice(0, 1015) + " [...]"
