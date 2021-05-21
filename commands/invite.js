@@ -9,7 +9,7 @@ module.exports.run = async (bot, message, args) => {
     
     let embed = new Discord.MessageEmbed()
         .setColor(colours.green_light)
-        .setAuthor('ProcrastinaNão', message.guild.iconURL)
+        .setTitle('📨 Convite para o ProcrastinaNão')
         .setDescription(`Convide seus amigos para o servidor!`)
         .addField('**Link:**', link)
         .setFooter(`Anti-Procrastinador | Membros: ${message.guild.memberCount}`, bot.user.displayAvatarURL())

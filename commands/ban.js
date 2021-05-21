@@ -41,7 +41,7 @@ module.exports.run = async (bot, message, args) => {
                 
                 const embed = new Discord.MessageEmbed()
                     .setColor('#FF0013')
-                    .setTitle(`Banimento de ${user.username}`)
+                    .setTitle(`\\🚫 Banimento de ${user.username}`)
                     .setDescription(`Usuário: ${user}\nBanido por: ${message.author}`)
                     .addFields(
                         { name: 'Tempo', value: `${tempo} dia(s)`, inline: false},

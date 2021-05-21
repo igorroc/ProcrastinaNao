@@ -36,7 +36,7 @@ module.exports.run = async (bot, message, args) => {
 
                 const embed = new Discord.MessageEmbed()
                     .setColor('#E3863F')
-                    .setTitle(`Expulsão de ${user.username}`)
+                    .setTitle(`\\🦶 Expulsão de ${user.username}`)
                     .setDescription(`Usuário: ${user}\nExpulso por: ${message.author}`)
                     .addFields(
                         { name: 'Motivo:', value: razao, inline: false },
