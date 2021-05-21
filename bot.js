@@ -45,27 +45,33 @@ bot.once("ready", () => {
 		barra = barra + "■"
 	}
 
-    if(MENSAGEM_REINICIO){
-        let reload = log.send(`${loading} Reiniciando...`).then(async m1 => {
-            await m1.edit(`\\✅ Reiniciado!`).then(async m1 => {
-                await m1.delete().catch( () => console.log(`↳ ⚠️ Erro ao deletar a mensagem`) )
-            })
-            .catch( () => console.log(`↳ ⚠️ Erro ao editar a mensagem`) )
-        }).catch( () => console.log(`↳ ⚠️ Erro ao editar a mensagem`) )
-        
-        let starting = log.send(`${loading}`).then(async m2 => {
-            await m2.edit(`\\▶ [START] ⇥ \\✅ Bot iniciado!\n> Total de \`${memberCount}\` participantes`)
-                .catch( () => console.log(`↳ ⚠️ Erro ao editar a mensagem`) )
-        }).catch( () => console.log(`↳ ⚠️ Erro ao editar a mensagem`) )
-    }
-    
-    if(config.status == "on"){
-        bot.user.setStatus('online')
-        bot.user.setActivity(`| .help para ajuda | Criado por Igor Rocha |`, {type: 'PLAYING'})
-    }else{
-        bot.user.setStatus('idle')
-        bot.user.setActivity(`| Estão fazendo alterações em mim! |`, {type: 'PLAYING'})
-    }
+	console.log(barra)
+	console.log(mensagem)
+	console.log(barra + "\n\n")
+
+	const log = bot.channels.cache.get("722274694535053317")
+
+	if (MENSAGEM_REINICIO) {
+		const embed = new Discord.MessageEmbed()
+			.setColor("#00FF00")
+			.setTitle("\\🌟 Bot iniciado!")
+			.setDescription(`**Total de \`${memberCount}\` participantes!**`)
+			.setTimestamp()
+
+		log.send(embed)
+	}
+
+	if (config.status == "on") {
+		bot.user.setStatus("online")
+		bot.user.setActivity(`| .help para ajuda | Criado por Igor Rocha |`, {
+			type: "PLAYING",
+		})
+	} else {
+		bot.user.setStatus("idle")
+		bot.user.setActivity(`| Estão fazendo alterações em mim! |`, {
+			type: "PLAYING",
+		})
+	}
 });
 
 bot.on("raw", async dados =>{
