@@ -324,9 +324,24 @@ bot.on("message", async message => {
     let comando = messageArray[0].slice(prefix.length)
     let args = messageArray.slice(1)
     
-    if(message.channel.type == "dm"){
-        return bot.channels.cache.get('722274694535053317').send(`\\💬 [DM] ⇥ Membro \`${message.author.username}\` enviou a mensagem:\n> ${message.content}`)
-    }
+	if (message.channel.type == "dm") {
+		const embed = new Discord.MessageEmbed()
+			.setColor("#0099ff")
+			.setTitle("\\💬 Mensagem recebida")
+			.setDescription(
+				message.content.length < 1024
+					? message.content
+					: message.content.slice(0, 1015) + " [...]"
+			)
+			.addFields({
+				name: `Enviado por:`,
+				value: message.author || message.author.username,
+				inline: false,
+			})
+			.setTimestamp()
+
+		return bot.channels.cache.get("722274694535053317").send(embed)
+	}
 
     if(!message.content.startsWith(prefix)) return; // Valida o prefix do comando
     if(config.status == "off" && (comando != "help" && comando != "config")){ // Valida se o bot está online ou offline, liberando apenas o uso do comando config e help
