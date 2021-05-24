@@ -69,7 +69,8 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.config = {
 	name: "sala",
-	description: "Cria uma sala de estudos para você e seus amigos!",
+	description:
+		"Cria uma sala de estudos para você e seus amigos!\nPara utilizar, coloque o nome do grupo (sem espaços) e marque as pessoas que você quiser adicionar ao grupo!",
 	usage: ".sala [nome_da_sala] [usuarios]",
 	accessableby: "Membros",
 	aliases: ["grupo"],
