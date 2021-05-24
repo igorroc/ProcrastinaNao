@@ -57,12 +57,11 @@ module.exports.run = async (bot, message, args) => {
 
 		bot.channels.cache.get(canal).send(embed)
 	}
-	message.delete()
 }
 
 module.exports.config = {
 	name: "embed",
-	description: "Envia um embed no canal indicado, com a cor, titulo e descrição dadas!",
+	description: "Envia um embed no canal indicado, com a cor, titulo (caso tenha mais de 1 palavra, separe por `-`) e descrição dadas!",
 	usage: ".embed (#canal) (#cor) (titulo) (descricao)",
 	accessableby: "Moderadores",
 	aliases: [],
