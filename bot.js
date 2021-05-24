@@ -291,6 +291,9 @@ bot.on("guildMemberAdd", (membro) => {
 		.setFooter(`Total de ${memberCount} membros\nTotal de ${botCount} bots`)
 
 	bot.channels.cache.get("722274694535053317").send(embed)
+	
+	let membros = guild.channels.cache.get("846354264741380116")
+	membros.setName(`👥▏ Membros: ${memberCount}`)
 })
 
 bot.on("guildMemberRemove", (membro) => {
@@ -319,6 +322,9 @@ bot.on("guildMemberRemove", (membro) => {
 		.setFooter(`Total de ${memberCount} membros\nTotal de ${botCount} bots`)
 
 	bot.channels.cache.get("722274694535053317").send(embed)
+	
+	let membros = guild.channels.cache.get("846354264741380116")
+	membros.setName(`👥▏ Membros: ${memberCount}`)
 })
 
 bot.on("message", async (message) => {
