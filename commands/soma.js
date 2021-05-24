@@ -5,15 +5,21 @@ module.exports.run = async (bot, message, args) => {
 		`\n■▶ [LOGS] ⇥ Usuário '${message.author.username}' usou o comando Soma`
 	)
 
-	message.channel.send(
-		`Utilize o bot <@725319850808967198> para fazer operações matemáticas!\nDigite \` +help \` para ajuda`
-	)
+	const embed = new Discord.MessageEmbed()
+		.setColor("#5E8A60")
+		.setTitle("➗ DisCalculus")
+		.setDescription(
+			"Utilize o bot <@725319850808967198> para fazer operações matemáticas!\nDigite `+help` para mais informações!"
+		)
+		
+
+	message.channel.send(embed)
 }
 
 module.exports.config = {
 	name: "soma",
-	description: "",
-	usage: "",
+	description: "Faça operações matemáticas!",
+	usage: "+soma",
 	accessableby: "Membros",
 	aliases: ["s"],
 }
