@@ -46,7 +46,15 @@ module.exports.run = async (bot, message, args) => {
 		.setDescription("Sua **sala de estudos** foi criada com **sucesso!**")
 
 	server.channels
-		.create(`▏${nomeDoGrupo}`, {
+		.create(`🔊▏${nomeDoGrupo}`, {
+			type: "voice",
+			parent: gruposDeEstudo.id,
+			permissionOverwrites: permissoes,
+		})
+		.catch(console.error)
+
+	server.channels
+		.create(`💬▏${nomeDoGrupo}`, {
 			type: "text",
 			parent: gruposDeEstudo.id,
 			permissionOverwrites: permissoes,
