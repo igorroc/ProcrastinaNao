@@ -107,7 +107,7 @@ module.exports.run = async (bot, message, args) => {
 module.exports.config = {
 	name: "filme",
 	description:
-		"Pesquisa o nome do filme/serie.\nInfelizmente todas as informações estão em inglês 😕",
+		"Pesquisa o nome do filme/serie.\nInfelizmente todas as informações estão em inglês \\😕",
 	usage: ".filme [nome_do_filme/serie]",
 	accessableby: "Membros",
 	aliases: ["movie", "serie"],
