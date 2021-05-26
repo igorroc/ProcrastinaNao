@@ -89,9 +89,9 @@ module.exports.run = async (bot, message, args) => {
 							}
 						)
 						.setImage(json.Poster)
-                    if(json.Type == "series"){
-                        embed.addField("Temporadas", json.totalSeasons, true)
-                    }
+					if (json.Type == "series") {
+						embed.addField("Temporadas", json.totalSeasons, true)
+					}
 				}
 				message.reply(embed)
 			})

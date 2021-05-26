@@ -291,7 +291,7 @@ bot.on("guildMemberAdd", (membro) => {
 		.setFooter(`Total de ${memberCount} membros\nTotal de ${botCount} bots`)
 
 	bot.channels.cache.get("722274694535053317").send(embed)
-	
+
 	let membros = guild.channels.cache.get("846354264741380116")
 	membros.setName(`👥▏ Membros: ${memberCount}`)
 })
@@ -322,7 +322,7 @@ bot.on("guildMemberRemove", (membro) => {
 		.setFooter(`Total de ${memberCount} membros\nTotal de ${botCount} bots`)
 
 	bot.channels.cache.get("722274694535053317").send(embed)
-	
+
 	let membros = guild.channels.cache.get("846354264741380116")
 	membros.setName(`👥▏ Membros: ${memberCount}`)
 })
@@ -330,7 +330,7 @@ bot.on("guildMemberRemove", (membro) => {
 bot.on("message", async (message) => {
 	// ! Return if the author is a bot
 	if (message.author.bot) return
-	
+
 	// ! Restart the config file
 	delete require.cache[require.resolve("./config.json")]
 	let config = require("./config.json")
@@ -389,11 +389,13 @@ bot.on("message", async (message) => {
 	}
 
 	// ! Retorna, caso o usuário esteja preso
-	if(message.member.roles.cache.find(r => r.id == "842189200337666058")){
+	if (message.member.roles.cache.find((r) => r.id == "842189200337666058")) {
 		const embed = new Discord.MessageEmbed()
 			.setColor("#ff0000")
 			.setTitle("\\🚫 Erro")
-			.setDescription('Você está **preso**, e **não** pode mais enviar comandos!')
+			.setDescription(
+				"Você está **preso**, e **não** pode mais enviar comandos!"
+			)
 			.setTimestamp()
 
 		return message.reply(embed)
