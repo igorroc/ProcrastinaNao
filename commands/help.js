@@ -18,18 +18,25 @@ module.exports.run = async (bot, message, args) => {
 				bot.commands.get(bot.aliases.get(command))
 
 			var SHembed = new Discord.MessageEmbed()
-				.setColor(colours.yellow)
-				.setTitle(`Comando: ${command.config.name}`)
-				.setDescription(
-					`\n**Descrição:** ${
-						command.config.description || "Sem descrição"
-					}\n**Uso:** ${
-						command.config.usage || "Sem uso"
-					}\n**Acessivel para:** ${
-						command.config.accessableby || "Membros"
-					}\n**Variações:** ${
-						command.config.noalias || command.config.aliases
-					}`
+				.setColor("#64B3E3")
+				.setTitle(`\\🔧 Comando: ${command.config.name}`)
+				.addFields(
+					{
+						name: "Descrição",
+						value: command.config.description || "Sem descrição",
+					},
+					{
+						name: "Como usar",
+						value: command.config.usage || "Sem uso",
+					},
+					{
+						name: "Acessível para",
+						value: command.config.accessableby || "Membros",
+					},
+					{
+						name: "Variações",
+						value: command.config.noalias || command.config.aliases,
+					}
 				)
 			message.channel.send(SHembed)
 		} else {
