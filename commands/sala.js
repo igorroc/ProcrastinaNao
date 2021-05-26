@@ -41,8 +41,8 @@ module.exports.run = async (bot, message, args) => {
 		)
 		.setTimestamp()
 	const concluido = new Discord.MessageEmbed()
-		.setColor("#0099ff")
-		.setTitle("✅ Concluido")
+		.setColor("#77B155")
+		.setTitle("\\✅ Concluído")
 		.setDescription("Sua **sala de estudos** foi criada com **sucesso!**")
 
 	server.channels
