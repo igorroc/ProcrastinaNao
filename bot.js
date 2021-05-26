@@ -329,7 +329,7 @@ bot.on("guildMemberRemove", (membro) => {
 
 bot.on("message", async (message) => {
 	if (message.author.bot) return // Se o autor foi um bot, faz nada
-
+	
 	delete require.cache[require.resolve("./config.json")]
 	let config = require("./config.json")
 
@@ -380,6 +380,18 @@ bot.on("message", async (message) => {
 			`⚫ Comando enviado por '${message.author.username}' enquanto o bot está OFF`
 		)
 	}
+
+	// ! Retorna, caso o usuário esteja preso
+	if(message.member.roles.cache.find(r => r.id == "842189200337666058")){
+		const embed = new Discord.MessageEmbed()
+			.setColor("#ff0000")
+			.setTitle("\\🚫 Erro")
+			.setDescription('Você está **preso**, e **não** pode mais enviar comandos!')
+			.setTimestamp()
+
+		return message.reply(embed)
+	}
+
 	let commandfile =
 		bot.commands.get(comando) || bot.commands.get(bot.aliases.get(comando)) // Pega o comando escrito no arquivo de comandos
 	if (commandfile) commandfile.run(bot, message, args)
