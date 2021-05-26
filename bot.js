@@ -30,7 +30,7 @@ fs.readdir("./commands/", (err, files) => {
 	})
 })
 
-// * =-=-=-=-=-=-=-=-=-=-=-=-=
+// ! =-=-=-=-=-=-=-=-=-=-=-=-=
 
 bot.once("ready", () => {
 	let config = require("./config.json")
@@ -328,16 +328,20 @@ bot.on("guildMemberRemove", (membro) => {
 })
 
 bot.on("message", async (message) => {
-	if (message.author.bot) return // Se o autor foi um bot, faz nada
+	// ! Return if the author is a bot
+	if (message.author.bot) return
 	
+	// ! Restart the config file
 	delete require.cache[require.resolve("./config.json")]
 	let config = require("./config.json")
 
+	// ? Cleans the message
 	let prefix = config.prefix
 	let messageArray = message.content.split(" ")
 	let comando = messageArray[0].slice(prefix.length)
 	let args = messageArray.slice(1)
 
+	// ! Return a message to ModChannel when someone sends a DM
 	if (message.channel.type == "dm") {
 		let anexo = message.attachments.first()?.attachment
 		const embed = new Discord.MessageEmbed()
@@ -369,7 +373,10 @@ bot.on("message", async (message) => {
 		return bot.channels.cache.get("722274694535053317").send(embed)
 	}
 
-	if (!message.content.startsWith(prefix)) return // Valida o prefix do comando
+	// ! Verify the prefix
+	if (!message.content.startsWith(prefix)) return
+
+	// ! Verify if the bot is set to be offline
 	if (config.status == "off" && comando != "help" && comando != "config") {
 		// Valida se o bot está online ou offline, liberando apenas o uso do comando config e help
 		let off = "<:off:723707654245187665>"
@@ -392,10 +399,12 @@ bot.on("message", async (message) => {
 		return message.reply(embed)
 	}
 
+	// ! Run the command
 	let commandfile =
 		bot.commands.get(comando) || bot.commands.get(bot.aliases.get(comando)) // Pega o comando escrito no arquivo de comandos
+
+	// ! Verifica se o comando existe
 	if (commandfile) commandfile.run(bot, message, args)
-	// Verifica se o comando existe
 	else {
 		message.channel.send(`Comando \`${comando}\` não encontrado`)
 		console.log(`\n\\▶ [LOGS] ⇥ Comando '${comando}' não encontrado`)
