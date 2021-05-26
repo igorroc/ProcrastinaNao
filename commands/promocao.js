@@ -107,7 +107,7 @@ module.exports.config = {
 	name: "promocao",
 	description:
 		"Pesquisa o nome do jogo e retorna os melhores lugares para compra-lo.",
-	usage: ".filme [nome_do_filme/serie]",
+	usage: ".jogo [nome_do_jogo]",
 	accessableby: "Membros",
 	aliases: ["jogo"],
 }
