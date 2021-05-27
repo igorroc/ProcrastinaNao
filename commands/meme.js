@@ -29,11 +29,23 @@ module.exports.run = async (bot, message, args) => {
     `&bottom=${args[2] ? args[2].split("-").join("+") : ""}`
 
 	try {
-		embed
-			.setImage(link)
-			.setFooter(`Meme feito por: ${message.author.username}\n`)
+		fetch(link)
+			.then((res) => res.json())
+			.then((json) => {
+				embed
+					.setImage(link)
+					.setFooter(`Meme feito por: ${message.author.username}\n`)
 
-		message.reply(embed)
+				message.reply(embed)
+			})
+			.catch((err) => {
+				embed
+					.setTitle("\\🚫 Erro")
+					.setDescription(`Ocorreu um erro ao criar seu meme.\nVerifique se você digitou corretamente o tipo do meme [aqui](http://apimeme.com)`)
+					.setColor("#ff0000")
+				message.reply(embed)
+				console.error(err)
+			})
 	} catch (err) {
 		embed
 			.setDescription(`Ocorreu um erro ao criar seu meme.\n`)
