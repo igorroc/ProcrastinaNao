@@ -1,12 +1,7 @@
 const Discord = require("discord.js")
-const config = require("../config.json")
 
 const fs = require("fs")
 
-const left = "◀️"
-const right = "▶"
-const x = "❌"
-const agree = "✅"
 const loading = "<a:loading:722456385098481735>"
 
 module.exports.run = async (bot, message, args) => {
@@ -47,10 +42,10 @@ module.exports.run = async (bot, message, args) => {
 			}
 
 			let msg = await message.channel.send(cEmbed)
-			await msg.react(left).then(async (r) => {
-				await msg.react(x).then(async (r) => {
-					await msg.react(right).then(async (r) => {
-						await msg.react(emojiLoading).then((r) => r.remove())
+			await msg.react(emojiLoading).then(async (load) => {
+				await msg.react("◀").then(async (r) => {
+					await msg.react("❌").then(async (r) => {
+						await msg.react("▶").then((r) => load.remove())
 					})
 				})
 			})
@@ -59,13 +54,13 @@ module.exports.run = async (bot, message, args) => {
 				.createReactionCollector(
 					(reaction, user1) =>
 						(user1.id === message.author.id &&
-							reaction.emoji.name === left) ||
-						reaction.emoji.name === right ||
-						reaction.emoji.name === x
+							reaction.emoji.name === "◀️") ||
+						reaction.emoji.name === "▶" ||
+						reaction.emoji.name === "❌"
 				)
 				.on("collect", async (reaction) => {
 					const chosen = reaction.emoji.name
-					if (chosen === right) {
+					if (chosen === "▶") {
 						if (indice < total - 1) {
 							indice++
 						}
@@ -100,7 +95,7 @@ module.exports.run = async (bot, message, args) => {
 						}
 
 						msg.edit(new Discord.MessageEmbed(cEmbed))
-					} else if (chosen === left) {
+					} else if (chosen === "◀️") {
 						if (indice > 0) {
 							indice--
 						}
@@ -131,7 +126,7 @@ module.exports.run = async (bot, message, args) => {
 							)
 
 						msg.edit(new Discord.MessageEmbed(cEmbed))
-					} else if (chosen === x) {
+					} else if (chosen === "❌") {
 						collector.stop()
 						msg.reactions
 							.removeAll()
@@ -499,7 +494,10 @@ module.exports.run = async (bot, message, args) => {
 
 													cEmbed
 														.setTitle(
-															`${agree} Perfil de ${message.author.username}`
+															`${"✅"} Perfil de ${
+																message.author
+																	.username
+															}`
 														)
 														.setDescription(
 															"Cadastro finalizado!"

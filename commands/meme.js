@@ -41,7 +41,9 @@ module.exports.run = async (bot, message, args) => {
 			.catch((err) => {
 				embed
 					.setTitle("\\🚫 Erro")
-					.setDescription(`Ocorreu um erro ao criar seu meme.\nVerifique se você digitou corretamente o tipo do meme [aqui](http://apimeme.com)`)
+					.setDescription(
+						`Ocorreu um erro ao criar seu meme.\nVerifique se você digitou corretamente o tipo do meme [aqui](http://apimeme.com)`
+					)
 					.setColor("#ff0000")
 				message.reply(embed)
 				console.error(err)

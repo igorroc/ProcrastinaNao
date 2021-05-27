@@ -27,11 +27,9 @@ module.exports.run = async (bot, message, args) => {
 		await fetch(`http://www.cheapshark.com/api/1.0/games?title=${jogo}`)
 			.then((res) => res.json())
 			.then(async (json) => {
-				if ((json.length == 0)) {
+				if (json.length == 0) {
 					embed
-						.setDescription(
-							`Não consegui encontrar esse jogo \\😔`
-						)
+						.setDescription(`Não consegui encontrar esse jogo \\😔`)
 						.setColor("#ff0000")
 					return message.reply(embed)
 				}

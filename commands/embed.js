@@ -41,13 +41,12 @@ module.exports.run = async (bot, message, args) => {
 		let title = args[2].split("-").join(" ")
 		let description = args.slice(3).join(" ")
 
-        if (!description){
-            message.channel.send("Faltam argumentos.").then((m) => {
-                m.delete({ timeout: 3000 })
-            })
-            console.log(`↳ Faltam argumentos.`)
-
-        }
+		if (!description) {
+			message.channel.send("Faltam argumentos.").then((m) => {
+				m.delete({ timeout: 3000 })
+			})
+			console.log(`↳ Faltam argumentos.`)
+		}
 		const embed = new Discord.MessageEmbed()
 			.setColor(color)
 			.setTitle(title)
@@ -61,7 +60,8 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.config = {
 	name: "embed",
-	description: "Envia um embed no canal indicado, com a cor, titulo (caso tenha mais de 1 palavra, separe por `-`) e descrição dadas!",
+	description:
+		"Envia um embed no canal indicado, com a cor, titulo (caso tenha mais de 1 palavra, separe por `-`) e descrição dadas!",
 	usage: ".embed (#canal) (#cor) (titulo) (descricao)",
 	accessableby: "Moderadores",
 	aliases: [],

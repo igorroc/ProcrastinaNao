@@ -1,5 +1,4 @@
 const Discord = require("discord.js")
-const colours = require("../colours.json")
 
 module.exports.run = async (bot, message, args) => {
 	console.log(
@@ -9,7 +8,7 @@ module.exports.run = async (bot, message, args) => {
 	let link = "https://discord.gg/RvtHp7V"
 
 	let embed = new Discord.MessageEmbed()
-		.setColor(colours.green_light)
+		.setColor("#64B3E3")
 		.setTitle("📨 Convite para o ProcrastinaNão")
 		.setDescription(`Convide seus amigos para o servidor!`)
 		.addField("**Link:**", link)

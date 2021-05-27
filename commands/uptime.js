@@ -19,7 +19,7 @@ module.exports.run = async (bot, message, args) => {
 	up = up.replace("weeks", "semanas")
 
 	const embed = new Discord.MessageEmbed()
-		.setColor("#0099ff")
+		.setColor("#64B3E3")
 		.setTitle("\\🎉 Up Time")
 		.setDescription(
 			`Estou trabalhando há **${up}** sem acidentes no **ProcrastinaNão**!`

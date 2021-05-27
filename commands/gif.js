@@ -35,13 +35,14 @@ module.exports.run = async (bot, message, args) => {
 		fetch(link)
 			.then((res) => res.json())
 			.then(async (json) => {
-                let random = Math.floor(Math.random() * (json.data.length));
-                let gif = json.data[random]
+				let random = Math.floor(Math.random() * json.data.length)
+				let gif = json.data[random]
 				console.log(gif)
-                console.log(link)
-                embed.setTitle(`\\👾 ${gif.title}`)
-                    .setImage(gif.images.original.url)
-                message.reply(embed)
+				console.log(link)
+				embed
+					.setTitle(`\\👾 ${gif.title}`)
+					.setImage(gif.images.original.url)
+				message.reply(embed)
 			})
 	} catch (e) {
 		embed

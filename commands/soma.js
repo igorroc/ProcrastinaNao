@@ -11,7 +11,6 @@ module.exports.run = async (bot, message, args) => {
 		.setDescription(
 			"Utilize o bot <@725319850808967198> para fazer operações matemáticas!\nDigite `+help` para mais informações!"
 		)
-		
 
 	message.channel.send(embed)
 }

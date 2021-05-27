@@ -36,7 +36,7 @@ module.exports.run = async (bot, message, args) => {
 	let check = "<a:check:722456384301563966>"
 
 	const carregando = new Discord.MessageEmbed()
-		.setColor("#0099ff")
+		.setColor("#64B3E3")
 		.setTitle(`${loading} Recarregando comando`)
 		.setDescription(`Recarregando o comando \`${command}\`...`)
 		.setTimestamp()

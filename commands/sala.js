@@ -42,7 +42,7 @@ module.exports.run = async (bot, message, args) => {
 		.setTimestamp()
 
 	const concluido = new Discord.MessageEmbed()
-		.setColor("#77B155")
+		.setColor("#64B3E3")
 		.setTitle("\\✅ Concluído")
 		.setDescription(
 			"Sua **sala de estudos** foi criada com **sucesso!**\nQuando **acabarem** de usar a sala, utilizem o comando `.fecharsala` dentro da sua própria sala, para finalizar.\n\n||Certifiquem que não tem nenhum arquivo importante, pois a sala será excluída||"

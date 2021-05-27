@@ -1,5 +1,4 @@
 const Discord = require("discord.js")
-const colours = require("../colours.json")
 
 module.exports.run = async (bot, message, args) => {
 	console.log(
@@ -7,7 +6,7 @@ module.exports.run = async (bot, message, args) => {
 	)
 
 	let sEmbed = new Discord.MessageEmbed()
-		.setColor(colours.yellow)
+		.setColor("#64B3E3")
 		.setTitle("Informações do Servidor")
 		.setThumbnail(message.guild.iconURL())
 		.addField("**Nome do Servidor:**", `${message.guild.name}`, true)
@@ -28,7 +27,7 @@ module.exports.run = async (bot, message, args) => {
 
 	let membros = message.guild.channels.cache.get("846354264741380116")
 	membros.setName(`👥▏ Membros: ${message.guild.memberCount}`)
-	
+
 	let cargos = message.guild.channels.cache.get("846356134919143464")
 	cargos.setName(`💼▏ Cargos: ${message.guild.roles.cache.size}`)
 }

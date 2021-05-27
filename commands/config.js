@@ -1,5 +1,4 @@
 const Discord = require("discord.js")
-const colours = require("../colours.json")
 
 const fs = require("fs")
 
@@ -226,7 +225,7 @@ module.exports.run = async (bot, message, args) => {
 
 			if (achou) {
 				let embed = new Discord.MessageEmbed()
-					.setColor(colours.cyan)
+					.setColor("#64B3E3")
 					.setTitle("Achei isso:")
 					.addField("**Nome:**", achou.name)
 					.addField("**ID:**", achou.id)
@@ -242,7 +241,7 @@ module.exports.run = async (bot, message, args) => {
 
 			let embed = new Discord.MessageEmbed()
 				.setTitle("Cargos:")
-				.setColor(colours.cyan)
+				.setColor("#64B3E3")
 				.addField("**Nome:**", cargos[i].name || "Sem nome")
 				.addField("**ID:**", cargos[i].id || "Sem ID")
 				.addField("**Tipo:**", cargos[i].type || "Sem tipo")

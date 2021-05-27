@@ -1,5 +1,4 @@
 const Discord = require("discord.js")
-const colours = require("../colours.json")
 const botconfig = require("../config.json")
 const prefix = botconfig.prefix
 
@@ -63,7 +62,7 @@ module.exports.run = async (bot, message, args) => {
 			.replace(/,,/g, "")
 
 		let Sembed = new Discord.MessageEmbed()
-			.setColor(colours.yellow)
+			.setColor("#64B3E3")
 			.setTitle(`${bot.commands.size} comandos`)
 			.setDescription(
 				`Esses são os comandos disponíveis para o Bot Anti-Procrastinador!`

@@ -9,16 +9,15 @@ module.exports.run = async (bot, message, args) => {
 	let piada = new Discord.MessageEmbed()
 		.setTitle(`🤡 Piada`)
 		.setColor("#64B3E3")
-        .setTimestamp()
+		.setTimestamp()
 
 	fetch("https://geek-jokes.sameerkumar.website/api?format=json")
 		.then((res) => res.json())
 		.then(async (json) => {
-            console.log(json)
-            piada.setDescription(json.joke)
-            message.reply(piada)
-        })
-
+			console.log(json)
+			piada.setDescription(json.joke)
+			message.reply(piada)
+		})
 }
 
 module.exports.config = {

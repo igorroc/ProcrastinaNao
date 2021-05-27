@@ -1,13 +1,7 @@
 const Discord = require("discord.js")
 const fetch = require("node-fetch")
-const colours = require("../colours.json")
-const config = require("../config.json")
 
-const left = "◀️"
-const right = "▶"
-const x = "❌"
 const loading = "<a:loading:722456385098481735>"
-const check = "✅"
 
 module.exports.run = async (bot, message, args) => {
 	console.log(
@@ -38,7 +32,7 @@ module.exports.run = async (bot, message, args) => {
 				return
 			}
 			let embed = new Discord.MessageEmbed()
-				.setColor(colours.orange)
+				.setColor("#64B3E3")
 				.setTitle(
 					`<:github:722277332206747691> GitHub de ${json.login}`
 				)
@@ -54,10 +48,10 @@ module.exports.run = async (bot, message, args) => {
 				.addField("**Seguidores:**", json.followers, true)
 
 			let msg = await message.channel.send(embed)
-			await msg.react(left).then(async (r) => {
-				await msg.react(x).then(async (r) => {
-					await msg.react(right).then(async (r) => {
-						await msg.react(emojiLoading).then((r) => r.remove())
+			await msg.react(emojiLoading).then(async (load) => {
+				await msg.react("◀️").then(async (r) => {
+					await msg.react("❌").then(async (r) => {
+						await msg.react("▶").then(async (r) => load.remove())
 					})
 				})
 			})
@@ -67,15 +61,15 @@ module.exports.run = async (bot, message, args) => {
 				.createReactionCollector(
 					(reaction, user1) =>
 						(user1.id === message.author.id &&
-							reaction.emoji.name === left) ||
-						reaction.emoji.name === right ||
-						reaction.emoji.name === x
+							reaction.emoji.name === "◀️") ||
+						reaction.emoji.name === "▶" ||
+						reaction.emoji.name === "❌"
 				)
 				.on("collect", async (reaction) => {
 					const chosen = reaction.emoji.name
-					if (chosen === right) {
+					if (chosen === "▶") {
 						let novoEmbed = new Discord.MessageEmbed()
-							.setColor(colours.orange)
+							.setColor("#64B3E3")
 							.setTitle(
 								`<:github:722277332206747691> Repositórios de ${json.login}`
 							)
@@ -89,21 +83,28 @@ module.exports.run = async (bot, message, args) => {
 							.then((res) => res.json())
 							.then(async (json) => {
 								let i = 0
+								json = json.slice(0, 6)
 								json.forEach((repos) => {
 									i++
 									novoEmbed
 										.addField(
 											"**" + repos.name + "**",
-											repos.description || "Sem descrição"
+											repos.description
+												? `[${repos.description}](${repos.html_url})`
+												: "Sem descrição"
 										)
 										.setFooter(`${i} de ${total}`)
 									if (i == total) {
 										novoEmbed.setDescription(
-											`Navegue pelas páginas utilizando as setas abaixo\n\\${check} Repositórios carregados`
+											`\\✅ Repositórios carregados`
+										)
+									} else if (i >= 6) {
+										novoEmbed.setDescription(
+											`\\✅ Para ver mais repositórios de **${repos.owner.login}**, [clique aqui](${repos.owner.html_url})`
 										)
 									} else {
 										novoEmbed.setDescription(
-											`Navegue pelas páginas utilizando as setas abaixo\n\n${loading} Carregando repositórios...`
+											`${loading} Carregando repositórios...`
 										)
 									}
 									msg.edit(
@@ -111,9 +112,9 @@ module.exports.run = async (bot, message, args) => {
 									)
 								})
 							})
-					} else if (chosen === left) {
+					} else if (chosen === "◀️") {
 						msg.edit(new Discord.MessageEmbed(embed))
-					} else if (chosen === x) {
+					} else if (chosen === "❌") {
 						collector.stop()
 						msg.reactions
 							.removeAll()

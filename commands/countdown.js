@@ -1,5 +1,4 @@
 const Discord = require("discord.js")
-const colours = require("../colours.json")
 
 module.exports.run = async (bot, message, args) => {
 	console.log(
@@ -11,7 +10,7 @@ module.exports.run = async (bot, message, args) => {
 	let check = "<a:check:722456384301563966>"
 
 	const embed = new Discord.MessageEmbed()
-		.setColor("#0099ff")
+		.setColor("#64B3E3")
 		.setTitle(`${loading} Contagem`)
 		.addFields({ name: "Contagem iniciada", value: contador })
 		.setTimestamp()
@@ -29,7 +28,7 @@ module.exports.run = async (bot, message, args) => {
 		const contagem = setInterval(async () => {
 			if (contador > 0) {
 				let contar = new Discord.MessageEmbed()
-					.setColor("#0099ff")
+					.setColor("#64B3E3")
 					.setTitle(`${loading} Contagem`)
 					.addFields({ name: "Contagem iniciada", value: contador })
 					.setTimestamp()

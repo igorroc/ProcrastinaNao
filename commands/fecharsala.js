@@ -27,8 +27,8 @@ module.exports.run = async (bot, message, args) => {
 			(perm) => perm.id == message.author.id
 		)
 	) {
-        embed.setDescription('Essa sala de estudos **não** é sua!')
-        return message.reply(embed)
+		embed.setDescription("Essa sala de estudos **não** é sua!")
+		return message.reply(embed)
 	}
 
 	let voice = message.guild.channels.cache.get(message.channel.topic)

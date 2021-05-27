@@ -1,5 +1,4 @@
 const Discord = require("discord.js")
-const colours = require("../colours.json")
 
 module.exports.run = async (bot, message, args) => {
 	console.log(
@@ -7,7 +6,7 @@ module.exports.run = async (bot, message, args) => {
 	)
 
 	let uEmbed = new Discord.MessageEmbed()
-		.setColor(colours.red_light)
+		.setColor("#64B3E3")
 		.setTitle("Informações de Usuário")
 		.setThumbnail(message.guild.iconURL)
 
