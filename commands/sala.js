@@ -40,12 +40,25 @@ module.exports.run = async (bot, message, args) => {
 			)}\nEsse canal **não será permanente**, então **não salvem** nada de **importante** aqui.\nAproveitem!`
 		)
 		.setTimestamp()
+
 	const concluido = new Discord.MessageEmbed()
 		.setColor("#77B155")
 		.setTitle("\\✅ Concluído")
 		.setDescription("Sua **sala de estudos** foi criada com **sucesso!**")
 
-	server.channels
+	if (
+		server.channels.cache.find(
+			(c) =>
+				(c.name == `🔊▏${nomeDoGrupo}` && c.type == "voice") ||
+				(c.name == `💬▏${nomeDoGrupo}` && c.type == "text")
+		)
+	) {
+		aviso.setDescription(
+			`Já existe uma sala de estudos com o nome **${nomeDoGrupo}**, por favor indique outro nome para o seu grupo!`
+		)
+		return message.reply(aviso)
+	}
+	let voice = await server.channels
 		.create(`🔊▏${nomeDoGrupo}`, {
 			type: "voice",
 			parent: gruposDeEstudo.id,
@@ -56,6 +69,7 @@ module.exports.run = async (bot, message, args) => {
 	server.channels
 		.create(`💬▏${nomeDoGrupo}`, {
 			type: "text",
+			topic: voice.id,
 			parent: gruposDeEstudo.id,
 			permissionOverwrites: permissoes,
 		})
