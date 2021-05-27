@@ -44,7 +44,9 @@ module.exports.run = async (bot, message, args) => {
 	const concluido = new Discord.MessageEmbed()
 		.setColor("#77B155")
 		.setTitle("\\✅ Concluído")
-		.setDescription("Sua **sala de estudos** foi criada com **sucesso!**")
+		.setDescription(
+			"Sua **sala de estudos** foi criada com **sucesso!**\nQuando acabarem de usar a sala, utilizem o comando `.fecharsala` dentro da sua própria sala, para finalizar.\n||Certifiquem que não tem nenhum arquivo importante, pois a sala será excluída||"
+		)
 
 	if (
 		server.channels.cache.find(
