@@ -37,7 +37,7 @@ module.exports.run = async (bot, message, args) => {
 		.setDescription(
 			`Esse grupo de estudos foi criado **apenas** para os usuários:\n${membrosMarcados.join(
 				", "
-			)}\nEsse canal **não será permanente**, então **não salvem** nada de **importante** aqui.\nAproveitem!`
+			)}\nEsse canal **não será permanente**, então **não salvem** nada de **importante** aqui.\nQuando **acabarem** de usar a sala, utilizem o comando \`.fecharsala\` aqui mesmo, para finalizar.\n\nAproveitem!`
 		)
 		.setTimestamp()
 
@@ -45,7 +45,7 @@ module.exports.run = async (bot, message, args) => {
 		.setColor("#77B155")
 		.setTitle("\\✅ Concluído")
 		.setDescription(
-			"Sua **sala de estudos** foi criada com **sucesso!**\nQuando acabarem de usar a sala, utilizem o comando `.fecharsala` dentro da sua própria sala, para finalizar.\n||Certifiquem que não tem nenhum arquivo importante, pois a sala será excluída||"
+			"Sua **sala de estudos** foi criada com **sucesso!**\nQuando **acabarem** de usar a sala, utilizem o comando `.fecharsala` dentro da sua própria sala, para finalizar.\n\n||Certifiquem que não tem nenhum arquivo importante, pois a sala será excluída||"
 		)
 
 	if (
@@ -75,14 +75,23 @@ module.exports.run = async (bot, message, args) => {
 			parent: gruposDeEstudo.id,
 			permissionOverwrites: permissoes,
 		})
-		.then((channel) => {
+		.then(async (channel) => {
 			channel.send(aviso).then((message) => {
 				message.pin()
 			})
 
 			concluido.addFields({
-				name: "Vá para ela:",
+				name: "Vá para o canal de texto:",
 				value: `<#${channel.id}>`,
+				inline: true,
+			})
+			await voice.createInvite().then((invite) => {
+				console.log(invite)
+				concluido.addFields({
+					name: "Vá para o canal de voz:",
+					value: `[\\🔊▏${nomeDoGrupo}](https://discord.gg/${invite.code})`,
+					inline: true,
+				})
 			})
 			message.reply(concluido)
 		})
