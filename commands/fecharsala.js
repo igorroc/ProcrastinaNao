@@ -22,12 +22,18 @@ module.exports.run = async (bot, message, args) => {
 		return message.reply(embed)
 	}
 
-    if(message.channel.permissionOverwrites.find((perm) => perm.id == message.author.id)){
-        let voice = message.guild.channels.cache.get(message.channel.topic)
-        voice.delete()
-        message.channel.delete()
-    }
+	if (
+		!message.channel.permissionOverwrites.find(
+			(perm) => perm.id == message.author.id
+		)
+	) {
+        embed.setDescription('Essa sala de estudos **não** é sua!')
+        return message.reply(embed)
+	}
 
+	let voice = message.guild.channels.cache.get(message.channel.topic)
+	voice.delete()
+	message.channel.delete()
 	console.log(`↳ Sala de estudos removida com sucesso`)
 }
 
