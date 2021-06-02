@@ -376,6 +376,9 @@ bot.on("message", async (message) => {
 	// ! Verify the prefix
 	if (!message.content.startsWith(prefix)) return
 
+	// ! Verify if there is a command
+	if (!comando) return
+
 	// ! Verify if the bot is set to be offline
 	if (config.status == "off" && comando != "help" && comando != "config") {
 		// Valida se o bot está online ou offline, liberando apenas o uso do comando config e help
