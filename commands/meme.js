@@ -64,5 +64,5 @@ module.exports.config = {
 	usage: ".meme [tipo_do_meme] [frase_superior] [frase_inferior]",
 	accessableby: "Membros",
 	noalias: "Sem variações",
-	aliases: [],
+	aliases: [""],
 }

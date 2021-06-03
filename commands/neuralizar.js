@@ -105,5 +105,6 @@ module.exports.config = {
 	description: "Redefine o canal sem professores!",
 	usage: ".neuralizar",
 	accessableby: "Moderadores",
-	aliases: [],
+	noalias: "Sem variações",
+	aliases: [""],
 }

@@ -24,5 +24,6 @@ module.exports.config = {
 	description: "Comando para testes",
 	usage: ".teste",
 	accessableby: "Moderadores",
-	aliases: [],
+	noalias: "Sem variações",
+	aliases: [""],
 }

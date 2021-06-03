@@ -152,5 +152,5 @@ module.exports.config = {
 	usage: ".git (usuário)",
 	accessableby: "Membros",
 	noalias: "Sem variações",
-	aliases: [],
+	aliases: [""],
 }

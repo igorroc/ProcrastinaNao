@@ -404,5 +404,6 @@ module.exports.config = {
 	description: "Configurações do servidor!",
 	usage: ".config (comandos|cargos|on|off)",
 	accessableby: "Moderadores",
-	aliases: [],
+	noalias: "Sem variações",
+	aliases: [""],
 }

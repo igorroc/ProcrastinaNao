@@ -64,5 +64,6 @@ module.exports.config = {
 		"Envia um embed no canal indicado, com a cor, titulo (caso tenha mais de 1 palavra, separe por `-`) e descrição dadas!",
 	usage: ".embed (#canal) (#cor) (titulo) (descricao)",
 	accessableby: "Moderadores",
-	aliases: [],
+	noalias: "Sem variações",
+	aliases: [""],
 }
