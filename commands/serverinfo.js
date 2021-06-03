@@ -26,10 +26,10 @@ module.exports.run = async (bot, message, args) => {
 	message.channel.send({ embed: sEmbed })
 
 	let membros = message.guild.channels.cache.get("846354264741380116")
-	membros.setName(`👥▏ Membros: ${message.guild.memberCount}`)
+	membros.setName(`👥・Membros: ${message.guild.memberCount}`)
 
 	let cargos = message.guild.channels.cache.get("846356134919143464")
-	cargos.setName(`💼▏ Cargos: ${message.guild.roles.cache.size}`)
+	cargos.setName(`💼・Cargos: ${message.guild.roles.cache.size}`)
 }
 
 module.exports.config = {

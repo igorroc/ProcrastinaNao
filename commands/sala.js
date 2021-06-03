@@ -51,8 +51,8 @@ module.exports.run = async (bot, message, args) => {
 	if (
 		server.channels.cache.find(
 			(c) =>
-				(c.name == `🔊▏${nomeDoGrupo}` && c.type == "voice") ||
-				(c.name == `💬▏${nomeDoGrupo}` && c.type == "text")
+				(c.name == `🔊・${nomeDoGrupo}` && c.type == "voice") ||
+				(c.name == `💬・${nomeDoGrupo}` && c.type == "text")
 		)
 	) {
 		aviso.setDescription(
@@ -61,7 +61,7 @@ module.exports.run = async (bot, message, args) => {
 		return message.reply(aviso)
 	}
 	let voice = await server.channels
-		.create(`🔊▏${nomeDoGrupo}`, {
+		.create(`🔊・${nomeDoGrupo}`, {
 			type: "voice",
 			parent: gruposDeEstudo.id,
 			permissionOverwrites: permissoes,
@@ -69,7 +69,7 @@ module.exports.run = async (bot, message, args) => {
 		.catch(console.error)
 
 	server.channels
-		.create(`💬▏${nomeDoGrupo}`, {
+		.create(`💬・${nomeDoGrupo}`, {
 			type: "text",
 			topic: voice.id,
 			parent: gruposDeEstudo.id,
@@ -89,7 +89,7 @@ module.exports.run = async (bot, message, args) => {
 				console.log(invite)
 				concluido.addFields({
 					name: "Vá para o canal de voz:",
-					value: `[\\🔊▏${nomeDoGrupo}](https://discord.gg/${invite.code})`,
+					value: `[\\🔊・${nomeDoGrupo}](https://discord.gg/${invite.code})`,
 					inline: true,
 				})
 			})

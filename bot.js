@@ -293,7 +293,7 @@ bot.on("guildMemberAdd", (membro) => {
 	bot.channels.cache.get("722274694535053317").send(embed)
 
 	let membros = guild.channels.cache.get("846354264741380116")
-	membros.setName(`👥▏ Membros: ${memberCount}`)
+	membros.setName(`👥・Membros: ${memberCount}`)
 })
 
 bot.on("guildMemberRemove", (membro) => {
@@ -324,7 +324,7 @@ bot.on("guildMemberRemove", (membro) => {
 	bot.channels.cache.get("722274694535053317").send(embed)
 
 	let membros = guild.channels.cache.get("846354264741380116")
-	membros.setName(`👥▏ Membros: ${memberCount}`)
+	membros.setName(`👥・Membros: ${memberCount}`)
 })
 
 bot.on("message", async (message) => {
