@@ -4,7 +4,7 @@ module.exports.run = async (bot, message, args) => {
 	console.log(
 		`\n■▶ [LOGS] ⇥ Usuário '${message.author.username}' usou o comando Teste`
 	)
-
+	
 	if (!message.member.hasPermission("ADMINISTRATOR")) {
 		const naoDigno = new Discord.MessageEmbed()
 			.setColor("#FF0000")
@@ -17,6 +17,13 @@ module.exports.run = async (bot, message, args) => {
 		console.log(`↳ Acesso negado para '${message.author.username}'`)
 		return
 	}
+
+	message.guild.channels.cache.forEach(element => {
+		if(element.name.includes("▏")){
+			let nome = element.name.replace('▏', '・')
+			element.setName(nome)
+		}
+	});
 }
 
 module.exports.config = {
