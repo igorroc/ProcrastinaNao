@@ -30,13 +30,13 @@ module.exports.run = async (bot, message, args) => {
 		(c) => c.name == "⤙ 🌍 GERAL ⤚" && c.type == "category"
 	)
 	let semprof = server.channels.cache.find(
-		(c) => c.name == "❌▏sem-professores" && c.type == "text"
+		(c) => c.name == "❌・sem-professores" && c.type == "text"
 	)
 
 	semprof.delete()
 
 	server.channels
-		.create("❌▏sem-professores", {
+		.create("❌・sem-professores", {
 			type: "text",
 			parent: geral.id,
 			position: 14,
