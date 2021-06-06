@@ -9,38 +9,43 @@ module.exports.run = async (bot, message, args) => {
 	let nMarcar = args[1]
 	let check = "<a:check:722456384301563966>"
 
-	if (!contador) return message.channel.send("Digite um tempo válido!")
+	const embed = new Discord.MessageEmbed()
+		.setTitle(`\\⏰ Lembrete`)
+		.setColor("#64B3E3")
+		.setTimestamp()
 
-	message.channel.send(
+	if (!contador) {
+		embed.setDescription(`Digite um tempo válido!`).setColor("#ff0000")
+		return message.reply(embed)
+	}
+
+	embed.setDescription(
 		`Lembrete marcado para daqui a \` ${contador} \` minutos!`
 	)
+	message.channel.send(embed)
 
 	const contagem = setInterval(async () => {
-		if (contador > 0) {
-			contador--
-		} else {
+		if (contador <= 0) {
 			console.log(
 				`↳ Lembrete de '${message.author.username}' finalizado.`
 			)
 			if (nMarcar == "true") {
 				let lembrete = args.slice(2).join(" ")
-				message.channel.send(`**Lembrete:** \n${lembrete}`)
+				embed.addField("Lembrete:", lembrete)
+				message.channel.send(embed)
 			} else {
 				let lembrete = args.slice(1).join(" ")
-				message.channel
-					.send(`Olá, ${message.member}! Chegou a hora! ${check}\n`)
-					.then((msg) => {
-						if (lembrete) {
-							msg.edit(
-								`Olá, ${message.member}! Chegou a hora! ${check}\n"${lembrete}"`
-							)
-						}
-					})
+				embed.setDescription(`Chegou a hora!`)
+				if (lembrete) {
+					embed.addField("Lembrete:", lembrete)
+				}
+				message.reply(embed)
 			}
 
 			clearInterval(contagem)
 		}
-	}, 60000)
+		contador--
+	}, 1000)
 }
 
 module.exports.config = {
