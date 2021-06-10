@@ -5,7 +5,7 @@ bot.aliases = new Discord.Collection()
 
 const pessoasComHorarioPerfeito = new Set()
 
-var intervaloPerfeito = setInterval(timerHorarioPerfeito, 10000)
+var intervaloPerfeito = setInterval(timerHorarioPerfeito, 40000)
 
 const fs = require("fs")
 
