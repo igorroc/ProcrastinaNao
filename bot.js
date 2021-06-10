@@ -472,12 +472,30 @@ function timerHorarioPerfeito() {
 		if (
 			// prettier-ignore
 			(hour == minute) ||
-			(hour > 12 && (hour % 13) + 1 == minute) ||
 			(hour == invertedMinute ) ||
 			(minute == invertedHour ) ||
 			(`${hour}${minute}` == "1234")
 		) {
 			bot.users.cache.get(id).send(embed)
+		} else if (hour > 12) {
+			hour = (hour % 13) + 1
+			formattedHour = ("0" + hour).slice(-2)
+			invertedHour = parseInt(
+				hour.toString().split("").reverse().join("")
+			)
+
+			embed.setDescription(
+				`Agora são:\n**${formattedHour}:${formattedMinute}**`
+			)
+
+			if (
+				// prettier-ignore
+				(hour == minute ) ||
+				(hour == invertedMinute ) ||
+				(minute == invertedHour )
+			) {
+				bot.users.cache.get(id).send(embed)
+			}
 		}
 	})
 }
