@@ -4,6 +4,7 @@ bot.commands = new Discord.Collection()
 bot.aliases = new Discord.Collection()
 
 const pessoasComHorarioPerfeito = new Set()
+pessoasComHorarioPerfeito.add("337349173894447106") // Add Gabi
 
 var intervaloPerfeito = setInterval(timerHorarioPerfeito, 60000)
 
