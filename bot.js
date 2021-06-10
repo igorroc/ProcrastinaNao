@@ -9,7 +9,7 @@ var intervaloPerfeito = setInterval(timerHorarioPerfeito, 10000)
 
 const fs = require("fs")
 
-const MENSAGEM_REINICIO = false
+const MENSAGEM_REINICIO = true
 
 let loading = "<a:loading:722456385098481735>"
 
