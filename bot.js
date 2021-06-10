@@ -457,7 +457,6 @@ function timerHorarioPerfeito() {
 
 	let formattedHour = ("0" + hour).slice(-2)
 	let formattedMinute = ("0" + minute).slice(-2)
-
 	let invertedHour = parseInt(hour.toString().split("").reverse().join(""))
 	let invertedMinute = parseInt(
 		minute.toString().split("").reverse().join("")
