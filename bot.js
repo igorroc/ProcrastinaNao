@@ -5,11 +5,11 @@ bot.aliases = new Discord.Collection()
 
 const pessoasComHorarioPerfeito = new Set()
 
-var intervaloPerfeito = setInterval(timerHorarioPerfeito, 30000)
+var intervaloPerfeito = setInterval(timerHorarioPerfeito, 10000)
 
 const fs = require("fs")
 
-const MENSAGEM_REINICIO = true
+const MENSAGEM_REINICIO = false
 
 let loading = "<a:loading:722456385098481735>"
 
@@ -449,6 +449,7 @@ function timerHorarioPerfeito() {
 	let day = new Date()
 	let hour = day.getHours()
 	let minute = day.getMinutes()
+	let fuso = day.getTimezoneOffset()
 
 	let formattedHour = ("0" + hour).slice(-2)
 	let formattedMinute = ("0" + minute).slice(-2)
@@ -463,21 +464,24 @@ function timerHorarioPerfeito() {
 		.setTitle("\\💚 Horário Perfeito")
 		.setDescription(`Agora são:\n**${formattedHour}:${formattedMinute}**`)
 
-	pessoasComHorarioPerfeito.forEach((id) => {
-		if (hour == minute) {
-			bot.users.cache.get(id).send(embed)
-		}
+	console.log(fuso)
+	console.log(hour, minute)
+	console.log(invertedHour, invertedMinute)
+	console.log(formattedHour, formattedMinute)
+	
+	if (
+		// prettier-ignore
+		(hour == minute) ||
+		(hour > 12 && (hour % 13) + 1 == minute) ||
+		(hour == invertedMinute ) ||
+		(minute == invertedHour ) ||
+		(`${hour}${minute}` == "1234")
+	) {
+		// bot.users.cache.get(id).send(embed)
+		console.log(hour, minute)
+		console.log(invertedHour, invertedMinute)
+		console.log(formattedHour, formattedMinute)
+	}
 
-		else if (hour > 12 && (hour % 13) + 1 == minute) {
-			bot.users.cache.get(id).send(embed)
-		}
-
-		else if (hour == invertedMinute || minute == invertedHour) {
-			bot.users.cache.get(id).send(embed)
-		}
-
-		else if (`${hour}${minute}` == "1234") {
-			bot.users.cache.get(id).send(embed)
-		}
-	})
+	pessoasComHorarioPerfeito.forEach((id) => {})
 }
