@@ -3,6 +3,10 @@ const bot = new Discord.Client()
 bot.commands = new Discord.Collection()
 bot.aliases = new Discord.Collection()
 
+const pessoasComHorarioPerfeito = new Set()
+
+var intervaloPerfeito = setInterval(timerHorarioPerfeito, 30000)
+
 const fs = require("fs")
 
 const MENSAGEM_REINICIO = true
@@ -414,7 +418,66 @@ bot.on("message", async (message) => {
 		message.channel.send(`Comando \`${comando}\` não encontrado`)
 		console.log(`\n\\▶ [LOGS] ⇥ Comando '${comando}' não encontrado`)
 	}
+
+	// ! HORARIO PERFEITO
+	if (comando == "horarioperfeito" || comando == "hp") {
+		const embed = new Discord.MessageEmbed()
+			.setColor("#0099ff")
+			.setTitle("\\⏰ Horário Perfeito")
+
+		if (pessoasComHorarioPerfeito.has(message.author.id)) {
+			pessoasComHorarioPerfeito.delete(message.author.id)
+			embed
+				.setDescription(
+					"Você não irá mais receber os horários perfeitos!"
+				)
+				.setColor("#ff0000")
+		} else {
+			pessoasComHorarioPerfeito.add(message.author.id)
+			embed.setDescription(
+				"A partir de agora você irá receber uma notificação dos horários perfeitos!"
+			)
+		}
+		message.reply(embed)
+	}
 })
 
 let config = require("./config.json")
 bot.login(config.token)
+
+function timerHorarioPerfeito() {
+	let day = new Date()
+	let hour = day.getHours()
+	let minute = day.getMinutes()
+
+	let formattedHour = ("0" + hour).slice(-2)
+	let formattedMinute = ("0" + minute).slice(-2)
+
+	let invertedHour = parseInt(hour.toString().split("").reverse().join(""))
+	let invertedMinute = parseInt(
+		minute.toString().split("").reverse().join("")
+	)
+
+	const embed = new Discord.MessageEmbed()
+		.setColor("#64B3E3")
+		.setTitle("\\💚 Horário Perfeito")
+		.setDescription(`Agora são:\n**${formattedHour}:${formattedMinute}**`)
+
+	pessoasComHorarioPerfeito.forEach((id) => {
+		if (hour == minute) {
+			bot.users.cache.get(id).send(embed)
+		}
+
+		else if (hour > 12 && (hour % 13) + 1 == minute) {
+			bot.users.cache.get(id).send(embed)
+		}
+
+		else if (hour == invertedMinute || minute == invertedHour) {
+			bot.users.cache.get(id).send(embed)
+		}
+
+		else if (`${hour}${minute}` == "1234") {
+			bot.users.cache.get(id).send(embed)
+		}
+	})
+}
