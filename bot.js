@@ -451,6 +451,10 @@ function timerHorarioPerfeito() {
 	let minute = day.getMinutes()
 	let fuso = day.getTimezoneOffset()
 
+	// ? APLICAÇÃO DO FUSO br
+	hour -= 3
+	// ! Comentar acima caso esteja rodando localmente.
+
 	let formattedHour = ("0" + hour).slice(-2)
 	let formattedMinute = ("0" + minute).slice(-2)
 
@@ -464,24 +468,16 @@ function timerHorarioPerfeito() {
 		.setTitle("\\💚 Horário Perfeito")
 		.setDescription(`Agora são:\n**${formattedHour}:${formattedMinute}**`)
 
-	console.log(fuso)
-	console.log(hour, minute)
-	console.log(invertedHour, invertedMinute)
-	console.log(formattedHour, formattedMinute)
-	
-	if (
-		// prettier-ignore
-		(hour == minute) ||
-		(hour > 12 && (hour % 13) + 1 == minute) ||
-		(hour == invertedMinute ) ||
-		(minute == invertedHour ) ||
-		(`${hour}${minute}` == "1234")
-	) {
-		// bot.users.cache.get(id).send(embed)
-		console.log(hour, minute)
-		console.log(invertedHour, invertedMinute)
-		console.log(formattedHour, formattedMinute)
-	}
-
-	pessoasComHorarioPerfeito.forEach((id) => {})
+	pessoasComHorarioPerfeito.forEach((id) => {
+		if (
+			// prettier-ignore
+			(hour == minute) ||
+			(hour > 12 && (hour % 13) + 1 == minute) ||
+			(hour == invertedMinute ) ||
+			(minute == invertedHour ) ||
+			(`${hour}${minute}` == "1234")
+		) {
+			bot.users.cache.get(id).send(embed)
+		}
+	})
 }
