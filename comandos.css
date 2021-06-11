@@ -36,8 +36,39 @@ footer {
 	height: 100px;
 }
 
+a{
+	color: #64B3E3;
+}
+
 li {
 	list-style: none;
+}
+
+mention {
+	background-color: #5865f2;
+	border-radius: 2px;
+	padding: 0 5px;
+}
+
+code {
+	background-color: #18181b;
+	border-radius: 10px;
+	padding: 0 5px;
+}
+
+secret{
+	background-color: #18181b;
+	color: #18181b;
+	
+	border-radius: 5px;
+	padding: 0 5px;
+
+	transition: color 100ms ease, background-color 100ms ease;
+}
+
+secret:hover{
+	color: white;
+	background-color: #4A4D53;
 }
 
 .descricao-geral {
@@ -110,7 +141,9 @@ li {
 
 .lista li {
 	height: fit-content;
+	/* max-height: 500px;  */
 	max-height: 2em;
+	
 	overflow: hidden;
 
 	background-color: #2a2c30;
@@ -164,18 +197,6 @@ li {
 .active-bg {
 	background-color: #64b3e3 !important;
 	font-weight: bold;
-}
-
-.code {
-	background-color: #18181b;
-	border-radius: 10px;
-	padding: 0 5px;
-}
-
-.mention {
-	background-color: #5865f2;
-	border-radius: 2px;
-	padding: 0 5px;
 }
 
 .icon {

@@ -19,8 +19,8 @@
 				<div class="descricao-geral">
 					<h2>🔧 Comandos</h2>
 					<p>
-						Esses são os <span class="code">34</span> comandos
-						disponíveis para o Bot Anti-Procrastinador!
+						Esses são os <code>34</code> comandos disponíveis para o
+						Bot Anti-Procrastinador!
 					</p>
 				</div>
 				<ul class="filtros">
@@ -48,8 +48,8 @@
 							<p class="sessao">
 								<b>Exemplo:</b><br />
 								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
+								<mention>@Igor Rocha</mention> Violou as regras
+								e fez spam
 							</p>
 							<p class="sessao">
 								<b>Variações:</b><br />
@@ -96,16 +96,14 @@
 							/>
 							<h3>
 								.config
-								<span class="params"> [@pessoa] [razão]</span>
+								<span class="params"> (opções)</span>
 							</h3>
 						</div>
 						<div class="desc">
-							<h4>Bane o usuário marcado!</h4>
-							<p class="exemplo">
-								<b>Exemplo:</b><br />
-								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
+							Configurações do servidor
+							<p class="sessao">
+								<b>Exemplos:</b><br />
+								.config cargos remove cic
 							</p>
 						</div>
 					</li>
@@ -117,16 +115,18 @@
 							/>
 							<h3>
 								.countdown
-								<span class="params"> [@pessoa] [razão]</span>
+								<span class="params"> [minutos]</span>
 							</h3>
 						</div>
 						<div class="desc">
-							<h4>Bane o usuário marcado!</h4>
-							<p class="exemplo">
+							Inicia uma contagem regressiva com o tempo indicado!
+							<p class="sessao">
 								<b>Exemplo:</b><br />
-								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
+								.countdown 5
+							</p>
+							<p class="sessao">
+								<b>Variações:</b><br />
+								cd
 							</p>
 						</div>
 					</li>
@@ -138,16 +138,21 @@
 							/>
 							<h3>
 								.dm
-								<span class="params"> [@pessoa] [razão]</span>
+								<span class="params">
+									[@pessoa] [mensagem]</span
+								>
 							</h3>
 						</div>
 						<div class="desc">
-							<h4>Bane o usuário marcado!</h4>
-							<p class="exemplo">
+							<h4>
+								Envia a mensagem desejada para a pessoa
+								especificada!
+							</h4>
+							<p class="sessao">
 								<b>Exemplo:</b><br />
-								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
+								.dm
+								<mention>@Igor Rocha</mention> Bem vindo ao
+								servidor!
 							</p>
 						</div>
 					</li>
@@ -159,16 +164,25 @@
 							/>
 							<h3>
 								.embed
-								<span class="params"> [@pessoa] [razão]</span>
+								<span class="params">
+									[#canal] [cor] [título] [descrição]</span
+								>
 							</h3>
 						</div>
 						<div class="desc">
-							<h4>Bane o usuário marcado!</h4>
-							<p class="exemplo">
+							<h4>
+								Envia um embed no canal indicado, com a cor,
+								titulo (caso tenha mais de 1 palavra, separe por
+								<code>-</code>) e descrição dadas!
+							</h4>
+							<p class="sessao">
 								<b>Exemplo:</b><br />
-								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
+								.embed
+								<mention>#💬 chat-global</mention>
+								<mention style="background-color: #ff76ae"
+									>#FF76AE</mention
+								>
+								Meu-Titulo Descrição do meu embed
 							</p>
 						</div>
 					</li>
@@ -178,18 +192,17 @@
 								src="./assets/right-arrow.svg"
 								class="icon invert"
 							/>
-							<h3>
-								.fecharsala
-								<span class="params"> [@pessoa] [razão]</span>
-							</h3>
+							<h3>.fecharsala</h3>
 						</div>
 						<div class="desc">
-							<h4>Bane o usuário marcado!</h4>
-							<p class="exemplo">
-								<b>Exemplo:</b><br />
-								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
+							<h4>
+								Apaga a sala de estudos que você criou!<br />Pra
+								isso acontecer, você precisa enviar a mensagem a
+								partir do chat da sua sala.
+							</h4>
+							<p class="sessao">
+								<b>Variações:</b><br />
+								apagarsala
 							</p>
 						</div>
 					</li>
@@ -201,16 +214,23 @@
 							/>
 							<h3>
 								.filme
-								<span class="params"> [@pessoa] [razão]</span>
+								<span class="params"> [nome do filme]</span>
 							</h3>
 						</div>
 						<div class="desc">
-							<h4>Bane o usuário marcado!</h4>
-							<p class="exemplo">
+							<h4>
+								Pesquisa o nome do filme/serie.<br />
+								Infelizmente todas as informações estão em
+								inglês 😕
+							</h4>
+							<p class="sessao">
 								<b>Exemplo:</b><br />
-								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
+								.filme avengers endgame <br />
+								.serie rick and morty
+							</p>
+							<p class="sessao">
+								<b>Variações:</b><br />
+								movie, serie
 							</p>
 						</div>
 					</li>
@@ -222,16 +242,29 @@
 							/>
 							<h3>
 								.fotoaleatoria
-								<span class="params"> [@pessoa] [razão]</span>
+								<span class="params"> [assuntos]</span>
 							</h3>
 						</div>
 						<div class="desc">
-							<h4>Bane o usuário marcado!</h4>
-							<p class="exemplo">
+							<h4>
+								Envia uma foto aleatória!<br />
+								Caso você queira, pode indicar um determinado
+								assunto.<br />
+								Dica:
+								<secret>
+									A busca acontece melhor se for feita em
+									inglês
+								</secret>
+							</h4>
+							<p class="sessao">
 								<b>Exemplo:</b><br />
-								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
+								.fotoaleatoria <br />
+								.fotoaleatoria cat<br />
+								.fotoaleatoria happy cat
+							</p>
+							<p class="sessao">
+								<b>Variações:</b><br />
+								randompic
 							</p>
 						</div>
 					</li>
@@ -247,12 +280,24 @@
 							</h3>
 						</div>
 						<div class="desc">
-							<h4>Bane o usuário marcado!</h4>
-							<p class="exemplo">
+							<h4>
+								Envia um gif ou figurinha!<br />
+								Caso você queira, pode indicar um determinado
+								assunto.<br />
+								Dica:
+								<secret>
+									A busca acontece melhor se for feita em
+									inglês
+								</secret>
+							</h4>
+							<p class="sessao">
 								<b>Exemplo:</b><br />
-								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
+								.gif cat <br />
+								.sticker cat
+							</p>
+							<p class="sessao">
+								<b>Variações:</b><br />
+								figurinha, sticker
 							</p>
 						</div>
 					</li>
@@ -264,16 +309,17 @@
 							/>
 							<h3>
 								.git
-								<span class="params"> [@pessoa] [razão]</span>
+								<span class="params"> [pessoa]</span>
 							</h3>
 						</div>
 						<div class="desc">
-							<h4>Bane o usuário marcado!</h4>
-							<p class="exemplo">
+							<h4>
+								Acessa o perfil do GitHub do usuário desejado. É
+								possível também acessar os repositórios.
+							</h4>
+							<p class="sessao">
 								<b>Exemplo:</b><br />
-								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
+								.git IgorRoc
 							</p>
 						</div>
 					</li>
@@ -285,16 +331,19 @@
 							/>
 							<h3>
 								.help
-								<span class="params"> [@pessoa] [razão]</span>
+								<span class="params"> (comando)</span>
 							</h3>
 						</div>
 						<div class="desc">
-							<h4>Bane o usuário marcado!</h4>
-							<p class="exemplo">
+							<h4>Resumo dos comandos do servidor!</h4>
+							<p class="sessao">
 								<b>Exemplo:</b><br />
-								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
+								.help<br />
+								.help filme
+							</p>
+							<p class="sessao">
+								<b>Variações:</b><br />
+								h, commands, comando, comandos, ajuda
 							</p>
 						</div>
 					</li>
@@ -304,18 +353,17 @@
 								src="./assets/right-arrow.svg"
 								class="icon invert"
 							/>
-							<h3>
-								.horarioperfeito
-								<span class="params"> [@pessoa] [razão]</span>
-							</h3>
+							<h3>.horarioperfeito</h3>
 						</div>
 						<div class="desc">
-							<h4>Bane o usuário marcado!</h4>
-							<p class="exemplo">
+							<h4>Te avisa todos os horarios perfeitos!</h4>
+							<p class="sessao">
 								<b>Exemplo:</b><br />
-								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
+								.horarioperfeito
+							</p>
+							<p class="sessao">
+								<b>Variações:</b><br />
+								.hp
 							</p>
 						</div>
 					</li>
@@ -325,18 +373,13 @@
 								src="./assets/right-arrow.svg"
 								class="icon invert"
 							/>
-							<h3>
-								.invite
-								<span class="params"> [@pessoa] [razão]</span>
-							</h3>
+							<h3>.invite</h3>
 						</div>
 						<div class="desc">
-							<h4>Bane o usuário marcado!</h4>
-							<p class="exemplo">
-								<b>Exemplo:</b><br />
-								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
+							<h4>Mostra o link de convite do servidor!</h4>
+							<p class="sessao">
+								<b>Variações:</b><br />
+								convite
 							</p>
 						</div>
 					</li>
@@ -352,12 +395,12 @@
 							</h3>
 						</div>
 						<div class="desc">
-							<h4>Bane o usuário marcado!</h4>
-							<p class="exemplo">
+							<h4>Expulsa o usuário marcado!</h4>
+							<p class="sessao">
 								<b>Exemplo:</b><br />
-								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
+								.kick
+								<mention>@Igor Rocha</mention> Violou as regras
+								e fez spam
 							</p>
 						</div>
 					</li>
@@ -369,16 +412,48 @@
 							/>
 							<h3>
 								.lembrete
-								<span class="params"> [@pessoa] [razão]</span>
+								<span class="params">
+									[minutos] (não ser marcado) (mensagem)</span
+								>
 							</h3>
 						</div>
 						<div class="desc">
-							<h4>Bane o usuário marcado!</h4>
-							<p class="exemplo">
+							<h4>
+								Faz um lembrete para você pelo tempo determinado
+								em minutos, com uma mensagem opcional!<br />
+								Caso você não queira ser marcado quando a
+								contagem acabar, digite true logo após o tempo.
+							</h4>
+							<p class="sessao">
 								<b>Exemplo:</b><br />
-								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
+								.lembrete 30 <br />
+								<secret>
+									↪ Apenas cria um lembrete de 30 minutos e te
+									marca quando chegar a hora
+								</secret>
+								<br />
+								.lembrete 30 true <br />
+								<secret>
+									↪ Apenas cria um lembrete de 30 minutos e
+									manda uma mensagem no mesmo chat onde esse
+									comando foi usado
+								</secret>
+								<br />
+								.lembrete 30 Lembrar de entregar a atividade no
+								Classroom <br />
+								<secret>
+									↪ Apenas cria um lembrete de 30 minutos e
+									manda ESSA mensagem, te marcando
+								</secret>
+								<br />
+								.lembrete 30 true Lembrar de entregar a
+								atividade no Classroom <br />
+								<secret>
+									↪ Apenas cria um lembrete de 30 minutos e
+									manda ESSA mensagem no mesmo chat onde esse
+									comando foi usado
+								</secret>
+								<br />
 							</p>
 						</div>
 					</li>
@@ -390,16 +465,24 @@
 							/>
 							<h3>
 								.meme
-								<span class="params"> [@pessoa] [razão]</span>
+								<span class="params">
+									[tipo_do_meme] (frase_superior)
+									(frase_inferior)</span
+								>
 							</h3>
 						</div>
 						<div class="desc">
-							<h4>Bane o usuário marcado!</h4>
-							<p class="exemplo">
+							<h4>
+								Retorna um meme feito por você.<br />
+								Use <code>-</code> para separar as palavras.<br />
+								Para ver todos os tipos de memes disponíveis,
+								<a href="http://apimeme.com" target="_blank"
+									>clique aqui</a
+								>
+							</h4>
+							<p class="sessao">
 								<b>Exemplo:</b><br />
-								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
+								.meme 10-Guy Frase+de+cima Baixo+de+frase
 							</p>
 						</div>
 					</li>
@@ -411,16 +494,19 @@
 							/>
 							<h3>
 								.msg
-								<span class="params"> [@pessoa] [razão]</span>
+								<span class="params"> [#canal] [mensagem]</span>
 							</h3>
 						</div>
 						<div class="desc">
-							<h4>Bane o usuário marcado!</h4>
-							<p class="exemplo">
+							<h4>
+								Envia a mensagem desejada para o canal
+								especificado!
+							</h4>
+							<p class="sessao">
 								<b>Exemplo:</b><br />
-								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
+								.msg
+								<mention>#💬 chat-global</mention>
+								Bom dia!
 							</p>
 						</div>
 					</li>
@@ -430,19 +516,10 @@
 								src="./assets/right-arrow.svg"
 								class="icon invert"
 							/>
-							<h3>
-								.neuralizar
-								<span class="params"> [@pessoa] [razão]</span>
-							</h3>
+							<h3>.neuralizar</h3>
 						</div>
 						<div class="desc">
-							<h4>Bane o usuário marcado!</h4>
-							<p class="exemplo">
-								<b>Exemplo:</b><br />
-								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
-							</p>
+							<h4>Redefine o canal sem professores!</h4>
 						</div>
 					</li>
 					<li id="noticia">
@@ -453,16 +530,40 @@
 							/>
 							<h3>
 								.noticia
-								<span class="params"> [@pessoa] [razão]</span>
+								<span class="params"> (país) (assunto)</span>
 							</h3>
 						</div>
 						<div class="desc">
-							<h4>Bane o usuário marcado!</h4>
-							<p class="exemplo">
+							<h4>
+								Retorna uma notícia aleatória, ou sobre um
+								determinado assunto.
+							</h4>
+							<p class="sessao">
 								<b>Exemplo:</b><br />
-								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
+								.noticia<br />
+								<secret
+									>↪ Retorna uma notícia aleatória do
+									Brasil</secret
+								><br />
+								.noticia us<br />
+								<secret
+									>↪ Retorna uma notícia aleatória dos Estados
+									Unidos</secret
+								><br />
+								.noticia bitcoin<br />
+								<secret
+									>↪ Retorna uma notícia sobre bitcoin, em
+									português</secret
+								><br />
+								.noticia bitcoin us<br />
+								<secret
+									>↪ Retorna uma notícia sobre bitcoin, em
+									inglês</secret
+								>
+							</p>
+							<p class="sessao">
+								<b>Variações:</b><br />
+								.news
 							</p>
 						</div>
 					</li>
@@ -472,19 +573,12 @@
 								src="./assets/right-arrow.svg"
 								class="icon invert"
 							/>
-							<h3>
-								.perfil
-								<span class="params"> [@pessoa] [razão]</span>
-							</h3>
+							<h3>.perfil</h3>
 						</div>
 						<div class="desc">
-							<h4>Bane o usuário marcado!</h4>
-							<p class="exemplo">
-								<b>Exemplo:</b><br />
-								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
-							</p>
+							<h4>
+								Comando especifico para o cadastro no COLCIC!
+							</h4>
 						</div>
 					</li>
 					<li id="piada">
@@ -493,18 +587,13 @@
 								src="./assets/right-arrow.svg"
 								class="icon invert"
 							/>
-							<h3>
-								.piada
-								<span class="params"> [@pessoa] [razão]</span>
-							</h3>
+							<h3>.piada</h3>
 						</div>
 						<div class="desc">
-							<h4>Bane o usuário marcado!</h4>
-							<p class="exemplo">
-								<b>Exemplo:</b><br />
-								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
+							<h4>Conta uma piada, em inglês, a você!</h4>
+							<p class="sessao">
+								<b>Variações:</b><br />
+								joke
 							</p>
 						</div>
 					</li>
@@ -514,18 +603,16 @@
 								src="./assets/right-arrow.svg"
 								class="icon invert"
 							/>
-							<h3>
-								.ping
-								<span class="params"> [@pessoa] [razão]</span>
-							</h3>
+							<h3>.ping</h3>
 						</div>
 						<div class="desc">
-							<h4>Bane o usuário marcado!</h4>
-							<p class="exemplo">
-								<b>Exemplo:</b><br />
-								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
+							<h4>
+								Informa a latência atual da conexão
+								bot-servidor!
+							</h4>
+							<p class="sessao">
+								<b>Variações:</b><br />
+								ms, latencia
 							</p>
 						</div>
 					</li>
@@ -537,16 +624,17 @@
 							/>
 							<h3>
 								.prefix
-								<span class="params"> [@pessoa] [razão]</span>
+								<span class="params">
+									[novo prefix / reset]</span
+								>
 							</h3>
 						</div>
 						<div class="desc">
-							<h4>Bane o usuário marcado!</h4>
-							<p class="exemplo">
+							<h4>Altera o prefixo do servidor!</h4>
+							<p class="sessao">
 								<b>Exemplo:</b><br />
-								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
+								.prefix ! <br />
+								.prefix reset
 							</p>
 						</div>
 					</li>
@@ -562,12 +650,17 @@
 							</h3>
 						</div>
 						<div class="desc">
-							<h4>Bane o usuário marcado!</h4>
-							<p class="exemplo">
+							<h4>Prende/solta o usuário marcado!</h4>
+							<p class="sessao">
 								<b>Exemplo:</b><br />
-								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
+								.prender
+								<mention>@Igor Rocha</mention>
+								Está tumultuando o chat <br />
+								.soltar <mention>@Igor Rocha</mention>
+							</p>
+							<p class="sessao">
+								<b>Variações:</b><br />
+								soltar, prisao
 							</p>
 						</div>
 					</li>
@@ -579,16 +672,21 @@
 							/>
 							<h3>
 								.promocao
-								<span class="params"> [@pessoa] [razão]</span>
+								<span class="params"> [nome do jogo]</span>
 							</h3>
 						</div>
 						<div class="desc">
-							<h4>Bane o usuário marcado!</h4>
-							<p class="exemplo">
+							<h4>
+								Pesquisa o nome do jogo e retorna os melhores
+								lugares para compra-lo.
+							</h4>
+							<p class="sessao">
 								<b>Exemplo:</b><br />
-								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
+								.promocao gta 5
+							</p>
+							<p class="sessao">
+								<b>Variações:</b><br />
+								jogo
 							</p>
 						</div>
 					</li>
@@ -600,16 +698,18 @@
 							/>
 							<h3>
 								.reload
-								<span class="params"> [@pessoa] [razão]</span>
+								<span class="params"> [comando]</span>
 							</h3>
 						</div>
 						<div class="desc">
-							<h4>Bane o usuário marcado!</h4>
-							<p class="exemplo">
+							<h4>Recarrega um comando especifico!</h4>
+							<p class="sessao">
 								<b>Exemplo:</b><br />
-								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
+								.reload cadastro
+							</p>
+							<p class="sessao">
+								<b>Variações:</b><br />
+								r
 							</p>
 						</div>
 					</li>
@@ -621,16 +721,28 @@
 							/>
 							<h3>
 								.sala
-								<span class="params"> [@pessoa] [razão]</span>
+								<span class="params">
+									[nome da sala] [@pessoas] ...</span
+								>
 							</h3>
 						</div>
 						<div class="desc">
-							<h4>Bane o usuário marcado!</h4>
-							<p class="exemplo">
+							<h4>
+								Cria uma sala de estudos para você e seus
+								amigos!<br />
+								Para utilizar, coloque o nome do grupo (sem
+								espaços) e marque as pessoas que você quiser
+								adicionar ao grupo!
+							</h4>
+							<p class="sessao">
 								<b>Exemplo:</b><br />
-								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
+								.sala grupo_de_estudos1
+								<mention>@Igor Rocha</mention>
+								<mention>@Gabi</mention>
+							</p>
+							<p class="sessao">
+								<b>Variações:</b><br />
+								grupo
 							</p>
 						</div>
 					</li>
@@ -640,18 +752,13 @@
 								src="./assets/right-arrow.svg"
 								class="icon invert"
 							/>
-							<h3>
-								.serverinfo
-								<span class="params"> [@pessoa] [razão]</span>
-							</h3>
+							<h3>.serverinfo</h3>
 						</div>
 						<div class="desc">
-							<h4>Bane o usuário marcado!</h4>
-							<p class="exemplo">
-								<b>Exemplo:</b><br />
-								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
+							<h4>Envia as informações do servidor!</h4>
+							<p class="sessao">
+								<b>Variações:</b><br />
+								si, serverdesc
 							</p>
 						</div>
 					</li>
@@ -661,18 +768,13 @@
 								src="./assets/right-arrow.svg"
 								class="icon invert"
 							/>
-							<h3>
-								.soma
-								<span class="params"> [@pessoa] [razão]</span>
-							</h3>
+							<h3>.soma</h3>
 						</div>
 						<div class="desc">
-							<h4>Bane o usuário marcado!</h4>
-							<p class="exemplo">
-								<b>Exemplo:</b><br />
-								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
+							<h4>Faça operações matemáticas!</h4>
+							<p class="sessao">
+								<b>Variações:</b><br />
+								s
 							</p>
 						</div>
 					</li>
@@ -684,16 +786,18 @@
 							/>
 							<h3>
 								.teste
-								<span class="params"> [@pessoa] [razão]</span>
+								<span class="params"> ??? </span>
 							</h3>
 						</div>
 						<div class="desc">
-							<h4>Bane o usuário marcado!</h4>
-							<p class="exemplo">
+							<h4>???</h4>
+							<p class="sessao">
 								<b>Exemplo:</b><br />
-								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
+								???
+							</p>
+							<p class="sessao">
+								<b>Variações:</b><br />
+								???
 							</p>
 						</div>
 					</li>
@@ -703,18 +807,13 @@
 								src="./assets/right-arrow.svg"
 								class="icon invert"
 							/>
-							<h3>
-								.uptime
-								<span class="params"> [@pessoa] [razão]</span>
-							</h3>
+							<h3>.uptime</h3>
 						</div>
 						<div class="desc">
-							<h4>Bane o usuário marcado!</h4>
-							<p class="exemplo">
-								<b>Exemplo:</b><br />
-								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
+							<h4>Informa o tempo que eu estou online!</h4>
+							<p class="sessao">
+								<b>Variações:</b><br />
+								up
 							</p>
 						</div>
 					</li>
@@ -726,16 +825,21 @@
 							/>
 							<h3>
 								.userinfo
-								<span class="params"> [@pessoa] [razão]</span>
+								<span class="params"> (pessoa)</span>
 							</h3>
 						</div>
 						<div class="desc">
-							<h4>Bane o usuário marcado!</h4>
-							<p class="exemplo">
+							<h4>
+								Mostra as suas informações ou as do usuário
+								mencionado!
+							</h4>
+							<p class="sessao">
 								<b>Exemplo:</b><br />
-								.ban
-								<span class="mention">@Igor Rocha</span> Violou
-								as regras e fez spam
+								.userinfo <br />
+								<secret>↪ Mostra as suas informações</secret>
+								<br />
+								.userinfo <mention>@Igor Rocha</mention> <br />
+								<secret>↪ Mostra as informações de Igor</secret>
 							</p>
 						</div>
 					</li>
@@ -745,20 +849,13 @@
 		<footer></footer>
 
 		<script>
-			let userType = ""
 			let busca = document.getElementById("inputBusca")
 			const comandos =
 				document.getElementsByClassName("lista")[0].children
 
-			busca.addEventListener("input", (event) => {
-				if (event.data != null) {
-					userType += event.data
-				} else {
-					userType = userType.slice(0, -1)
-				}
-
+			busca.addEventListener("input", () => {
 				for (const comando of comandos) {
-					if (comando.id.toString().search(userType) != -1) {
+					if (comando.id.toString().search(busca.value) != -1) {
 						// comando.classList.add("sumir")
 						comando.setAttribute("style", "max-height: 500;")
 						comando.setAttribute("style", "display: block;")
