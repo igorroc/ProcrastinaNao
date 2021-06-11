@@ -18,12 +18,7 @@ module.exports.run = async (bot, message, args) => {
 		return
 	}
 
-	message.guild.channels.cache.forEach(element => {
-		if(element.name.includes("▏")){
-			let nome = element.name.replace('▏', '・')
-			element.setName(nome)
-		}
-	});
+	
 }
 
 module.exports.config = {
@@ -32,5 +27,5 @@ module.exports.config = {
 	usage: ".teste",
 	accessableby: "Moderadores",
 	noalias: "Sem variações",
-	aliases: [""],
+	aliases: [],
 }
