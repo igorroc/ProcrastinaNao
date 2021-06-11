@@ -416,8 +416,8 @@ bot.on("message", async (message) => {
 	// ! Verifica se o comando existe
 	if (commandfile) commandfile.run(bot, message, args)
 	else {
-		message.channel.send(`Comando \`${comando}\` não encontrado`)
-		console.log(`\n\\▶ [LOGS] ⇥ Comando '${comando}' não encontrado`)
+		message.react(`❓`)
+		console.log(`\n■▶ [LOGS] ⇥ Comando '${comando}' não encontrado`)
 	}
 
 	// ! HORARIO PERFEITO
