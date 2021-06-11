@@ -19,6 +19,7 @@ module.exports.run = async (bot, message, args) => {
 			var SHembed = new Discord.MessageEmbed()
 				.setColor("#64B3E3")
 				.setTitle(`\\🔧 Comando: ${command.config.name}`)
+				.setURL(`https://igorroc.github.io/ProcrastinaNao/comandos.html#${command.config.name}`)
 				.addFields(
 					{
 						name: "Descrição",
@@ -74,7 +75,7 @@ module.exports.run = async (bot, message, args) => {
 		}
 		Sembed.addField(
 			"Para mais informações",
-			`Digite \`${prefix}help [comando]\``
+			`Digite \`${prefix}help [comando]\`\nOu acesse o meu [site oficial](https://igorroc.github.io/ProcrastinaNao/comandos.html)`
 		)
 		message.channel.send(Sembed)
 	}
