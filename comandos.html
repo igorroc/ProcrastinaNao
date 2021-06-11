@@ -23,12 +23,14 @@
 						disponíveis para o Bot Anti-Procrastinador!
 					</p>
 				</div>
-                <ul class="filtros">
-                    <li class="active-bg">Todos</li>
-                    <li>Estudo</li>
-                    <li>Moderação</li>
-                </ul>
-                <input id="inputBusca" type="text" placeholder="Buscar...">
+				<ul class="filtros">
+					<li class="active-bg">Todos</li>
+					<li>Estudo</li>
+					<li>Diversão</li>
+					<li>Informações</li>
+					<li>Moderação</li>
+				</ul>
+				<input id="inputBusca" type="text" placeholder="Buscar..." />
 				<ul class="lista">
 					<li id="ban">
 						<div class="title">
@@ -742,29 +744,30 @@
 		</main>
 		<footer></footer>
 
-        <script>
-            let userType = "";
-            let busca = document.getElementById("inputBusca")
-            const comandos = document.getElementsByClassName("lista")[0].children
+		<script>
+			let userType = ""
+			let busca = document.getElementById("inputBusca")
+			const comandos =
+				document.getElementsByClassName("lista")[0].children
 
-            busca.addEventListener("input", (event) =>{
-                if(event.data != null){
-                    userType += event.data
-                }else{
-                    userType = userType.slice(0, -1)
-                }
+			busca.addEventListener("input", (event) => {
+				if (event.data != null) {
+					userType += event.data
+				} else {
+					userType = userType.slice(0, -1)
+				}
 
-                for (const comando of comandos) {
-                    if(comando.id.toString().search(userType) != -1){
-                        // comando.classList.add("sumir")
-                        comando.setAttribute("style", "max-height: 500;")
-                        comando.setAttribute("style", "display: block;")
-                    }else{
-                        comando.setAttribute("style", "max-height: 0;")
-                        comando.setAttribute("style", "display: none;")
-                    }
-                }
-            })
-        </script>
+				for (const comando of comandos) {
+					if (comando.id.toString().search(userType) != -1) {
+						// comando.classList.add("sumir")
+						comando.setAttribute("style", "max-height: 500;")
+						comando.setAttribute("style", "display: block;")
+					} else {
+						comando.setAttribute("style", "max-height: 0;")
+						comando.setAttribute("style", "display: none;")
+					}
+				}
+			})
+		</script>
 	</body>
 </html>
