@@ -6,6 +6,10 @@
 
 }
 
+html{
+	scroll-behavior: smooth;
+}
+
 body{
     font-family: 'Roboto', sans-serif;
     background-color: #36393F;
@@ -21,21 +25,50 @@ header{
 }
 
 main{
-    width: 100%;
+    width: 95%;
     max-width: 1200px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: .5fr 1fr;
+    display: flex;
+    flex-direction: column;
 }
 
 footer{
     width: 100%;
     height: 100px;
-    background-color: #292b30;
 }
 
 li{
     list-style: none;
+}
+
+.descricao-geral{
+    background-color: #2A2C30;
+    box-shadow: 5px 5px 5px #0002;
+    border-radius: 10px;
+
+    margin-bottom: 20px;
+    padding: 20px 30px;
+
+    font-size: 1.2em;
+}
+
+.descricao-geral h2{
+    margin-bottom: 1em;
+}
+
+#inputBusca{
+    width: calc(100% - 60px);
+    
+    font-size: 1.1em;
+    color: white;
+
+    background-color: #202024;
+    box-shadow: 5px 5px 5px #0002;
+    
+    border: none;
+    border-radius: 5px;
+
+    padding: 20px 30px;
 }
 
 .filtros{
@@ -44,16 +77,17 @@ li{
     box-shadow: 5px 5px 5px #0002;
     
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     align-items: center;
 
     padding: 20px 30px;
-    margin: 0 10%;
+    margin-bottom: 20px;
     border-radius: 5px;
 }
 
 .filtros li{
-    width: 100%;
+    min-width: 200px;
+    flex-grow: 1;
 
     text-align:center;
     
@@ -61,7 +95,7 @@ li{
 
     border-radius: 5px;
 
-    margin: 10px 0;
+    margin: 10px 10px;
     padding: 5px 0;
 
     cursor: pointer;
@@ -71,20 +105,6 @@ li{
 
 .filtros li:hover{
     background-color: #83b7d88c;
-}
-
-.descricao-geral{
-    background-color: #2A2C30;
-    box-shadow: 5px 5px 5px #0002;
-    border-radius: 10px;
-
-    padding: 20px 30px;
-
-    font-size: 1.2em;
-}
-
-.descricao-geral h2{
-    margin-bottom: 1em;
 }
 
 .lista li{
@@ -165,4 +185,43 @@ li{
 
 .invert{
     filter: invert(1);
+}
+
+.sumir{
+    animation: disappear 500ms ease-out forwards;
+}
+
+@keyframes disappear {
+    0%{
+        opacity: 1;
+        display: block;
+    }
+    99%{
+        opacity: 0;
+    }
+    100%{
+        display: none !important;
+    }
+}
+
+/* width */
+::-webkit-scrollbar {
+	width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background-color: #2A2C30;
+	/* box-shadow: inset 0 0 5px grey;
+	border-radius: 10px; */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #3f3f3f;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #202024;
 }
