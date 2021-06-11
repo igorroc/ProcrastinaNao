@@ -1,4 +1,5 @@
 const Discord = require("discord.js")
+const ms = require("ms")
 
 module.exports.run = async (bot, message, args) => {
 	console.log(
@@ -10,9 +11,11 @@ module.exports.run = async (bot, message, args) => {
 		.setTitle("Informações de Usuário")
 		.setThumbnail(message.guild.iconURL)
 
+	let member
+
 	if (args.length > 0) {
-		let user = message.mentions.users.first()
-		if (!user) {
+		member = message.mentions.users.first()
+		if (!member) {
 			message.channel.send(
 				`Ocorreu um erro ao encontrar o usuário mencionado.`
 			)
@@ -21,34 +24,36 @@ module.exports.run = async (bot, message, args) => {
 			)
 			return
 		}
-		uEmbed
-			.setTitle(`Informações de ${user.username}`)
-			.setThumbnail(user.displayAvatarURL())
-			.addField("**Nome:**", user.username, true)
-			.addField("**Tag:**", user.discriminator, true)
-			.addField("**ID:**", user.id, true)
-			.addField("**Status:**", user.presence.status, true)
-			.addField("**Desde:**", user.createdAt.toDateString(), true)
+		member = message.guild.members.cache.get(member.id)
 	} else {
-		uEmbed
-			.setTitle(
-				`Informações de ${
-					message.member.nickname || message.author.username
-				}`
-			)
-			.setThumbnail(message.author.displayAvatarURL())
-			.addField("**Nome:**", message.author.username, true)
-			.addField("**Tag:**", message.author.discriminator, true)
-			.addField("**ID:**", message.author.id, true)
-			.addField("**Status:**", message.author.presence.status, true)
-			.addField(
-				"**Desde:**",
-				message.author.createdAt.toDateString(),
-				true
-			)
+		member = message.guild.members.cache.get(message.author.id)
 	}
 
-	message.channel.send({ embed: uEmbed })
+	let age = ms(new Date() - member.user.createdAt, { long: true })
+	age = age.replace("second", "segundo")
+	age = age.replace("seconds", "segundos")
+	age = age.replace("minute", "minuto")
+	age = age.replace("minutes", "minutos")
+	age = age.replace("hour", "hora")
+	age = age.replace("hours", "horas")
+	age = age.replace("day", "dia")
+	age = age.replace("days", "dias")
+
+	uEmbed
+		.setTitle(`\\👤 ${member.nickname || member.user.username}`)
+		.setThumbnail(member.user.displayAvatarURL())
+		.addField("**Nome:**", member.user.username, true)
+		.addField("**Tag:**", member.user.discriminator, true)
+		.addField("**Status:**", member.user.presence.status)
+		.addField("**Desde:**", member.user.createdAt.toDateString(), true)
+		.addField("**Idade**", age, true)
+		.addField(
+			"**Server Booster**",
+			member.premiumSince ? member.premiumSince.toDateString() : "Não"
+		)
+		.setFooter(member.user.id)
+
+	message.channel.send(uEmbed)
 }
 
 module.exports.config = {
