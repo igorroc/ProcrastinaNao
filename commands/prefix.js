@@ -57,5 +57,5 @@ module.exports.config = {
 	usage: ".prefix [novo_prefix] | .prefix reset",
 	accessableby: "Moderadores",
 	noalias: "Sem variações",
-	aliases: [""],
+	aliases: [],
 }

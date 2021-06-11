@@ -629,5 +629,5 @@ module.exports.config = {
 	usage: ".perfil",
 	accessableby: "Membros",
 	noalias: "Sem variações",
-	aliases: [""],
+	aliases: [],
 }

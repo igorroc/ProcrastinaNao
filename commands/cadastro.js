@@ -507,5 +507,5 @@ module.exports.config = {
 	usage: ".cadastro",
 	accessableby: "Novato",
 	noalias: "Sem variações",
-	aliases: [""],
+	aliases: [],
 }

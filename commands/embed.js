@@ -65,5 +65,5 @@ module.exports.config = {
 	usage: ".embed (#canal) (#cor) (titulo) (descricao)",
 	accessableby: "Moderadores",
 	noalias: "Sem variações",
-	aliases: [""],
+	aliases: [],
 }

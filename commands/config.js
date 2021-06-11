@@ -405,5 +405,5 @@ module.exports.config = {
 	usage: ".config (comandos|cargos|on|off)",
 	accessableby: "Moderadores",
 	noalias: "Sem variações",
-	aliases: [""],
+	aliases: [],
 }

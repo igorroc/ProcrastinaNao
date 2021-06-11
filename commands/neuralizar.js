@@ -106,5 +106,5 @@ module.exports.config = {
 	usage: ".neuralizar",
 	accessableby: "Moderadores",
 	noalias: "Sem variações",
-	aliases: [""],
+	aliases: [],
 }
