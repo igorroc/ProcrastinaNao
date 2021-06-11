@@ -450,10 +450,9 @@ function timerHorarioPerfeito() {
 	let day = new Date()
 	let hour = day.getHours()
 	let minute = day.getMinutes()
-	let fuso = day.getTimezoneOffset()
 
 	// ? APLICAÇÃO DO FUSO br
-	hour -= 3
+	hour = (hour+24-3)%24
 	// ! Comentar acima caso esteja rodando localmente.
 
 	let formattedHour = ("0" + hour).slice(-2)
