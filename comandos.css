@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: #36393F;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    font-size: 20px;
+}
+
+header{
+    width: 100%;
+    height: 100px;
+}
+
+main{
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: .5fr 1fr;
+}
+
+footer{
+    width: 100%;
+    height: 100px;
+    background-color: #292b30;
+}
+
+li{
+    list-style: none;
+}
+
+.filtros{
+    height: max-content;
+    background-color: #202024;
+    box-shadow: 5px 5px 5px #0002;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 20px 30px;
+    margin: 0 10%;
+    border-radius: 5px;
+}
+
+.filtros li{
+    width: 100%;
+
+    text-align:center;
+    
+    background-color: #2A2C30;
+
+    border-radius: 5px;
+
+    margin: 10px 0;
+    padding: 5px 0;
+
+    cursor: pointer;
+
+    transition: background-color 300ms ease;
+}
+
+.filtros li:hover{
+    background-color: #83b7d88c;
+}
+
+.descricao-geral{
+    background-color: #2A2C30;
+    box-shadow: 5px 5px 5px #0002;
+    border-radius: 10px;
+
+    padding: 20px 30px;
+
+    font-size: 1.2em;
+}
+
+.descricao-geral h2{
+    margin-bottom: 1em;
+}
+
+.lista li{
+    height: fit-content;
+    max-height: 2em;
+    overflow: hidden;
+
+    background-color: #2A2C30;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px #0002;
+
+    margin: 20px 0;
+    padding: 1em 30px;
+
+    transition: max-height 500ms ease;
+}
+
+.lista li:hover{
+    max-height: 500px;
+}
+
+.lista li:hover .icon{
+    transform: rotate(90deg);
+}
+
+.title{
+    display: flex;
+    align-items: center;
+}
+
+.title h3{
+    margin-left: 1em;
+    font-size: 1.5em;
+}
+
+.desc{
+    margin-top: 1em;
+}
+
+.desc h4{
+    font-weight: 400;
+}
+
+.desc .sessao{
+    margin-top: 1em;
+}
+
+.params{
+    margin-left: .5em;
+    opacity: .5;
+    font-weight: 300;
+}
+
+
+/* * OPCOES */
+
+.active-bg{
+    background-color: #64B3E3 !important;
+    font-weight: bold;
+}
+
+.code{
+    background-color:#18181B;
+    border-radius: 10px;
+    padding: 0 5px;
+}
+
+.mention{
+    background-color: #5865F2;
+    border-radius: 2px;
+    padding: 0 5px;
+}
+
+.icon{
+    height: 1em;
+    transition: transform 300ms ease-out;
+}
+
+.invert{
+    filter: invert(1);
+}
