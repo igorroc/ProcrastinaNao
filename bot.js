@@ -10,7 +10,7 @@ pessoasComHorarioPerfeito.add("337349173894447106") // Add Gabi
 var intervaloPerfeito = setInterval(timerHorarioPerfeito, 60000)
 
 
-const MENSAGEM_REINICIO = true
+const MENSAGEM_REINICIO = false
 
 fs.readdir("./commands/", (err, files) => {
 	if (err) console.log(err)
