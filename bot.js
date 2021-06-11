@@ -1,4 +1,5 @@
 const Discord = require("discord.js")
+const fs = require("fs")
 const bot = new Discord.Client()
 bot.commands = new Discord.Collection()
 bot.aliases = new Discord.Collection()
@@ -8,11 +9,8 @@ pessoasComHorarioPerfeito.add("337349173894447106") // Add Gabi
 
 var intervaloPerfeito = setInterval(timerHorarioPerfeito, 60000)
 
-const fs = require("fs")
 
-const MENSAGEM_REINICIO = false
-
-let loading = "<a:loading:722456385098481735>"
+const MENSAGEM_REINICIO = true
 
 fs.readdir("./commands/", (err, files) => {
 	if (err) console.log(err)
