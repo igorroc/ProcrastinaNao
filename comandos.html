@@ -23,6 +23,11 @@
 						Bot Anti-Procrastinador!
 					</p>
 				</div>
+                <ul class="legenda">
+                    <li>Legenda</li>
+                    <li>[ ] = parametro obrigatório</li>
+                    <li>( ) = parametro não obrigatório</li>
+                </ul>
 				<ul class="filtros">
 					<li class="active-bg">Todos</li>
 					<li>Estudo</li>
@@ -30,7 +35,10 @@
 					<li>Informações</li>
 					<li>Moderação</li>
 				</ul>
-				<input id="inputBusca" type="text" placeholder="Buscar..." />
+                <div class="busca">
+                    <img src="./assets/search.svg" class="invert">
+                    <input id="inputBusca" type="text" placeholder="Buscar..." />
+                </div>
 				<ul class="lista">
 					<li id="ban">
 						<div class="title">
@@ -178,7 +186,7 @@
 							<p class="sessao">
 								<b>Exemplo:</b><br />
 								.embed
-								<mention>#💬 chat-global</mention>
+								<mention>#💬・global-1</mention>
 								<mention style="background-color: #ff76ae"
 									>#FF76AE</mention
 								>
@@ -363,7 +371,7 @@
 							</p>
 							<p class="sessao">
 								<b>Variações:</b><br />
-								.hp
+								hp
 							</p>
 						</div>
 					</li>
@@ -505,7 +513,7 @@
 							<p class="sessao">
 								<b>Exemplo:</b><br />
 								.msg
-								<mention>#💬 chat-global</mention>
+								<mention>#💬・global-1</mention>
 								Bom dia!
 							</p>
 						</div>
@@ -519,7 +527,7 @@
 							<h3>.neuralizar</h3>
 						</div>
 						<div class="desc">
-							<h4>Redefine o canal sem professores!</h4>
+							<h4>Redefine o canal <mention>#❌・sem-professores</mention>!</h4>
 						</div>
 					</li>
 					<li id="noticia">
@@ -563,7 +571,7 @@
 							</p>
 							<p class="sessao">
 								<b>Variações:</b><br />
-								.news
+								news
 							</p>
 						</div>
 					</li>
@@ -825,7 +833,7 @@
 							/>
 							<h3>
 								.userinfo
-								<span class="params"> (pessoa)</span>
+								<span class="params"> (@pessoa)</span>
 							</h3>
 						</div>
 						<div class="desc">

@@ -45,14 +45,23 @@ li {
 }
 
 mention {
-	background-color: #5865f2;
+	background-color: #414675;
 	border-radius: 2px;
 	padding: 0 5px;
+
+	cursor: pointer;
+
+
+	transition: background-color 100ms ease;
+}
+
+mention:hover{
+	background-color: #5865F2;
 }
 
 code {
 	background-color: #18181b;
-	border-radius: 10px;
+	border-radius: 5px;
 	padding: 0 5px;
 }
 
@@ -74,7 +83,7 @@ secret:hover{
 .descricao-geral {
 	background-color: #2a2c30;
 	box-shadow: 5px 5px 5px #0002;
-	border-radius: 10px;
+	border-radius: 5px;
 
 	margin-bottom: 20px;
 	padding: 20px 30px;
@@ -86,19 +95,81 @@ secret:hover{
 	margin-bottom: 1em;
 }
 
-#inputBusca {
+.busca{
 	width: calc(100% - 60px);
-
-	font-size: 1.1em;
-	color: white;
 
 	background-color: #202024;
 	box-shadow: 5px 5px 5px #0002;
+	
+	border-radius: 5px;
+	
+	padding: 20px 30px;
+	
+	display: flex;
+}
+
+.busca img{
+	height: 30px;
+	transform: rotateY(180deg);
+}
+
+#inputBusca {
+	width: 80%;
+	
+	font-size: 1.1em;
+	
+	margin-left: 20px;
+	
+	color: white;
+	background: none;
 
 	border: none;
+
+}
+
+.legenda{
+	height: max-content;
+	background-color: #202024;
+	box-shadow: 5px 5px 5px #0002;
+
+	z-index: 10;
+
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content:  center;
+
+	padding: 10px 30px;
+	margin-bottom: 20px;
 	border-radius: 5px;
 
-	padding: 20px 30px;
+	position: sticky;
+	top: 0;
+}
+
+.legenda li:first-child{
+	width: 100%;
+	flex-grow: unset;
+
+	background: none;
+	border-radius: 0;
+
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
+.legenda  li {
+	min-width: 300px;
+	flex-grow: 1;
+
+	text-align: center;
+
+	background-color: #2a2c30;
+
+	border-radius: 5px;
+
+	margin: 10px 10px;
+	padding: 5px 0;
 }
 
 .filtros {
@@ -143,7 +214,7 @@ secret:hover{
 	height: fit-content;
 	/* max-height: 500px;  */
 	max-height: 2em;
-	
+
 	overflow: hidden;
 
 	background-color: #2a2c30;
@@ -175,7 +246,7 @@ secret:hover{
 }
 
 .desc {
-	margin-top: 1em;
+	margin-top: 1.2em;
 }
 
 .desc h4 {
