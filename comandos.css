@@ -104,9 +104,10 @@ secret:hover {
 
 	border-radius: 5px;
 
-	padding: 20px 30px;
-
+	padding: 0 30px;
+	
 	display: flex;
+	align-items: center;
 	flex-wrap: wrap;
 }
 
@@ -116,9 +117,12 @@ secret:hover {
 }
 
 #inputBusca {
+	width: calc(100% - 100px);
+	height: 3em;
+
 	font-size: 1.1em;
 
-	margin-left: 20px;
+	margin: 0 20px;
 
 	background: none;
 	color: white;
