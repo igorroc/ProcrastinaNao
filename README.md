@@ -26,7 +26,7 @@ Se você está procrastinando muito nessa quarentena, junte-se a nós e [#Procra
 ## 🤖 Bot Anti-Procrastinador
 O principal bot do servidor, o qual é responsável pelo cadastro de novos membros...
 
-* [Arquivo principal](https://github.com/IgorRoc/ProcrastinaNao/blob/master/bot.js)
+* [Todos os comandos e funcionalidades](./comandos.html)
 
 ![ProcrastinaNão](https://raw.githubusercontent.com/IgorRoc/ProcrastinaNao/master/assets/Bot/Logo_v3_Nome_Small.png)
 
