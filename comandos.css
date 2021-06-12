@@ -212,8 +212,6 @@ secret:hover {
 
 .lista li {
 	height: fit-content;
-	/* max-height: 500px;  */
-	max-height: 2em;
 
 	overflow: hidden;
 
@@ -223,8 +221,6 @@ secret:hover {
 
 	margin: 20px 0;
 	padding: 1em 30px;
-
-	transition: max-height 500ms ease;
 }
 
 .lista li:hover {
@@ -233,6 +229,20 @@ secret:hover {
 
 .lista li:hover .icon {
 	transform: rotate(90deg);
+}
+
+.lista li div:nth-child(2){
+	display: none;
+	
+	max-height: 0;
+
+	transition: max-height 500ms ease;
+}
+
+.lista li:hover div:nth-child(2){
+	display: block;
+
+	max-height: 300px;
 }
 
 .title {
@@ -270,12 +280,17 @@ secret:hover {
 	font-weight: bold;
 }
 
-.comando-ativo{
+.comando-ativo {
 	max-height: 500px !important;
 	border-left: solid 10px #64b3e3;
 	z-index: 5;
 	position: sticky;
 	top: var(--custom-top);
+}
+
+.comando-ativo div:nth-child(2){
+	display: block !important;
+	max-height: 300px !important;
 }
 
 .icon {
@@ -331,26 +346,8 @@ secret:hover {
 	background: #64b3e3;
 }
 
-@media (max-width: 920px){
+@media (max-width: 920px) {
 	body {
 		font-size: 17px;
-	}
-}
-
-@media (max-width: 800px){
-	body {
-		font-size: 15px;
-	}
-}
-
-@media (max-width: 700px){
-	body {
-		font-size: 12px;
-	}
-}
-
-@media (max-width: 600px){
-	body {
-		font-size: 10px;
 	}
 }
