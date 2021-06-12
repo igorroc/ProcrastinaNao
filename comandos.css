@@ -235,13 +235,13 @@ secret:hover {
 	height: fit-content;
 	max-height: 0;
 	overflow: hidden;
-	
+
 	transition: max-height 300ms ease;
 }
 
 .lista li:hover .desc {
 	max-height: 300px;
-	
+
 	overflow: auto;
 
 	margin: 10px 0;
@@ -255,6 +255,52 @@ secret:hover {
 .title h3 {
 	margin-left: 1em;
 	font-size: 1.5em;
+}
+
+.title .perms{
+	margin-left: auto;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.title .perms h5{
+	text-align: center;
+	font-weight: 900;
+
+	flex-grow: 1;
+	margin: 5px;
+	padding: 10px 10px;
+
+	border-radius: 5px;
+}
+
+.adm{
+	background-color: #ec2a10;
+}
+
+.mod{
+	background-color: #FF7600;
+}
+
+.sup{
+	background-color: #FFC77F;
+	color: #18181b;
+}
+
+.ver{
+	background-color: #2ECC71;
+}
+
+.nov{
+	background-color: #607D8B;
+}
+
+.all{
+	background-color: #64B3E3;
+}
+
+.ocult{
+	background-color: #18181b;
 }
 
 .desc h4 {
@@ -285,7 +331,7 @@ secret:hover {
 	position: sticky;
 	top: var(--custom-top);
 
-	box-shadow: 0 0 20px #000a!important;
+	box-shadow: 0 0 20px #000a !important;
 }
 
 .comando-ativo .desc {
@@ -306,7 +352,8 @@ secret:hover {
 }
 
 .sumir {
-	animation: disappear 500ms ease-out forwards;
+	max-width: 0;
+	display: none;
 }
 
 @keyframes disappear {

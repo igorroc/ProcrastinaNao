@@ -28,12 +28,12 @@
 					<li>[ ] = parametro obrigatório</li>
 					<li>( ) = parametro opcional</li>
 				</ul>
-				<ul class="filtros">
-					<li class="active-bg">Todos</li>
-					<li>Estudo</li>
-					<li>Diversão</li>
-					<li>Informações</li>
-					<li>Moderação</li>
+				<ul id="filtro" class="filtros">
+					<li onclick="filtrar('todos')" class="active-bg">Todos</li>
+					<li onclick="filtrar('estudo')">Estudo</li>
+					<li onclick="filtrar('diversão')">Diversão</li>
+					<li onclick="filtrar('informações')">Informações</li>
+					<li onclick="filtrar('moderação')">Moderação</li>
 				</ul>
 				<div class="busca">
 					<img src="./assets/search.svg" class="invert" />
@@ -54,6 +54,10 @@
 								.ban
 								<span class="params"> [@pessoa] [razão]</span>
 							</h3>
+							<div class="perms">
+								<h5 class="adm">ADM</h5>
+								<h5 class="mod">MOD</h5>
+							</div>
 						</div>
 						<div class="desc">
 							<h4>Bane o usuário marcado!</h4>
@@ -76,6 +80,9 @@
 								class="icon invert"
 							/>
 							<h3>.cadastro</h3>
+							<div class="perms">
+								<h5 class="nov">NOV</h5>
+							</div>
 						</div>
 						<div class="desc">
 							Comando expecifico para o cadastro de novos usuários
@@ -91,6 +98,9 @@
 								.clear
 								<span class="params"> [quantidade]</span>
 							</h3>
+							<div class="perms">
+								<h5 class="adm">ADM</h5>
+							</div>
 						</div>
 						<div class="desc">
 							Apaga as últimas X mensagens naquele canal!
@@ -110,6 +120,9 @@
 								.config
 								<span class="params"> (opções)</span>
 							</h3>
+							<div class="perms">
+								<h5 class="adm">ADM</h5>
+							</div>
 						</div>
 						<div class="desc">
 							Configurações do servidor
@@ -129,6 +142,9 @@
 								.countdown
 								<span class="params"> [minutos]</span>
 							</h3>
+							<div class="perms">
+								<h5 class="all">ALL</h5>
+							</div>
 						</div>
 						<div class="desc">
 							Inicia uma contagem regressiva com o tempo indicado!
@@ -154,6 +170,9 @@
 									[@pessoa] [mensagem]</span
 								>
 							</h3>
+							<div class="perms">
+								<h5 class="adm">ADM</h5>
+							</div>
 						</div>
 						<div class="desc">
 							<h4>
@@ -180,6 +199,9 @@
 									[#canal] [cor] [título] [descrição]</span
 								>
 							</h3>
+							<div class="perms">
+								<h5 class="adm">ADM</h5>
+							</div>
 						</div>
 						<div class="desc">
 							<h4>
@@ -205,6 +227,9 @@
 								class="icon invert"
 							/>
 							<h3>.fecharsala</h3>
+							<div class="perms">
+								<h5 class="ver">VER</h5>
+							</div>
 						</div>
 						<div class="desc">
 							<h4>
@@ -228,6 +253,9 @@
 								.filme
 								<span class="params"> [nome do filme]</span>
 							</h3>
+							<div class="perms">
+								<h5 class="all">ALL</h5>
+							</div>
 						</div>
 						<div class="desc">
 							<h4>
@@ -237,7 +265,8 @@
 							</h4>
 							<p class="sessao">
 								<b>● Exemplo:</b><br />
-								.filme avengers endgame <br />
+								.filme avengers endgame
+								<br /><br />
 								.serie rick and morty
 							</p>
 							<p class="sessao">
@@ -254,8 +283,11 @@
 							/>
 							<h3>
 								.fotoaleatoria
-								<span class="params"> [assuntos]</span>
+								<span class="params"> (assuntos)</span>
 							</h3>
+							<div class="perms">
+								<h5 class="all">ALL</h5>
+							</div>
 						</div>
 						<div class="desc">
 							<h4>
@@ -270,8 +302,10 @@
 							</h4>
 							<p class="sessao">
 								<b>● Exemplo:</b><br />
-								.fotoaleatoria <br />
-								.fotoaleatoria cat<br />
+								.fotoaleatoria
+								<br /><br />
+								.fotoaleatoria cat
+								<br /><br />
 								.fotoaleatoria happy cat
 							</p>
 							<p class="sessao">
@@ -288,8 +322,11 @@
 							/>
 							<h3>
 								.gif
-								<span class="params"> [@pessoa] [razão]</span>
+								<span class="params"> (assunto)</span>
 							</h3>
+							<div class="perms">
+								<h5 class="all">ALL</h5>
+							</div>
 						</div>
 						<div class="desc">
 							<h4>
@@ -304,7 +341,8 @@
 							</h4>
 							<p class="sessao">
 								<b>● Exemplo:</b><br />
-								.gif cat <br />
+								.gif cat
+								<br /><br />
 								.sticker cat
 							</p>
 							<p class="sessao">
@@ -323,6 +361,9 @@
 								.git
 								<span class="params"> [pessoa]</span>
 							</h3>
+							<div class="perms">
+								<h5 class="all">ALL</h5>
+							</div>
 						</div>
 						<div class="desc">
 							<h4>
@@ -345,12 +386,16 @@
 								.help
 								<span class="params"> (comando)</span>
 							</h3>
+							<div class="perms">
+								<h5 class="all">ALL</h5>
+							</div>
 						</div>
 						<div class="desc">
 							<h4>Resumo dos comandos do servidor!</h4>
 							<p class="sessao">
 								<b>● Exemplo:</b><br />
-								.help<br />
+								.help
+								<br /><br />
 								.help filme
 							</p>
 							<p class="sessao">
@@ -366,6 +411,9 @@
 								class="icon invert"
 							/>
 							<h3>.horarioperfeito</h3>
+							<div class="perms">
+								<h5 class="all">ALL</h5>
+							</div>
 						</div>
 						<div class="desc">
 							<h4>Te avisa todos os horarios perfeitos!</h4>
@@ -386,6 +434,9 @@
 								class="icon invert"
 							/>
 							<h3>.invite</h3>
+							<div class="perms">
+								<h5 class="all">ALL</h5>
+							</div>
 						</div>
 						<div class="desc">
 							<h4>Mostra o link de convite do servidor!</h4>
@@ -405,6 +456,11 @@
 								.kick
 								<span class="params"> [@pessoa] [razão]</span>
 							</h3>
+							<div class="perms">
+								<h5 class="adm">ADM</h5>
+								<h5 class="mod">MOD</h5>
+								<h5 class="sup">SUP</h5>
+							</div>
 						</div>
 						<div class="desc">
 							<h4>Expulsa o usuário marcado!</h4>
@@ -428,6 +484,9 @@
 									[minutos] (não ser marcado) (mensagem)</span
 								>
 							</h3>
+							<div class="perms">
+								<h5 class="all">ALL</h5>
+							</div>
 						</div>
 						<div class="desc">
 							<h4>
@@ -443,26 +502,26 @@
 									↪ Apenas cria um lembrete de 30 minutos e te
 									marca quando chegar a hora
 								</secret>
-								<br />
+								<br /><br />
 								.lembrete 30 true <br />
 								<secret>
 									↪ Apenas cria um lembrete de 30 minutos e
 									manda uma mensagem no mesmo chat onde esse
 									comando foi usado
 								</secret>
-								<br />
+								<br /><br />
 								.lembrete 30 Lembrar de entregar a atividade no
 								Classroom <br />
 								<secret>
-									↪ Apenas cria um lembrete de 30 minutos e
-									manda ESSA mensagem, te marcando
+									↪ Cria um lembrete de 30 minutos e manda
+									ESSA mensagem, te marcando
 								</secret>
-								<br />
+								<br /><br />
 								.lembrete 30 true Lembrar de entregar a
 								atividade no Classroom <br />
 								<secret>
-									↪ Apenas cria um lembrete de 30 minutos e
-									manda ESSA mensagem no mesmo chat onde esse
+									↪ Cria um lembrete de 30 minutos e manda
+									ESSA mensagem no mesmo chat onde esse
 									comando foi usado
 								</secret>
 								<br />
@@ -482,6 +541,9 @@
 									(frase_inferior)</span
 								>
 							</h3>
+							<div class="perms">
+								<h5 class="all">ALL</h5>
+							</div>
 						</div>
 						<div class="desc">
 							<h4>
@@ -508,6 +570,9 @@
 								.msg
 								<span class="params"> [#canal] [mensagem]</span>
 							</h3>
+							<div class="perms">
+								<h5 class="adm">ADM</h5>
+							</div>
 						</div>
 						<div class="desc">
 							<h4>
@@ -529,6 +594,9 @@
 								class="icon invert"
 							/>
 							<h3>.neuralizar</h3>
+							<div class="perms">
+								<h5 class="adm">ADM</h5>
+							</div>
 						</div>
 						<div class="desc">
 							<h4>
@@ -547,6 +615,9 @@
 								.noticia
 								<span class="params"> (país) (assunto)</span>
 							</h3>
+							<div class="perms">
+								<h5 class="all">ALL</h5>
+							</div>
 						</div>
 						<div class="desc">
 							<h4>
@@ -556,25 +627,27 @@
 							<p class="sessao">
 								<b>● Exemplo:</b><br />
 								.noticia<br />
-								<secret
-									>↪ Retorna uma notícia aleatória do
-									Brasil</secret
-								><br />
+								<secret>
+									↪ Retorna uma notícia aleatória do Brasil
+								</secret>
+								<br /><br />
 								.noticia us<br />
-								<secret
-									>↪ Retorna uma notícia aleatória dos Estados
-									Unidos</secret
-								><br />
+								<secret>
+									↪ Retorna uma notícia aleatória dos Estados
+									Unidos
+								</secret>
+								<br /><br />
 								.noticia bitcoin<br />
-								<secret
-									>↪ Retorna uma notícia sobre bitcoin, em
-									português</secret
-								><br />
+								<secret>
+									↪ Retorna uma notícia sobre bitcoin, em
+									português
+								</secret>
+								<br /><br />
 								.noticia bitcoin us<br />
-								<secret
-									>↪ Retorna uma notícia sobre bitcoin, em
-									inglês</secret
-								>
+								<secret>
+									↪ Retorna uma notícia sobre bitcoin, em
+									inglês
+								</secret>
 							</p>
 							<p class="sessao">
 								<b>● Variações:</b><br />
@@ -589,6 +662,9 @@
 								class="icon invert"
 							/>
 							<h3>.perfil</h3>
+							<div class="perms">
+								<h5 class="ver">VER</h5>
+							</div>
 						</div>
 						<div class="desc">
 							<h4>
@@ -603,6 +679,9 @@
 								class="icon invert"
 							/>
 							<h3>.piada</h3>
+							<div class="perms">
+								<h5 class="all">ALL</h5>
+							</div>
 						</div>
 						<div class="desc">
 							<h4>Conta uma piada, em inglês, a você!</h4>
@@ -619,6 +698,9 @@
 								class="icon invert"
 							/>
 							<h3>.ping</h3>
+							<div class="perms">
+								<h5 class="all">ALL</h5>
+							</div>
 						</div>
 						<div class="desc">
 							<h4>
@@ -643,12 +725,15 @@
 									[novo prefix / reset]</span
 								>
 							</h3>
+							<div class="perms">
+								<h5 class="adm">ADM</h5>
+							</div>
 						</div>
 						<div class="desc">
 							<h4>Altera o prefixo do servidor!</h4>
 							<p class="sessao">
 								<b>● Exemplo:</b><br />
-								.prefix ! <br />
+								.prefix ! <br /><br />
 								.prefix reset
 							</p>
 						</div>
@@ -663,14 +748,18 @@
 								.prender
 								<span class="params"> [@pessoa] [razão]</span>
 							</h3>
+							<div class="perms">
+								<h5 class="adm">ADM</h5>
+								<h5 class="mod">MOD</h5>
+								<h5 class="sup">SUP</h5>
+							</div>
 						</div>
 						<div class="desc">
 							<h4>Prende/solta o usuário marcado!</h4>
 							<p class="sessao">
 								<b>● Exemplo:</b><br />
-								.prender
-								<mention>@Igor Rocha</mention>
-								Está tumultuando o chat <br />
+								.prender <mention>@Igor Rocha</mention> Está
+								tumultuando o chat <br /><br />
 								.soltar <mention>@Igor Rocha</mention>
 							</p>
 							<p class="sessao">
@@ -689,6 +778,9 @@
 								.promocao
 								<span class="params"> [nome do jogo]</span>
 							</h3>
+							<div class="perms">
+								<h5 class="all">ALL</h5>
+							</div>
 						</div>
 						<div class="desc">
 							<h4>
@@ -715,6 +807,9 @@
 								.reload
 								<span class="params"> [comando]</span>
 							</h3>
+							<div class="perms">
+								<h5 class="adm">ADM</h5>
+							</div>
 						</div>
 						<div class="desc">
 							<h4>Recarrega um comando especifico!</h4>
@@ -740,6 +835,9 @@
 									[nome da sala] [@pessoas] ...</span
 								>
 							</h3>
+							<div class="perms">
+								<h5 class="ver">VER</h5>
+							</div>
 						</div>
 						<div class="desc">
 							<h4>
@@ -768,6 +866,9 @@
 								class="icon invert"
 							/>
 							<h3>.serverinfo</h3>
+							<div class="perms">
+								<h5 class="all">ALL</h5>
+							</div>
 						</div>
 						<div class="desc">
 							<h4>Envia as informações do servidor!</h4>
@@ -784,6 +885,9 @@
 								class="icon invert"
 							/>
 							<h3>.soma</h3>
+							<div class="perms">
+								<h5 class="all">ALL</h5>
+							</div>
 						</div>
 						<div class="desc">
 							<h4>Faça operações matemáticas!</h4>
@@ -803,6 +907,9 @@
 								.teste
 								<span class="params"> ??? </span>
 							</h3>
+							<div class="perms">
+								<h5 class="ocult">???</h5>
+							</div>
 						</div>
 						<div class="desc">
 							<h4>???</h4>
@@ -823,6 +930,9 @@
 								class="icon invert"
 							/>
 							<h3>.uptime</h3>
+							<div class="perms">
+								<h5 class="all">ALL</h5>
+							</div>
 						</div>
 						<div class="desc">
 							<h4>Informa o tempo que eu estou online!</h4>
@@ -842,6 +952,9 @@
 								.userinfo
 								<span class="params"> (@pessoa)</span>
 							</h3>
+							<div class="perms">
+								<h5 class="all">ALL</h5>
+							</div>
 						</div>
 						<div class="desc">
 							<h4>
@@ -852,7 +965,7 @@
 								<b>● Exemplo:</b><br />
 								.userinfo <br />
 								<secret>↪ Mostra as suas informações</secret>
-								<br />
+								<br /><br />
 								.userinfo <mention>@Igor Rocha</mention> <br />
 								<secret>↪ Mostra as informações de Igor</secret>
 							</p>
@@ -872,6 +985,7 @@
 
 			const comandos =
 				document.getElementsByClassName("lista")[0].children
+			const filtros = document.getElementById("filtro").children
 
 			document.getElementById("qtd-comandos").innerText = comandos.length
 
@@ -890,12 +1004,9 @@
 			busca.addEventListener("input", () => {
 				for (const comando of comandos) {
 					if (comando.id.toString().search(busca.value) != -1) {
-						// comando.classList.add("sumir")
-						comando.setAttribute("style", "max-height: 500;")
-						comando.setAttribute("style", "display: block;")
+						comando.classList.remove("sumir")
 					} else {
-						comando.setAttribute("style", "max-height: 0;")
-						comando.setAttribute("style", "display: none;")
+						comando.classList.add("sumir")
 					}
 				}
 			})
@@ -904,6 +1015,22 @@
 				let selecionado = evt.target
 				selecionado.classList.remove("comando-ativo")
 				selecionado.removeEventListener("mouseleave", removeClass)
+			}
+
+			function filtrar(categoria){
+				if(categoria == "todos"){
+					for (const filtro of filtros) {
+						filtro.classList.remove("active-bg")
+					}
+					filtros[0].classList.add("active-bg")
+					for (const comando of comandos) {
+						comando.classList.remove("sumir")
+					}
+					busca.value = ''
+				}else{
+					filtros[0].classList.remove("active-bg")
+					
+				}
 			}
 		</script>
 	</body>
