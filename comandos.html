@@ -23,11 +23,11 @@
 						Bot Anti-Procrastinador!
 					</p>
 				</div>
-                <ul class="legenda">
-                    <li>Legenda</li>
-                    <li>[ ] = parametro obrigatório</li>
-                    <li>( ) = parametro opcional</li>
-                </ul>
+				<ul class="legenda" id="legenda">
+					<li>Legenda</li>
+					<li>[ ] = parametro obrigatório</li>
+					<li>( ) = parametro opcional</li>
+				</ul>
 				<ul class="filtros">
 					<li class="active-bg">Todos</li>
 					<li>Estudo</li>
@@ -35,10 +35,14 @@
 					<li>Informações</li>
 					<li>Moderação</li>
 				</ul>
-                <div class="busca">
-                    <img src="./assets/search.svg" class="invert">
-                    <input id="inputBusca" type="text" placeholder="Buscar..." />
-                </div>
+				<div class="busca">
+					<img src="./assets/search.svg" class="invert" />
+					<input
+						id="inputBusca"
+						type="text"
+						placeholder="Buscar..."
+					/>
+				</div>
 				<ul class="lista">
 					<li id="ban">
 						<div class="title">
@@ -527,7 +531,10 @@
 							<h3>.neuralizar</h3>
 						</div>
 						<div class="desc">
-							<h4>Redefine o canal <mention>#❌・sem-professores</mention>!</h4>
+							<h4>
+								Redefine o canal
+								<mention>#❌・sem-professores</mention>!
+							</h4>
 						</div>
 					</li>
 					<li id="noticia">
@@ -857,6 +864,20 @@
 		<footer></footer>
 
 		<script>
+			var url = new URL(window.location)
+			var comando = url.searchParams.get("comando")
+
+			let legenda = document.getElementById("legenda")
+
+			if (comando) {
+				let selecionado = document.getElementById(comando)
+				selecionado.setAttribute("style", `--custom-top: ${legenda.offsetHeight}px;`)
+				selecionado.scrollIntoView()
+
+				selecionado.classList.add("comando-ativo")
+				selecionado.addEventListener("mouseleave", removeClass)
+			}
+
 			let busca = document.getElementById("inputBusca")
 			const comandos =
 				document.getElementsByClassName("lista")[0].children
@@ -873,6 +894,12 @@
 					}
 				}
 			})
+
+			function removeClass(evt) {
+				let selecionado = evt.target
+				selecionado.classList.remove("comando-ativo")
+				selecionado.removeEventListener("mouseleave", removeClass)
+			}
 		</script>
 	</body>
 </html>

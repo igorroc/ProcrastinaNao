@@ -270,6 +270,14 @@ secret:hover {
 	font-weight: bold;
 }
 
+.comando-ativo{
+	max-height: 500px !important;
+	border-left: solid 10px #64b3e3;
+	z-index: 5;
+	position: sticky;
+	top: var(--custom-top);
+}
+
 .icon {
 	height: 1em;
 	transition: transform 300ms ease-out;
