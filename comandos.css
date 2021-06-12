@@ -231,7 +231,7 @@ secret:hover {
 	transform: rotate(90deg);
 }
 
-.lista li div:nth-child(2) {
+.lista li .desc {
 	height: fit-content;
 	max-height: 0;
 	overflow: hidden;
@@ -288,8 +288,12 @@ secret:hover {
 	box-shadow: 0 0 20px #000a!important;
 }
 
-.comando-ativo div:nth-child(2) {
-	max-height: 400px !important;
+.comando-ativo .desc {
+	max-height: 300px !important;
+
+	overflow: auto !important;
+
+	margin: 10px 0 !important;
 }
 
 .icon {
