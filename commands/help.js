@@ -19,7 +19,7 @@ module.exports.run = async (bot, message, args) => {
 			var SHembed = new Discord.MessageEmbed()
 				.setColor("#64B3E3")
 				.setTitle(`\\🔧 Comando: ${command.config.name}`)
-				.setURL(`https://igorroc.github.io/ProcrastinaNao/comandos.html#${command.config.name}`)
+				.setURL(`https://igorroc.github.io/ProcrastinaNao/comandos.html?comando=${command.config.name}`)
 				.addFields(
 					{
 						name: "Descrição",
