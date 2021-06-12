@@ -43,12 +43,13 @@
 					<li onclick="filtrar('moderação')">Moderação</li>
 				</ul>
 				<div class="busca">
-					<img src="./assets/search.svg" class="invert" />
+					<img id="imgBusca" src="./assets/search.svg" class="invert" />
 					<input
 						id="inputBusca"
 						type="text"
 						placeholder="Buscar..."
 					/>
+					<img id="resetBusca" src="./assets/reset.svg" class="invert resetHidden" onclick="resetBusca()"/>
 				</div>
 				<ul class="lista">
 					<li id="ban" categoria="moderação">

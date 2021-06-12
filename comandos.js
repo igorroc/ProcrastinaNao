@@ -3,6 +3,7 @@ var comando = url.searchParams.get("comando")
 
 let legenda = document.getElementById("legenda")
 let busca = document.getElementById("inputBusca")
+let reset = document.getElementById("resetBusca")
 
 const comandos = document.getElementsByClassName("lista")[0].children
 const filtros = document.getElementById("filtro").children
@@ -24,11 +25,12 @@ if (comando) {
 busca.addEventListener("input", () => {
 	for (const comando of comandos) {
 		if (!comando.classList.contains("sumir")) {
-			if (comando.id.toString().search(busca.value) == -1) {
+			if (comando.id.toString().search(busca.value.toLowerCase()) == -1) {
 				comando.classList.add("sumir")
 			}
 		}
 	}
+	reset.classList.remove("resetHidden")
 })
 
 function removeClass(evt) {
@@ -63,4 +65,22 @@ function filtrar(categoria) {
 			}
 		}
 	}
+}
+
+function resetBusca() {
+	for (const filtro of filtros) {
+		filtro.classList.remove("active-bg")
+	}
+	filtros[1].classList.add("active-bg")
+	for (const comando of comandos) {
+		comando.classList.remove("sumir")
+	}
+	busca.value = ""
+
+	let buscaReset = document.getElementById("resetBusca")
+	buscaReset.classList.add("resetAnimation")
+	setTimeout(() => {
+		buscaReset.classList.remove("resetAnimation")
+		buscaReset.classList.add("resetHidden")
+	}, 2000)
 }

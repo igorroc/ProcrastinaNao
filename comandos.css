@@ -95,6 +95,8 @@ secret:hover {
 }
 
 .busca {
+	overflow: hidden;
+
 	width: calc(100% - 60px);
 
 	background-color: #202024;
@@ -108,41 +110,57 @@ secret:hover {
 	flex-wrap: wrap;
 }
 
-.busca img {
+#imgBusca {
 	height: 30px;
 	transform: rotateY(180deg);
 }
 
 #inputBusca {
-	width: 80%;
-
 	font-size: 1.1em;
 
 	margin-left: 20px;
 
 	background: none;
 	color: white;
-	
+
 	border: none;
 	outline: none;
+}
+
+#resetBusca {
+	height: 30px;
+	margin-left: auto;
+
+	transition: transform 500ms ease;
+
+	cursor: pointer;
+}
+
+.resetHidden {
+	transform: translateX(80px) !important;
+}
+
+.resetAnimation {
+	animation: rotateBusca 500ms ease, hideBusca 500ms ease forwards;
+	animation-delay: 0s, 500ms;
 }
 
 .legenda {
 	height: max-content;
 	background-color: #202024;
 	box-shadow: 5px 5px 5px #0002;
-	
+
 	z-index: 10;
-	
+
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: center;
-	
+
 	padding: 10px 30px;
 	margin-bottom: 20px;
 	border-radius: 5px;
-	
+
 	position: sticky;
 	top: 0;
 
@@ -375,6 +393,18 @@ secret:hover {
 .sumir {
 	max-width: 0;
 	display: none;
+}
+
+@keyframes rotateBusca {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes hideBusca {
+	to {
+		transform: translateX(80px);
+	}
 }
 
 /* * Scroll Bar */
