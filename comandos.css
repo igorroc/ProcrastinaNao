@@ -213,7 +213,7 @@ secret:hover {
 .lista li {
 	height: fit-content;
 
-	overflow: hidden;
+	overflow: auto;
 
 	background-color: #2a2c30;
 	border-radius: 10px;
@@ -231,18 +231,20 @@ secret:hover {
 	transform: rotate(90deg);
 }
 
-.lista li div:nth-child(2){
-	display: none;
-	
+.lista li div:nth-child(2) {
+	height: fit-content;
 	max-height: 0;
-
-	transition: max-height 500ms ease;
+	overflow: hidden;
+	
+	transition: max-height 300ms ease;
 }
 
-.lista li:hover div:nth-child(2){
-	display: block;
-
+.lista li:hover .desc {
 	max-height: 300px;
+	
+	overflow: auto;
+
+	margin: 10px 0;
 }
 
 .title {
@@ -253,10 +255,6 @@ secret:hover {
 .title h3 {
 	margin-left: 1em;
 	font-size: 1.5em;
-}
-
-.desc {
-	margin-top: 1.2em;
 }
 
 .desc h4 {
@@ -281,16 +279,17 @@ secret:hover {
 }
 
 .comando-ativo {
-	max-height: 500px !important;
 	border-left: solid 10px #64b3e3;
+
 	z-index: 5;
 	position: sticky;
 	top: var(--custom-top);
+
+	box-shadow: 0 0 20px #000a!important;
 }
 
-.comando-ativo div:nth-child(2){
-	display: block !important;
-	max-height: 300px !important;
+.comando-ativo div:nth-child(2) {
+	max-height: 400px !important;
 }
 
 .icon {
