@@ -122,7 +122,7 @@ secret:hover {
 
 	background: none;
 	color: white;
-
+	
 	border: none;
 	outline: none;
 }
@@ -131,20 +131,22 @@ secret:hover {
 	height: max-content;
 	background-color: #202024;
 	box-shadow: 5px 5px 5px #0002;
-
+	
 	z-index: 10;
-
+	
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: center;
-
+	
 	padding: 10px 30px;
 	margin-bottom: 20px;
 	border-radius: 5px;
-
+	
 	position: sticky;
 	top: 0;
+
+	user-select: none;
 }
 
 .legenda li:first-child {
@@ -159,7 +161,7 @@ secret:hover {
 }
 
 .legenda li {
-	min-width: 300px;
+	min-width: max-content;
 	flex-grow: 1;
 
 	text-align: center;
@@ -169,7 +171,7 @@ secret:hover {
 	border-radius: 5px;
 
 	margin: 10px 10px;
-	padding: 5px 0;
+	padding: 5px 10px;
 }
 
 .filtros {
@@ -210,6 +212,18 @@ secret:hover {
 	background-color: #83b7d88c;
 }
 
+.filtros li:first-child {
+	width: 100%;
+	flex-grow: unset;
+
+	background: none;
+	border-radius: 0;
+
+	font-size: 1.5em;
+	font-weight: bold;
+
+	cursor: auto;
+}
 .lista li {
 	height: fit-content;
 
@@ -236,15 +250,14 @@ secret:hover {
 	max-height: 0;
 	overflow: hidden;
 
-	transition: max-height 300ms ease;
+	transition: max-height 300ms ease, margin 300ms ease;
 }
 
 .lista li:hover .desc {
-	max-height: 300px;
-
-	overflow: auto;
-
 	margin: 10px 0;
+
+	max-height: 300px;
+	overflow: auto;
 }
 
 .title {
@@ -257,13 +270,13 @@ secret:hover {
 	font-size: 1.5em;
 }
 
-.title .perms{
+.title .perms {
 	margin-left: auto;
 	display: flex;
 	flex-wrap: wrap;
 }
 
-.title .perms h5{
+.title .perms h5 {
 	text-align: center;
 	font-weight: 900;
 
@@ -272,34 +285,41 @@ secret:hover {
 	padding: 10px 10px;
 
 	border-radius: 5px;
+
+	cursor: pointer;
+
+	position: relative;
 }
 
-.adm{
-	background-color: #ec2a10;
+.adm {
+	background-color: #d1230c !important;
 }
 
-.mod{
-	background-color: #FF7600;
-}
-
-.sup{
-	background-color: #FFC77F;
+.mod {
+	background-color: #ff7600 !important;
 	color: #18181b;
 }
 
-.ver{
-	background-color: #2ECC71;
+.sup {
+	background-color: #ffc77f !important;
+	color: #18181b;
 }
 
-.nov{
-	background-color: #607D8B;
+.ver {
+	background-color: #2ecc71 !important;
+	color: #18181b;
 }
 
-.all{
-	background-color: #64B3E3;
+.nov {
+	background-color: #4f6570 !important;
 }
 
-.ocult{
+.all {
+	background-color: #64b3e3 !important;
+	color: #18181b;
+}
+
+.ocult {
 	background-color: #18181b;
 }
 
@@ -322,6 +342,7 @@ secret:hover {
 .active-bg {
 	background-color: #64b3e3 !important;
 	font-weight: bold;
+	color: #000;
 }
 
 .comando-ativo {
@@ -356,19 +377,7 @@ secret:hover {
 	display: none;
 }
 
-@keyframes disappear {
-	0% {
-		opacity: 1;
-		display: block;
-	}
-	99% {
-		opacity: 0;
-	}
-	100% {
-		display: none !important;
-	}
-}
-
+/* * Scroll Bar */
 /* width */
 ::-webkit-scrollbar {
 	width: 12px;
