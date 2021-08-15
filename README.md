@@ -20,7 +20,7 @@ Se você está procrastinando muito nessa quarentena, junte-se a nós e [#Procra
 
 ----
 ## 📁 Servidor: 
-![ProcrastinaNão](https://github.com/IgorRoc/ProcrastinaNao/blob/fullfiles/assets/Servidor%20ProcrastinaN%C3%A3o(Limpo).png?raw=true)
+![ProcrastinaNão](https://raw.githubusercontent.com/IgorRoc/ProcrastinaNao/master/assets/Server/print_server.png)
 
 ----
 ## 🤖 Bot Anti-Procrastinador
