@@ -9,7 +9,6 @@ pessoasComHorarioPerfeito.add("337349173894447106") // Add Gabi
 
 var intervaloPerfeito = setInterval(timerHorarioPerfeito, 60000)
 
-
 const MENSAGEM_REINICIO = false
 
 fs.readdir("./commands/", (err, files) => {
@@ -96,7 +95,10 @@ bot.on("raw", async (dados) => {
 		java = servidor.roles.cache.get("721176368964173835"),
 		css = servidor.roles.cache.get("721177136655892632"),
 		html = servidor.roles.cache.get("721346290369167460"),
-		c = servidor.roles.cache.get("721115106871738408")
+		c = servidor.roles.cache.get("721115106871738408"),
+		separadorProject = servidor.roles.cache.get("856261907183042600"),
+		separadorSkill = servidor.roles.cache.get("856259520220889118"),
+		separadorInfo = servidor.roles.cache.get("856261550994096149")
 
 	const embed = new Discord.MessageEmbed()
 	let localCorreto = false
@@ -168,6 +170,43 @@ bot.on("raw", async (dados) => {
 					`↳ Cargo 'C' adicionado para o usuário '${membro.user.username}'`
 				)
 			}
+		} else if (dados.d.message_id === "889571344918925342") {
+			// Mensagem Separadores
+			embed.setTitle("\\💼 Cargo adicionado").setColor("#00FF00")
+
+			if (dados.d.emoji.name === "🟥") {
+				// Cargo Projetos
+				if (
+					membro.roles.cache.some((role) => role === separadorProject)
+				)
+					return console.log(
+						`↳ Usuário '${membro.user.username}' já possui o cargo 'Projetos'`
+					)
+				membro.roles.add(separadorProject)
+				console.log(
+					`↳ Cargo 'Projetos' adicionado para o usuário '${membro.user.username}'`
+				)
+			} else if (dados.d.emoji.name === "🟩") {
+				// Cargo Habilidades
+				if (membro.roles.cache.some((role) => role === separadorSkill))
+					return console.log(
+						`↳ Usuário '${membro.user.username}' já possui o cargo 'Habilidades'`
+					)
+				membro.roles.add(separadorSkill)
+				console.log(
+					`↳ Cargo 'Habilidades' adicionado para o usuário '${membro.user.username}'`
+				)
+			} else if (dados.d.emoji.name === "🟦") {
+				// Cargo Informações
+				if (membro.roles.cache.some((role) => role === separadorInfo))
+					return console.log(
+						`↳ Usuário '${membro.user.username}' já possui o cargo 'Informações'`
+					)
+				membro.roles.add(separadorInfo)
+				console.log(
+					`↳ Cargo 'Informações' adicionado para o usuário '${membro.user.username}'`
+				)
+			}
 		}
 	}
 	if (dados.t === "MESSAGE_REACTION_REMOVE") {
@@ -235,6 +274,45 @@ bot.on("raw", async (dados) => {
 				membro.roles.remove(c)
 				console.log(
 					`↳ Usuário '${membro.user.username}' removeu o cargo 'C'`
+				)
+			}
+		} else if (dados.d.message_id === "889571344918925342") {
+			// Mensagem Separadores
+			embed.setTitle("\\💼 Cargo removido").setColor("#FF0000")
+
+			if (dados.d.emoji.name === "🟥") {
+				// Cargo Projetos
+				if (
+					!membro.roles.cache.some(
+						(role) => role === separadorProject
+					)
+				)
+					return console.log(
+						`↳ Usuário '${membro.user.username}' ainda não tinha o cargo 'Projetos'`
+					)
+				membro.roles.remove(separadorProject)
+				console.log(
+					`↳ Usuário '${membro.user.username}' removeu o cargo 'Projetos'`
+				)
+			} else if (dados.d.emoji.name === "🟩") {
+				// Cargo Habilidades
+				if (!membro.roles.cache.some((role) => role === separadorSkill))
+					return console.log(
+						`↳ Usuário '${membro.user.username}' ainda não tinha o cargo 'Habilidades'`
+					)
+				membro.roles.remove(separadorSkill)
+				console.log(
+					`↳ Usuário '${membro.user.username}' removeu o cargo 'Habilidades'`
+				)
+			} else if (dados.d.emoji.name === "🟦") {
+				// Cargo Informações
+				if (!membro.roles.cache.some((role) => role === separadorInfo))
+					return console.log(
+						`↳ Usuário '${membro.user.username}' ainda não tinha o cargo 'Informações'`
+					)
+				membro.roles.remove(separadorInfo)
+				console.log(
+					`↳ Usuário '${membro.user.username}' removeu o cargo 'Informações'`
 				)
 			}
 		}
@@ -450,7 +528,7 @@ function timerHorarioPerfeito() {
 	let minute = day.getMinutes()
 
 	// ? APLICAÇÃO DO FUSO br
-	hour = (hour+24-3)%24
+	hour = (hour + 24 - 3) % 24
 	// ! Comentar acima caso esteja rodando localmente.
 
 	let formattedHour = ("0" + hour).slice(-2)
