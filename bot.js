@@ -117,7 +117,7 @@ bot.on("raw", async (dados) => {
 					)
 				membro.roles.add(python)
 				console.log(
-					`↳ Cargo 'Python' adicionado para o usuário '${membro.user.username}'`
+					`↳ Usuário '${membro.user.username}' adicionou o cargo 'Python'`
 				)
 			} else if (dados.d.emoji.id === "721349573901287445") {
 				// Cargo JavaScript
@@ -127,7 +127,7 @@ bot.on("raw", async (dados) => {
 					)
 				membro.roles.add(javascript)
 				console.log(
-					`↳ Cargo 'JavaScript' adicionado para o usuário '${membro.user.username}'`
+					`↳ Usuário '${membro.user.username}' adicionou o cargo 'JavaScript'`
 				)
 			} else if (dados.d.emoji.id === "722249250586492978") {
 				// Cargo Java
@@ -137,7 +137,7 @@ bot.on("raw", async (dados) => {
 					)
 				membro.roles.add(java)
 				console.log(
-					`↳ Cargo 'Java' adicionado para o usuário '${membro.user.username}'`
+					`↳ Usuário '${membro.user.username}' adicionou o cargo 'Java'`
 				)
 			} else if (dados.d.emoji.id === "721345484035325984") {
 				// Cargo CSS
@@ -147,7 +147,7 @@ bot.on("raw", async (dados) => {
 					)
 				membro.roles.add(css)
 				console.log(
-					`↳ Cargo 'CSS' adicionado para o usuário '${membro.user.username}'`
+					`↳ Usuário '${membro.user.username}' adicionou o cargo 'CSS'`
 				)
 			} else if (dados.d.emoji.id === "721345485314588744") {
 				// Cargo HTML
@@ -157,7 +157,7 @@ bot.on("raw", async (dados) => {
 					)
 				membro.roles.add(html)
 				console.log(
-					`↳ Cargo 'HTML' adicionado para o usuário '${membro.user.username}'`
+					`↳ Usuário '${membro.user.username}' adicionou o cargo 'HTML'`
 				)
 			} else if (dados.d.emoji.id === "721347830765322313") {
 				// Cargo C
@@ -167,7 +167,7 @@ bot.on("raw", async (dados) => {
 					)
 				membro.roles.add(c)
 				console.log(
-					`↳ Cargo 'C' adicionado para o usuário '${membro.user.username}'`
+					`↳ Usuário '${membro.user.username}' adicionou o cargo 'C'`
 				)
 			}
 		} else if (dados.d.message_id === "889571344918925342") {
@@ -184,7 +184,7 @@ bot.on("raw", async (dados) => {
 					)
 				membro.roles.add(separadorProject)
 				console.log(
-					`↳ Cargo 'Projetos' adicionado para o usuário '${membro.user.username}'`
+					`↳ Usuário '${membro.user.username}' adicionou o cargo 'Projetos'`
 				)
 			} else if (dados.d.emoji.name === "🟩") {
 				// Cargo Habilidades
@@ -194,7 +194,7 @@ bot.on("raw", async (dados) => {
 					)
 				membro.roles.add(separadorSkill)
 				console.log(
-					`↳ Cargo 'Habilidades' adicionado para o usuário '${membro.user.username}'`
+					`↳ Usuário '${membro.user.username}' adicionou o cargo 'Habilidades'`
 				)
 			} else if (dados.d.emoji.name === "🟦") {
 				// Cargo Informações
@@ -204,7 +204,7 @@ bot.on("raw", async (dados) => {
 					)
 				membro.roles.add(separadorInfo)
 				console.log(
-					`↳ Cargo 'Informações' adicionado para o usuário '${membro.user.username}'`
+					`↳ Usuário '${membro.user.username}' adicionou o cargo 'Informações'`
 				)
 			}
 		}
