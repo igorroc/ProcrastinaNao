@@ -454,6 +454,15 @@ bot.on("message", async (message) => {
 		return bot.channels.cache.get("722274694535053317").send(embed)
 	}
 
+	let emojiAgree = bot.emojis.cache.get("892486327080218684"),
+		emojiDisagree = bot.emojis.cache.get("892486199233618041")
+
+	if(message.channel.id == "696458021500354581"){ // Suggestion channel
+		await message.react(emojiDisagree)
+		await message.react(emojiAgree)
+		console.log("New suggestion")
+	}
+
 	// ! Verify the prefix
 	if (!message.content.startsWith(prefix)) return
 
