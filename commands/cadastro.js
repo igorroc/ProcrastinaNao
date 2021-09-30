@@ -131,11 +131,12 @@ module.exports.run = async (bot, message, args) => {
 								.get("722274694535053317")
 								.send(errorCursoEmbed)
 						}
-						cEmbed.addField("**Curso:**", curso)
 					} else {
-						cEmbed.addField("**Curso:**", "Nenhum")
+						curso = "Nenhum"
 					}
+					cEmbed.addField("**Curso:**", curso)
 
+					// ! --------------------------------------------------------------------
 					cEmbed
 						.addField(
 							`**Faculdade:**  ${loading}`,
@@ -205,11 +206,13 @@ module.exports.run = async (bot, message, args) => {
 										.get("722274694535053317")
 										.send(errorFaculEmbed)
 								}
-								cEmbed.addField("**Faculdade:**", faculdade)
 							} else {
-								cEmbed.addField("**Faculdade:**", "Nenhuma")
+								faculdade = "Nenhuma"
 							}
-
+							cEmbed.addField("**Faculdade:**", faculdade)
+							
+							// ! --------------------------------------------------------------------
+							
 							cEmbed
 								.addField(
 									`**Nível:**  ${loading}`,
@@ -388,13 +391,13 @@ module.exports.run = async (bot, message, args) => {
 																			v ===
 																			curso.toLowerCase()
 																	)
-															).name
+															)?.name
 														let roleCurso =
 															message.guild.roles.cache.find(
 																(role) =>
 																	role.name ==
 																	nomeCurso
-															).id
+															)?.id
 														message.member.roles
 															.add(roleCurso)
 															.catch(() =>
@@ -432,13 +435,13 @@ module.exports.run = async (bot, message, args) => {
 																				faculdade.toLowerCase()
 																		)
 																)
-																.name.toUpperCase()
+																?.name.toUpperCase()
 														let roleFaculdade =
 															message.guild.roles.cache.find(
 																(role) =>
 																	role.name ==
 																	nomeFaculdade
-															).id
+															)?.id
 														message.member.roles
 															.add(roleFaculdade)
 															.catch(() =>
