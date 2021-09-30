@@ -112,11 +112,27 @@ module.exports.run = async (bot, message, args) => {
 							)
 						) {
 							cEmbed.addField("**Curso:** ❗", curso)
+							let errorEmbed = new Discord.MessageEmbed()
+								.setColor("#FCE100")
+								.setTitle("\\⚠️ Erro cadastro")
+								.addFields(
+									{
+										name: "Usuário",
+										value:
+											message.author ||
+											message.author.user ||
+											message.author.username,
+									},
+									{
+										name: "Curso não encontrado",
+										value: curso,
+									}
+								)
+								.setTimestamp()
+
 							message.guild.channels.cache
 								.get("722274694535053317")
-								.send(
-									`⚠️ O curso \` ${curso} \` escolhido por \` ${message.author.username} \` não foi encontrado.`
-								)
+								.send(errorEmbed)
 						} else {
 							cEmbed.addField("**Curso:**", curso)
 						}
@@ -174,11 +190,27 @@ module.exports.run = async (bot, message, args) => {
 										"**Faculdade:** ❗",
 										faculdade
 									)
+									let errorEmbed = new Discord.MessageEmbed()
+										.setColor("#FCE100")
+										.setTitle("\\⚠️ Erro cadastro")
+										.addFields(
+											{
+												name: "Usuário",
+												value:
+													message.author ||
+													message.author.user ||
+													message.author.username,
+											},
+											{
+												name: "Faculdade não encontrada",
+												value: curso,
+											}
+										)
+										.setTimestamp()
+
 									message.guild.channels.cache
 										.get("722274694535053317")
-										.send(
-											`⚠️ A faculdade \` ${faculdade} \` escolhida por \` ${message.author.username} \` não foi encontrada.`
-										)
+										.send(errorEmbed)
 								} else {
 									cEmbed.addField("**Faculdade:**", faculdade)
 								}
@@ -233,11 +265,25 @@ module.exports.run = async (bot, message, args) => {
 										console.log(
 											`↳ Nível escolhido 'Professor(a)`
 										)
+										let errorEmbed =
+											new Discord.MessageEmbed()
+												.setColor("#FCE100")
+												.setTitle("\\⚠️ Aviso cadastro")
+
+												.setDescription(
+													"O usuário diz ser um professor, verifique por favor!"
+												)
+												.addFields(
+													"Usuário",
+													message.author ||
+														message.author.user ||
+														message.author.username
+												)
+												.setTimestamp()
+
 										message.guild.channels.cache
 											.get("722274694535053317")
-											.send(
-												`⚠️ O usuário \` ${message.author.username} \` disse ser um professor, verifique por favor!`
-											)
+											.send(errorEmbed)
 									} else {
 										cEmbed.addField(
 											"**Nível:**",
@@ -447,33 +493,42 @@ module.exports.run = async (bot, message, args) => {
 														.addFields(
 															{
 																name: "Usuário",
-																value: message.author || message.author.user || message.author.username,
+																value:
+																	message.author ||
+																	message
+																		.author
+																		.user ||
+																	message
+																		.author
+																		.username,
 																inline: false,
 															},
 															{
 																name: "Nome",
 																value: newName,
-																inline: true
+																inline: true,
 															},
 															{
 																name: "Faculdade",
 																value: faculdade,
-																inline: true
+																inline: true,
 															},
 															{
 																name: "Curso",
 																value: curso,
-																inline: true
+																inline: true,
 															},
 															{
 																name: "Nível",
 																value: nivel,
-																inline: true
+																inline: true,
 															}
 														)
 														.setTimestamp()
 
-												message.guild.channels.cache.get("722274694535053317").send(newMemberEmbed)
+												message.guild.channels.cache
+													.get("722274694535053317")
+													.send(newMemberEmbed)
 											} else if (
 												collected.first().emoji.name ==
 												disagree
