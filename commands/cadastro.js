@@ -25,7 +25,7 @@ module.exports.run = async (bot, message, args) => {
 
 	let cEmbed = new Discord.MessageEmbed()
 		.setColor("#ff0000")
-		.setTitle(`Cadastro de ${message.author.username}`)
+		.setTitle(`${loading} Cadastro de ${message.author.username}`)
 		.setThumbnail(message.author.avatarURL)
 		.setDescription("**Responda as perguntas que serão feitas abaixo!**")
 		.setFooter(
