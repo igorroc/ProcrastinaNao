@@ -27,9 +27,7 @@ module.exports.run = async (bot, message, args) => {
 		.setColor("#ff0000")
 		.setTitle(`Cadastro de ${message.author.username}`)
 		.setThumbnail(message.author.avatarURL)
-		.setDescription(
-			'**Responda as perguntas que serão feitas abaixo!**\n> Itens marcados com "❗" serão revistos pelo suporte, não é necessário se preocupar!'
-		)
+		.setDescription("**Responda as perguntas que serão feitas abaixo!**")
 		.setFooter(
 			`Anti-Procrastinador | Passo 0 de 5`,
 			bot.user.displayAvatarURL
@@ -111,8 +109,7 @@ module.exports.run = async (bot, message, args) => {
 									)
 							)
 						) {
-							cEmbed.addField("**Curso:** ❗", curso)
-							let errorEmbed = new Discord.MessageEmbed()
+							let errorCursoEmbed = new Discord.MessageEmbed()
 								.setColor("#FCE100")
 								.setTitle("\\⚠️ Erro cadastro")
 								.addFields(
@@ -132,10 +129,9 @@ module.exports.run = async (bot, message, args) => {
 
 							message.guild.channels.cache
 								.get("722274694535053317")
-								.send(errorEmbed)
-						} else {
-							cEmbed.addField("**Curso:**", curso)
+								.send(errorCursoEmbed)
 						}
+						cEmbed.addField("**Curso:**", curso)
 					} else {
 						cEmbed.addField("**Curso:**", "Nenhum")
 					}
@@ -186,34 +182,30 @@ module.exports.run = async (bot, message, args) => {
 											)
 									)
 								) {
-									cEmbed.addField(
-										"**Faculdade:** ❗",
-										faculdade
-									)
-									let errorEmbed = new Discord.MessageEmbed()
-										.setColor("#FCE100")
-										.setTitle("\\⚠️ Erro cadastro")
-										.addFields(
-											{
-												name: "Usuário",
-												value:
-													message.author ||
-													message.author.user ||
-													message.author.username,
-											},
-											{
-												name: "Faculdade não encontrada",
-												value: curso,
-											}
-										)
-										.setTimestamp()
+									let errorFaculEmbed =
+										new Discord.MessageEmbed()
+											.setColor("#FCE100")
+											.setTitle("\\⚠️ Erro cadastro")
+											.addFields(
+												{
+													name: "Usuário",
+													value:
+														message.author ||
+														message.author.user ||
+														message.author.username,
+												},
+												{
+													name: "Faculdade não encontrada",
+													value: faculdade,
+												}
+											)
+											.setTimestamp()
 
 									message.guild.channels.cache
 										.get("722274694535053317")
-										.send(errorEmbed)
-								} else {
-									cEmbed.addField("**Faculdade:**", faculdade)
+										.send(errorFaculEmbed)
 								}
+								cEmbed.addField("**Faculdade:**", faculdade)
 							} else {
 								cEmbed.addField("**Faculdade:**", "Nenhuma")
 							}
@@ -265,15 +257,14 @@ module.exports.run = async (bot, message, args) => {
 										console.log(
 											`↳ Nível escolhido 'Professor(a)`
 										)
-										let errorEmbed =
+										let errorProfEmbed =
 											new Discord.MessageEmbed()
 												.setColor("#FCE100")
 												.setTitle("\\⚠️ Aviso cadastro")
-
 												.setDescription(
 													"O usuário diz ser um professor, verifique por favor!"
 												)
-												.addFields(
+												.addField(
 													"Usuário",
 													message.author ||
 														message.author.user ||
@@ -283,7 +274,7 @@ module.exports.run = async (bot, message, args) => {
 
 										message.guild.channels.cache
 											.get("722274694535053317")
-											.send(errorEmbed)
+											.send(errorProfEmbed)
 									} else {
 										cEmbed.addField(
 											"**Nível:**",
@@ -554,10 +545,6 @@ module.exports.run = async (bot, message, args) => {
 											}
 
 											cEmbed.fields.splice(4, 2) // Remove a mensagem de pedido de dado
-
-											cEmbed.setDescription(
-												"~~Responda as perguntas que serão feitas abaixo!~~"
-											)
 
 											await envio.reactions
 												.removeAll()
