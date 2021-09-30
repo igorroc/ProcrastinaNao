@@ -67,7 +67,7 @@ bot.once("ready", () => {
 
 	if (config.status == "on") {
 		bot.user.setStatus("online")
-		bot.user.setActivity(`| .help para ajuda | Criado por Igor Rocha |`, {
+		bot.user.setActivity(`| .help para ajuda`, {
 			type: "PLAYING",
 		})
 	} else {
