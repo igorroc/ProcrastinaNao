@@ -11,14 +11,14 @@ module.exports.run = async (bot, message, args) => {
 		`\n■▶ [LOGS] ⇥ Usuário '${message.author.username}' usou o comando Cadastro`
 	)
 
-	if (!message.member.roles.cache.has("721103513874202645")) {
-		// Não tem cargo novato
-		message.channel.send(
-			`Você **já está cadastrado** no servidor!\n> Caso queira **alterar** sua faculdade/curso, fale com um membro do <@&721329022621057074>`
-		)
-		console.log(`⚠️ Usuário '${message.author.username}' já cadastrado`)
-		return
-	}
+	// if (!message.member.roles.cache.has("721103513874202645")) {
+	// 	// Não tem cargo novato
+	// 	message.channel.send(
+	// 		`Você **já está cadastrado** no servidor!\n> Caso queira **alterar** sua faculdade/curso, fale com um membro do <@&721329022621057074>`
+	// 	)
+	// 	console.log(`⚠️ Usuário '${message.author.username}' já cadastrado`)
+	// 	return
+	// }
 
 	delete require.cache[require.resolve("../cargos.json")]
 	let cargos = require("../cargos.json")
@@ -59,6 +59,8 @@ module.exports.run = async (bot, message, args) => {
 			time: 60000,
 		})
 		.then(async (collected) => {
+			let newName = collected.first().content
+
 			console.log(`↳ Nome escolhido '${collected.first().content}'`)
 
 			cEmbed.fields.splice(0, 1) // Remove a mensagem de pedido de dado
@@ -314,7 +316,7 @@ module.exports.run = async (bot, message, args) => {
 															"**Nível:**"
 													).value == "Estudante"
 												)
-													// Cargo de Veterano
+													// Cargo de Estudante
 													message.member.roles
 														.add(
 															"821147812456300574"
@@ -435,6 +437,43 @@ module.exports.run = async (bot, message, args) => {
 														bot.user
 															.displayAvatarURL
 													)
+
+												let newMemberEmbed =
+													new Discord.MessageEmbed()
+														.setColor("#64B2E3")
+														.setTitle(
+															"\\✅ Cadastro finalizado"
+														)
+														.addFields(
+															{
+																name: "Usuário",
+																value: message.author || message.author.user || message.author.username,
+																inline: false,
+															},
+															{
+																name: "Nome",
+																value: newName,
+																inline: true
+															},
+															{
+																name: "Faculdade",
+																value: faculdade,
+																inline: true
+															},
+															{
+																name: "Curso",
+																value: curso,
+																inline: true
+															},
+															{
+																name: "Nível",
+																value: nivel,
+																inline: true
+															}
+														)
+														.setTimestamp()
+
+												message.guild.channels.cache.get("722274694535053317").send(newMemberEmbed)
 											} else if (
 												collected.first().emoji.name ==
 												disagree
