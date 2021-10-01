@@ -37,8 +37,6 @@ module.exports.run = async (bot, message, args) => {
 			.then(async (json) => {
 				let random = Math.floor(Math.random() * json.data.length)
 				let gif = json.data[random]
-				console.log(gif)
-				console.log(link)
 				embed
 					.setTitle(`\\👾 ${gif.title}`)
 					.setImage(gif.images.original.url)
