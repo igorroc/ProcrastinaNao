@@ -45,21 +45,19 @@ module.exports.run = async (bot, message, args) => {
 				console.error("ERRO", err)
 				isError = true
 			})
-			console.log(isError)
 			if (!isError) {
 				verify += 1
 			}
 		})
 
-		await sleep(1000)
+		await sleep(3000)
 
 		if (verify != listaEmojis.length) {
-			console.log(verify, listaEmojis.length)
 			let error = new Discord.MessageEmbed()
 				.setColor("#C7151C")
-				.setTitle("Erro")
+				.setTitle("Erro na enquete")
 				.setDescription(
-					"Ocorreu um erro na criação da sua enquete.\nEsse comando apenas aceita emojis padrões do sistema."
+					"Ocorreu um erro na criação da sua enquete.\nEsse comando apenas aceita **emojis padrões** do sistema."
 				)
 			message.channel.send(error)
 			msg.delete()
