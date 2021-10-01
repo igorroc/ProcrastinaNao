@@ -30,39 +30,43 @@ module.exports.run = async (bot, message, args) => {
 	let description = ""
 	let listaEmojis = []
 	opcoes.forEach((e) => {
-		e = e.split(")")
+		e = e.split("-")
 		let emoji = e[0]
 		let frase = e[1]
 		description += emoji + " → **" + frase + "**\n"
 		listaEmojis.push(emoji)
 	})
 	enquete.setDescription(description)
-	let verify = 0
-	await message.channel.send(enquete).then(async (msg) => {
+    let isError = false
+    let waiting = true
+    let qtdAccepted = 0
+	let msg1 = await message.channel.send(enquete).then((msg) => {
 		listaEmojis.forEach(async (e) => {
-			let isError = false
 			await msg.react(e).catch((err) => {
 				console.error("ERRO", err)
 				isError = true
 			})
-			if (!isError) {
-				verify += 1
-			}
+            qtdAccepted += 1
 		})
-
-		await sleep(3000)
-
-		if (verify != listaEmojis.length) {
-			let error = new Discord.MessageEmbed()
-				.setColor("#C7151C")
-				.setTitle("Erro na enquete")
-				.setDescription(
-					"Ocorreu um erro na criação da sua enquete.\nEsse comando apenas aceita **emojis padrões** do sistema."
-				)
-			message.channel.send(error)
-			msg.delete()
-		}
+        return msg
 	})
+    
+    while(waiting){
+        await sleep(100)
+        if(isError) waiting = false
+        if(qtdAccepted == listaEmojis.length) waiting = false
+    }
+
+    if (isError) {
+        let error = new Discord.MessageEmbed()
+            .setColor("#C7151C")
+            .setTitle("Erro na enquete")
+            .setDescription(
+                "Ocorreu um erro na criação da sua enquete.\nEsse comando apenas aceita **emojis padrões** do sistema."
+            )
+        message.channel.send(error)
+        msg1.delete()
+    }
 
 	message.delete()
 }
@@ -70,7 +74,7 @@ module.exports.run = async (bot, message, args) => {
 module.exports.config = {
 	name: "enquete",
 	description: "Cria uma enquete no canal atual!",
-	usage: ".enquete [titulo-assim] [emoji1)opcao1|emoji2)opcao2|emoji3)opcao3...]\nExemplo:\n.enquete Meu-titulo 😀)Opção 1|💚)Opção 2|💥)Opção 3",
+	usage: ".enquete [titulo-assim] [emoji1-opcao1|emoji2-opcao2|emoji3-opcao3...]\nExemplo:\n.enquete Meu-titulo 😀-Opção 1|💚-Opção 2|💥-Opção 3",
 	accessableby: "Membros",
 	aliases: ["pool"],
 }
