@@ -45,7 +45,7 @@ module.exports.run = async (bot, message, args) => {
 			clearInterval(contagem)
 		}
 		contador--
-	}, 1000)
+	}, 60000)
 }
 
 module.exports.config = {
