@@ -25,7 +25,7 @@ module.exports.run = async (bot, message, args) => {
 		return message.reply("você precisa indicar as opções da enquete.")
 	}
 
-	enquete.setTitle(title.replace("-", " "))
+	enquete.setTitle(title.replace(/-/g, " "))
 	opcoes = opcoes.split("|")
 	let description = ""
 	let listaEmojis = []
