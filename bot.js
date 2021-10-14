@@ -7,7 +7,7 @@ bot.aliases = new Discord.Collection()
 const pessoasComHorarioPerfeito = new Set()
 pessoasComHorarioPerfeito.add("337349173894447106") // Add Gabi
 
-var intervaloPerfeito = setInterval(timerHorarioPerfeito, 60000)
+// var intervaloPerfeito = setInterval(timerHorarioPerfeito, 60000)
 
 const MENSAGEM_REINICIO = false
 
@@ -506,32 +506,32 @@ bot.on("message", async (message) => {
 	}
 
 	// ! HORARIO PERFEITO
-	if (comando == "horarioperfeito" || comando == "hp") {
-		const embed = new Discord.MessageEmbed()
-			.setColor("#0099ff")
-			.setTitle("\\⏰ Horário Perfeito")
+	// if (comando == "horarioperfeito" || comando == "hp") {
+	// 	const embed = new Discord.MessageEmbed()
+	// 		.setColor("#0099ff")
+	// 		.setTitle("\\⏰ Horário Perfeito")
 
-		if (pessoasComHorarioPerfeito.has(message.author.id)) {
-			pessoasComHorarioPerfeito.delete(message.author.id)
-			embed
-				.setDescription(
-					"Você não irá mais receber os horários perfeitos!"
-				)
-				.setColor("#ff0000")
-		} else {
-			pessoasComHorarioPerfeito.add(message.author.id)
-			embed.setDescription(
-				"A partir de agora você irá receber uma notificação dos horários perfeitos!"
-			)
-		}
-		message.reply(embed)
-	}
+	// 	if (pessoasComHorarioPerfeito.has(message.author.id)) {
+	// 		pessoasComHorarioPerfeito.delete(message.author.id)
+	// 		embed
+	// 			.setDescription(
+	// 				"Você não irá mais receber os horários perfeitos!"
+	// 			)
+	// 			.setColor("#ff0000")
+	// 	} else {
+	// 		pessoasComHorarioPerfeito.add(message.author.id)
+	// 		embed.setDescription(
+	// 			"A partir de agora você irá receber uma notificação dos horários perfeitos!"
+	// 		)
+	// 	}
+	// 	message.reply(embed)
+	// }
 })
 
 let config = require("./config.json")
 bot.login(config.token)
 
-function timerHorarioPerfeito() {
+// function timerHorarioPerfeito() {
 	let day = new Date()
 	let hour = day.getHours()
 	let minute = day.getMinutes()
