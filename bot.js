@@ -531,7 +531,7 @@ bot.on("message", async (message) => {
 let config = require("./config.json")
 bot.login(config.token)
 
-// function timerHorarioPerfeito() {
+function timerHorarioPerfeito() {
 	let day = new Date()
 	let hour = day.getHours()
 	let minute = day.getMinutes()
