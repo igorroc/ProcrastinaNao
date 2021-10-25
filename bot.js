@@ -90,231 +90,137 @@ bot.on("raw", async (dados) => {
 
 	if (membro.user.bot) return
 
-	let python = servidor.roles.cache.get("721102448483369140"),
-		javascript = servidor.roles.cache.get("721179010767388682"),
-		java = servidor.roles.cache.get("721176368964173835"),
-		css = servidor.roles.cache.get("721177136655892632"),
-		html = servidor.roles.cache.get("721346290369167460"),
-		c = servidor.roles.cache.get("721115106871738408"),
-		separadorProject = servidor.roles.cache.get("856261907183042600"),
-		separadorSkill = servidor.roles.cache.get("856259520220889118"),
-		separadorInfo = servidor.roles.cache.get("856261550994096149")
-
 	const embed = new Discord.MessageEmbed()
 	let localCorreto = false
+
+	const ListaSkills = [
+		{
+			name: "Python",
+			emoji: "696478679391272961",
+			cargo: servidor.roles.cache.get("721102448483369140"),
+		},
+		{
+			name: "JavaScript",
+			emoji: "721349573901287445",
+			cargo: servidor.roles.cache.get("721179010767388682"),
+		},
+		{
+			name: "Java",
+			emoji: "722249250586492978",
+			cargo: servidor.roles.cache.get("721176368964173835"),
+		},
+		{
+			name: "CSS",
+			emoji: "721345484035325984",
+			cargo: servidor.roles.cache.get("721177136655892632"),
+		},
+		{
+			name: "HTML",
+			emoji: "721345485314588744",
+			cargo: servidor.roles.cache.get("721346290369167460"),
+		},
+		{
+			name: "C",
+			emoji: "721347830765322313",
+			cargo: servidor.roles.cache.get("721115106871738408"),
+		},
+		{
+			name: "Ruby",
+			emoji: "902233239786254357",
+			cargo: servidor.roles.cache.get("902233562491781170"),
+		},
+	]
+
+	const ListaSeparadores = [
+		{
+			name: "Projetos",
+			emoji: "🟥",
+			cargo: servidor.roles.cache.get("856261907183042600"),
+		},
+		{
+			name: "Habilidades",
+			emoji: "🟩",
+			cargo: servidor.roles.cache.get("856259520220889118"),
+		},
+		{
+			name: "Informações",
+			emoji: "🟦",
+			cargo: servidor.roles.cache.get("856261550994096149"),
+		},
+	]
 
 	if (dados.t === "MESSAGE_REACTION_ADD") {
 		if (dados.d.message_id === "721347287426793494") {
 			// Mensagem de cargos
 			embed.setTitle("\\💼 Cargo adicionado").setColor("#00FF00")
-			localCorreto = true
 
-			if (dados.d.emoji.id === "696478679391272961") {
-				// Cargo Python
-				if (membro.roles.cache.some((role) => role === python))
-					return console.log(
-						`↳ Usuário '${membro.user.username}' já possui o cargo 'Python'`
+			ListaSkills.forEach((c) => {
+				localCorreto = true
+				if (dados.d.emoji.id === c.emoji) {
+					if (membro.roles.cache.some((role) => role === c.cargo)) {
+						// prettier-ignore
+						return console.log(`↳ Usuário '${membro.user.username}' já possui o cargo '${c.name}'`)
+					}
+					membro.roles.add(c.cargo)
+					console.log(
+						`↳ Usuário '${membro.user.username}' adicionou o cargo '${c.name}'`
 					)
-				membro.roles.add(python)
-				console.log(
-					`↳ Usuário '${membro.user.username}' adicionou o cargo 'Python'`
-				)
-			} else if (dados.d.emoji.id === "721349573901287445") {
-				// Cargo JavaScript
-				if (membro.roles.cache.some((role) => role === javascript))
-					return console.log(
-						`↳ Usuário '${membro.user.username}' já possui o cargo 'JavaScript'`
-					)
-				membro.roles.add(javascript)
-				console.log(
-					`↳ Usuário '${membro.user.username}' adicionou o cargo 'JavaScript'`
-				)
-			} else if (dados.d.emoji.id === "722249250586492978") {
-				// Cargo Java
-				if (membro.roles.cache.some((role) => role === java))
-					return console.log(
-						`↳ Usuário '${membro.user.username}' já possui o cargo 'Java'`
-					)
-				membro.roles.add(java)
-				console.log(
-					`↳ Usuário '${membro.user.username}' adicionou o cargo 'Java'`
-				)
-			} else if (dados.d.emoji.id === "721345484035325984") {
-				// Cargo CSS
-				if (membro.roles.cache.some((role) => role === css))
-					return console.log(
-						`↳ Usuário '${membro.user.username}' já possui o cargo 'CSS'`
-					)
-				membro.roles.add(css)
-				console.log(
-					`↳ Usuário '${membro.user.username}' adicionou o cargo 'CSS'`
-				)
-			} else if (dados.d.emoji.id === "721345485314588744") {
-				// Cargo HTML
-				if (membro.roles.cache.some((role) => role === html))
-					return console.log(
-						`↳ Usuário '${membro.user.username}' já possui o cargo 'HTML'`
-					)
-				membro.roles.add(html)
-				console.log(
-					`↳ Usuário '${membro.user.username}' adicionou o cargo 'HTML'`
-				)
-			} else if (dados.d.emoji.id === "721347830765322313") {
-				// Cargo C
-				if (membro.roles.cache.some((role) => role === c))
-					return console.log(
-						`↳ Usuário '${membro.user.username}' já possui o cargo 'C'`
-					)
-				membro.roles.add(c)
-				console.log(
-					`↳ Usuário '${membro.user.username}' adicionou o cargo 'C'`
-				)
-			}
+				}
+			})
 		} else if (dados.d.message_id === "889571344918925342") {
 			// Mensagem Separadores
 			embed.setTitle("\\💼 Cargo adicionado").setColor("#00FF00")
 
-			if (dados.d.emoji.name === "🟥") {
-				// Cargo Projetos
-				if (
-					membro.roles.cache.some((role) => role === separadorProject)
-				)
-					return console.log(
-						`↳ Usuário '${membro.user.username}' já possui o cargo 'Projetos'`
+			ListaSeparadores.forEach((c) => {
+				localCorreto = true
+				if (dados.d.emoji.name === c.emoji) {
+					if (membro.roles.cache.some((role) => role === c.cargo)) {
+						// prettier-ignore
+						return console.log(`↳ Usuário '${membro.user.username}' já possui o separador '${c.name}'`)
+					}
+					membro.roles.add(c.cargo)
+					console.log(
+						`↳ Usuário '${membro.user.username}' adicionou o separador '${c.name}'`
 					)
-				membro.roles.add(separadorProject)
-				console.log(
-					`↳ Usuário '${membro.user.username}' adicionou o cargo 'Projetos'`
-				)
-			} else if (dados.d.emoji.name === "🟩") {
-				// Cargo Habilidades
-				if (membro.roles.cache.some((role) => role === separadorSkill))
-					return console.log(
-						`↳ Usuário '${membro.user.username}' já possui o cargo 'Habilidades'`
-					)
-				membro.roles.add(separadorSkill)
-				console.log(
-					`↳ Usuário '${membro.user.username}' adicionou o cargo 'Habilidades'`
-				)
-			} else if (dados.d.emoji.name === "🟦") {
-				// Cargo Informações
-				if (membro.roles.cache.some((role) => role === separadorInfo))
-					return console.log(
-						`↳ Usuário '${membro.user.username}' já possui o cargo 'Informações'`
-					)
-				membro.roles.add(separadorInfo)
-				console.log(
-					`↳ Usuário '${membro.user.username}' adicionou o cargo 'Informações'`
-				)
-			}
+				}
+			})
 		}
 	}
 	if (dados.t === "MESSAGE_REACTION_REMOVE") {
 		if (dados.d.message_id === "721347287426793494") {
 			// Mensagem de cargos
 			embed.setTitle("\\💼 Cargo removido").setColor("#FF0000")
-			localCorreto = true
 
-			if (dados.d.emoji.id === "696478679391272961") {
-				// Cargo Python
-				if (!membro.roles.cache.some((role) => role === python))
-					return console.log(
-						`↳ Usuário '${membro.user.username}' ainda não tinha o cargo 'Python'`
+			ListaSkills.forEach((c) => {
+				localCorreto = true
+				if (dados.d.emoji.id === c.emoji) {
+					if (!membro.roles.cache.some((role) => role === c.cargo)) {
+						// prettier-ignore
+						return console.log(`↳ Usuário '${membro.user.username}' ainda não tinha o cargo '${c.name}'`)
+					}
+					membro.roles.remove(c.cargo)
+					console.log(
+						`↳ Usuário '${membro.user.username}' removeu o cargo '${c.name}'`
 					)
-				membro.roles.remove(python)
-				console.log(
-					`↳ Usuário '${membro.user.username}' removeu o cargo 'Python'`
-				)
-			} else if (dados.d.emoji.id === "721349573901287445") {
-				// Cargo JavaScript
-				if (!membro.roles.cache.some((role) => role === javascript))
-					return console.log(
-						`↳ Usuário '${membro.user.username}' ainda não tinha o cargo 'JavaScript'`
-					)
-				membro.roles.remove(javascript)
-				console.log(
-					`↳ Usuário '${membro.user.username}' removeu o cargo 'JavaScript'`
-				)
-			} else if (dados.d.emoji.id === "722249250586492978") {
-				// Cargo Java
-				if (!membro.roles.cache.some((role) => role === java))
-					return console.log(
-						`↳ Usuário '${membro.user.username}' ainda não tinha o cargo 'Java'`
-					)
-				membro.roles.remove(java)
-				console.log(
-					`↳ Usuário '${membro.user.username}' removeu o cargo 'Java'`
-				)
-			} else if (dados.d.emoji.id === "721345484035325984") {
-				// Cargo CSS
-				if (!membro.roles.cache.some((role) => role === css))
-					return console.log(
-						`↳ Usuário '${membro.user.username}' ainda não tinha o cargo 'CSS'`
-					)
-				membro.roles.remove(css)
-				console.log(
-					`↳ Usuário '${membro.user.username}' removeu o cargo 'CSS'`
-				)
-			} else if (dados.d.emoji.id === "721345485314588744") {
-				// Cargo HMTL
-				if (!membro.roles.cache.some((role) => role === html))
-					return console.log(
-						`↳ Usuário '${membro.user.username}' ainda não tinha o cargo 'HTML'`
-					)
-				membro.roles.remove(html)
-				console.log(
-					`↳ Usuário '${membro.user.username}' removeu o cargo 'HTML'`
-				)
-			} else if (dados.d.emoji.id === "721347830765322313") {
-				// Cargo C
-				if (!membro.roles.cache.some((role) => role === c))
-					return console.log(
-						`↳ Usuário '${membro.user.username}' ainda não tinha o cargo 'C'`
-					)
-				membro.roles.remove(c)
-				console.log(
-					`↳ Usuário '${membro.user.username}' removeu o cargo 'C'`
-				)
-			}
+				}
+			})
 		} else if (dados.d.message_id === "889571344918925342") {
 			// Mensagem Separadores
 			embed.setTitle("\\💼 Cargo removido").setColor("#FF0000")
 
-			if (dados.d.emoji.name === "🟥") {
-				// Cargo Projetos
-				if (
-					!membro.roles.cache.some(
-						(role) => role === separadorProject
+			ListaSeparadores.forEach((c) => {
+				localCorreto = true
+				if (dados.d.emoji.name === c.emoji) {
+					if (!membro.roles.cache.some((role) => role === c.cargo)) {
+						// prettier-ignore
+						return console.log(`↳ Usuário '${membro.user.username}' ainda não tinha o separador '${c.name}'`)
+					}
+					membro.roles.remove(c.cargo)
+					console.log(
+						`↳ Usuário '${membro.user.username}' removeu o separador '${c.name}'`
 					)
-				)
-					return console.log(
-						`↳ Usuário '${membro.user.username}' ainda não tinha o cargo 'Projetos'`
-					)
-				membro.roles.remove(separadorProject)
-				console.log(
-					`↳ Usuário '${membro.user.username}' removeu o cargo 'Projetos'`
-				)
-			} else if (dados.d.emoji.name === "🟩") {
-				// Cargo Habilidades
-				if (!membro.roles.cache.some((role) => role === separadorSkill))
-					return console.log(
-						`↳ Usuário '${membro.user.username}' ainda não tinha o cargo 'Habilidades'`
-					)
-				membro.roles.remove(separadorSkill)
-				console.log(
-					`↳ Usuário '${membro.user.username}' removeu o cargo 'Habilidades'`
-				)
-			} else if (dados.d.emoji.name === "🟦") {
-				// Cargo Informações
-				if (!membro.roles.cache.some((role) => role === separadorInfo))
-					return console.log(
-						`↳ Usuário '${membro.user.username}' ainda não tinha o cargo 'Informações'`
-					)
-				membro.roles.remove(separadorInfo)
-				console.log(
-					`↳ Usuário '${membro.user.username}' removeu o cargo 'Informações'`
-				)
-			}
+				}
+			})
 		}
 	}
 
@@ -457,7 +363,8 @@ bot.on("message", async (message) => {
 	let emojiAgree = bot.emojis.cache.get("892486327080218684"),
 		emojiDisagree = bot.emojis.cache.get("892486199233618041")
 
-	if(message.channel.id == "696458021500354581"){ // Suggestion channel
+	if (message.channel.id == "696458021500354581") {
+		// Suggestion channel
 		await message.react(emojiDisagree)
 		await message.react(emojiAgree)
 		console.log("New suggestion")
