@@ -19,7 +19,9 @@ module.exports.run = async (bot, message, args) => {
 			var SHembed = new Discord.MessageEmbed()
 				.setColor("#64B3E3")
 				.setTitle(`\\🔧 Comando: ${command.config.name}`)
-				.setURL(`https://igorroc.github.io/ProcrastinaNao/comandos.html?comando=${command.config.name}`)
+				.setURL(
+					`https://igorroc.github.io/ProcrastinaNao/comandos.html?comando=${command.config.name}`
+				)
 				.addFields(
 					{
 						name: "Descrição",
@@ -35,7 +37,10 @@ module.exports.run = async (bot, message, args) => {
 					},
 					{
 						name: "Variações",
-						value: command.config.noalias || command.config.aliases,
+						value:
+							command.config.noalias ||
+							command.config.aliases ||
+							"Sem variações",
 					}
 				)
 			message.channel.send(SHembed)
