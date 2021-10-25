@@ -8,3 +8,5 @@ config.json
 ProcrastinaNao.zip
 run.bat
 package-lock.json
+
+*.zip
