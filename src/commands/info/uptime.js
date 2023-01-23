@@ -11,6 +11,8 @@ module.exports = class extends Command {
 		})
 	}
 	run = (interaction) => {
+		console.log(`\n■▶ [LOGS] ⇥ Usuário '${interaction.user.username}' usou o comando UpTime`)
+
 		let up = ms(interaction.client.uptime, { long: true })
 		up = up.replace("second", "segundo")
 		up = up.replace("seconds", "segundos")

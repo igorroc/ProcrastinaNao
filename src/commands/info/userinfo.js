@@ -60,16 +60,8 @@ function getAge(dateString) {
 
 	if (age.years > 0 && age.months > 0 && age.days > 0)
 		ageString =
-			age.years +
-			yearString +
-			", " +
-			age.months +
-			monthString +
-			", e " +
-			age.days +
-			dayString
-	else if (age.years == 0 && age.months == 0 && age.days > 0)
-		ageString = age.days + dayString
+			age.years + yearString + ", " + age.months + monthString + ", e " + age.days + dayString
+	else if (age.years == 0 && age.months == 0 && age.days > 0) ageString = age.days + dayString
 	else if (age.years > 0 && age.months == 0 && age.days == 0)
 		ageString = age.years + yearString + ". Feliz DiscordVersário!!"
 	else if (age.years > 0 && age.months > 0 && age.days == 0)
@@ -78,8 +70,7 @@ function getAge(dateString) {
 		ageString = age.months + monthString + " e " + age.days + dayString
 	else if (age.years > 0 && age.months == 0 && age.days > 0)
 		ageString = age.years + yearString + " e " + age.days + dayString
-	else if (age.years == 0 && age.months > 0 && age.days == 0)
-		ageString = age.months + monthString
+	else if (age.years == 0 && age.months > 0 && age.days == 0) ageString = age.months + monthString
 	else ageString = "Oops! Não consegui calcular a idade!"
 
 	return ageString
@@ -89,11 +80,13 @@ module.exports = class extends Command {
 	constructor(client) {
 		super(client, {
 			name: "userinfo",
-			description:
-				"Informações gerais do usuário mencionado, ou suas informações!",
+			description: "Informações gerais do usuário mencionado, ou suas informações!",
+			usage:
+				"Use ` /userinfo ` para ver as suas informações.\n" +
+				"Use ` /userinfo @membro ` para ver informações de outra pessoa.",
 			options: [
 				{
-					name: "Usuário",
+					name: "usuário",
 					type: "USER",
 					description:
 						"O usuário a ser pesquisado. Caso queira ver suas informações, basta enviar o comando sozinho!",
@@ -103,7 +96,9 @@ module.exports = class extends Command {
 		})
 	}
 	run = (interaction) => {
-		let usuario = interaction.options.getUser("Usuário")
+		console.log(`\n■▶ [LOGS] ⇥ Usuário '${interaction.user.username}' usou o comando UserInfo`)
+
+		let usuario = interaction.options.getUser("usuário")
 
 		if (!usuario) usuario = interaction.user
 
@@ -138,9 +133,7 @@ module.exports = class extends Command {
 			.addField("**Idade**", getAge(formattedAge), true)
 			.addField(
 				"**Server Booster**",
-				usuario.premiumSince
-					? usuario.premiumSince.toDateString()
-					: "Não"
+				usuario.premiumSince ? usuario.premiumSince.toDateString() : "Não"
 			)
 			.setFooter({ text: usuario.user.id })
 

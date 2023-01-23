@@ -7,13 +7,13 @@ module.exports = class extends Command {
 			description: "Cria uma sala de estudos para você e seus amigos!",
 			options: [
 				{
-					name: "NomeDaSala",
+					name: "nome_da_sala",
 					type: "STRING",
 					description: "Nome da sua sala de estudos.",
 					required: true,
 				},
 				{
-					name: "Usuarios",
+					name: "usuários",
 					type: "USER",
 					description: "Colegas para adicionar nessa sala.",
 					required: true,
@@ -22,10 +22,10 @@ module.exports = class extends Command {
 		})
 	}
 	run = (interaction) => {
-		let nomeSala = interaction.options
-			.getString("Nome da sala")
-			.replaceAll(" ", "_")
-		let colegas = interaction.options.getUser("Usuarios")
+		console.log(`\n■▶ [LOGS] ⇥ Usuário '${interaction.user.username}' usou o comando Sala`)
+
+		let nomeSala = interaction.options.getString("nome_da_sala")
+		let colegas = interaction.options.getUser("usuários")
 
 		console.log(nomeSala)
 		console.log(colegas)

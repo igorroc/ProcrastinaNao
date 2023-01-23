@@ -36,6 +36,8 @@ module.exports = class extends Command {
 	}
 
 	run = (interaction) => {
+		console.log(`\n■▶ [LOGS] ⇥ Usuário '${interaction.user.username}' usou o comando Cadastro`)
+
 		interaction.reply({
 			content: "Cadastro iniciado. Responda as perguntas abaixo",
 			ephemeral: true,

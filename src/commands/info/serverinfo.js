@@ -93,6 +93,8 @@ module.exports = class extends Command {
 		})
 	}
 	run = (interaction) => {
+		console.log(`\n■▶ [LOGS] ⇥ Usuário '${interaction.user.username}' usou o comando ServerInfo`)
+
 		var memberCount = interaction.guild.members.cache.filter(
 			(m) => !m.user.bot
 		).size
