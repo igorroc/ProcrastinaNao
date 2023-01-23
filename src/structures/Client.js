@@ -22,17 +22,16 @@ module.exports = class extends Client {
 	loadCommands(path = "src/commands") {
 		const categories = readdirSync(path)
 
+		console.log(`\n■■■■ Loading ■■■■\n`)
+
 		for (const category of categories) {
 			const commands = readdirSync(`${path}/${category}`)
 			for (const command of commands) {
-				const commandClass = require(join(
-					process.cwd(),
-					`${path}/${category}/${command}`
-				))
+				const commandClass = require(join(process.cwd(), `${path}/${category}/${command}`))
 				const cmd = new commandClass(this)
 
 				this.commands.push(cmd)
-				console.log(`Comando ${cmd.name} carregado!`)
+				console.log(`[COMMAND] ✅ ${cmd.name}`)
 			}
 		}
 	}
@@ -40,17 +39,16 @@ module.exports = class extends Client {
 	loadEvents(path = "src/events") {
 		const categories = readdirSync(path)
 
+		console.log(`\n■■■■ Loading ■■■■\n`)
+
 		for (const category of categories) {
 			const events = readdirSync(`${path}/${category}`)
 			for (const event of events) {
-				const eventClass = require(join(
-					process.cwd(),
-					`${path}/${category}/${event}`
-				))
+				const eventClass = require(join(process.cwd(), `${path}/${category}/${event}`))
 				const evt = new eventClass(this)
 
 				this.on(evt.name, evt.run)
-				console.log(`Evento ${evt.name} carregado!`)
+				console.log(`[EVENT] ✅ ${evt.name}`)
 			}
 		}
 	}
