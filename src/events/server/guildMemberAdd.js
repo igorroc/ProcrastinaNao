@@ -25,25 +25,18 @@ module.exports = class extends Event {
 				)
 		}
 
-		var memberCount = member.guild.members.cache.filter(
-			(m) => !m.user.bot
-		).size
+		var memberCount = member.guild.members.cache.filter((m) => !m.user.bot).size
 		var botCount = member.guild.members.cache.filter((m) => m.user.bot).size
 
 		const embed = new MessageEmbed()
 			.setColor("#00FF00")
-			.addField(
-				"\\✅ → Novo membro",
-				member.displayName || member.user.username || "indefinido",
-				false
-			)
+			.setTitle("\\✅ → Novo membro")
+			.setDescription(`<@${member.user.id}>`)
 			.setTimestamp()
 			.setFooter({
 				text: `Total de ${memberCount} membros\nTotal de ${botCount} bots`,
 			})
 
-		member.guild.channels.cache
-			.get("722274694535053317")
-			.send({ embeds: [embed] }) // Chat moderadores
+		member.guild.channels.cache.get("722274694535053317").send({ embeds: [embed] }) // Chat moderadores
 	}
 }
