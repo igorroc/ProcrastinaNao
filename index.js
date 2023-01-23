@@ -1,9 +1,9 @@
 require("dotenv").config()
 
-const { ClientRequest } = require("http")
 const Client = require("./src/structures/Client")
 
 const client = new Client({
+	partials: ["CHANNEL"],
 	intents: [
 		"GUILDS",
 		"GUILD_MESSAGES",
