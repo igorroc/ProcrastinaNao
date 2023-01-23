@@ -8,7 +8,9 @@ module.exports = class extends Event {
 	}
 
 	run = (messageReaction, user) => {
-		console.log(messageReaction)
-		console.log(user)
+
+
+		// console.log(messageReaction)
+		// console.log(user)
 	}
 }

@@ -20,7 +20,7 @@ module.exports = class extends Event {
 			barra = barra + "■"
 		}
 
-		console.log(barra)
+		console.log("\n" + barra)
 		console.log(mensagem)
 		console.log(barra + "\n\n")
 
