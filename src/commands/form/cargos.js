@@ -7,11 +7,6 @@ const { MessageEmbed, MessageActionRow, MessageButton, MessageSelectMenu } = req
 
 const questionsTimeOut = 1
 
-const actionRow = new MessageActionRow().addComponents([
-	new MessageButton().setStyle("DANGER").setLabel("Não").setCustomId("no"),
-	new MessageButton().setStyle("SUCCESS").setLabel("Confirmar").setCustomId("yes"),
-])
-
 module.exports = class extends Command {
 	constructor(client) {
 		super(client, {

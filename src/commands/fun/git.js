@@ -36,7 +36,7 @@ module.exports = class extends Command {
 					!json.hireable &&
 					!json.bio
 				) {
-					interaction.reply(`Usuário '${user}' não encontrado`)
+					interaction.reply(`Usuário \`${user}\` não encontrado`)
 					console.log(`↳ Usuário '${user}' não encontrado`)
 					return
 				}
@@ -56,6 +56,7 @@ module.exports = class extends Command {
 				interaction.reply({
 					embeds: [uEmbed],
 				})
+
 				console.log(`↳ Perfil Git de '${user}' enviado`)
 			})
 	}
